@@ -1,0 +1,18 @@
+{
+    "name": "alliedwaterproofing",
+    "version": "1.0.0",
+    "dependencies": {
+        "bcryptjs": "*",
+        "cors": "*",
+        "express": "*",
+        "jsonwebtoken": "*",
+        "passport": "*",
+        "passport-jwt": "*",
+        "mysql": "*"
+    },
+    "scripts": {
+        "start": "node app.js"
+    },
+    "author": "Nick Coffey",
+    "license": "ISC"
+}
