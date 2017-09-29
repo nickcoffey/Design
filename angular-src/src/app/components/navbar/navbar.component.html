@@ -1,7 +1,22 @@
+<!-- https://stackoverflow.com/questions/38209713/how-to-make-a-responsive-nav-bar-using-angular-material-2 -->
 <md-sidenav-container fullscreen>
     <md-toolbar color="primary">
-        <i class="material-icons app-toolbar-menu">menu</i>
-        <span>Allied Waterproofing</span>
-        <md-sidenav></md-sidenav>
+        <button md-button><md-icon>home</md-icon>Allied Waterproofing</button>
+        <!-- This fills the remaining space of the current row -->
+        <span class="fill-remaining-space"></span>
+        <div fxLayout="row" fxShow="false" fxShow.gt-sm>
+            <button md-button>Products</button>
+            <button md-button>Dashboard</button>
+        </div>
+        <button md-button [md-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm><md-icon>menu</md-icon></button>
+        <!--<button type="button" md-button (click)="sidenav.open()"><md-icon>menu</md-icon></button>-->
     </md-toolbar>
+    <!--<md-sidenav #sidenav class="example-sidenav">
+        <button md-menu-item>Products</button>
+        <button md-menu-item>Dashboard</button>
+    </md-sidenav>-->
+    <md-menu x-position="before" #menu="mdMenu">
+        <button md-menu-item>Products</button>
+        <button md-menu-item>Dashboard</button>
+    </md-menu>
 </md-sidenav-container>
