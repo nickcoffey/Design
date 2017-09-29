@@ -1,17 +1,20 @@
 {
     "name": "alliedwaterproofing",
     "version": "1.0.0",
+    "description": "Design team application.",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js"
+    },
     "dependencies": {
         "bcryptjs": "*",
+        "body-parser": "*",
         "cors": "*",
         "express": "*",
         "jsonwebtoken": "*",
         "passport": "*",
         "passport-jwt": "*",
         "mysql": "*"
-    },
-    "scripts": {
-        "start": "node app.js"
     },
     "author": "Nick Coffey",
     "license": "ISC"

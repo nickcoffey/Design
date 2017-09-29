@@ -1,14 +1,13 @@
 const connection = require('../app');
+const config = require('../config/database');
 
-module.exports.getAllBids = function(callback){
+module.exports.getAllCustomers = function(callback){
     connection.query('SELECT * FROM Customer', (err, rows, fields) => {
-        console.log(rows);
         if(!err){
+            console.log(rows);
             callback(rows);
-            //console.log(rows);
         } else{
             throw err;
-            //console.log(err);
         }
     });
 }
