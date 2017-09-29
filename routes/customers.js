@@ -9,7 +9,19 @@ router.get('/all', (request, response, next) => {
         if(!customers){
             throw err;
         } else{
-            response.json();
+            return response.json({customers: customers});
+        }
+    });
+});
+
+// Get customer by id
+router.get('/:id', (request, response, next) => {
+    const id = request.params.id;
+    customer.getCustomerById(id, (customer) => {
+        if(!customer){
+            throw err;
+        } else{
+            return response.json(customer);
         }
     });
 });

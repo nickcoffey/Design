@@ -1,21 +1,22 @@
 {
-    "name": "alliedwaterproofing",
-    "version": "1.0.0",
-    "description": "Design team application.",
-    "main": "app.js",
-    "scripts": {
-        "start": "node app.js"
-    },
-    "dependencies": {
-        "bcryptjs": "*",
-        "body-parser": "*",
-        "cors": "*",
-        "express": "*",
-        "jsonwebtoken": "*",
-        "passport": "*",
-        "passport-jwt": "*",
-        "mysql": "*"
-    },
-    "author": "Nick Coffey",
-    "license": "ISC"
+  "name": "alliedwaterproofing",
+  "version": "1.0.0",
+  "description": "Design team application.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "@angular/cli": "^1.4.4",
+    "bcryptjs": "*",
+    "body-parser": "*",
+    "cors": "*",
+    "express": "*",
+    "jsonwebtoken": "*",
+    "mysql": "*",
+    "passport": "*",
+    "passport-jwt": "*"
+  },
+  "author": "Nick Coffey",
+  "license": "ISC"
 }
