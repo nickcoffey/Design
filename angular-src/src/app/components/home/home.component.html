@@ -7,3 +7,22 @@
     </p>
   </div>
 </div>
+
+<ng-container *ngIf="currentJobs; else noCurrentJobs">
+  <h2 class="page-header">Current Jobs</h2>
+  <ul class="list-group" *ngFor="let currentJob of currentJobs">
+    <li class="list-group-item"><b>Customer:</b> {{currentJob.customerName}}</li>
+    <li class="list-group-item"><b>Job Description:</b> {{currentJob.description}}</li>
+    <li class="list-group-item"><b>Estimated Cost Compared To Actual Costs:</b> 
+      <div class="progress">
+        <div id="costProgress" class="progress-bar" role="progressbar" [attr.aria-valuenow]="currentJob.jobCost" aria-valuemin="0" [attr.aria-valuemax]="currentJob.bidCost" [ngStyle]="{'min-width': '2em', 'width': (currentJob.jobCost/currentJob.bidCost)*100+ '%'}">
+          {{(currentJob.jobCost/currentJob.bidCost)*100}}%
+        </div>
+      </div>
+    </li>
+  </ul>
+</ng-container>
+<ng-template #noCurrentJobs>
+  <h2 class="page-header">Loading...</h2>
+  <p>Try refreshing the page if there is a significant delay.</p>
+</ng-template>

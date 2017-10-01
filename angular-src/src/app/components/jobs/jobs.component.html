@@ -1,0 +1,24 @@
+<button class="btn btn-default" [routerLink]="['/home']">Go Home</button>
+<ng-container *ngIf="jobs; else noJobs">
+    <h2 class="page-header">Jobs</h2>
+    <div class="panel-group" id="accordion">
+      <div class="panel panel-default" *ngFor="let job of jobs">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#{{job.jobID + '-details'}}">Job ID: {{job.jobID}}</a>
+          </h4>
+        </div>
+        <div attr.id="{{job.jobID + '-details'}}" class="panel-collapse collapse">
+          <div class="panel-body">
+            <li class="list-group-item"><b>Job Cost:</b> ${{job.jobCost}}</li>
+            <li class="list-group-item"><b>Job Income:</b> ${{job.jobIncome}}</li>
+            <li class="list-group-item"><b>Job Status:</b> {{job.jobStatus}}</li>
+          </div>
+        </div>
+      </div>
+    </div>
+</ng-container>
+<ng-template #noJobs>
+  <h2 class="page-header">Loading...</h2>
+  <p>Try refreshing the page if there is a significant delay.</p>
+</ng-template>

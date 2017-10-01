@@ -1,0 +1,24 @@
+<button class="btn btn-default" [routerLink]="['/home']">Go Home</button>
+<ng-container *ngIf="bids; else noBids">
+    <h2 class="page-header">Bids</h2>
+    <div class="panel-group" id="accordion">
+      <div class="panel panel-default" *ngFor="let bid of bids">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#{{bid.bidID + '-details'}}">Bid ID: {{bid.bidID}}</a>
+          </h4>
+        </div>
+        <div attr.id="{{bid.bidID + '-details'}}" class="panel-collapse collapse">
+          <div class="panel-body">
+            <li class="list-group-item"><b>Estimated Cost:</b> ${{bid.bidCost}}</li>
+            <li class="list-group-item"><b>Bid Price:</b> ${{bid.bidPrice}}</li>
+            <li class="list-group-item"><b>Status:</b> {{bid.bidStatus}}</li>
+          </div>
+        </div>
+      </div>
+    </div>
+</ng-container>
+<ng-template #noBids>
+  <h2 class="page-header">Loading...</h2>
+  <p>Try refreshing the page if there is a significant delay.</p>
+</ng-template>

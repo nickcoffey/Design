@@ -1,4 +1,4 @@
-<button class="btn btn-default" [routerLink]="['/home']">Go Back</button>
+<button class="btn btn-default" [routerLink]="['/home']">Go Home</button>
 <ng-container *ngIf="customers; else noCustomers">
     <h2 class="page-header">Customers</h2>
     <div class="panel-group" id="accordion">
@@ -11,7 +11,8 @@
         <div attr.id="{{customer.customerID + '-details'}}" class="panel-collapse collapse">
           <div class="panel-body">
             <li class="list-group-item"><b>ID:</b> {{customer.customerID}}</li>
-            <li class="list-group-item"><b>Name:</b> {{customer.customerName}}</li>
+            <li class="list-group-item"><b>Name:</b> {{customer.customerName}}</li><br>
+            <button type="button" class="btn btn-primary" [routerLink]="['/customers/'+customer.customerID]">View Customer Page</button>
           </div>
         </div>
       </div>

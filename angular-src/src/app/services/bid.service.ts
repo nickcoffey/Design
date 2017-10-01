@@ -4,7 +4,7 @@ import 'rxjs/add/operator/map';
 import { AuthService } from './auth.service';
 
 @Injectable()
-export class CustomerService {
+export class BidService {
 
   localHttp:String = 'http://localhost:3000';
 
@@ -13,19 +13,11 @@ export class CustomerService {
     private authService:AuthService
   ) { }
 
-  getAllCustomers(){
+  getAllBids(){
     this.authService.loadToken();
     let headers = new Headers();
     headers.append('Authorization', this.authService.authToken);
     headers.append('Content-Type','application/json');
-    return this.http.get(`${this.localHttp}/customers/all`, {headers: headers}).map(response => response.json());
-  }
-
-  getCustomerById(id){
-    this.authService.loadToken();
-    let headers = new Headers();
-    headers.append('Authorization', this.authService.authToken);
-    headers.append('Content-Type','application/json');
-    return this.http.get(`${this.localHttp}/customers/${id}`, {headers: headers}).map(response => response.json());
+    return this.http.get(`${this.localHttp}/bids/all`, {headers: headers}).map(response => response.json());
   }
 }

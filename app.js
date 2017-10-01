@@ -22,6 +22,8 @@ const app = express();
 const users = require('./routes/users');
 const customers = require('./routes/customers');
 const inquiries = require('./routes/inquiries');
+const bids = require('./routes/bids');
+const jobs = require('./routes/jobs');
 
 // Port Number
 const port = 3000;
@@ -46,6 +48,8 @@ require('./config/passport')(passport);
 app.use('/users', users);
 app.use('/customers', customers);
 app.use('/inquiries', inquiries);
+app.use('/bids', bids);
+app.use('/jobs', jobs);
 
 // Index Route
 app.get('/', (request, response) => {
