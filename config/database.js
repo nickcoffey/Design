@@ -5,3 +5,5 @@ module.exports.AWS = {
     port: '3306',
     database: 'designDB'
 }
+
+module.exports.secret = 'yoursecret';

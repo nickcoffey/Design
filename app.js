@@ -19,7 +19,9 @@ connection.connect((err) => {
 
 const app = express();
 
+const users = require('./routes/users');
 const customers = require('./routes/customers');
+const inquiries = require('./routes/inquiries');
 
 // Port Number
 const port = 3000;
@@ -33,27 +35,29 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Body Parser Middleware
 app.use(bodyParser.json());
 
-/*
+
 // Passport Middleware
 app.use(passport.initialize());
 app.use(passport.session());
 
 require('./config/passport')(passport);
-*/
 
+
+app.use('/users', users);
 app.use('/customers', customers);
+app.use('/inquiries', inquiries);
 
 // Index Route
 app.get('/', (request, response) => {
     response.send('Invalid Endpoint');
 });
 
-/*
+
 // Any other route besides given ones will be sent here
 app.get('*', (request, response) => {
     response.sendFile(path.join(__dirname, 'public/index.html'));
 });
-*/
+
 
 // Start Server
 app.listen(port, () => {

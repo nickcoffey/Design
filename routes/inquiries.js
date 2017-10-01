@@ -1,28 +1,28 @@
 const express = require('express');
 const router = express.Router();
-const customer = require('../models/customer');
+const inquiry = require('../models/inquiry');
 const config = require('../config/database');
 const passport = require('passport');
 
-// Get all customers
+// Get all inquiries
 router.get('/all', passport.authenticate('jwt', {session: false}), (request, response, next) => {
-    customer.getAllCustomers((customers) => {
-        if(!customers){
+    inquiry.getAllInquiries((inquiries) => {
+        if(!inquiries){
             throw err;
         } else{
-            return response.json({customers: customers});
+            return response.json({inquiries: inquiries});
         }
     });
 });
 
-// Get customer by id
+// Get inquiry by id
 router.get('/:id', passport.authenticate('jwt', {session: false}), (request, response, next) => {
     const id = request.params.id;
-    customer.getCustomerById(id, (customer) => {
-        if(!customer){
+    inquiry.getInquiryById(id, (inquiry) => {
+        if(!inquiry){
             throw err;
         } else{
-            return response.json(customer);
+            return response.json(inquiry);
         }
     });
 });

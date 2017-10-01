@@ -1,0 +1,23 @@
+<button class="btn btn-default" [routerLink]="['/home']">Go Back</button>
+<ng-container *ngIf="inquiries; else noInquiries">
+    <h2 class="page-header">Inquiries</h2>
+    <div class="panel-group" id="accordion">
+      <div class="panel panel-default" *ngFor="let inquiry of inquiries">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#{{inquiry.inquiryID + '-details'}}">Inquiry ID: {{inquiry.inquiryID}}</a>
+          </h4>
+        </div>
+        <div attr.id="{{inquiry.inquiryID + '-details'}}" class="panel-collapse collapse">
+          <div class="panel-body">
+            <li class="list-group-item"><b>Description:</b> {{inquiry.description}}</li>
+            <li class="list-group-item"><b>Status:</b> {{inquiry.inquiryStatus}}</li>
+          </div>
+        </div>
+      </div>
+    </div>
+</ng-container>
+<ng-template #noInquiries>
+  <h2 class="page-header">Loading...</h2>
+  <p>Try refreshing the page if there is a significant delay.</p>
+</ng-template>
