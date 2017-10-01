@@ -13,6 +13,7 @@
             <li class="list-group-item"><b>ID:</b> {{customer.customerID}}</li>
             <li class="list-group-item"><b>Name:</b> {{customer.customerName}}</li><br>
             <button type="button" class="btn btn-primary" [routerLink]="['/customers/'+customer.customerID]">View Customer Page</button>
+            <button type="button" class="btn btn-primary" [routerLink]="['/home']">Create Inquiry</button>
           </div>
         </div>
       </div>

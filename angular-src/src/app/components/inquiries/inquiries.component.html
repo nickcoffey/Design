@@ -11,7 +11,9 @@
         <div attr.id="{{inquiry.inquiryID + '-details'}}" class="panel-collapse collapse">
           <div class="panel-body">
             <li class="list-group-item"><b>Description:</b> {{inquiry.description}}</li>
-            <li class="list-group-item"><b>Status:</b> {{inquiry.inquiryStatus}}</li>
+            <li class="list-group-item"><b>Status:</b> {{inquiry.inquiryStatus}}</li><br>
+            <button type="button" class="btn btn-primary" [routerLink]="['/home']">Create Bid</button>
+            <button type="button" class="btn btn-danger" [routerLink]="['/home']">Edit</button>
           </div>
         </div>
       </div>

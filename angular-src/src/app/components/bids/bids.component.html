@@ -12,7 +12,9 @@
           <div class="panel-body">
             <li class="list-group-item"><b>Estimated Cost:</b> ${{bid.bidCost}}</li>
             <li class="list-group-item"><b>Bid Price:</b> ${{bid.bidPrice}}</li>
-            <li class="list-group-item"><b>Status:</b> {{bid.bidStatus}}</li>
+            <li class="list-group-item"><b>Status:</b> {{bid.bidStatus}}</li><br>
+            <button type="button" class="btn btn-primary" [routerLink]="['/home']">Create Job</button>
+            <button type="button" class="btn btn-danger" [routerLink]="['/home']">Edit</button>
           </div>
         </div>
       </div>

@@ -38,7 +38,7 @@ router.post('/authenticate', (request, response, next) => {
         //console.log(`User = ${JSON.stringify(user)}`);
         //console.log(`Error = ${error}`);
         if(error){
-            throw error;
+            return error;
         }
         if(!user[0]){
             return response.json({success: false, msg: 'User not found'});
@@ -55,7 +55,7 @@ router.post('/authenticate', (request, response, next) => {
         User.comparePassword(password, user[0].password, (error, isMatch) => {
             // If callback contains error
             if(error){
-                throw error;
+                return error;
             }
             // If callback hash matches 
             if(isMatch){
