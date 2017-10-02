@@ -28,4 +28,12 @@ export class InquiryService {
     headers.append('Authorization',this.authService.authToken);
     return this.http.post(`${this.localHttp}/inquiries/new`, JSON.stringify(newInquiry), {headers: headers}).map(response => response.json());
   }
+
+  updateInquiryStatus(updatedInquiry){
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    headers.append('Authorization',this.authService.authToken);
+    return this.http.post(`${this.localHttp}/inquiries/update-status`, JSON.stringify(updatedInquiry), {headers: headers}).map(response => response.json());
+  }
 }

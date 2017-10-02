@@ -24,6 +24,7 @@ const customers = require('./routes/customers');
 const inquiries = require('./routes/inquiries');
 const bids = require('./routes/bids');
 const jobs = require('./routes/jobs');
+const materials = require('./routes/materials');
 
 // Port Number
 const port = 3000;
@@ -50,6 +51,7 @@ app.use('/customers', customers);
 app.use('/inquiries', inquiries);
 app.use('/bids', bids);
 app.use('/jobs', jobs);
+app.use('/materials', materials);
 
 // Index Route
 app.get('/', (request, response) => {

@@ -94,12 +94,14 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_jobs_jobs_component__ = __webpack_require__("../../../../../src/app/components/jobs/jobs.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_customer_customer_component__ = __webpack_require__("../../../../../src/app/components/customer/customer.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_create_bid_create_bid_component__ = __webpack_require__("../../../../../src/app/components/create-bid/create-bid.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__services_customer_service__ = __webpack_require__("../../../../../src/app/services/customer.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__services_inquiry_service__ = __webpack_require__("../../../../../src/app/services/inquiry.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__services_bid_service__ = __webpack_require__("../../../../../src/app/services/bid.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__services_job_service__ = __webpack_require__("../../../../../src/app/services/job.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__guards_auth_guard__ = __webpack_require__("../../../../../src/app/guards/auth.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_materials_materials_component__ = __webpack_require__("../../../../../src/app/components/materials/materials.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__services_customer_service__ = __webpack_require__("../../../../../src/app/services/customer.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__services_inquiry_service__ = __webpack_require__("../../../../../src/app/services/inquiry.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__services_bid_service__ = __webpack_require__("../../../../../src/app/services/bid.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__services_job_service__ = __webpack_require__("../../../../../src/app/services/job.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__services_material_service__ = __webpack_require__("../../../../../src/app/services/material.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__guards_auth_guard__ = __webpack_require__("../../../../../src/app/guards/auth.guard.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -131,16 +133,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
+
 var appRoutes = [
     { path: '', component: __WEBPACK_IMPORTED_MODULE_9__components_login_login_component__["a" /* LoginComponent */] },
-    { path: 'home', component: __WEBPACK_IMPORTED_MODULE_7__components_home_home_component__["a" /* HomeComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_21__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'customers', component: __WEBPACK_IMPORTED_MODULE_8__components_customers_customers_component__["a" /* CustomersComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_21__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'customers/:id', component: __WEBPACK_IMPORTED_MODULE_14__components_customer_customer_component__["a" /* CustomerComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_21__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'inquiries', component: __WEBPACK_IMPORTED_MODULE_11__components_inquiries_inquiries_component__["a" /* InquiriesComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_21__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'bids', component: __WEBPACK_IMPORTED_MODULE_12__components_bids_bids_component__["a" /* BidsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_21__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'jobs', component: __WEBPACK_IMPORTED_MODULE_13__components_jobs_jobs_component__["a" /* JobsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_21__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'register', component: __WEBPACK_IMPORTED_MODULE_10__components_register_register_component__["a" /* RegisterComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_21__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'create-bid', component: __WEBPACK_IMPORTED_MODULE_15__components_create_bid_create_bid_component__["a" /* CreateBidComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_21__guards_auth_guard__["a" /* AuthGuard */]] }
+    { path: 'home', component: __WEBPACK_IMPORTED_MODULE_7__components_home_home_component__["a" /* HomeComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_23__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'customers', component: __WEBPACK_IMPORTED_MODULE_8__components_customers_customers_component__["a" /* CustomersComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_23__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'customers/:id', component: __WEBPACK_IMPORTED_MODULE_14__components_customer_customer_component__["a" /* CustomerComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_23__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'inquiries', component: __WEBPACK_IMPORTED_MODULE_11__components_inquiries_inquiries_component__["a" /* InquiriesComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_23__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'bids', component: __WEBPACK_IMPORTED_MODULE_12__components_bids_bids_component__["a" /* BidsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_23__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'jobs', component: __WEBPACK_IMPORTED_MODULE_13__components_jobs_jobs_component__["a" /* JobsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_23__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'register', component: __WEBPACK_IMPORTED_MODULE_10__components_register_register_component__["a" /* RegisterComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_23__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'create-bid/:id', component: __WEBPACK_IMPORTED_MODULE_15__components_create_bid_create_bid_component__["a" /* CreateBidComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_23__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'materials', component: __WEBPACK_IMPORTED_MODULE_16__components_materials_materials_component__["a" /* MaterialsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_23__guards_auth_guard__["a" /* AuthGuard */]] }
 ];
 var AppModule = (function () {
     function AppModule() {
@@ -160,7 +165,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_12__components_bids_bids_component__["a" /* BidsComponent */],
             __WEBPACK_IMPORTED_MODULE_13__components_jobs_jobs_component__["a" /* JobsComponent */],
             __WEBPACK_IMPORTED_MODULE_14__components_customer_customer_component__["a" /* CustomerComponent */],
-            __WEBPACK_IMPORTED_MODULE_15__components_create_bid_create_bid_component__["a" /* CreateBidComponent */]
+            __WEBPACK_IMPORTED_MODULE_15__components_create_bid_create_bid_component__["a" /* CreateBidComponent */],
+            __WEBPACK_IMPORTED_MODULE_16__components_materials_materials_component__["a" /* MaterialsComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -176,12 +182,13 @@ AppModule = __decorate([
             MdMenuModule*/
         ],
         providers: [
-            __WEBPACK_IMPORTED_MODULE_16__services_customer_service__["a" /* CustomerService */],
-            __WEBPACK_IMPORTED_MODULE_17__services_inquiry_service__["a" /* InquiryService */],
-            __WEBPACK_IMPORTED_MODULE_18__services_bid_service__["a" /* BidService */],
-            __WEBPACK_IMPORTED_MODULE_19__services_job_service__["a" /* JobService */],
-            __WEBPACK_IMPORTED_MODULE_20__services_auth_service__["a" /* AuthService */],
-            __WEBPACK_IMPORTED_MODULE_21__guards_auth_guard__["a" /* AuthGuard */]
+            __WEBPACK_IMPORTED_MODULE_17__services_customer_service__["a" /* CustomerService */],
+            __WEBPACK_IMPORTED_MODULE_18__services_inquiry_service__["a" /* InquiryService */],
+            __WEBPACK_IMPORTED_MODULE_19__services_bid_service__["a" /* BidService */],
+            __WEBPACK_IMPORTED_MODULE_20__services_job_service__["a" /* JobService */],
+            __WEBPACK_IMPORTED_MODULE_21__services_material_service__["a" /* MaterialService */],
+            __WEBPACK_IMPORTED_MODULE_22__services_auth_service__["a" /* AuthService */],
+            __WEBPACK_IMPORTED_MODULE_23__guards_auth_guard__["a" /* AuthGuard */]
         ],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */]]
     })
@@ -212,7 +219,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/bids/bids.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<button class=\"btn btn-default\" [routerLink]=\"['/home']\">Go Home</button>\r\n<ng-container *ngIf=\"bids; else noBids\">\r\n    <h2 class=\"page-header\">Bids</h2>\r\n    <div class=\"panel-group\" id=\"accordion\">\r\n      <div class=\"panel panel-default\" *ngFor=\"let bid of bids\">\r\n        <div class=\"panel-heading\">\r\n          <h4 class=\"panel-title\">\r\n            <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#{{bid.bidID + '-details'}}\">Bid ID: {{bid.bidID}}</a>\r\n          </h4>\r\n        </div>\r\n        <div attr.id=\"{{bid.bidID + '-details'}}\" class=\"panel-collapse collapse\">\r\n          <div class=\"panel-body\">\r\n            <li class=\"list-group-item\"><b>Estimated Cost:</b> ${{bid.bidCost}}</li>\r\n            <li class=\"list-group-item\"><b>Bid Price:</b> ${{bid.bidPrice}}</li>\r\n            <li class=\"list-group-item\"><b>Status:</b> {{bid.bidStatus}}</li><br>\r\n            <button type=\"button\" class=\"btn btn-primary\" [routerLink]=\"['/home']\">Create Job</button>\r\n            <button type=\"button\" class=\"btn btn-danger\" [routerLink]=\"['/home']\">Edit</button>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n</ng-container>\r\n<ng-template #noBids>\r\n  <h2 class=\"page-header\">Loading...</h2>\r\n  <p>Try refreshing the page if there is a significant delay.</p>\r\n</ng-template>"
+module.exports = "<!--<button class=\"btn btn-default\" [routerLink]=\"['/home']\">Go Home</button>\r\n<ng-container *ngIf=\"bids; else noBids\">\r\n    <h2 class=\"page-header\">Bids</h2>\r\n    <div class=\"panel-group\" id=\"accordion\">\r\n      <div class=\"panel panel-default\" *ngFor=\"let bid of bids\">\r\n        <div class=\"panel-heading\">\r\n          <h4 class=\"panel-title\">\r\n            <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#{{bid.bidID + '-details'}}\">Bid ID: {{bid.bidID}}</a>\r\n          </h4>\r\n        </div>\r\n        <div attr.id=\"{{bid.bidID + '-details'}}\" class=\"panel-collapse collapse\">\r\n          <div class=\"panel-body\">\r\n            <li class=\"list-group-item\"><b>Estimated Cost:</b> ${{bid.bidCost}}</li>\r\n            <li class=\"list-group-item\"><b>Bid Price:</b> ${{bid.bidPrice}}</li>\r\n            <li class=\"list-group-item\"><b>Status:</b> {{bid.bidStatus}}</li><br>\r\n            <button type=\"button\" class=\"btn btn-primary\" [routerLink]=\"['/home']\">Create Job</button>\r\n            <button type=\"button\" class=\"btn btn-danger\" [routerLink]=\"['/home']\">Edit</button>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n</ng-container>\r\n<ng-template #noBids>\r\n  <h2 class=\"page-header\">Loading...</h2>\r\n  <p>Try refreshing the page if there is a significant delay.</p>\r\n</ng-template>-->\r\n\r\n\r\n\r\n\r\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <button class=\"btn btn-default\" [routerLink]=\"['/home']\">Go Home</button>\r\n</div>\r\n  \r\n<ng-container *ngIf=\"bids; else noBids\">\r\n  <ng-container *ngIf=\"pendingBids[0]; else noPendingBids\">\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">Pending Bids</h2>\r\n      <table class=\"table table-striped table-hover\">\r\n        <thead>\r\n          <tr>\r\n            <th>ID</th>\r\n            <th>Price</th>\r\n            <th>Labor Cost</th>\r\n            <th>Material Cost</th>\r\n            <th>Created Date</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let pendingBid of pendingBids;\">\r\n            <td>{{pendingBid.bidID}}</td>\r\n            <td>{{pendingBid.bidPrice}}</td>\r\n            <td>{{pendingBid.bidLabor}}</td>\r\n            <td>Material Cost</td>\r\n            <td>{{pendingBid.createdDate}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>  \r\n    </div>\r\n  </ng-container>\r\n  <ng-template #noPendingBids>\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">No Pending Bids</h2>\r\n      <p>If this is incorrect, try refreshing the page.</p>\r\n    </div>\r\n  </ng-template>\r\n  \r\n  <ng-container *ngIf=\"acceptedBids[0]; else noAcceptedBids\">\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">Accepted Bids</h2>\r\n      <table class=\"table table-striped table-hover\">\r\n        <thead>\r\n          <tr>\r\n            <th>ID</th>\r\n            <th>Price</th>\r\n            <th>Labor Cost</th>\r\n            <th>Material Cost</th>\r\n            <th>Accepted Date</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let acceptedBid of acceptedBids;\">\r\n            <td>{{acceptedBid.bidID}}</td>\r\n            <td>{{acceptedBid.bidPrice}}</td>\r\n            <td>{{acceptedBid.bidLabor}}</td>\r\n            <td>Material Cost</td>\r\n            <td>{{acceptedBid.endDate}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>  \r\n    </div>\r\n  </ng-container>\r\n  <ng-template #noAcceptedBids>\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">No Accepted Bids</h2>\r\n      <p>If this is incorrect, try refreshing the page.</p>\r\n    </div>\r\n  </ng-template>\r\n  \r\n  <ng-container *ngIf=\"declinedBids[0]; else noDeclinedBids\">\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">Declined Bids</h2>\r\n      <table class=\"table table-striped table-hover\">\r\n        <thead>\r\n          <tr>\r\n            <th>ID</th>\r\n            <th>Price</th>\r\n            <th>Labor Cost</th>\r\n            <th>Material Cost</th>\r\n            <th>Declined Date</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let declinedBid of declinedBids;\">\r\n            <td>{{declinedBid.bidID}}</td>\r\n            <td>{{declinedBid.bidPrice}}</td>\r\n            <td>{{declinedBid.bidLabor}}</td>\r\n            <td>Material Cost</td>\r\n            <td>{{declinedBid.endDate}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table> \r\n    </div>\r\n  </ng-container>\r\n  <ng-template #noDeclinedBids>\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">No Declined Bids</h2>\r\n      <p>If this is incorrect, try refreshing the page.</p>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n<ng-template #noBids>\r\n  <div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n    <h2 class=\"page-header\">No Bids</h2>\r\n    <p>If this is incorrect, try refreshing the page.</p>\r\n  </div>\r\n</ng-template>"
 
 /***/ }),
 
@@ -241,7 +248,10 @@ var BidsComponent = (function () {
     BidsComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.bidService.getAllBids().subscribe(function (bids) {
-            _this.bids = bids.bids;
+            _this.bids = bids;
+            _this.pendingBids = bids.pendingBids;
+            _this.acceptedBids = bids.acceptedBids;
+            _this.declinedBids = bids.declinedBids;
         });
     };
     return BidsComponent;
@@ -281,7 +291,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/create-bid/create-bid.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  create-bid works!\n</p>\n"
+module.exports = "<button class=\"btn btn-default\" [routerLink]=\"['/inquiries']\">Go Back</button>\r\n<h2 class=\"page-header\">Create Bid</h2>\r\n<form (submit)=\"onCreate()\">\r\n    <h3>Bid Information</h3>\r\n  <div class=\"form-group\">\r\n    <label>Bid Price</label>\r\n    <input type=\"text\" [(ngModel)]=\"bidPrice\" name=\"bidPrice\" placeholder=\"Bid Price\" class=\"form-control\" required>\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <label>Current Date</label>\r\n    <input type=\"text\" [(ngModel)]=\"createdDate\" name=\"createdDate\" placeholder=\"Current Date\" class=\"form-control\" required>\r\n  </div>\r\n  <h3>Estimated Costs</h3>\r\n  <div class=\"form-group\">\r\n    <label>Labor Cost</label>\r\n    <input type=\"text\" [(ngModel)]=\"bidLabor\" name=\"bidLabor\" placeholder=\"Labor Cost\" class=\"form-control\" required>\r\n  </div>\r\n  <label>Materials Cost</label>\r\n  <div class=\"dropdown\">\r\n    <button class=\"btn btn-primary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">Add Materials<span class=\"caret\"></span></button>\r\n    <ul class=\"dropdown-menu\">\r\n      <li *ngFor=\"let material of materials;\"><a (click)=\"onAddMaterial(material)\">{{material.materialName}}</a></li>\r\n    </ul>\r\n  </div>\r\n  <table class=\"table table-striped table-hover\">\r\n    <thead>\r\n      <tr>\r\n        <th>Name</th>\r\n        <th>Quantity</th>\r\n        <th>Per Unit Cost</th>\r\n      </tr>\r\n      </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let selectedMaterial of selectedMaterials;\">\r\n        <td>{{selectedMaterial.materialName}}</td>\r\n        <td><input type=\"text\" [(ngModel)]=\"selectedMaterial.quantity\" name=\"quantity\" placeholder=\"Quantity\" class=\"form-control\" required></td>\r\n        <td><input type=\"text\" [(ngModel)]=\"selectedMaterial.perUnitCost\" name=\"perUnitCost\" placeholder=\"Per Unit Cost\" class=\"form-control\" required></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <button type=\"submit\" class=\"btn btn-primary\">Create</button>\r\n  <button type=\"reset\" class=\"btn btn-danger\" (click)=\"onClear()\">Clear</button>\r\n</form>"
 
 /***/ }),
 
@@ -291,6 +301,10 @@ module.exports = "<p>\n  create-bid works!\n</p>\n"
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CreateBidComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_material_service__ = __webpack_require__("../../../../../src/app/services/material.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_bid_service__ = __webpack_require__("../../../../../src/app/services/bid.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_inquiry_service__ = __webpack_require__("../../../../../src/app/services/inquiry.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -301,10 +315,73 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
+
 var CreateBidComponent = (function () {
-    function CreateBidComponent() {
+    function CreateBidComponent(materialService, bidService, inquiryService, router, route) {
+        this.materialService = materialService;
+        this.bidService = bidService;
+        this.inquiryService = inquiryService;
+        this.router = router;
+        this.route = route;
+        this.selectedMaterials = [];
     }
     CreateBidComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.materialService.getAllMaterials().subscribe(function (materials) {
+            _this.materials = materials.materials;
+        });
+    };
+    CreateBidComponent.prototype.onAddMaterial = function (material) {
+        this.selectedMaterials.push(material);
+    };
+    CreateBidComponent.prototype.onClear = function () {
+        this.selectedMaterials = [];
+    };
+    CreateBidComponent.prototype.onCreate = function () {
+        var _this = this;
+        var newBid = {
+            inquiryID: this.route.snapshot.params['id'],
+            bidLabor: this.bidLabor,
+            bidPrice: this.bidPrice,
+            createdDate: this.createdDate
+        };
+        var updatedInquiry = {
+            inquiryID: this.route.snapshot.params['id'],
+            inquiryStatus: "ACCEPTED"
+        };
+        this.bidService.createBid(newBid).subscribe(function (data) {
+            if (data.success) {
+                console.log(data.msg);
+                _this.ngOnInit();
+            }
+            else {
+                console.log(data.msg);
+            }
+        });
+        this.inquiryService.updateInquiryStatus(updatedInquiry).subscribe(function (data) {
+            if (data.success) {
+                console.log(data.msg);
+                _this.ngOnInit();
+            }
+            else {
+                console.log(data.msg);
+            }
+        });
+        this.selectedMaterials.forEach(function (selectedMaterial) {
+            _this.bidService.createBidMaterial(selectedMaterial).subscribe(function (data) {
+                if (data.success) {
+                    console.log(data.msg);
+                    _this.ngOnInit();
+                }
+                else {
+                    console.log(data.msg);
+                }
+            });
+        });
+        this.router.navigate(['/bids']);
     };
     return CreateBidComponent;
 }());
@@ -314,9 +391,10 @@ CreateBidComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/components/create-bid/create-bid.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/create-bid/create-bid.component.css")]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services_material_service__["a" /* MaterialService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_material_service__["a" /* MaterialService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__services_bid_service__["a" /* BidService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_bid_service__["a" /* BidService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__services_inquiry_service__["a" /* InquiryService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_inquiry_service__["a" /* InquiryService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]) === "function" && _e || Object])
 ], CreateBidComponent);
 
+var _a, _b, _c, _d, _e;
 //# sourceMappingURL=create-bid.component.js.map
 
 /***/ }),
@@ -342,7 +420,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/customer/customer.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\n  <button class=\"btn btn-default\" [routerLink]=\"['/customers']\">Go Back</button>  \n</div>\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\n  <ng-container *ngIf=\"customer; else noCustomer\">\n    <h2 class=\"page-header\">{{customer[0].customerName}}</h2>\n    <ul class=\"list-group\">\n      <li class=\"list-group-item\"><b>Address:</b> {{customer[0].address}}</li>\n      <li class=\"list-group-item\"><b>Email:</b> {{customer[0].email}}</li>\n      <li class=\"list-group-item\"><b>Phone:</b> {{customer[0].phone}}</li>\n    </ul>\n  </ng-container>\n  <ng-template #noCustomer>\n    <h2 class=\"page-header\">No Customers</h2>\n    <p>If this is incorrect, try refreshing the page.</p>\n  </ng-template>\n</div>\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\n  <h2 class=\"page-header\">Create A New Inquiry</h2>\n  <form (submit)=\"onCreate()\">\n    <div class=\"form-group\">\n      <label>Received Date</label>\n      <input type=\"text\" [(ngModel)]=\"receivedDate\" name=\"receivedDate\" placeholder=\"YYYY-MM-DD\" class=\"form-control\" required>\n    </div>\n    <div class=\"form-group\">\n      <label>Description</label>\n      <textarea type=\"text\" [(ngModel)]=\"description\" name=\"description\" placeholder=\"Description\" class=\"form-control\" required></textarea>\n    </div>\n    <button type=\"submit\" class=\"btn btn-primary\">Create</button>\n    <button type=\"reset\" class=\"btn btn-danger\">Clear</button>\n  </form>  \n</div>"
+module.exports = "<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <button class=\"btn btn-default\" [routerLink]=\"['/customers']\">Go Back</button>  \r\n</div>\r\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <ng-container *ngIf=\"customer; else noCustomer\">\r\n    <h2 class=\"page-header\">{{customer[0].customerName}}</h2>\r\n    <ul class=\"list-group\">\r\n      <li class=\"list-group-item\"><b>Address:</b> {{customer[0].address}}</li>\r\n      <li class=\"list-group-item\"><b>Email:</b> {{customer[0].email}}</li>\r\n      <li class=\"list-group-item\"><b>Phone:</b> {{customer[0].phone}}</li>\r\n    </ul>\r\n  </ng-container>\r\n  <ng-template #noCustomer>\r\n    <h2 class=\"page-header\">No Customers</h2>\r\n    <p>If this is incorrect, try refreshing the page.</p>\r\n  </ng-template>\r\n</div>\r\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <h2 class=\"page-header\">Create A New Inquiry</h2>\r\n  <form (submit)=\"onCreate()\">\r\n    <div class=\"form-group\">\r\n      <label>Received Date</label>\r\n      <input type=\"text\" [(ngModel)]=\"receivedDate\" name=\"receivedDate\" placeholder=\"YYYY-MM-DD\" class=\"form-control\" required>\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label>Description</label>\r\n      <textarea type=\"text\" [(ngModel)]=\"description\" name=\"description\" placeholder=\"Description\" class=\"form-control\" required></textarea>\r\n    </div>\r\n    <button type=\"submit\" class=\"btn btn-primary\">Create</button>\r\n    <button type=\"reset\" class=\"btn btn-danger\">Clear</button>\r\n  </form>  \r\n</div>"
 
 /***/ }),
 
@@ -392,7 +470,7 @@ var CustomerComponent = (function () {
         this.inquiryService.createInquiry(newInquiry).subscribe(function (data) {
             if (data.success) {
                 console.log(data.msg);
-                _this.router.navigate(['/customers']);
+                _this.router.navigate(['/inquiries']);
             }
             else {
                 console.log(data.msg);
@@ -436,7 +514,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/customers/customers.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <button class=\"btn btn-default\" [routerLink]=\"['/home']\">Go Home</button>  \r\n</div>\r\n<div class=\"col-xs-12 col-sm-12 col-md-6 col-lg-6\">\r\n  <ng-container *ngIf=\"customers; else noCustomers\">\r\n    <h2 class=\"page-header\">Customers</h2>\r\n    <div class=\"panel-group\" id=\"accordion\">\r\n      <div class=\"panel panel-default\" *ngFor=\"let customer of customers\">\r\n        <div class=\"panel-heading\">\r\n          <h4 class=\"panel-title\">\r\n            <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#{{customer.customerID + '-details'}}\">{{customer.customerName}}</a>\r\n          </h4>\r\n        </div>\r\n        <div attr.id=\"{{customer.customerID + '-details'}}\" class=\"panel-collapse collapse\">\r\n          <div class=\"panel-body\">\r\n            <li class=\"list-group-item\"><b>ID:</b> {{customer.customerID}}</li>\r\n            <li class=\"list-group-item\"><b>Name:</b> {{customer.customerName}}</li><br>\r\n            <button type=\"button\" class=\"btn btn-primary\" [routerLink]=\"['/customers/'+customer.customerID]\">View Customer Page</button>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </ng-container>\r\n  <ng-template #noCustomers>\r\n    <h2 class=\"page-header\">No Customers</h2>\r\n    <p>If this is incorrect, try refreshing the page.</p>\r\n  </ng-template>\r\n</div>\r\n<div class=\"col-xs-12 col-sm-12 col-md-6 col-lg-6\">\r\n  <h2 class=\"page-header\">Create A New Customer</h2>\r\n  <form (submit)=\"onCreate()\">\r\n    <div class=\"form-group\">\r\n      <label>Name</label>\r\n      <input type=\"text\" [(ngModel)]=\"name\" name=\"name\" placeholder=\"Name\" class=\"form-control\" required>\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label>Email</label>\r\n      <input type=\"text\" [(ngModel)]=\"email\" name=\"email\" placeholder=\"Email\" class=\"form-control\" required>\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label>Address</label>\r\n      <input type=\"text\" [(ngModel)]=\"address\" name=\"address\" placeholder=\"Address\" class=\"form-control\" required>\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label>Phone</label>\r\n      <input type=\"text\" [(ngModel)]=\"phone\" name=\"phone\" placeholder=\"Phone\" class=\"form-control\" required>\r\n    </div>\r\n    <button type=\"submit\" class=\"btn btn-primary\">Create</button>\r\n    <button type=\"reset\" class=\"btn btn-danger\">Clear</button>\r\n  </form>\r\n</div>\r\n"
+module.exports = "<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <button class=\"btn btn-default\" [routerLink]=\"['/home']\">Go Home</button>  \r\n</div>\r\n<div class=\"col-xs-12 col-sm-12 col-md-6 col-lg-6\">\r\n  <ng-container *ngIf=\"customers; else noCustomers\">\r\n    <h2 class=\"page-header\">Customers</h2>\r\n    <div class=\"panel-group\" id=\"accordion\">\r\n      <div class=\"panel panel-default\" *ngFor=\"let customer of customers\">\r\n        <div class=\"panel-heading\">\r\n          <h4 class=\"panel-title\">\r\n            <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#{{customer.customerID + '-details'}}\">{{customer.customerName}}</a>\r\n          </h4>\r\n        </div>\r\n        <div attr.id=\"{{customer.customerID + '-details'}}\" class=\"panel-collapse collapse\">\r\n          <div class=\"panel-body\">\r\n            <li class=\"list-group-item\"><b>ID:</b> {{customer.customerID}}</li>\r\n            <li class=\"list-group-item\"><b>Name:</b> {{customer.customerName}}</li><br>\r\n            <button type=\"button\" class=\"btn btn-primary\" [routerLink]=\"['/customers/'+customer.customerID]\">View Customer Page</button>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </ng-container>\r\n  <ng-template #noCustomers>\r\n    <h2 class=\"page-header\">No Customers</h2>\r\n    <p>If this is incorrect, try refreshing the page.</p>\r\n  </ng-template>\r\n</div>\r\n\r\n<div class=\"col-xs-12 col-sm-12 col-md-6 col-lg-6\">\r\n  <h2 class=\"page-header\">Create A New Customer</h2>\r\n  <form (submit)=\"onCreate()\">\r\n    <div class=\"form-group\">\r\n      <label>Name</label>\r\n      <input type=\"text\" [(ngModel)]=\"name\" name=\"name\" placeholder=\"Name\" class=\"form-control\" required>\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label>Email</label>\r\n      <input type=\"text\" [(ngModel)]=\"email\" name=\"email\" placeholder=\"Email\" class=\"form-control\" required>\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label>Address</label>\r\n      <input type=\"text\" [(ngModel)]=\"address\" name=\"address\" placeholder=\"Address\" class=\"form-control\" required>\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label>Phone</label>\r\n      <input type=\"text\" [(ngModel)]=\"phone\" name=\"phone\" placeholder=\"Phone\" class=\"form-control\" required>\r\n    </div>\r\n    <button type=\"submit\" class=\"btn btn-primary\">Create</button>\r\n    <button type=\"reset\" class=\"btn btn-danger\">Clear</button>\r\n  </form>\r\n</div>"
 
 /***/ }),
 
@@ -595,7 +673,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/inquiries/inquiries.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <button class=\"btn btn-default\" [routerLink]=\"['/home']\">Go Home</button>\r\n</div>\r\n\r\n<ng-container *ngIf=\"inquiries; else noInquiries\">\r\n  <ng-container *ngIf=\"pendingInquiries; else noPendingInquiries\">\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">Pending Inquiries</h2>\r\n      <div class=\"panel-group\" id=\"pendingAccordion\">\r\n        <div class=\"panel panel-default\" *ngFor=\"let pendingInquiry of pendingInquiries;\">\r\n          <div class=\"panel-heading\">\r\n            <h4 class=\"panel-title\">\r\n              <a data-toggle=\"collapse\" data-parent=\"#pendingAccordion\" href=\"#{{pendingInquiry.inquiryID + '-details'}}\">Inquiry ID: {{pendingInquiry.inquiryID}}</a>\r\n            </h4>\r\n          </div>\r\n          <div attr.id=\"{{pendingInquiry.inquiryID + '-details'}}\" class=\"panel-collapse collapse\">\r\n            <div class=\"panel-body\">\r\n              <li class=\"list-group-item\" style=\"word-wrap: break-word;\"><b>Description:</b> {{pendingInquiry.description}}</li>\r\n              <li class=\"list-group-item\"><b>Status:</b> {{pendingInquiry.inquiryStatus}}</li><br>\r\n              <button type=\"button\" class=\"btn btn-primary\" [routerLink]=\"['/create-bid']\">Create Bid</button>\r\n              <button type=\"button\" class=\"btn btn-danger\" [routerLink]=\"['/home']\">Edit</button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>  \r\n    </div>\r\n  </ng-container>\r\n  <ng-template #noPendingInquiries>\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">No Pending Inquiries</h2>\r\n      <p>If this is incorrect, try refreshing the page.</p>\r\n    </div>\r\n  </ng-template>\r\n\r\n  <ng-container *ngIf=\"acceptedInquiries; else noAcceptedInquiries\">\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">Accepted Inquiries</h2>\r\n      <div class=\"panel-group\" id=\"acceptedAccordion\">\r\n        <div class=\"panel panel-default\" *ngFor=\"let acceptedInquiry of acceptedInquiries\">\r\n          <div class=\"panel-heading\">\r\n            <h4 class=\"panel-title\">\r\n              <a data-toggle=\"collapse\" data-parent=\"#acceptedAccordion\" href=\"#{{acceptedInquiry.inquiryID + '-details'}}\">Inquiry ID: {{acceptedInquiry.inquiryID}}</a>\r\n            </h4>\r\n          </div>\r\n          <div attr.id=\"{{acceptedInquiry.inquiryID + '-details'}}\" class=\"panel-collapse collapse\">\r\n            <div class=\"panel-body\">\r\n              <li class=\"list-group-item\" style=\"word-wrap: break-word;\"><b>Description:</b> {{acceptedInquiry.description}}</li>\r\n              <li class=\"list-group-item\"><b>Status:</b> {{acceptedInquiry.inquiryStatus}}</li><br>\r\n              <button type=\"button\" class=\"btn btn-danger\" [routerLink]=\"['/home']\">Edit</button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>  \r\n    </div>\r\n  </ng-container>\r\n  <ng-template #noAcceptedInquiries>\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">No Accepted Inquiries</h2>\r\n      <p>If this is incorrect, try refreshing the page.</p>\r\n    </div>\r\n  </ng-template>\r\n\r\n  <ng-container *ngIf=\"declinedInquiries; else noDeclinedInquiries\">\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">Declined Inquiries</h2>\r\n      <div class=\"panel-group\" id=\"declinedAccordion\">\r\n        <div class=\"panel panel-default\" *ngFor=\"let declinedInquiry of declinedInquiries\">\r\n          <div class=\"panel-heading\">\r\n            <h4 class=\"panel-title\">\r\n              <a data-toggle=\"collapse\" data-parent=\"#declinedAccordion\" href=\"#{{declinedInquiry.inquiryID + '-details'}}\">Inquiry ID: {{declinedInquiry.inquiryID}}</a>\r\n            </h4>\r\n          </div>\r\n          <div attr.id=\"{{declinedInquiry.inquiryID + '-details'}}\" class=\"panel-collapse collapse\">\r\n            <div class=\"panel-body\">\r\n              <li class=\"list-group-item\" style=\"word-wrap: break-word;\"><b>Description:</b> {{declinedInquiry.description}}</li>\r\n              <li class=\"list-group-item\"><b>Status:</b> {{declinedInquiry.inquiryStatus}}</li><br>\r\n              <button type=\"button\" class=\"btn btn-danger\" [routerLink]=\"['/home']\">Edit</button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>  \r\n    </div>\r\n  </ng-container>\r\n  <ng-template #noDeclinedInquiries>\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">No Declined Inquiries</h2>\r\n      <p>If this is incorrect, try refreshing the page.</p>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n<ng-template #noInquiries>\r\n  <div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n    <h2 class=\"page-header\">No Inquiries</h2>\r\n    <p>If this is incorrect, try refreshing the page.</p>\r\n  </div>\r\n</ng-template>"
+module.exports = "<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <button class=\"btn btn-default\" [routerLink]=\"['/home']\">Go Home</button>\r\n</div>\r\n\r\n<ng-container *ngIf=\"inquiries; else noInquiries\">\r\n  <ng-container *ngIf=\"pendingInquiries; else noPendingInquiries\">\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">Pending Inquiries</h2>\r\n      <div class=\"panel-group\" id=\"pendingAccordion\">\r\n        <div class=\"panel panel-default\" *ngFor=\"let pendingInquiry of pendingInquiries;\">\r\n          <div class=\"panel-heading\">\r\n            <h4 class=\"panel-title\">\r\n              <a data-toggle=\"collapse\" data-parent=\"#pendingAccordion\" href=\"#{{pendingInquiry.inquiryID + '-details'}}\">Inquiry ID: {{pendingInquiry.inquiryID}}</a>\r\n            </h4>\r\n          </div>\r\n          <div attr.id=\"{{pendingInquiry.inquiryID + '-details'}}\" class=\"panel-collapse collapse\">\r\n            <div class=\"panel-body\">\r\n              <li class=\"list-group-item\" style=\"word-wrap: break-word;\"><b>Description:</b> {{pendingInquiry.description}}</li>\r\n              <li class=\"list-group-item\"><b>Status:</b> {{pendingInquiry.inquiryStatus}}</li><br>\r\n              <button type=\"button\" class=\"btn btn-primary\" [routerLink]=\"['/create-bid/'+pendingInquiry.inquiryID]\">Create Bid</button>\r\n              <button type=\"button\" class=\"btn btn-danger\" [routerLink]=\"['/home']\">Edit</button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>  \r\n    </div>\r\n  </ng-container>\r\n  <ng-template #noPendingInquiries>\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">No Pending Inquiries</h2>\r\n      <p>If this is incorrect, try refreshing the page.</p>\r\n    </div>\r\n  </ng-template>\r\n\r\n  <ng-container *ngIf=\"acceptedInquiries; else noAcceptedInquiries\">\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">Accepted Inquiries</h2>\r\n      <div class=\"panel-group\" id=\"acceptedAccordion\">\r\n        <div class=\"panel panel-default\" *ngFor=\"let acceptedInquiry of acceptedInquiries\">\r\n          <div class=\"panel-heading\">\r\n            <h4 class=\"panel-title\">\r\n              <a data-toggle=\"collapse\" data-parent=\"#acceptedAccordion\" href=\"#{{acceptedInquiry.inquiryID + '-details'}}\">Inquiry ID: {{acceptedInquiry.inquiryID}}</a>\r\n            </h4>\r\n          </div>\r\n          <div attr.id=\"{{acceptedInquiry.inquiryID + '-details'}}\" class=\"panel-collapse collapse\">\r\n            <div class=\"panel-body\">\r\n              <li class=\"list-group-item\" style=\"word-wrap: break-word;\"><b>Description:</b> {{acceptedInquiry.description}}</li>\r\n              <li class=\"list-group-item\"><b>Status:</b> {{acceptedInquiry.inquiryStatus}}</li><br>\r\n              <button type=\"button\" class=\"btn btn-danger\" [routerLink]=\"['/home']\">Edit</button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>  \r\n    </div>\r\n  </ng-container>\r\n  <ng-template #noAcceptedInquiries>\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">No Accepted Inquiries</h2>\r\n      <p>If this is incorrect, try refreshing the page.</p>\r\n    </div>\r\n  </ng-template>\r\n\r\n  <ng-container *ngIf=\"declinedInquiries; else noDeclinedInquiries\">\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">Declined Inquiries</h2>\r\n      <div class=\"panel-group\" id=\"declinedAccordion\">\r\n        <div class=\"panel panel-default\" *ngFor=\"let declinedInquiry of declinedInquiries\">\r\n          <div class=\"panel-heading\">\r\n            <h4 class=\"panel-title\">\r\n              <a data-toggle=\"collapse\" data-parent=\"#declinedAccordion\" href=\"#{{declinedInquiry.inquiryID + '-details'}}\">Inquiry ID: {{declinedInquiry.inquiryID}}</a>\r\n            </h4>\r\n          </div>\r\n          <div attr.id=\"{{declinedInquiry.inquiryID + '-details'}}\" class=\"panel-collapse collapse\">\r\n            <div class=\"panel-body\">\r\n              <li class=\"list-group-item\" style=\"word-wrap: break-word;\"><b>Description:</b> {{declinedInquiry.description}}</li>\r\n              <li class=\"list-group-item\"><b>Status:</b> {{declinedInquiry.inquiryStatus}}</li><br>\r\n              <button type=\"button\" class=\"btn btn-danger\" [routerLink]=\"['/home']\">Edit</button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>  \r\n    </div>\r\n  </ng-container>\r\n  <ng-template #noDeclinedInquiries>\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">No Declined Inquiries</h2>\r\n      <p>If this is incorrect, try refreshing the page.</p>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n<ng-template #noInquiries>\r\n  <div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n    <h2 class=\"page-header\">No Inquiries</h2>\r\n    <p>If this is incorrect, try refreshing the page.</p>\r\n  </div>\r\n</ng-template>"
 
 /***/ }),
 
@@ -667,7 +745,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/jobs/jobs.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<button class=\"btn btn-default\" [routerLink]=\"['/home']\">Go Home</button>\n<ng-container *ngIf=\"jobs; else noJobs\">\n    <h2 class=\"page-header\">Jobs</h2>\n    <div class=\"panel-group\" id=\"accordion\">\n      <div class=\"panel panel-default\" *ngFor=\"let job of jobs\">\n        <div class=\"panel-heading\">\n          <h4 class=\"panel-title\">\n            <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#{{job.jobID + '-details'}}\">Job ID: {{job.jobID}}</a>\n          </h4>\n        </div>\n        <div attr.id=\"{{job.jobID + '-details'}}\" class=\"panel-collapse collapse\">\n          <div class=\"panel-body\">\n            <li class=\"list-group-item\"><b>Job Cost:</b> ${{job.jobCost}}</li>\n            <li class=\"list-group-item\"><b>Job Income:</b> ${{job.jobIncome}}</li>\n            <li class=\"list-group-item\"><b>Job Status:</b> {{job.jobStatus}}</li>\n          </div>\n        </div>\n      </div>\n    </div>\n</ng-container>\n<ng-template #noJobs>\n  <h2 class=\"page-header\">Loading...</h2>\n  <p>Try refreshing the page if there is a significant delay.</p>\n</ng-template>"
+module.exports = "<button class=\"btn btn-default\" [routerLink]=\"['/home']\">Go Home</button>\r\n<ng-container *ngIf=\"jobs; else noJobs\">\r\n    <h2 class=\"page-header\">Jobs</h2>\r\n    <div class=\"panel-group\" id=\"accordion\">\r\n      <div class=\"panel panel-default\" *ngFor=\"let job of jobs\">\r\n        <div class=\"panel-heading\">\r\n          <h4 class=\"panel-title\">\r\n            <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#{{job.jobID + '-details'}}\">Job ID: {{job.jobID}}</a>\r\n          </h4>\r\n        </div>\r\n        <div attr.id=\"{{job.jobID + '-details'}}\" class=\"panel-collapse collapse\">\r\n          <div class=\"panel-body\">\r\n            <li class=\"list-group-item\"><b>Job Cost:</b> ${{job.jobCost}}</li>\r\n            <li class=\"list-group-item\"><b>Job Income:</b> ${{job.jobIncome}}</li>\r\n            <li class=\"list-group-item\"><b>Job Status:</b> {{job.jobStatus}}</li>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n</ng-container>\r\n<ng-template #noJobs>\r\n  <h2 class=\"page-header\">Loading...</h2>\r\n  <p>Try refreshing the page if there is a significant delay.</p>\r\n</ng-template>"
 
 /***/ }),
 
@@ -736,7 +814,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2 class=\"page-header\">Login</h2>\n<form (submit)=\"onLogin()\">\n  <div class=\"form-group\">\n    <label>Username</label>\n    <input type=\"text\" [(ngModel)]=\"username\" name=\"username\" placeholder=\"Username\" class=\"form-control\" required>\n  </div>\n  <div class=\"form-group\">\n    <label>Password</label>\n    <input type=\"password\" [(ngModel)]=\"password\" name=\"password\" placeholder=\"Password\" class=\"form-control\" required>\n  </div>\n  <button type=\"submit\" class=\"btn btn-primary\">Login</button>\n  <button type=\"reset\" class=\"btn btn-danger\">Clear</button>\n</form>"
+module.exports = "<h2 class=\"page-header\">Login</h2>\r\n<form (submit)=\"onLogin()\">\r\n  <div class=\"form-group\">\r\n    <label>Username</label>\r\n    <input type=\"text\" [(ngModel)]=\"username\" name=\"username\" placeholder=\"Username\" class=\"form-control\" required>\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <label>Password</label>\r\n    <input type=\"password\" [(ngModel)]=\"password\" name=\"password\" placeholder=\"Password\" class=\"form-control\" required>\r\n  </div>\r\n  <button type=\"submit\" class=\"btn btn-primary\">Login</button>\r\n  <button type=\"reset\" class=\"btn btn-danger\">Clear</button>\r\n</form>"
 
 /***/ }),
 
@@ -799,6 +877,90 @@ var _a, _b;
 
 /***/ }),
 
+/***/ "../../../../../src/app/components/materials/materials.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/materials/materials.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\n  <button class=\"btn btn-default\" [routerLink]=\"['/home']\">Go Home</button>  \n</div>\n<div class=\"col-xs-12 col-sm-12 col-md-6 col-lg-6\">\n  <ng-container *ngIf=\"materials; else noMaterials\">\n    <h2 class=\"page-header\">Materials</h2>\n    <table class=\"table table-striped table-hover\">\n      <thead>\n        <tr>\n          <th>ID</th>\n          <th>Name</th>\n        </tr>\n        </thead>\n      <tbody>\n        <tr *ngFor=\"let material of materials\">\n          <td>{{material.materialID}}</td>\n          <td>{{material.materialName}}</td>\n        </tr>\n      </tbody>\n    </table>\n  </ng-container>\n  <ng-template #noMaterials>\n    <h2 class=\"page-header\">No Materials</h2>\n    <p>If this is incorrect, try refreshing the page.</p>\n  </ng-template>\n</div>\n\n<div class=\"col-xs-12 col-sm-12 col-md-6 col-lg-6\">\n  <h2 class=\"page-header\">Create A New Material</h2>\n  <form (submit)=\"onCreate()\">\n    <div class=\"form-group\">\n      <label>Name</label>\n      <input type=\"text\" [(ngModel)]=\"name\" name=\"name\" placeholder=\"Name\" class=\"form-control\" required>\n    </div>\n    <button type=\"submit\" class=\"btn btn-primary\">Create</button>\n    <button type=\"reset\" class=\"btn btn-danger\">Clear</button>\n  </form>\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/materials/materials.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MaterialsComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_material_service__ = __webpack_require__("../../../../../src/app/services/material.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var MaterialsComponent = (function () {
+    function MaterialsComponent(materialService) {
+        this.materialService = materialService;
+    }
+    MaterialsComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.materialService.getAllMaterials().subscribe(function (materials) {
+            _this.materials = materials.materials;
+        });
+    };
+    MaterialsComponent.prototype.onCreate = function () {
+        var _this = this;
+        var newMaterial = {
+            materialName: this.name
+        };
+        this.materialService.createMaterial(newMaterial).subscribe(function (data) {
+            if (data.success) {
+                console.log(data.msg);
+                _this.ngOnInit();
+            }
+            else {
+                console.log(data.msg);
+            }
+        });
+    };
+    return MaterialsComponent;
+}());
+MaterialsComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-materials',
+        template: __webpack_require__("../../../../../src/app/components/materials/materials.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/components/materials/materials.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_material_service__["a" /* MaterialService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_material_service__["a" /* MaterialService */]) === "function" && _a || Object])
+], MaterialsComponent);
+
+var _a;
+//# sourceMappingURL=materials.component.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/components/navbar/navbar.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -820,7 +982,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/navbar/navbar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- https://stackoverflow.com/questions/38209713/how-to-make-a-responsive-nav-bar-using-angular-material-2 -->\r\n<!--<md-sidenav-containe fullscreen>-->\r\n<!--<md-sidenav-container>\r\n    <md-toolbar color=\"primary\">\r\n        <button md-button [routerLink]=\"['/']\"><md-icon>home</md-icon>Allied Waterproofing</button>\r\n        <span class=\"fill-remaining-space\"></span>\r\n        <div fxLayout=\"row\" fxShow=\"false\" fxShow.gt-sm>\r\n            <button md-button [routerLink]=\"['/customers']\">Customers</button>\r\n            <button md-button [routerLink]=\"['/']\">Something</button>\r\n        </div>\r\n        <button md-button [md-menu-trigger-for]=\"menu\" fxHide=\"false\" fxHide.gt-sm><md-icon>menu</md-icon></button>\r\n    </md-toolbar>\r\n    <md-menu x-position=\"before\" #menu=\"mdMenu\">\r\n        <button md-menu-item [routerLink]=\"['/customers']\">Customers</button>\r\n        <button md-menu-item [routerLink]=\"['/']\">Something</button>\r\n    </md-menu>\r\n</md-sidenav-container>-->\r\n\r\n<nav class=\"navbar navbar-inverse\" role=\"navigation\">\r\n    <!-- Brand and toggle get grouped for better mobile display -->\r\n    <div class=\"navbar-header\">\r\n        <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-ex1-collapse\">\r\n            <span class=\"sr-only\">Toggle navigation</span>\r\n            <span class=\"icon-bar\"></span>\r\n            <span class=\"icon-bar\"></span>\r\n            <span class=\"icon-bar\"></span>\r\n        </button>\r\n        <a class=\"navbar-brand\" [routerLink]=\"['/home']\">Allied Waterproofing</a>\r\n    </div>\r\n\r\n    <!-- Collect the nav links, forms, and other content for toggling -->\r\n    <div class=\"collapse navbar-collapse navbar-ex1-collapse\">\r\n        <ul class=\"nav navbar-nav\">\r\n            <li><a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" [routerLink]=\"['/customers']\">Customers</a></li>\r\n            <li><a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" [routerLink]=\"['/inquiries']\">Inquiries</a></li>\r\n            <li><a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" [routerLink]=\"['/bids']\">Bids</a></li>\r\n            <li><a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" [routerLink]=\"['/jobs']\">Jobs</a></li>\r\n            <li class=\"dropdown\">\r\n                <a *ngIf=\"authService.loggedIn()\" href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">Create <b class=\"caret\"></b></a>\r\n                <ul class=\"dropdown-menu\">\r\n                    <li><a [routerLink]=\"['/customers/new']\">Customer</a></li>\r\n                    <li><a [routerLink]=\"['/inquiries/new']\">Inquiry</a></li>\r\n                </ul>\r\n            </li>\r\n        </ul>\r\n        <ul class=\"nav navbar-nav navbar-right\">\r\n            <li><a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" [routerLink]=\"['/register']\">Register User</a></li>\r\n            <li><a *ngIf=\"authService.loggedIn()\" data-toggle=\"modal\" href='#logout-modal'>Logout</a></li>\r\n        </ul>\r\n    </div><!-- /.navbar-collapse -->\r\n</nav>\r\n\r\n\r\n<!--                Logout Popup                -->\r\n<div class=\"modal fade\" id=\"logout-modal\">\r\n    <div class=\"modal-dialog\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header\">\r\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\r\n                <h4 class=\"modal-title\">Warning</h4>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <p>Are you sure you want to logout?</p>\r\n            </div>\r\n            <div class=\"modal-footer\">\r\n                <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">No</button>\r\n                <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\" (click)=\"onLogout()\">Yes</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
+module.exports = "<!-- https://stackoverflow.com/questions/38209713/how-to-make-a-responsive-nav-bar-using-angular-material-2 -->\r\n<!--<md-sidenav-containe fullscreen>-->\r\n<!--<md-sidenav-container>\r\n    <md-toolbar color=\"primary\">\r\n        <button md-button [routerLink]=\"['/']\"><md-icon>home</md-icon>Allied Waterproofing</button>\r\n        <span class=\"fill-remaining-space\"></span>\r\n        <div fxLayout=\"row\" fxShow=\"false\" fxShow.gt-sm>\r\n            <button md-button [routerLink]=\"['/customers']\">Customers</button>\r\n            <button md-button [routerLink]=\"['/']\">Something</button>\r\n        </div>\r\n        <button md-button [md-menu-trigger-for]=\"menu\" fxHide=\"false\" fxHide.gt-sm><md-icon>menu</md-icon></button>\r\n    </md-toolbar>\r\n    <md-menu x-position=\"before\" #menu=\"mdMenu\">\r\n        <button md-menu-item [routerLink]=\"['/customers']\">Customers</button>\r\n        <button md-menu-item [routerLink]=\"['/']\">Something</button>\r\n    </md-menu>\r\n</md-sidenav-container>-->\r\n\r\n<nav class=\"navbar navbar-inverse\" role=\"navigation\">\r\n    <!-- Brand and toggle get grouped for better mobile display -->\r\n    <div class=\"navbar-header\">\r\n        <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-ex1-collapse\">\r\n            <span class=\"sr-only\">Toggle navigation</span>\r\n            <span class=\"icon-bar\"></span>\r\n            <span class=\"icon-bar\"></span>\r\n            <span class=\"icon-bar\"></span>\r\n        </button>\r\n        <a class=\"navbar-brand\" [routerLink]=\"['/home']\">Allied Waterproofing</a>\r\n    </div>\r\n\r\n    <!-- Collect the nav links, forms, and other content for toggling -->\r\n    <div class=\"collapse navbar-collapse navbar-ex1-collapse\">\r\n        <ul class=\"nav navbar-nav\">\r\n            <li><a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" [routerLink]=\"['/customers']\">Customers</a></li>\r\n            <li><a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" [routerLink]=\"['/inquiries']\">Inquiries</a></li>\r\n            <li><a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" [routerLink]=\"['/bids']\">Bids</a></li>\r\n            <li><a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" [routerLink]=\"['/jobs']\">Jobs</a></li>\r\n        </ul>\r\n        <ul class=\"nav navbar-nav navbar-right\">\r\n            <li><a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" [routerLink]=\"['/materials']\">Edit Materials</a></li>\r\n            <li><a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" [routerLink]=\"['/register']\">Register User</a></li>\r\n            <li><a *ngIf=\"authService.loggedIn()\" data-toggle=\"modal\" href='#logout-modal'>Logout</a></li>\r\n        </ul>\r\n    </div><!-- /.navbar-collapse -->\r\n</nav>\r\n\r\n\r\n<!--                Logout Popup                -->\r\n<div class=\"modal fade\" id=\"logout-modal\">\r\n    <div class=\"modal-dialog\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header\">\r\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\r\n                <h4 class=\"modal-title\">Warning</h4>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <p>Are you sure you want to logout?</p>\r\n            </div>\r\n            <div class=\"modal-footer\">\r\n                <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">No</button>\r\n                <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\" (click)=\"onLogout()\">Yes</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -893,7 +1055,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/register/register.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<button class=\"btn btn-default\" [routerLink]=\"['/home']\">Go Home</button>\n<h2 class=\"page-header\">Register A New User</h2>\n<form (submit)=\"onRegister()\">\n  <div class=\"form-group\">\n    <label>Name</label>\n    <input type=\"text\" [(ngModel)]=\"name\" name=\"name\" placeholder=\"Name\" class=\"form-control\" required>\n  </div>\n  <div class=\"form-group\">\n    <label>Username</label>\n    <input type=\"text\" [(ngModel)]=\"username\" name=\"username\" placeholder=\"Username\" class=\"form-control\" required>\n  </div>\n  <div class=\"form-group\">\n    <label>Password</label>\n    <input type=\"password\" [(ngModel)]=\"password\" name=\"password\" placeholder=\"Password\" class=\"form-control\" required>\n  </div>\n  <button type=\"submit\" class=\"btn btn-primary\">Register</button>\n  <button type=\"reset\" class=\"btn btn-danger\">Clear</button>\n</form>"
+module.exports = "<button class=\"btn btn-default\" [routerLink]=\"['/home']\">Go Home</button>\r\n<h2 class=\"page-header\">Register A New User</h2>\r\n<form (submit)=\"onRegister()\">\r\n  <div class=\"form-group\">\r\n    <label>Name</label>\r\n    <input type=\"text\" [(ngModel)]=\"name\" name=\"name\" placeholder=\"Name\" class=\"form-control\" required>\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <label>Username</label>\r\n    <input type=\"text\" [(ngModel)]=\"username\" name=\"username\" placeholder=\"Username\" class=\"form-control\" required>\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <label>Password</label>\r\n    <input type=\"password\" [(ngModel)]=\"password\" name=\"password\" placeholder=\"Password\" class=\"form-control\" required>\r\n  </div>\r\n  <button type=\"submit\" class=\"btn btn-primary\">Register</button>\r\n  <button type=\"reset\" class=\"btn btn-danger\">Clear</button>\r\n</form>"
 
 /***/ }),
 
@@ -1115,6 +1277,20 @@ var BidService = (function () {
         headers.append('Content-Type', 'application/json');
         return this.http.get(this.localHttp + "/bids/all", { headers: headers }).map(function (response) { return response.json(); });
     };
+    BidService.prototype.createBid = function (newBid) {
+        this.authService.loadToken();
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', this.authService.authToken);
+        return this.http.post(this.localHttp + "/bids/new", JSON.stringify(newBid), { headers: headers }).map(function (response) { return response.json(); });
+    };
+    BidService.prototype.createBidMaterial = function (newBidMaterial) {
+        this.authService.loadToken();
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', this.authService.authToken);
+        return this.http.post(this.localHttp + "/bids/new/bid-material", JSON.stringify(newBidMaterial), { headers: headers }).map(function (response) { return response.json(); });
+    };
     return BidService;
 }());
 BidService = __decorate([
@@ -1232,6 +1408,13 @@ var InquiryService = (function () {
         headers.append('Authorization', this.authService.authToken);
         return this.http.post(this.localHttp + "/inquiries/new", JSON.stringify(newInquiry), { headers: headers }).map(function (response) { return response.json(); });
     };
+    InquiryService.prototype.updateInquiryStatus = function (updatedInquiry) {
+        this.authService.loadToken();
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', this.authService.authToken);
+        return this.http.post(this.localHttp + "/inquiries/update-status", JSON.stringify(updatedInquiry), { headers: headers }).map(function (response) { return response.json(); });
+    };
     return InquiryService;
 }());
 InquiryService = __decorate([
@@ -1296,6 +1479,61 @@ JobService = __decorate([
 
 var _a, _b;
 //# sourceMappingURL=job.service.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/services/material.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MaterialService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/add/operator/map.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var MaterialService = (function () {
+    function MaterialService(http, authService) {
+        this.http = http;
+        this.authService = authService;
+        this.localHttp = 'http://localhost:3000';
+    }
+    MaterialService.prototype.getAllMaterials = function () {
+        this.authService.loadToken();
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        headers.append('Authorization', this.authService.authToken);
+        headers.append('Content-Type', 'application/json');
+        return this.http.get(this.localHttp + "/materials/all", { headers: headers }).map(function (response) { return response.json(); });
+    };
+    MaterialService.prototype.createMaterial = function (newMaterial) {
+        this.authService.loadToken();
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', this.authService.authToken);
+        return this.http.post(this.localHttp + "/materials/new", JSON.stringify(newMaterial), { headers: headers }).map(function (response) { return response.json(); });
+    };
+    return MaterialService;
+}());
+MaterialService = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__auth_service__["a" /* AuthService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__auth_service__["a" /* AuthService */]) === "function" && _b || Object])
+], MaterialService);
+
+var _a, _b;
+//# sourceMappingURL=material.service.js.map
 
 /***/ }),
 

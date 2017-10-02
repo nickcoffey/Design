@@ -18,11 +18,13 @@ import { BidsComponent } from './components/bids/bids.component';
 import { JobsComponent } from './components/jobs/jobs.component';
 import { CustomerComponent } from './components/customer/customer.component';
 import { CreateBidComponent } from './components/create-bid/create-bid.component';
+import { MaterialsComponent } from './components/materials/materials.component';
 
 import { CustomerService } from './services/customer.service';
 import { InquiryService } from './services/inquiry.service';
 import { BidService } from './services/bid.service';
 import { JobService } from './services/job.service';
+import { MaterialService } from './services/material.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
 
@@ -35,7 +37,8 @@ const appRoutes:Routes = [
   { path: 'bids', component: BidsComponent, canActivate: [AuthGuard] },
   { path: 'jobs', component: JobsComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
-  { path: 'create-bid', component: CreateBidComponent, canActivate: [AuthGuard] }
+  { path: 'create-bid/:id', component: CreateBidComponent, canActivate: [AuthGuard] },
+  { path: 'materials', component: MaterialsComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
@@ -50,7 +53,8 @@ const appRoutes:Routes = [
     BidsComponent,
     JobsComponent,
     CustomerComponent,
-    CreateBidComponent
+    CreateBidComponent,
+    MaterialsComponent
   ],
   imports: [
     BrowserModule,
@@ -70,6 +74,7 @@ const appRoutes:Routes = [
     InquiryService,
     BidService,
     JobService,
+    MaterialService,
     AuthService,
     AuthGuard
   ],

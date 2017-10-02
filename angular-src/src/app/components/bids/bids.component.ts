@@ -9,6 +9,9 @@ import { BidService } from '../../services/bid.service';
 export class BidsComponent implements OnInit {
 
   bids:any;
+  pendingBids:any;
+  acceptedBids:any;
+  declinedBids:any;
 
   constructor(
     private bidService:BidService
@@ -16,7 +19,10 @@ export class BidsComponent implements OnInit {
 
   ngOnInit() {
     this.bidService.getAllBids().subscribe((bids) => {
-      this.bids = bids.bids;
+      this.bids = bids;
+      this.pendingBids = bids.pendingBids;
+      this.acceptedBids = bids.acceptedBids;
+      this.declinedBids = bids.declinedBids;
     });
   }
 

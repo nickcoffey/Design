@@ -35,15 +35,9 @@
             <li><a *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" [routerLink]="['/inquiries']">Inquiries</a></li>
             <li><a *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" [routerLink]="['/bids']">Bids</a></li>
             <li><a *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" [routerLink]="['/jobs']">Jobs</a></li>
-            <li class="dropdown">
-                <a *ngIf="authService.loggedIn()" href="#" class="dropdown-toggle" data-toggle="dropdown">Create <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a [routerLink]="['/customers/new']">Customer</a></li>
-                    <li><a [routerLink]="['/inquiries/new']">Inquiry</a></li>
-                </ul>
-            </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
+            <li><a *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" [routerLink]="['/materials']">Edit Materials</a></li>
             <li><a *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" [routerLink]="['/register']">Register User</a></li>
             <li><a *ngIf="authService.loggedIn()" data-toggle="modal" href='#logout-modal'>Logout</a></li>
         </ul>

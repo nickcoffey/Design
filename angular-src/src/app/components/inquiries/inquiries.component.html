@@ -17,7 +17,7 @@
             <div class="panel-body">
               <li class="list-group-item" style="word-wrap: break-word;"><b>Description:</b> {{pendingInquiry.description}}</li>
               <li class="list-group-item"><b>Status:</b> {{pendingInquiry.inquiryStatus}}</li><br>
-              <button type="button" class="btn btn-primary" [routerLink]="['/create-bid']">Create Bid</button>
+              <button type="button" class="btn btn-primary" [routerLink]="['/create-bid/'+pendingInquiry.inquiryID]">Create Bid</button>
               <button type="button" class="btn btn-danger" [routerLink]="['/home']">Edit</button>
             </div>
           </div>

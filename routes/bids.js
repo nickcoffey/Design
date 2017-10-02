@@ -7,10 +7,27 @@ const passport = require('passport');
 // Get all bids
 router.get('/all', passport.authenticate('jwt', {session: false}), (request, response, next) => {
     bid.getAllBids((bids) => {
+        const pendingBids = [];
+        const declinedBids = [];
+        const acceptedBids = [];
+
         if(!bids){
             throw err;
         } else{
-            return response.json({bids: bids});
+            bids.forEach(bid => {
+                if(bid.bidStatus == "PENDING"){
+                    pendingBids.push(bid);
+                } else if(bid.bidStatus == "DECLINED"){
+                    declinedBids.push(bid);
+                } else if(bid.bidStatus == "ACCEPTED"){
+                    acceptedBids.push(bid);
+                } 
+            });
+            return response.json({
+                pendingBids: pendingBids,
+                declinedBids: declinedBids,
+                acceptedBids: acceptedBids
+            });
         }
     });
 });
@@ -23,6 +40,53 @@ router.get('/:id', passport.authenticate('jwt', {session: false}), (request, res
             throw err;
         } else{
             return response.json(bid);
+        }
+    });
+});
+
+// Create bid
+router.post('/new', passport.authenticate('jwt', {session: false}), (request, response, next) => {
+    let newBid = {
+        inquiryID: request.body.inquiryID,
+        bidLabor: request.body.bidLabor,
+        bidPrice: request.body.bidPrice,
+        createdDate: request.body.createdDate
+    };
+
+    bid.createBid(newBid, (message) => {
+        if(message.message == ""){
+            response.json({
+                success: true,
+                msg: 'Bid created'
+            });
+        } else{
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
+// Create bid material
+router.post('/new/bid-material', passport.authenticate('jwt', {session: false}), (request, response, next) => {
+    let newBidMaterial = {
+        materialID: request.body.materialID,
+        quantity: request.body.quantity,
+        perUnitCost: request.body.perUnitCost
+    };
+    
+    bid.createBidMaterial(newBidMaterial, (message) => {
+        if(message.message == ""){
+            response.json({
+                success: true,
+                msg: 'Bid material created'
+            });
+        } else{
+            response.json({
+                success: false,
+                msg: message.message
+            });
         }
     });
 });

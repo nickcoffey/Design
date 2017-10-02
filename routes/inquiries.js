@@ -68,4 +68,26 @@ router.post('/new', passport.authenticate('jwt', {session: false}), (request, re
     });
 });
 
+// Update inquiry status
+router.post('/update-status', passport.authenticate('jwt', {session: false}), (request, response, next) => {
+    let updatedInquiry = {
+        inquiryID: request.body.inquiryID,
+        inquiryStatus: request.body.inquiryStatus
+    };
+
+    inquiry.updateInquiryStatus(updatedInquiry, (message) => {
+        if(message.message.includes("Rows matched: 1  Changed: 1  Warnings: 0")){
+            response.json({
+                success: true,
+                msg: 'Inquiry status updated'
+            });
+        } else{
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
 module.exports = router;
