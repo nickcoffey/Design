@@ -8,7 +8,7 @@ const passport = require('passport');
 router.get('/all', passport.authenticate('jwt', {session: false}), (request, response, next) => {
     job.getAllJobs((jobs) => {
         if(!jobs){
-            throw err;
+            return err;
         } else{
             return response.json({jobs: jobs});
         }
@@ -19,7 +19,7 @@ router.get('/all', passport.authenticate('jwt', {session: false}), (request, res
 router.get('/all/current', passport.authenticate('jwt', {session: false}), (request, response, next) => {
     job.getCurrentJobs((jobs) => {
         if(!jobs){
-            throw err;
+            return err;
         } else{
             return response.json({jobs: jobs});
         }
@@ -31,7 +31,7 @@ router.get('/:id', passport.authenticate('jwt', {session: false}), (request, res
     const id = request.params.id;
     job.getJobById(id, (job) => {
         if(!job){
-            throw err;
+            return err;
         } else{
             return response.json(job);
         }

@@ -7,7 +7,7 @@ module.exports.getAllInquiries = function(callback){
         if(!err){
             callback(rows);
         } else{
-            throw err;
+            return err;
         }
     });
 }
@@ -18,7 +18,18 @@ module.exports.getInquiryById = function(id, callback){
         if(!error){
             callback(rows);
         } else{
-            throw error;
+            return error;
+        }
+    });
+}
+
+module.exports.createInquiry = function(newInquiry, callback){
+    const queryString = `INSERT INTO Inquiry (customerID, description, inquiryStatus, receivedDate) VALUES ((SELECT customerID FROM Customer WHERE customerID=${newInquiry.customerID}), "${newInquiry.description}", "PENDING", "${newInquiry.receivedDate}")`;
+    connection.query(queryString, (error, rows, fields) => {
+        if(!error){
+            callback(rows);
+        } else{
+            return error;
         }
     });
 }

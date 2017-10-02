@@ -17,6 +17,7 @@ import { InquiriesComponent } from './components/inquiries/inquiries.component';
 import { BidsComponent } from './components/bids/bids.component';
 import { JobsComponent } from './components/jobs/jobs.component';
 import { CustomerComponent } from './components/customer/customer.component';
+import { CreateBidComponent } from './components/create-bid/create-bid.component';
 
 import { CustomerService } from './services/customer.service';
 import { InquiryService } from './services/inquiry.service';
@@ -33,7 +34,8 @@ const appRoutes:Routes = [
   { path: 'inquiries', component: InquiriesComponent, canActivate: [AuthGuard] },
   { path: 'bids', component: BidsComponent, canActivate: [AuthGuard] },
   { path: 'jobs', component: JobsComponent, canActivate: [AuthGuard] },
-  { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] }
+  { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
+  { path: 'create-bid', component: CreateBidComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
@@ -47,7 +49,8 @@ const appRoutes:Routes = [
     InquiriesComponent,
     BidsComponent,
     JobsComponent,
-    CustomerComponent
+    CustomerComponent,
+    CreateBidComponent
   ],
   imports: [
     BrowserModule,

@@ -1,25 +1,96 @@
-<button class="btn btn-default" [routerLink]="['/home']">Go Home</button>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <button class="btn btn-default" [routerLink]="['/home']">Go Home</button>
+</div>
+
 <ng-container *ngIf="inquiries; else noInquiries">
-    <h2 class="page-header">Inquiries</h2>
-    <div class="panel-group" id="accordion">
-      <div class="panel panel-default" *ngFor="let inquiry of inquiries">
-        <div class="panel-heading">
-          <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" href="#{{inquiry.inquiryID + '-details'}}">Inquiry ID: {{inquiry.inquiryID}}</a>
-          </h4>
-        </div>
-        <div attr.id="{{inquiry.inquiryID + '-details'}}" class="panel-collapse collapse">
-          <div class="panel-body">
-            <li class="list-group-item"><b>Description:</b> {{inquiry.description}}</li>
-            <li class="list-group-item"><b>Status:</b> {{inquiry.inquiryStatus}}</li><br>
-            <button type="button" class="btn btn-primary" [routerLink]="['/home']">Create Bid</button>
-            <button type="button" class="btn btn-danger" [routerLink]="['/home']">Edit</button>
+  <ng-container *ngIf="pendingInquiries; else noPendingInquiries">
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+      <h2 class="page-header">Pending Inquiries</h2>
+      <div class="panel-group" id="pendingAccordion">
+        <div class="panel panel-default" *ngFor="let pendingInquiry of pendingInquiries;">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#pendingAccordion" href="#{{pendingInquiry.inquiryID + '-details'}}">Inquiry ID: {{pendingInquiry.inquiryID}}</a>
+            </h4>
+          </div>
+          <div attr.id="{{pendingInquiry.inquiryID + '-details'}}" class="panel-collapse collapse">
+            <div class="panel-body">
+              <li class="list-group-item" style="word-wrap: break-word;"><b>Description:</b> {{pendingInquiry.description}}</li>
+              <li class="list-group-item"><b>Status:</b> {{pendingInquiry.inquiryStatus}}</li><br>
+              <button type="button" class="btn btn-primary" [routerLink]="['/create-bid']">Create Bid</button>
+              <button type="button" class="btn btn-danger" [routerLink]="['/home']">Edit</button>
+            </div>
           </div>
         </div>
-      </div>
+      </div>  
     </div>
+  </ng-container>
+  <ng-template #noPendingInquiries>
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+      <h2 class="page-header">No Pending Inquiries</h2>
+      <p>If this is incorrect, try refreshing the page.</p>
+    </div>
+  </ng-template>
+
+  <ng-container *ngIf="acceptedInquiries; else noAcceptedInquiries">
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+      <h2 class="page-header">Accepted Inquiries</h2>
+      <div class="panel-group" id="acceptedAccordion">
+        <div class="panel panel-default" *ngFor="let acceptedInquiry of acceptedInquiries">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#acceptedAccordion" href="#{{acceptedInquiry.inquiryID + '-details'}}">Inquiry ID: {{acceptedInquiry.inquiryID}}</a>
+            </h4>
+          </div>
+          <div attr.id="{{acceptedInquiry.inquiryID + '-details'}}" class="panel-collapse collapse">
+            <div class="panel-body">
+              <li class="list-group-item" style="word-wrap: break-word;"><b>Description:</b> {{acceptedInquiry.description}}</li>
+              <li class="list-group-item"><b>Status:</b> {{acceptedInquiry.inquiryStatus}}</li><br>
+              <button type="button" class="btn btn-danger" [routerLink]="['/home']">Edit</button>
+            </div>
+          </div>
+        </div>
+      </div>  
+    </div>
+  </ng-container>
+  <ng-template #noAcceptedInquiries>
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+      <h2 class="page-header">No Accepted Inquiries</h2>
+      <p>If this is incorrect, try refreshing the page.</p>
+    </div>
+  </ng-template>
+
+  <ng-container *ngIf="declinedInquiries; else noDeclinedInquiries">
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+      <h2 class="page-header">Declined Inquiries</h2>
+      <div class="panel-group" id="declinedAccordion">
+        <div class="panel panel-default" *ngFor="let declinedInquiry of declinedInquiries">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#declinedAccordion" href="#{{declinedInquiry.inquiryID + '-details'}}">Inquiry ID: {{declinedInquiry.inquiryID}}</a>
+            </h4>
+          </div>
+          <div attr.id="{{declinedInquiry.inquiryID + '-details'}}" class="panel-collapse collapse">
+            <div class="panel-body">
+              <li class="list-group-item" style="word-wrap: break-word;"><b>Description:</b> {{declinedInquiry.description}}</li>
+              <li class="list-group-item"><b>Status:</b> {{declinedInquiry.inquiryStatus}}</li><br>
+              <button type="button" class="btn btn-danger" [routerLink]="['/home']">Edit</button>
+            </div>
+          </div>
+        </div>
+      </div>  
+    </div>
+  </ng-container>
+  <ng-template #noDeclinedInquiries>
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+      <h2 class="page-header">No Declined Inquiries</h2>
+      <p>If this is incorrect, try refreshing the page.</p>
+    </div>
+  </ng-template>
 </ng-container>
 <ng-template #noInquiries>
-  <h2 class="page-header">Loading...</h2>
-  <p>Try refreshing the page if there is a significant delay.</p>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <h2 class="page-header">No Inquiries</h2>
+    <p>If this is incorrect, try refreshing the page.</p>
+  </div>
 </ng-template>

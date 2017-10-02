@@ -7,10 +7,28 @@ const passport = require('passport');
 // Get all inquiries
 router.get('/all', passport.authenticate('jwt', {session: false}), (request, response, next) => {
     inquiry.getAllInquiries((inquiries) => {
+        const pendingInquiries = [];
+        const declinedInquiries = [];
+        const acceptedInquiries = [];
+
         if(!inquiries){
             throw err;
         } else{
-            return response.json({inquiries: inquiries});
+            inquiries.forEach(inquiry => {
+                if(inquiry.inquiryStatus == "PENDING"){
+                    pendingInquiries.push(inquiry);
+                } else if(inquiry.inquiryStatus == "DECLINED"){
+                    declinedInquiries.push(inquiry);
+                } else if(inquiry.inquiryStatus == "ACCEPTED"){
+                    acceptedInquiries.push(inquiry);
+                } 
+            });
+            //console.log({inquiries: inquiries});
+            return response.json({
+                pendingInquiries: pendingInquiries,
+                declinedInquiries: declinedInquiries,
+                acceptedInquiries: acceptedInquiries
+            });
         }
     });
 });
@@ -23,6 +41,29 @@ router.get('/:id', passport.authenticate('jwt', {session: false}), (request, res
             throw err;
         } else{
             return response.json(inquiry);
+        }
+    });
+});
+
+// Create inquiry
+router.post('/new', passport.authenticate('jwt', {session: false}), (request, response, next) => {
+    let newInquiry = {
+        customerID: request.body.customerID,
+        description: request.body.description,
+        receivedDate: request.body.receivedDate
+    };
+    
+    inquiry.createInquiry(newInquiry, (message) => {
+        if(message.message == ""){
+            response.json({
+                success: true,
+                msg: 'Inquiry created'
+            });
+        } else{
+            response.json({
+                success: false,
+                msg: message.message
+            });
         }
     });
 });

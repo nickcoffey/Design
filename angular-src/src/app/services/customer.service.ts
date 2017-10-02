@@ -24,8 +24,16 @@ export class CustomerService {
   getCustomerById(id){
     this.authService.loadToken();
     let headers = new Headers();
-    headers.append('Authorization', this.authService.authToken);
     headers.append('Content-Type','application/json');
+    headers.append('Authorization', this.authService.authToken);
     return this.http.get(`${this.localHttp}/customers/${id}`, {headers: headers}).map(response => response.json());
+  }
+
+  createCustomer(newCustomer){
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    headers.append('Authorization',this.authService.authToken);
+    return this.http.post(`${this.localHttp}/customers/new`, JSON.stringify(newCustomer), {headers: headers}).map(response => response.json());
   }
 }

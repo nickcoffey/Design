@@ -20,4 +20,12 @@ export class InquiryService {
     headers.append('Content-Type','application/json');
     return this.http.get(`${this.localHttp}/inquiries/all`, {headers: headers}).map(response => response.json());
   }
+
+  createInquiry(newInquiry){
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    headers.append('Authorization',this.authService.authToken);
+    return this.http.post(`${this.localHttp}/inquiries/new`, JSON.stringify(newInquiry), {headers: headers}).map(response => response.json());
+  }
 }

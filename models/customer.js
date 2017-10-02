@@ -7,7 +7,7 @@ module.exports.getAllCustomers = function(callback){
         if(!err){
             callback(rows);
         } else{
-            throw err;
+            return err;
         }
     });
 }
@@ -18,7 +18,18 @@ module.exports.getCustomerById = function(id, callback){
         if(!error){
             callback(rows);
         } else{
-            throw error;
+            return error;
+        }
+    });
+}
+
+module.exports.createCustomer = function(newCustomer, callback){
+    const queryString = `INSERT INTO Customer (customerName, email, address, phone) VALUES ("${newCustomer.customerName}", "${newCustomer.email}", "${newCustomer.address}", "${newCustomer.phone}")`;
+    connection.query(queryString, (error, rows, fields) => {
+        if(!error){
+            callback(rows);
+        } else{
+            return error;
         }
     });
 }

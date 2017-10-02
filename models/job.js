@@ -7,7 +7,7 @@ module.exports.getAllJobs = function(callback){
         if(!err){
             callback(rows);
         } else{
-            throw err;
+            return err;
         }
     });
 }
@@ -18,7 +18,7 @@ module.exports.getJobById = function(id, callback){
         if(!error){
             callback(rows);
         } else{
-            throw error;
+            return error;
         }
     });
 }
@@ -29,7 +29,7 @@ module.exports.getCurrentJobs = function(callback){
         if(!error){
             callback(rows);
         } else{
-            throw error;
+            return error;
         }
     });
 }
