@@ -12,7 +12,7 @@ router.get('/all', passport.authenticate('jwt', {session: false}), (request, res
         const acceptedBids = [];
 
         if(!bids){
-            throw err;
+            return err;
         } else{
             bids.forEach(bid => {
                 if(bid.bidStatus == "PENDING"){
@@ -37,9 +37,21 @@ router.get('/:id', passport.authenticate('jwt', {session: false}), (request, res
     const id = request.params.id;
     bid.getBidById(id, (bid) => {
         if(!bid){
-            throw err;
+            return err;
         } else{
             return response.json(bid);
+        }
+    });
+});
+
+// Get bid materials by id
+router.get('/:id/bid-materials', passport.authenticate('jwt', {session: false}), (request, response, next) => {
+    const id = request.params.id;
+    bid.getBidMaterialsById(id, (bidMaterials) => {
+        if(!bid){
+            return err;
+        } else{
+            return response.json(bidMaterials);
         }
     });
 });

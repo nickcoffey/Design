@@ -21,6 +21,22 @@ export class BidService {
     return this.http.get(`${this.localHttp}/bids/all`, {headers: headers}).map(response => response.json());
   }
 
+  getBidById(id){
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Authorization',this.authService.authToken);
+    headers.append('Content-Type','application/json');
+    return this.http.get(`${this.localHttp}/bids/${id}`, {headers: headers}).map(response => response.json());
+  }
+
+  getBidMaterialsById(bidId){
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Authorization',this.authService.authToken);
+    headers.append('Content-Type','application/json');
+    return this.http.get(`${this.localHttp}/bids/${bidId}/bid-materials`, {headers: headers}).map(response => response.json());
+  }
+
   createBid(newBid){
     this.authService.loadToken();
     let headers = new Headers();

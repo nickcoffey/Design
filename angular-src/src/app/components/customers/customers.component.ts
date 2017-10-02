@@ -38,6 +38,10 @@ export class CustomersComponent implements OnInit {
       if(data.success){
         console.log(data.msg);
         this.ngOnInit();
+        this.name = null;
+        this.email = null;
+        this.address = null;
+        this.phone = null;
       } else{
         console.log(data.msg);
       }

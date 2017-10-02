@@ -7,7 +7,7 @@ module.exports.getAllBids = function(callback){
         if(!err){
             callback(rows);
         } else{
-            throw err;
+            return err;
         }
     });
 }
@@ -18,7 +18,18 @@ module.exports.getBidById = function(id, callback){
         if(!error){
             callback(rows);
         } else{
-            throw error;
+            return error;
+        }
+    });
+}
+
+module.exports.getBidMaterialsById = function(id, callback){
+    const queryString = `SELECT * FROM BidMaterial WHERE bidID=${id}`;
+    connection.query(queryString, (error, rows, fields) => {
+        if(!error){
+            callback(rows);
+        } else{
+            return error;
         }
     });
 }

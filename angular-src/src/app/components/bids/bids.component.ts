@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BidService } from '../../services/bid.service';
+import { Router, Routes, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-bids',
@@ -14,7 +15,8 @@ export class BidsComponent implements OnInit {
   declinedBids:any;
 
   constructor(
-    private bidService:BidService
+    private bidService:BidService,
+    private router:Router
   ) { }
 
   ngOnInit() {

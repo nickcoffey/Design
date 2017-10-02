@@ -4,11 +4,22 @@
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
   <ng-container *ngIf="customer; else noCustomer">
     <h2 class="page-header">{{customer[0].customerName}}</h2>
-    <ul class="list-group">
-      <li class="list-group-item"><b>Address:</b> {{customer[0].address}}</li>
-      <li class="list-group-item"><b>Email:</b> {{customer[0].email}}</li>
-      <li class="list-group-item"><b>Phone:</b> {{customer[0].phone}}</li>
-    </ul>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Address</th>
+          <th>Email</th>
+          <th>Phone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{customer[0].address}}</td>
+          <td>{{customer[0].email}}</td>
+          <td>{{customer[0].phone}}</td>
+        </tr>
+      </tbody>
+    </table>
   </ng-container>
   <ng-template #noCustomer>
     <h2 class="page-header">No Customers</h2>

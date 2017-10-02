@@ -4,22 +4,21 @@
 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
   <ng-container *ngIf="customers; else noCustomers">
     <h2 class="page-header">Customers</h2>
-    <div class="panel-group" id="accordion">
-      <div class="panel panel-default" *ngFor="let customer of customers">
-        <div class="panel-heading">
-          <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" href="#{{customer.customerID + '-details'}}">{{customer.customerName}}</a>
-          </h4>
-        </div>
-        <div attr.id="{{customer.customerID + '-details'}}" class="panel-collapse collapse">
-          <div class="panel-body">
-            <li class="list-group-item"><b>ID:</b> {{customer.customerID}}</li>
-            <li class="list-group-item"><b>Name:</b> {{customer.customerName}}</li><br>
-            <button type="button" class="btn btn-primary" [routerLink]="['/customers/'+customer.customerID]">View Customer Page</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <h4>Click To View Details</h4>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let customer of customers;" [routerLink]="['/customers/'+customer.customerID]">
+          <td>{{customer.customerID}}</td>
+          <td>{{customer.customerName}}</td>
+        </tr>
+      </tbody>
+    </table> 
   </ng-container>
   <ng-template #noCustomers>
     <h2 class="page-header">No Customers</h2>
