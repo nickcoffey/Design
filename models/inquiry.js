@@ -35,7 +35,7 @@ module.exports.createInquiry = function(newInquiry, callback){
 }
 
 module.exports.updateInquiryStatus = function(updatedInquiry, callback){
-    const queryString = `UPDATE Inquiry SET inquiryStatus = "${updatedInquiry.inquiryStatus}" WHERE inquiryID=${updatedInquiry.inquiryID}`;
+    const queryString = `UPDATE Inquiry SET inquiryStatus = "${updatedInquiry.inquiryStatus}", endDate=NOW() WHERE inquiryID=${updatedInquiry.inquiryID}`;
     connection.query(queryString, (error, rows, fields) => {
         if(!error){
             callback(rows);

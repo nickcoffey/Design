@@ -6,23 +6,21 @@
   <ng-container *ngIf="pendingInquiries; else noPendingInquiries">
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
       <h2 class="page-header">Pending Inquiries</h2>
-      <div class="panel-group" id="pendingAccordion">
-        <div class="panel panel-default" *ngFor="let pendingInquiry of pendingInquiries;">
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a data-toggle="collapse" data-parent="#pendingAccordion" href="#{{pendingInquiry.inquiryID + '-details'}}">Inquiry ID: {{pendingInquiry.inquiryID}}</a>
-            </h4>
-          </div>
-          <div attr.id="{{pendingInquiry.inquiryID + '-details'}}" class="panel-collapse collapse">
-            <div class="panel-body">
-              <li class="list-group-item" style="word-wrap: break-word;"><b>Description:</b> {{pendingInquiry.description}}</li>
-              <li class="list-group-item"><b>Status:</b> {{pendingInquiry.inquiryStatus}}</li><br>
-              <button type="button" class="btn btn-primary" [routerLink]="['/create-bid/'+pendingInquiry.inquiryID]">Create Bid</button>
-              <button type="button" class="btn btn-danger" [routerLink]="['/home']">Edit</button>
-            </div>
-          </div>
-        </div>
-      </div>  
+      <h4>Click To View Details</h4>
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Received Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pendingInquiry of pendingInquiries;" [routerLink]="['/inquiries/'+pendingInquiry.inquiryID]">
+            <td>{{pendingInquiry.inquiryID}}</td>
+            <td>{{pendingInquiry.receivedDate | date: 'MM/dd/yyyy'}}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </ng-container>
   <ng-template #noPendingInquiries>
@@ -35,22 +33,21 @@
   <ng-container *ngIf="acceptedInquiries; else noAcceptedInquiries">
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
       <h2 class="page-header">Accepted Inquiries</h2>
-      <div class="panel-group" id="acceptedAccordion">
-        <div class="panel panel-default" *ngFor="let acceptedInquiry of acceptedInquiries">
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a data-toggle="collapse" data-parent="#acceptedAccordion" href="#{{acceptedInquiry.inquiryID + '-details'}}">Inquiry ID: {{acceptedInquiry.inquiryID}}</a>
-            </h4>
-          </div>
-          <div attr.id="{{acceptedInquiry.inquiryID + '-details'}}" class="panel-collapse collapse">
-            <div class="panel-body">
-              <li class="list-group-item" style="word-wrap: break-word;"><b>Description:</b> {{acceptedInquiry.description}}</li>
-              <li class="list-group-item"><b>Status:</b> {{acceptedInquiry.inquiryStatus}}</li><br>
-              <button type="button" class="btn btn-danger" [routerLink]="['/home']">Edit</button>
-            </div>
-          </div>
-        </div>
-      </div>  
+      <h4>Click To View Details</h4>
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Accepted Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let acceptedInquiry of acceptedInquiries;" [routerLink]="['/inquiries/'+acceptedInquiry.inquiryID]">
+            <td>{{acceptedInquiry.inquiryID}}</td>
+            <td>{{acceptedInquiry.endDate | date: 'MM/dd/yyyy'}}</td>
+          </tr>
+        </tbody>
+      </table>  
     </div>
   </ng-container>
   <ng-template #noAcceptedInquiries>
@@ -63,22 +60,21 @@
   <ng-container *ngIf="declinedInquiries; else noDeclinedInquiries">
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
       <h2 class="page-header">Declined Inquiries</h2>
-      <div class="panel-group" id="declinedAccordion">
-        <div class="panel panel-default" *ngFor="let declinedInquiry of declinedInquiries">
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a data-toggle="collapse" data-parent="#declinedAccordion" href="#{{declinedInquiry.inquiryID + '-details'}}">Inquiry ID: {{declinedInquiry.inquiryID}}</a>
-            </h4>
-          </div>
-          <div attr.id="{{declinedInquiry.inquiryID + '-details'}}" class="panel-collapse collapse">
-            <div class="panel-body">
-              <li class="list-group-item" style="word-wrap: break-word;"><b>Description:</b> {{declinedInquiry.description}}</li>
-              <li class="list-group-item"><b>Status:</b> {{declinedInquiry.inquiryStatus}}</li><br>
-              <button type="button" class="btn btn-danger" [routerLink]="['/home']">Edit</button>
-            </div>
-          </div>
-        </div>
-      </div>  
+      <h4>Click To View Details</h4>
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Declined Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let declinedInquiry of declinedInquiries;" [routerLink]="['/inquiries/'+declinedInquiry.inquiryID]">
+            <td>{{declinedInquiry.inquiryID}}</td>
+            <td>{{declinedInquiry.endDate | date: 'MM/dd/yyyy'}}</td>
+          </tr>
+        </tbody>
+      </table>  
     </div>
   </ng-container>
   <ng-template #noDeclinedInquiries>

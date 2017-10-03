@@ -38,7 +38,7 @@ router.get('/:id', passport.authenticate('jwt', {session: false}), (request, res
     const id = request.params.id;
     inquiry.getInquiryById(id, (inquiry) => {
         if(!inquiry){
-            throw err;
+            return err;
         } else{
             return response.json(inquiry);
         }

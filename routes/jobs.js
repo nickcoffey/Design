@@ -38,4 +38,49 @@ router.get('/:id', passport.authenticate('jwt', {session: false}), (request, res
     });
 });
 
+// Create job
+router.post('/new', passport.authenticate('jwt', {session: false}), (request, response, next) => {
+    let newJob = {
+        bidID: request.body.bidID,
+        createdDate: request.body.createdDate
+    };
+
+    job.createJob(newJob, (message) => {
+        if(message.message == ""){
+            response.json({
+                success: true,
+                msg: 'Job created'
+            });
+        } else{
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
+// Create job material
+router.post('/new/job-material', passport.authenticate('jwt', {session: false}), (request, response, next) => {
+    let newJobMaterial = {
+        materialID: request.body.materialID,
+        quantity: request.body.quantity,
+        perUnitCost: request.body.perUnitCost
+    };
+    
+    job.createJobMaterial(newJobMaterial, (message) => {
+        if(message.message == ""){
+            response.json({
+                success: true,
+                msg: 'Job material created'
+            });
+        } else{
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
 module.exports = router;

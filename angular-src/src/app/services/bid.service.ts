@@ -52,4 +52,12 @@ export class BidService {
     headers.append('Authorization',this.authService.authToken);
     return this.http.post(`${this.localHttp}/bids/new/bid-material`, JSON.stringify(newBidMaterial), {headers: headers}).map(response => response.json());
   }
+
+  updateBidStatus(updatedBid){
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    headers.append('Authorization',this.authService.authToken);
+    return this.http.post(`${this.localHttp}/bids/update-status`, JSON.stringify(updatedBid), {headers: headers}).map(response => response.json());
+  }
 }

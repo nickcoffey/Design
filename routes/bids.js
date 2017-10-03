@@ -103,4 +103,26 @@ router.post('/new/bid-material', passport.authenticate('jwt', {session: false}),
     });
 });
 
+// Update bid status
+router.post('/update-status', passport.authenticate('jwt', {session: false}), (request, response, next) => {
+    let updatedBid = {
+        bidID: request.body.bidID,
+        bidStatus: request.body.bidStatus
+    };
+
+    bid.updateBidStatus(updatedBid, (message) => {
+        if(message.message.includes("Rows matched: 1  Changed: 1  Warnings: 0")){
+            response.json({
+                success: true,
+                msg: 'Bid status updated'
+            });
+        } else{
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
 module.exports = router;

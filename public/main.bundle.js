@@ -96,13 +96,14 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_create_bid_create_bid_component__ = __webpack_require__("../../../../../src/app/components/create-bid/create-bid.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_materials_materials_component__ = __webpack_require__("../../../../../src/app/components/materials/materials.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_bid_bid_component__ = __webpack_require__("../../../../../src/app/components/bid/bid.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__services_customer_service__ = __webpack_require__("../../../../../src/app/services/customer.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__services_inquiry_service__ = __webpack_require__("../../../../../src/app/services/inquiry.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__services_bid_service__ = __webpack_require__("../../../../../src/app/services/bid.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__services_job_service__ = __webpack_require__("../../../../../src/app/services/job.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__services_material_service__ = __webpack_require__("../../../../../src/app/services/material.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__guards_auth_guard__ = __webpack_require__("../../../../../src/app/guards/auth.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_inquiry_inquiry_component__ = __webpack_require__("../../../../../src/app/components/inquiry/inquiry.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__services_customer_service__ = __webpack_require__("../../../../../src/app/services/customer.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__services_inquiry_service__ = __webpack_require__("../../../../../src/app/services/inquiry.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__services_bid_service__ = __webpack_require__("../../../../../src/app/services/bid.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__services_job_service__ = __webpack_require__("../../../../../src/app/services/job.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__services_material_service__ = __webpack_require__("../../../../../src/app/services/material.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__guards_auth_guard__ = __webpack_require__("../../../../../src/app/guards/auth.guard.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -137,18 +138,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var appRoutes = [
     { path: '', component: __WEBPACK_IMPORTED_MODULE_9__components_login_login_component__["a" /* LoginComponent */] },
-    { path: 'home', component: __WEBPACK_IMPORTED_MODULE_7__components_home_home_component__["a" /* HomeComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_24__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'customers', component: __WEBPACK_IMPORTED_MODULE_8__components_customers_customers_component__["a" /* CustomersComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_24__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'customers/:id', component: __WEBPACK_IMPORTED_MODULE_14__components_customer_customer_component__["a" /* CustomerComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_24__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'inquiries', component: __WEBPACK_IMPORTED_MODULE_11__components_inquiries_inquiries_component__["a" /* InquiriesComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_24__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'bids', component: __WEBPACK_IMPORTED_MODULE_12__components_bids_bids_component__["a" /* BidsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_24__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'jobs', component: __WEBPACK_IMPORTED_MODULE_13__components_jobs_jobs_component__["a" /* JobsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_24__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'register', component: __WEBPACK_IMPORTED_MODULE_10__components_register_register_component__["a" /* RegisterComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_24__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'create-bid/:id', component: __WEBPACK_IMPORTED_MODULE_15__components_create_bid_create_bid_component__["a" /* CreateBidComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_24__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'materials', component: __WEBPACK_IMPORTED_MODULE_16__components_materials_materials_component__["a" /* MaterialsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_24__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'bids/:id', component: __WEBPACK_IMPORTED_MODULE_17__components_bid_bid_component__["a" /* BidComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_24__guards_auth_guard__["a" /* AuthGuard */]] }
+    { path: 'home', component: __WEBPACK_IMPORTED_MODULE_7__components_home_home_component__["a" /* HomeComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_25__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'customers', component: __WEBPACK_IMPORTED_MODULE_8__components_customers_customers_component__["a" /* CustomersComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_25__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'customers/:id', component: __WEBPACK_IMPORTED_MODULE_14__components_customer_customer_component__["a" /* CustomerComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_25__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'inquiries', component: __WEBPACK_IMPORTED_MODULE_11__components_inquiries_inquiries_component__["a" /* InquiriesComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_25__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'bids', component: __WEBPACK_IMPORTED_MODULE_12__components_bids_bids_component__["a" /* BidsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_25__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'jobs', component: __WEBPACK_IMPORTED_MODULE_13__components_jobs_jobs_component__["a" /* JobsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_25__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'register', component: __WEBPACK_IMPORTED_MODULE_10__components_register_register_component__["a" /* RegisterComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_25__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'create-bid/:id', component: __WEBPACK_IMPORTED_MODULE_15__components_create_bid_create_bid_component__["a" /* CreateBidComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_25__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'materials', component: __WEBPACK_IMPORTED_MODULE_16__components_materials_materials_component__["a" /* MaterialsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_25__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'bids/:id', component: __WEBPACK_IMPORTED_MODULE_17__components_bid_bid_component__["a" /* BidComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_25__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'inquiries/:id', component: __WEBPACK_IMPORTED_MODULE_18__components_inquiry_inquiry_component__["a" /* InquiryComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_25__guards_auth_guard__["a" /* AuthGuard */]] }
 ];
 var AppModule = (function () {
     function AppModule() {
@@ -170,7 +173,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_14__components_customer_customer_component__["a" /* CustomerComponent */],
             __WEBPACK_IMPORTED_MODULE_15__components_create_bid_create_bid_component__["a" /* CreateBidComponent */],
             __WEBPACK_IMPORTED_MODULE_16__components_materials_materials_component__["a" /* MaterialsComponent */],
-            __WEBPACK_IMPORTED_MODULE_17__components_bid_bid_component__["a" /* BidComponent */]
+            __WEBPACK_IMPORTED_MODULE_17__components_bid_bid_component__["a" /* BidComponent */],
+            __WEBPACK_IMPORTED_MODULE_18__components_inquiry_inquiry_component__["a" /* InquiryComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -186,13 +190,13 @@ AppModule = __decorate([
             MdMenuModule*/
         ],
         providers: [
-            __WEBPACK_IMPORTED_MODULE_18__services_customer_service__["a" /* CustomerService */],
-            __WEBPACK_IMPORTED_MODULE_19__services_inquiry_service__["a" /* InquiryService */],
-            __WEBPACK_IMPORTED_MODULE_20__services_bid_service__["a" /* BidService */],
-            __WEBPACK_IMPORTED_MODULE_21__services_job_service__["a" /* JobService */],
-            __WEBPACK_IMPORTED_MODULE_22__services_material_service__["a" /* MaterialService */],
-            __WEBPACK_IMPORTED_MODULE_23__services_auth_service__["a" /* AuthService */],
-            __WEBPACK_IMPORTED_MODULE_24__guards_auth_guard__["a" /* AuthGuard */]
+            __WEBPACK_IMPORTED_MODULE_19__services_customer_service__["a" /* CustomerService */],
+            __WEBPACK_IMPORTED_MODULE_20__services_inquiry_service__["a" /* InquiryService */],
+            __WEBPACK_IMPORTED_MODULE_21__services_bid_service__["a" /* BidService */],
+            __WEBPACK_IMPORTED_MODULE_22__services_job_service__["a" /* JobService */],
+            __WEBPACK_IMPORTED_MODULE_23__services_material_service__["a" /* MaterialService */],
+            __WEBPACK_IMPORTED_MODULE_24__services_auth_service__["a" /* AuthService */],
+            __WEBPACK_IMPORTED_MODULE_25__guards_auth_guard__["a" /* AuthGuard */]
         ],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */]]
     })
@@ -223,7 +227,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/bid/bid.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\n  <button class=\"btn btn-default\" [routerLink]=\"['/bids']\">Go Back</button>  \n</div>\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\n  <ng-container *ngIf=\"bid; else noBid\">\n    <h2 class=\"page-header\">Bid #{{bid[0].bidID}}</h2>\n    <h4>Details</h4>\n    <table class=\"table table-striped table-hover\">\n      <thead>\n        <tr>\n          <th>Price</th>\n          <th>Created Date</th>\n          <th>Accepted/Declined Date</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr>\n          <td>{{bid[0].bidPrice}}</td>\n          <td>{{bid[0].createdDate}}</td>\n          <td>{{bid[0].endDate}}</td>\n        </tr>\n      </tbody>\n    </table>\n    <h4>Costs</h4>\n    <label>Labor Cost</label>\n    <table class=\"table table-striped table-hover\">\n      <tbody>\n        <tr>\n          <td>{{bid[0].bidLabor}}</td>\n        </tr>\n      </tbody>\n    </table>\n    <label>Materials Cost</label>\n    <table class=\"table table-striped table-hover\">\n      <thead>\n        <tr>\n          <th>ID</th>\n          <th>Quantity</th>\n          <th>Per Unit Cost</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let bidMaterial of bidMaterials\">\n          <td>{{bidMaterial.materialID}}</td>\n          <td>{{bidMaterial.quantity}}</td>\n          <td>{{bidMaterial.perUnitCost}}</td>\n        </tr>\n      </tbody>\n    </table>\n  </ng-container>\n  <ng-template #noBid>\n    <h2 class=\"page-header\">No Bids</h2>\n    <p>If this is incorrect, try refreshing the page.</p>\n  </ng-template>\n</div>\n\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\n  <h2 class=\"page-header\">Create A New Job</h2>\n  <form (submit)=\"onCreate()\">\n    <div class=\"form-group\">\n      <label>Received Date</label>\n      <input type=\"text\" [(ngModel)]=\"receivedDate\" name=\"receivedDate\" placeholder=\"YYYY-MM-DD\" class=\"form-control\" required>\n    </div>\n    <div class=\"form-group\">\n      <label>Description</label>\n      <textarea type=\"text\" [(ngModel)]=\"description\" name=\"description\" placeholder=\"Description\" class=\"form-control\" required></textarea>\n    </div>\n    <button type=\"submit\" class=\"btn btn-primary\">Create</button>\n    <button type=\"reset\" class=\"btn btn-danger\">Clear</button>\n  </form>  \n</div>"
+module.exports = "<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <button class=\"btn btn-default\" [routerLink]=\"['/bids']\">Go Back</button>  \r\n</div>\r\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <ng-container *ngIf=\"bid; else noBid\">\r\n    <h2 class=\"page-header\">Bid #{{bid[0].bidID}}</h2>\r\n    <h4>Details</h4>\r\n    <table class=\"table table-striped table-hover\">\r\n      <thead>\r\n        <tr>\r\n          <th>Price</th>\r\n          <th>Created Date</th>\r\n          <th>Accepted/Declined Date</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr>\r\n          <td>{{bid[0].bidPrice}}</td>\r\n          <td>{{bid[0].createdDate | date: 'MM/dd/yyyy'}}</td>\r\n          <td>{{bid[0].endDate | date: 'MM/dd/yyyy'}}</td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n    <h4>Costs</h4>\r\n    <label>Labor Cost</label>\r\n    <table class=\"table table-striped table-hover\">\r\n      <tbody>\r\n        <tr>\r\n          <td>{{bid[0].bidLabor}}</td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n    <label>Materials Cost</label>\r\n    <table class=\"table table-striped table-hover\">\r\n      <thead>\r\n        <tr>\r\n          <th>ID</th>\r\n          <th>Quantity</th>\r\n          <th>Per Unit Cost</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let bidMaterial of bidMaterials\">\r\n          <td>{{bidMaterial.materialID}}</td>\r\n          <td>{{bidMaterial.quantity}}</td>\r\n          <td>{{bidMaterial.perUnitCost}}</td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </ng-container>\r\n  <ng-template #noBid>\r\n    <h2 class=\"page-header\">No Bids</h2>\r\n    <p>If this is incorrect, try refreshing the page.</p>\r\n  </ng-template>\r\n</div>\r\n\r\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <h2 class=\"page-header\">Create A New Job</h2>\r\n  <form (submit)=\"onCreate()\">\r\n    <div class=\"form-group\">\r\n      <label>Created Date</label>\r\n      <input type=\"text\" [(ngModel)]=\"createdDate\" name=\"createdDate\" placeholder=\"YYYY-MM-DD\" class=\"form-control\" required>\r\n    </div>\r\n    <button type=\"submit\" class=\"btn btn-primary\">Create</button>\r\n    <button type=\"reset\" class=\"btn btn-danger\">Clear</button>\r\n  </form>  \r\n</div>"
 
 /***/ }),
 
@@ -235,6 +239,8 @@ module.exports = "<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\n  <bu
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_bid_service__ = __webpack_require__("../../../../../src/app/services/bid.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_material_service__ = __webpack_require__("../../../../../src/app/services/material.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_job_service__ = __webpack_require__("../../../../../src/app/services/job.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -247,11 +253,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
 var BidComponent = (function () {
-    function BidComponent(router, route, bidService) {
+    function BidComponent(router, route, bidService, materialService, jobService) {
         this.router = router;
         this.route = route;
         this.bidService = bidService;
+        this.materialService = materialService;
+        this.jobService = jobService;
+        this.selectedMaterials = [];
     }
     BidComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -262,6 +273,56 @@ var BidComponent = (function () {
         this.bidService.getBidMaterialsById(this.id).subscribe(function (bidMaterials) {
             _this.bidMaterials = bidMaterials;
         });
+        this.materialService.getAllMaterials().subscribe(function (materials) {
+            _this.materials = materials.materials;
+        });
+    };
+    BidComponent.prototype.onAddMaterial = function (material) {
+        this.selectedMaterials.push(material);
+    };
+    BidComponent.prototype.onClear = function () {
+        this.selectedMaterials = [];
+    };
+    BidComponent.prototype.onCreate = function () {
+        var _this = this;
+        var newJob = {
+            bidID: this.id,
+            createdDate: this.createdDate
+        };
+        var updatedBid = {
+            bidID: this.id,
+            bidStatus: "ACCEPTED"
+        };
+        this.jobService.createJob(newJob).subscribe(function (data) {
+            if (data.success) {
+                console.log(data.msg);
+                _this.ngOnInit();
+            }
+            else {
+                console.log(data.msg);
+            }
+        });
+        this.bidService.updateBidStatus(updatedBid).subscribe(function (data) {
+            if (data.success) {
+                console.log(data.msg);
+                _this.ngOnInit();
+            }
+            else {
+                console.log(data.msg);
+            }
+        });
+        this.selectedMaterials.forEach(function (selectedMaterial) {
+            _this.jobService.createJobMaterial(selectedMaterial).subscribe(function (data) {
+                if (data.success) {
+                    console.log(data.msg);
+                    _this.ngOnInit();
+                }
+                else {
+                    console.log(data.msg);
+                }
+            });
+        });
+        this.router.navigate(['/jobs']);
     };
     return BidComponent;
 }());
@@ -271,10 +332,10 @@ BidComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/components/bid/bid.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/bid/bid.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_bid_service__["a" /* BidService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_bid_service__["a" /* BidService */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_bid_service__["a" /* BidService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_bid_service__["a" /* BidService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__services_material_service__["a" /* MaterialService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_material_service__["a" /* MaterialService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__services_job_service__["a" /* JobService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_job_service__["a" /* JobService */]) === "function" && _e || Object])
 ], BidComponent);
 
-var _a, _b, _c;
+var _a, _b, _c, _d, _e;
 //# sourceMappingURL=bid.component.js.map
 
 /***/ }),
@@ -300,7 +361,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/bids/bids.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--<button class=\"btn btn-default\" [routerLink]=\"['/home']\">Go Home</button>\r\n<ng-container *ngIf=\"bids; else noBids\">\r\n    <h2 class=\"page-header\">Bids</h2>\r\n    <div class=\"panel-group\" id=\"accordion\">\r\n      <div class=\"panel panel-default\" *ngFor=\"let bid of bids\">\r\n        <div class=\"panel-heading\">\r\n          <h4 class=\"panel-title\">\r\n            <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#{{bid.bidID + '-details'}}\">Bid ID: {{bid.bidID}}</a>\r\n          </h4>\r\n        </div>\r\n        <div attr.id=\"{{bid.bidID + '-details'}}\" class=\"panel-collapse collapse\">\r\n          <div class=\"panel-body\">\r\n            <li class=\"list-group-item\"><b>Estimated Cost:</b> ${{bid.bidCost}}</li>\r\n            <li class=\"list-group-item\"><b>Bid Price:</b> ${{bid.bidPrice}}</li>\r\n            <li class=\"list-group-item\"><b>Status:</b> {{bid.bidStatus}}</li><br>\r\n            <button type=\"button\" class=\"btn btn-primary\" [routerLink]=\"['/home']\">Create Job</button>\r\n            <button type=\"button\" class=\"btn btn-danger\" [routerLink]=\"['/home']\">Edit</button>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n</ng-container>\r\n<ng-template #noBids>\r\n  <h2 class=\"page-header\">Loading...</h2>\r\n  <p>Try refreshing the page if there is a significant delay.</p>\r\n</ng-template>-->\r\n\r\n\r\n\r\n\r\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <button class=\"btn btn-default\" [routerLink]=\"['/home']\">Go Home</button>\r\n</div>\r\n  \r\n<ng-container *ngIf=\"bids; else noBids\">\r\n  <ng-container *ngIf=\"pendingBids[0]; else noPendingBids\">\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">Pending Bids</h2>\r\n      <h4>Click To View Details</h4>\r\n      <table class=\"table table-striped table-hover\">\r\n        <thead>\r\n          <tr>\r\n            <th>ID</th>\r\n            <th>Price</th>\r\n            <th>Created Date</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let pendingBid of pendingBids;\" [routerLink]=\"['/bids/'+pendingBid.bidID]\">\r\n            <td>{{pendingBid.bidID}}</td>\r\n            <td>{{pendingBid.bidPrice}}</td>\r\n            <td>{{pendingBid.createdDate}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>  \r\n    </div>\r\n  </ng-container>\r\n  <ng-template #noPendingBids>\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">No Pending Bids</h2>\r\n      <p>If this is incorrect, try refreshing the page.</p>\r\n    </div>\r\n  </ng-template>\r\n  \r\n  <ng-container *ngIf=\"acceptedBids[0]; else noAcceptedBids\">\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">Accepted Bids</h2>\r\n      <h4>Click To View Details</h4>\r\n      <table class=\"table table-striped table-hover\">\r\n        <thead>\r\n          <tr>\r\n            <th>ID</th>\r\n            <th>Price</th>\r\n            <th>Accepted Date</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let acceptedBid of acceptedBids;\" [routerLink]=\"['/bids/'+pendingBid.bidID]\">\r\n            <td>{{acceptedBid.bidID}}</td>\r\n            <td>{{acceptedBid.bidPrice}}</td>\r\n            <td>{{acceptedBid.endDate}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>  \r\n    </div>\r\n  </ng-container>\r\n  <ng-template #noAcceptedBids>\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">No Accepted Bids</h2>\r\n      <p>If this is incorrect, try refreshing the page.</p>\r\n    </div>\r\n  </ng-template>\r\n  \r\n  <ng-container *ngIf=\"declinedBids[0]; else noDeclinedBids\">\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">Declined Bids</h2>\r\n      <h4>Click To View Details</h4>\r\n      <table class=\"table table-striped table-hover\">\r\n        <thead>\r\n          <tr>\r\n            <th>ID</th>\r\n            <th>Price</th>\r\n            <th>Declined Date</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let declinedBid of declinedBids;\" [routerLink]=\"['/bids/'+pendingBid.bidID]\">\r\n            <td>{{declinedBid.bidID}}</td>\r\n            <td>{{declinedBid.bidPrice}}</td>\r\n            <td>{{declinedBid.endDate}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table> \r\n    </div>\r\n  </ng-container>\r\n  <ng-template #noDeclinedBids>\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">No Declined Bids</h2>\r\n      <p>If this is incorrect, try refreshing the page.</p>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n<ng-template #noBids>\r\n  <div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n    <h2 class=\"page-header\">No Bids</h2>\r\n    <p>If this is incorrect, try refreshing the page.</p>\r\n  </div>\r\n</ng-template>"
+module.exports = "<!--<button class=\"btn btn-default\" [routerLink]=\"['/home']\">Go Home</button>\r\n<ng-container *ngIf=\"bids; else noBids\">\r\n    <h2 class=\"page-header\">Bids</h2>\r\n    <div class=\"panel-group\" id=\"accordion\">\r\n      <div class=\"panel panel-default\" *ngFor=\"let bid of bids\">\r\n        <div class=\"panel-heading\">\r\n          <h4 class=\"panel-title\">\r\n            <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#{{bid.bidID + '-details'}}\">Bid ID: {{bid.bidID}}</a>\r\n          </h4>\r\n        </div>\r\n        <div attr.id=\"{{bid.bidID + '-details'}}\" class=\"panel-collapse collapse\">\r\n          <div class=\"panel-body\">\r\n            <li class=\"list-group-item\"><b>Estimated Cost:</b> ${{bid.bidCost}}</li>\r\n            <li class=\"list-group-item\"><b>Bid Price:</b> ${{bid.bidPrice}}</li>\r\n            <li class=\"list-group-item\"><b>Status:</b> {{bid.bidStatus}}</li><br>\r\n            <button type=\"button\" class=\"btn btn-primary\" [routerLink]=\"['/home']\">Create Job</button>\r\n            <button type=\"button\" class=\"btn btn-danger\" [routerLink]=\"['/home']\">Edit</button>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n</ng-container>\r\n<ng-template #noBids>\r\n  <h2 class=\"page-header\">Loading...</h2>\r\n  <p>Try refreshing the page if there is a significant delay.</p>\r\n</ng-template>-->\r\n\r\n\r\n\r\n\r\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <button class=\"btn btn-default\" [routerLink]=\"['/home']\">Go Home</button>\r\n</div>\r\n  \r\n<ng-container *ngIf=\"bids; else noBids\">\r\n  <ng-container *ngIf=\"pendingBids[0]; else noPendingBids\">\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">Pending Bids</h2>\r\n      <h4>Click To View Details</h4>\r\n      <table class=\"table table-striped table-hover\">\r\n        <thead>\r\n          <tr>\r\n            <th>ID</th>\r\n            <th>Price</th>\r\n            <th>Created Date</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let pendingBid of pendingBids;\" [routerLink]=\"['/bids/'+pendingBid.bidID]\">\r\n            <td>{{pendingBid.bidID}}</td>\r\n            <td>{{pendingBid.bidPrice}}</td>\r\n            <td>{{pendingBid.createdDate | date: 'MM/dd/yyyy'}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>  \r\n    </div>\r\n  </ng-container>\r\n  <ng-template #noPendingBids>\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">No Pending Bids</h2>\r\n      <p>If this is incorrect, try refreshing the page.</p>\r\n    </div>\r\n  </ng-template>\r\n  \r\n  <ng-container *ngIf=\"acceptedBids[0]; else noAcceptedBids\">\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">Accepted Bids</h2>\r\n      <h4>Click To View Details</h4>\r\n      <table class=\"table table-striped table-hover\">\r\n        <thead>\r\n          <tr>\r\n            <th>ID</th>\r\n            <th>Price</th>\r\n            <th>Accepted Date</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let acceptedBid of acceptedBids;\" [routerLink]=\"['/bids/'+acceptedBid.bidID]\">\r\n            <td>{{acceptedBid.bidID}}</td>\r\n            <td>{{acceptedBid.bidPrice}}</td>\r\n            <td>{{acceptedBid.endDate | date: 'MM/dd/yyyy'}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>  \r\n    </div>\r\n  </ng-container>\r\n  <ng-template #noAcceptedBids>\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">No Accepted Bids</h2>\r\n      <p>If this is incorrect, try refreshing the page.</p>\r\n    </div>\r\n  </ng-template>\r\n  \r\n  <ng-container *ngIf=\"declinedBids[0]; else noDeclinedBids\">\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">Declined Bids</h2>\r\n      <h4>Click To View Details</h4>\r\n      <table class=\"table table-striped table-hover\">\r\n        <thead>\r\n          <tr>\r\n            <th>ID</th>\r\n            <th>Price</th>\r\n            <th>Declined Date</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let declinedBid of declinedBids;\" [routerLink]=\"['/bids/'+declinedBid.bidID]\">\r\n            <td>{{declinedBid.bidID}}</td>\r\n            <td>{{declinedBid.bidPrice}}</td>\r\n            <td>{{declinedBid.endDate | date: 'MM/dd/yyyy'}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table> \r\n    </div>\r\n  </ng-container>\r\n  <ng-template #noDeclinedBids>\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">No Declined Bids</h2>\r\n      <p>If this is incorrect, try refreshing the page.</p>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n<ng-template #noBids>\r\n  <div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n    <h2 class=\"page-header\">No Bids</h2>\r\n    <p>If this is incorrect, try refreshing the page.</p>\r\n  </div>\r\n</ng-template>"
 
 /***/ }),
 
@@ -761,7 +822,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/inquiries/inquiries.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <button class=\"btn btn-default\" [routerLink]=\"['/home']\">Go Home</button>\r\n</div>\r\n\r\n<ng-container *ngIf=\"inquiries; else noInquiries\">\r\n  <ng-container *ngIf=\"pendingInquiries; else noPendingInquiries\">\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">Pending Inquiries</h2>\r\n      <div class=\"panel-group\" id=\"pendingAccordion\">\r\n        <div class=\"panel panel-default\" *ngFor=\"let pendingInquiry of pendingInquiries;\">\r\n          <div class=\"panel-heading\">\r\n            <h4 class=\"panel-title\">\r\n              <a data-toggle=\"collapse\" data-parent=\"#pendingAccordion\" href=\"#{{pendingInquiry.inquiryID + '-details'}}\">Inquiry ID: {{pendingInquiry.inquiryID}}</a>\r\n            </h4>\r\n          </div>\r\n          <div attr.id=\"{{pendingInquiry.inquiryID + '-details'}}\" class=\"panel-collapse collapse\">\r\n            <div class=\"panel-body\">\r\n              <li class=\"list-group-item\" style=\"word-wrap: break-word;\"><b>Description:</b> {{pendingInquiry.description}}</li>\r\n              <li class=\"list-group-item\"><b>Status:</b> {{pendingInquiry.inquiryStatus}}</li><br>\r\n              <button type=\"button\" class=\"btn btn-primary\" [routerLink]=\"['/create-bid/'+pendingInquiry.inquiryID]\">Create Bid</button>\r\n              <button type=\"button\" class=\"btn btn-danger\" [routerLink]=\"['/home']\">Edit</button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>  \r\n    </div>\r\n  </ng-container>\r\n  <ng-template #noPendingInquiries>\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">No Pending Inquiries</h2>\r\n      <p>If this is incorrect, try refreshing the page.</p>\r\n    </div>\r\n  </ng-template>\r\n\r\n  <ng-container *ngIf=\"acceptedInquiries; else noAcceptedInquiries\">\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">Accepted Inquiries</h2>\r\n      <div class=\"panel-group\" id=\"acceptedAccordion\">\r\n        <div class=\"panel panel-default\" *ngFor=\"let acceptedInquiry of acceptedInquiries\">\r\n          <div class=\"panel-heading\">\r\n            <h4 class=\"panel-title\">\r\n              <a data-toggle=\"collapse\" data-parent=\"#acceptedAccordion\" href=\"#{{acceptedInquiry.inquiryID + '-details'}}\">Inquiry ID: {{acceptedInquiry.inquiryID}}</a>\r\n            </h4>\r\n          </div>\r\n          <div attr.id=\"{{acceptedInquiry.inquiryID + '-details'}}\" class=\"panel-collapse collapse\">\r\n            <div class=\"panel-body\">\r\n              <li class=\"list-group-item\" style=\"word-wrap: break-word;\"><b>Description:</b> {{acceptedInquiry.description}}</li>\r\n              <li class=\"list-group-item\"><b>Status:</b> {{acceptedInquiry.inquiryStatus}}</li><br>\r\n              <button type=\"button\" class=\"btn btn-danger\" [routerLink]=\"['/home']\">Edit</button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>  \r\n    </div>\r\n  </ng-container>\r\n  <ng-template #noAcceptedInquiries>\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">No Accepted Inquiries</h2>\r\n      <p>If this is incorrect, try refreshing the page.</p>\r\n    </div>\r\n  </ng-template>\r\n\r\n  <ng-container *ngIf=\"declinedInquiries; else noDeclinedInquiries\">\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">Declined Inquiries</h2>\r\n      <div class=\"panel-group\" id=\"declinedAccordion\">\r\n        <div class=\"panel panel-default\" *ngFor=\"let declinedInquiry of declinedInquiries\">\r\n          <div class=\"panel-heading\">\r\n            <h4 class=\"panel-title\">\r\n              <a data-toggle=\"collapse\" data-parent=\"#declinedAccordion\" href=\"#{{declinedInquiry.inquiryID + '-details'}}\">Inquiry ID: {{declinedInquiry.inquiryID}}</a>\r\n            </h4>\r\n          </div>\r\n          <div attr.id=\"{{declinedInquiry.inquiryID + '-details'}}\" class=\"panel-collapse collapse\">\r\n            <div class=\"panel-body\">\r\n              <li class=\"list-group-item\" style=\"word-wrap: break-word;\"><b>Description:</b> {{declinedInquiry.description}}</li>\r\n              <li class=\"list-group-item\"><b>Status:</b> {{declinedInquiry.inquiryStatus}}</li><br>\r\n              <button type=\"button\" class=\"btn btn-danger\" [routerLink]=\"['/home']\">Edit</button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>  \r\n    </div>\r\n  </ng-container>\r\n  <ng-template #noDeclinedInquiries>\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">No Declined Inquiries</h2>\r\n      <p>If this is incorrect, try refreshing the page.</p>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n<ng-template #noInquiries>\r\n  <div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n    <h2 class=\"page-header\">No Inquiries</h2>\r\n    <p>If this is incorrect, try refreshing the page.</p>\r\n  </div>\r\n</ng-template>"
+module.exports = "<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <button class=\"btn btn-default\" [routerLink]=\"['/home']\">Go Home</button>\r\n</div>\r\n\r\n<ng-container *ngIf=\"inquiries; else noInquiries\">\r\n  <ng-container *ngIf=\"pendingInquiries; else noPendingInquiries\">\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">Pending Inquiries</h2>\r\n      <h4>Click To View Details</h4>\r\n      <table class=\"table table-striped table-hover\">\r\n        <thead>\r\n          <tr>\r\n            <th>ID</th>\r\n            <th>Received Date</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let pendingInquiry of pendingInquiries;\" [routerLink]=\"['/inquiries/'+pendingInquiry.inquiryID]\">\r\n            <td>{{pendingInquiry.inquiryID}}</td>\r\n            <td>{{pendingInquiry.receivedDate | date: 'MM/dd/yyyy'}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n  </ng-container>\r\n  <ng-template #noPendingInquiries>\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">No Pending Inquiries</h2>\r\n      <p>If this is incorrect, try refreshing the page.</p>\r\n    </div>\r\n  </ng-template>\r\n\r\n  <ng-container *ngIf=\"acceptedInquiries; else noAcceptedInquiries\">\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">Accepted Inquiries</h2>\r\n      <h4>Click To View Details</h4>\r\n      <table class=\"table table-striped table-hover\">\r\n        <thead>\r\n          <tr>\r\n            <th>ID</th>\r\n            <th>Accepted Date</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let acceptedInquiry of acceptedInquiries;\" [routerLink]=\"['/inquiries/'+acceptedInquiry.inquiryID]\">\r\n            <td>{{acceptedInquiry.inquiryID}}</td>\r\n            <td>{{acceptedInquiry.endDate | date: 'MM/dd/yyyy'}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>  \r\n    </div>\r\n  </ng-container>\r\n  <ng-template #noAcceptedInquiries>\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">No Accepted Inquiries</h2>\r\n      <p>If this is incorrect, try refreshing the page.</p>\r\n    </div>\r\n  </ng-template>\r\n\r\n  <ng-container *ngIf=\"declinedInquiries; else noDeclinedInquiries\">\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">Declined Inquiries</h2>\r\n      <h4>Click To View Details</h4>\r\n      <table class=\"table table-striped table-hover\">\r\n        <thead>\r\n          <tr>\r\n            <th>ID</th>\r\n            <th>Declined Date</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let declinedInquiry of declinedInquiries;\" [routerLink]=\"['/inquiries/'+declinedInquiry.inquiryID]\">\r\n            <td>{{declinedInquiry.inquiryID}}</td>\r\n            <td>{{declinedInquiry.endDate | date: 'MM/dd/yyyy'}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>  \r\n    </div>\r\n  </ng-container>\r\n  <ng-template #noDeclinedInquiries>\r\n    <div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-4\">\r\n      <h2 class=\"page-header\">No Declined Inquiries</h2>\r\n      <p>If this is incorrect, try refreshing the page.</p>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n<ng-template #noInquiries>\r\n  <div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n    <h2 class=\"page-header\">No Inquiries</h2>\r\n    <p>If this is incorrect, try refreshing the page.</p>\r\n  </div>\r\n</ng-template>"
 
 /***/ }),
 
@@ -809,6 +870,139 @@ InquiriesComponent = __decorate([
 
 var _a;
 //# sourceMappingURL=inquiries.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/inquiry/inquiry.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/inquiry/inquiry.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\n  <button class=\"btn btn-default\" [routerLink]=\"['/inquiries']\">Go Back</button>  \n</div>\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\n  <ng-container *ngIf=\"inquiry; else noInquiry\">\n    <h2 class=\"page-header\">Inquiry #{{inquiry[0].inquiryID}}</h2>\n    <h4>Details</h4>\n    <table class=\"table table-striped table-hover\">\n      <thead>\n        <tr>\n          <th>Received Date</th>\n          <th>Accepted/Declined Date</th>\n          <th>Description</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr>\n          <td>{{inquiry[0].receivedDate | date: 'MM/dd/yyyy'}}</td>\n          <td>{{inquiry[0].endDate | date: 'MM/dd/yyyy'}}</td>\n          <td>{{inquiry[0].description}}</td>\n        </tr>\n      </tbody>\n    </table>\n  </ng-container>\n  <ng-template #noInquiry>\n    <h2 class=\"page-header\">No Inquiries</h2>\n    <p>If this is incorrect, try refreshing the page.</p>\n  </ng-template>\n</div>\n\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\n  <form (submit)=\"onCreate()\">\n    <h2 class=\"page-header\">Create Bid</h2>\n    <div class=\"form-group\">\n      <label>Bid Price</label>\n      <input type=\"text\" [(ngModel)]=\"bidPrice\" name=\"bidPrice\" placeholder=\"Bid Price\" class=\"form-control\" required>\n    </div>\n    <div class=\"form-group\">\n      <label>Current Date</label>\n      <input type=\"text\" [(ngModel)]=\"createdDate\" name=\"createdDate\" placeholder=\"Current Date\" class=\"form-control\" required>\n    </div>\n    <h3>Estimated Costs</h3>\n    <div class=\"form-group\">\n      <label>Labor Cost</label>\n      <input type=\"text\" [(ngModel)]=\"bidLabor\" name=\"bidLabor\" placeholder=\"Labor Cost\" class=\"form-control\" required>\n    </div>\n    <label>Materials Cost</label>\n    <div class=\"dropdown\">\n      <button class=\"btn btn-primary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">Add Materials<span class=\"caret\"></span></button>\n      <ul class=\"dropdown-menu\">\n        <li *ngFor=\"let material of materials;\"><a (click)=\"onAddMaterial(material)\">{{material.materialName}}</a></li>\n      </ul>\n    </div>\n    <table class=\"table table-striped table-hover\">\n      <thead>\n        <tr>\n          <th>Name</th>\n          <th>Quantity</th>\n          <th>Per Unit Cost</th>\n        </tr>\n        </thead>\n      <tbody>\n        <tr *ngFor=\"let selectedMaterial of selectedMaterials;\">\n          <td>{{selectedMaterial.materialName}}</td>\n          <td><input type=\"text\" [(ngModel)]=\"selectedMaterial.quantity\" name=\"quantity\" placeholder=\"Quantity\" class=\"form-control\" required></td>\n          <td><input type=\"text\" [(ngModel)]=\"selectedMaterial.perUnitCost\" name=\"perUnitCost\" placeholder=\"Per Unit Cost\" class=\"form-control\" required></td>\n        </tr>\n      </tbody>\n    </table>\n    <button type=\"submit\" class=\"btn btn-primary\">Create</button>\n    <button type=\"reset\" class=\"btn btn-danger\" (click)=\"onClear()\">Clear</button>\n  </form>\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/inquiry/inquiry.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return InquiryComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_inquiry_service__ = __webpack_require__("../../../../../src/app/services/inquiry.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_material_service__ = __webpack_require__("../../../../../src/app/services/material.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_bid_service__ = __webpack_require__("../../../../../src/app/services/bid.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var InquiryComponent = (function () {
+    function InquiryComponent(router, route, inquiryService, materialService, bidService) {
+        this.router = router;
+        this.route = route;
+        this.inquiryService = inquiryService;
+        this.materialService = materialService;
+        this.bidService = bidService;
+        this.selectedMaterials = [];
+    }
+    InquiryComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.id = this.route.snapshot.params['id'];
+        this.inquiryService.getInquiryById(this.id).subscribe(function (inquiry) {
+            _this.inquiry = inquiry;
+        });
+        this.materialService.getAllMaterials().subscribe(function (materials) {
+            _this.materials = materials.materials;
+        });
+    };
+    InquiryComponent.prototype.onAddMaterial = function (material) {
+        this.selectedMaterials.push(material);
+    };
+    InquiryComponent.prototype.onClear = function () {
+        this.selectedMaterials = [];
+    };
+    InquiryComponent.prototype.onCreate = function () {
+        var _this = this;
+        var newBid = {
+            inquiryID: this.id,
+            bidLabor: this.bidLabor,
+            bidPrice: this.bidPrice,
+            createdDate: this.createdDate
+        };
+        var updatedInquiry = {
+            inquiryID: this.id,
+            inquiryStatus: "ACCEPTED"
+        };
+        this.bidService.createBid(newBid).subscribe(function (data) {
+            if (data.success) {
+                console.log(data.msg);
+                _this.ngOnInit();
+            }
+            else {
+                console.log(data.msg);
+            }
+        });
+        this.inquiryService.updateInquiryStatus(updatedInquiry).subscribe(function (data) {
+            if (data.success) {
+                console.log(data.msg);
+                _this.ngOnInit();
+            }
+            else {
+                console.log(data.msg);
+            }
+        });
+        this.selectedMaterials.forEach(function (selectedMaterial) {
+            _this.bidService.createBidMaterial(selectedMaterial).subscribe(function (data) {
+                if (data.success) {
+                    console.log(data.msg);
+                    _this.ngOnInit();
+                }
+                else {
+                    console.log(data.msg);
+                }
+            });
+        });
+        this.router.navigate(['/bids']);
+    };
+    return InquiryComponent;
+}());
+InquiryComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-inquiry',
+        template: __webpack_require__("../../../../../src/app/components/inquiry/inquiry.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/components/inquiry/inquiry.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_inquiry_service__["a" /* InquiryService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_inquiry_service__["a" /* InquiryService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__services_material_service__["a" /* MaterialService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_material_service__["a" /* MaterialService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__services_bid_service__["a" /* BidService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_bid_service__["a" /* BidService */]) === "function" && _e || Object])
+], InquiryComponent);
+
+var _a, _b, _c, _d, _e;
+//# sourceMappingURL=inquiry.component.js.map
 
 /***/ }),
 
@@ -986,7 +1180,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/materials/materials.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\n  <button class=\"btn btn-default\" [routerLink]=\"['/home']\">Go Home</button>  \n</div>\n<div class=\"col-xs-12 col-sm-12 col-md-6 col-lg-6\">\n  <ng-container *ngIf=\"materials; else noMaterials\">\n    <h2 class=\"page-header\">Materials</h2>\n    <table class=\"table table-striped table-hover\">\n      <thead>\n        <tr>\n          <th>ID</th>\n          <th>Name</th>\n        </tr>\n        </thead>\n      <tbody>\n        <tr *ngFor=\"let material of materials\">\n          <td>{{material.materialID}}</td>\n          <td>{{material.materialName}}</td>\n        </tr>\n      </tbody>\n    </table>\n  </ng-container>\n  <ng-template #noMaterials>\n    <h2 class=\"page-header\">No Materials</h2>\n    <p>If this is incorrect, try refreshing the page.</p>\n  </ng-template>\n</div>\n\n<div class=\"col-xs-12 col-sm-12 col-md-6 col-lg-6\">\n  <h2 class=\"page-header\">Create A New Material</h2>\n  <form (submit)=\"onCreate()\">\n    <div class=\"form-group\">\n      <label>Name</label>\n      <input type=\"text\" [(ngModel)]=\"name\" name=\"name\" placeholder=\"Name\" class=\"form-control\" required>\n    </div>\n    <button type=\"submit\" class=\"btn btn-primary\">Create</button>\n    <button type=\"reset\" class=\"btn btn-danger\">Clear</button>\n  </form>\n</div>"
+module.exports = "<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <button class=\"btn btn-default\" [routerLink]=\"['/home']\">Go Home</button>  \r\n</div>\r\n<div class=\"col-xs-12 col-sm-12 col-md-6 col-lg-6\">\r\n  <ng-container *ngIf=\"materials; else noMaterials\">\r\n    <h2 class=\"page-header\">Materials</h2>\r\n    <table class=\"table table-striped table-hover\">\r\n      <thead>\r\n        <tr>\r\n          <th>ID</th>\r\n          <th>Name</th>\r\n        </tr>\r\n        </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let material of materials\">\r\n          <td>{{material.materialID}}</td>\r\n          <td>{{material.materialName}}</td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </ng-container>\r\n  <ng-template #noMaterials>\r\n    <h2 class=\"page-header\">No Materials</h2>\r\n    <p>If this is incorrect, try refreshing the page.</p>\r\n  </ng-template>\r\n</div>\r\n\r\n<div class=\"col-xs-12 col-sm-12 col-md-6 col-lg-6\">\r\n  <h2 class=\"page-header\">Create A New Material</h2>\r\n  <form (submit)=\"onCreate()\">\r\n    <div class=\"form-group\">\r\n      <label>Name</label>\r\n      <input type=\"text\" [(ngModel)]=\"name\" name=\"name\" placeholder=\"Name\" class=\"form-control\" required>\r\n    </div>\r\n    <button type=\"submit\" class=\"btn btn-primary\">Create</button>\r\n    <button type=\"reset\" class=\"btn btn-danger\">Clear</button>\r\n  </form>\r\n</div>"
 
 /***/ }),
 
@@ -1393,6 +1587,13 @@ var BidService = (function () {
         headers.append('Authorization', this.authService.authToken);
         return this.http.post(this.localHttp + "/bids/new/bid-material", JSON.stringify(newBidMaterial), { headers: headers }).map(function (response) { return response.json(); });
     };
+    BidService.prototype.updateBidStatus = function (updatedBid) {
+        this.authService.loadToken();
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', this.authService.authToken);
+        return this.http.post(this.localHttp + "/bids/update-status", JSON.stringify(updatedBid), { headers: headers }).map(function (response) { return response.json(); });
+    };
     return BidService;
 }());
 BidService = __decorate([
@@ -1503,6 +1704,13 @@ var InquiryService = (function () {
         headers.append('Content-Type', 'application/json');
         return this.http.get(this.localHttp + "/inquiries/all", { headers: headers }).map(function (response) { return response.json(); });
     };
+    InquiryService.prototype.getInquiryById = function (id) {
+        this.authService.loadToken();
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        headers.append('Authorization', this.authService.authToken);
+        headers.append('Content-Type', 'application/json');
+        return this.http.get(this.localHttp + "/inquiries/" + id, { headers: headers }).map(function (response) { return response.json(); });
+    };
     InquiryService.prototype.createInquiry = function (newInquiry) {
         this.authService.loadToken();
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
@@ -1571,6 +1779,27 @@ var JobService = (function () {
         headers.append('Authorization', this.authService.authToken);
         headers.append('Content-Type', 'application/json');
         return this.http.get(this.localHttp + "/jobs/all/current", { headers: headers }).map(function (response) { return response.json(); });
+    };
+    JobService.prototype.getJobMaterialsById = function (jobId) {
+        this.authService.loadToken();
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        headers.append('Authorization', this.authService.authToken);
+        headers.append('Content-Type', 'application/json');
+        return this.http.get(this.localHttp + "/jobs/" + jobId + "/job-materials", { headers: headers }).map(function (response) { return response.json(); });
+    };
+    JobService.prototype.createJob = function (newJob) {
+        this.authService.loadToken();
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', this.authService.authToken);
+        return this.http.post(this.localHttp + "/jobs/new", JSON.stringify(newJob), { headers: headers }).map(function (response) { return response.json(); });
+    };
+    JobService.prototype.createJobMaterial = function (newJobMaterial) {
+        this.authService.loadToken();
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', this.authService.authToken);
+        return this.http.post(this.localHttp + "/jobs/new/job-material", JSON.stringify(newJobMaterial), { headers: headers }).map(function (response) { return response.json(); });
     };
     return JobService;
 }());

@@ -55,3 +55,14 @@ module.exports.createBidMaterial = function(newBidMaterial, callback){
         }
     });
 }
+
+module.exports.updateBidStatus = function(updatedBid, callback){
+    const queryString = `UPDATE Bid SET bidStatus = "${updatedBid.bidStatus}", endDate=NOW() WHERE bidID=${updatedBid.bidID}`;
+    connection.query(queryString, (error, rows, fields) => {
+        if(!error){
+            callback(rows);
+        } else{
+            return error;
+        }
+    });
+}

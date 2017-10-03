@@ -1,41 +1,38 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { BidService } from '../../services/bid.service';
+import { InquiryService } from '../../services/inquiry.service';
 import { MaterialService } from '../../services/material.service';
-import { JobService } from '../../services/job.service';
+import { BidService } from '../../services/bid.service';
 
 @Component({
-  selector: 'app-bid',
-  templateUrl: './bid.component.html',
-  styleUrls: ['./bid.component.css']
+  selector: 'app-inquiry',
+  templateUrl: './inquiry.component.html',
+  styleUrls: ['./inquiry.component.css']
 })
-export class BidComponent implements OnInit {
+export class InquiryComponent implements OnInit {
 
   id:any;
-  bid:any;
-  bidMaterials:any;
+  inquiry:any;
 
+  bidPrice:any;
   createdDate:any;
+  bidLabor:any;
   materials:any;
   selectedMaterials:SelectedMaterial[] = [];
 
   constructor(
     private router:Router,
     private route:ActivatedRoute,
-    private bidService:BidService,
+    private inquiryService:InquiryService,
     private materialService:MaterialService,
-    private jobService:JobService
+    private bidService:BidService
   ) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
 
-    this.bidService.getBidById(this.id).subscribe((bid) => {
-      this.bid = bid;
-    });
-
-    this.bidService.getBidMaterialsById(this.id).subscribe((bidMaterials) => {
-      this.bidMaterials = bidMaterials;
+    this.inquiryService.getInquiryById(this.id).subscribe((inquiry) => {
+      this.inquiry = inquiry;
     });
 
     this.materialService.getAllMaterials().subscribe((materials) => {
@@ -52,16 +49,18 @@ export class BidComponent implements OnInit {
   }
 
   onCreate(){
-    const newJob = {
-      bidID: this.id,
+    const newBid = {
+      inquiryID: this.id,
+      bidLabor: this.bidLabor,
+      bidPrice: this.bidPrice,
       createdDate: this.createdDate
     };
-    const updatedBid = {
-      bidID: this.id,
-      bidStatus: "ACCEPTED"
+    const updatedInquiry = {
+      inquiryID: this.id,
+      inquiryStatus: "ACCEPTED"
     };
 
-    this.jobService.createJob(newJob).subscribe((data) => {
+    this.bidService.createBid(newBid).subscribe((data) => {
       if(data.success){
         console.log(data.msg);
         this.ngOnInit();
@@ -69,7 +68,7 @@ export class BidComponent implements OnInit {
         console.log(data.msg);
       }
     });
-    this.bidService.updateBidStatus(updatedBid).subscribe((data) => {
+    this.inquiryService.updateInquiryStatus(updatedInquiry).subscribe((data) => {
       if(data.success){
         console.log(data.msg);
         this.ngOnInit();
@@ -78,7 +77,7 @@ export class BidComponent implements OnInit {
       }
     });
     this.selectedMaterials.forEach(selectedMaterial => {
-      this.jobService.createJobMaterial(selectedMaterial).subscribe((data) => {
+      this.bidService.createBidMaterial(selectedMaterial).subscribe((data) => {
         if(data.success){
           console.log(data.msg);
           this.ngOnInit();
@@ -88,7 +87,7 @@ export class BidComponent implements OnInit {
       });
     });
 
-    this.router.navigate(['/jobs']);
+    this.router.navigate(['/bids']);
   }
 }
 

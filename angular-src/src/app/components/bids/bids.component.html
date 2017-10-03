@@ -49,7 +49,7 @@
           <tr *ngFor="let pendingBid of pendingBids;" [routerLink]="['/bids/'+pendingBid.bidID]">
             <td>{{pendingBid.bidID}}</td>
             <td>{{pendingBid.bidPrice}}</td>
-            <td>{{pendingBid.createdDate}}</td>
+            <td>{{pendingBid.createdDate | date: 'MM/dd/yyyy'}}</td>
           </tr>
         </tbody>
       </table>  
@@ -75,10 +75,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let acceptedBid of acceptedBids;" [routerLink]="['/bids/'+pendingBid.bidID]">
+          <tr *ngFor="let acceptedBid of acceptedBids;" [routerLink]="['/bids/'+acceptedBid.bidID]">
             <td>{{acceptedBid.bidID}}</td>
             <td>{{acceptedBid.bidPrice}}</td>
-            <td>{{acceptedBid.endDate}}</td>
+            <td>{{acceptedBid.endDate | date: 'MM/dd/yyyy'}}</td>
           </tr>
         </tbody>
       </table>  
@@ -104,10 +104,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let declinedBid of declinedBids;" [routerLink]="['/bids/'+pendingBid.bidID]">
+          <tr *ngFor="let declinedBid of declinedBids;" [routerLink]="['/bids/'+declinedBid.bidID]">
             <td>{{declinedBid.bidID}}</td>
             <td>{{declinedBid.bidPrice}}</td>
-            <td>{{declinedBid.endDate}}</td>
+            <td>{{declinedBid.endDate | date: 'MM/dd/yyyy'}}</td>
           </tr>
         </tbody>
       </table> 
