@@ -1,0 +1,103 @@
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <button class="btn btn-default" [routerLink]="['/jobs']">Go Back</button>  
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <ng-container *ngIf="job; else noJob">
+    <h2 class="page-header">Job #{{job[0].jobID}}</h2>
+    <h4>Details</h4>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Revenue</th>
+          <th>Created Date</th>
+          <th>Completion Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{job[0].jobRevenue}}</td>
+          <td>{{job[0].createdDate | date: 'MM/dd/yyyy'}}</td>
+          <td>{{job[0].endDate | date: 'MM/dd/yyyy'}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <h4>Costs</h4>
+    <label>Labor Cost</label>
+    <table class="table table-striped table-hover">
+      <tbody>
+        <tr>
+          <td>{{job[0].jobLabor}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <label>Materials Cost</label>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Quantity</th>
+          <th>Per Unit Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let jobMaterial of jobMaterials">
+          <td>{{jobMaterial.materialID}}</td>
+          <td>{{jobMaterial.quantity}}</td>
+          <td>{{jobMaterial.perUnitCost}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+  <ng-template #noBid>
+    <h2 class="page-header">No Bids</h2>
+    <p>If this is incorrect, try refreshing the page.</p>
+  </ng-template>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <h2 class="page-header">Update Job</h2>
+  <form (submit)="onUpdate()">
+    <div class="form-group">
+      <label>Revenue</label>
+      <input type="text" [(ngModel)]="jobRevenue" name="jobRevenue" placeholder="Revenue" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label>Labor Cost</label>
+      <input type="text" [(ngModel)]="jobLabor" name="jobLabor" placeholder="Labor Cost" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label>Created Date</label>
+      <input type="text" [(ngModel)]="createdDate" name="createdDate" placeholder="YYYY-MM-DD" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label>Completion Date</label>
+      <input type="text" [(ngModel)]="endDate" name="endDate" placeholder="YYYY-MM-DD" class="form-control" required>
+    </div>
+    <label>Materials Cost</label>
+    <div class="dropdown">
+      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Add Materials<span class="caret"></span></button>
+      <ul class="dropdown-menu">
+        <li *ngFor="let material of materials;"><a (click)="onAddMaterial(material)">{{material.materialName}}</a></li>
+      </ul>
+    </div>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Quantity</th>
+          <th>Per Unit Cost</th>
+        </tr>
+        </thead>
+      <tbody>
+        <tr *ngFor="let selectedMaterial of selectedMaterials;">
+          <td>{{selectedMaterial.materialName}}</td>
+          <td><input type="text" [(ngModel)]="selectedMaterial.quantity" name="quantity" placeholder="Quantity" class="form-control" required></td>
+          <td><input type="text" [(ngModel)]="selectedMaterial.perUnitCost" name="perUnitCost" placeholder="Per Unit Cost" class="form-control" required></td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="submit" class="btn btn-primary">Update</button>
+    <button type="reset" class="btn btn-danger" (click)="onClear()">Clear</button>
+  </form>
+</div>

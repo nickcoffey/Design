@@ -9,6 +9,8 @@ import { JobService } from '../../services/job.service';
 export class JobsComponent implements OnInit {
   
   jobs:any;
+  inProgressJobs:any;
+  completedJobs:any;
 
   constructor(
     private jobService:JobService
@@ -16,7 +18,9 @@ export class JobsComponent implements OnInit {
 
   ngOnInit() {
     this.jobService.getAllJobs().subscribe((jobs) => {
-      this.jobs = jobs.jobs;
+      this.jobs = jobs;
+      this.inProgressJobs = jobs.inProgressJobs;
+      this.completedJobs = jobs.completedJobs;
     });
   }
 

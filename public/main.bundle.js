@@ -97,13 +97,14 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_materials_materials_component__ = __webpack_require__("../../../../../src/app/components/materials/materials.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_bid_bid_component__ = __webpack_require__("../../../../../src/app/components/bid/bid.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_inquiry_inquiry_component__ = __webpack_require__("../../../../../src/app/components/inquiry/inquiry.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__services_customer_service__ = __webpack_require__("../../../../../src/app/services/customer.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__services_inquiry_service__ = __webpack_require__("../../../../../src/app/services/inquiry.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__services_bid_service__ = __webpack_require__("../../../../../src/app/services/bid.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__services_job_service__ = __webpack_require__("../../../../../src/app/services/job.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__services_material_service__ = __webpack_require__("../../../../../src/app/services/material.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__guards_auth_guard__ = __webpack_require__("../../../../../src/app/guards/auth.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_job_job_component__ = __webpack_require__("../../../../../src/app/components/job/job.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__services_customer_service__ = __webpack_require__("../../../../../src/app/services/customer.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__services_inquiry_service__ = __webpack_require__("../../../../../src/app/services/inquiry.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__services_bid_service__ = __webpack_require__("../../../../../src/app/services/bid.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__services_job_service__ = __webpack_require__("../../../../../src/app/services/job.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__services_material_service__ = __webpack_require__("../../../../../src/app/services/material.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__guards_auth_guard__ = __webpack_require__("../../../../../src/app/guards/auth.guard.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -139,19 +140,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var appRoutes = [
     { path: '', component: __WEBPACK_IMPORTED_MODULE_9__components_login_login_component__["a" /* LoginComponent */] },
-    { path: 'home', component: __WEBPACK_IMPORTED_MODULE_7__components_home_home_component__["a" /* HomeComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_25__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'customers', component: __WEBPACK_IMPORTED_MODULE_8__components_customers_customers_component__["a" /* CustomersComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_25__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'customers/:id', component: __WEBPACK_IMPORTED_MODULE_14__components_customer_customer_component__["a" /* CustomerComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_25__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'inquiries', component: __WEBPACK_IMPORTED_MODULE_11__components_inquiries_inquiries_component__["a" /* InquiriesComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_25__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'bids', component: __WEBPACK_IMPORTED_MODULE_12__components_bids_bids_component__["a" /* BidsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_25__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'jobs', component: __WEBPACK_IMPORTED_MODULE_13__components_jobs_jobs_component__["a" /* JobsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_25__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'register', component: __WEBPACK_IMPORTED_MODULE_10__components_register_register_component__["a" /* RegisterComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_25__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'create-bid/:id', component: __WEBPACK_IMPORTED_MODULE_15__components_create_bid_create_bid_component__["a" /* CreateBidComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_25__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'materials', component: __WEBPACK_IMPORTED_MODULE_16__components_materials_materials_component__["a" /* MaterialsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_25__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'bids/:id', component: __WEBPACK_IMPORTED_MODULE_17__components_bid_bid_component__["a" /* BidComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_25__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'inquiries/:id', component: __WEBPACK_IMPORTED_MODULE_18__components_inquiry_inquiry_component__["a" /* InquiryComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_25__guards_auth_guard__["a" /* AuthGuard */]] }
+    { path: 'home', component: __WEBPACK_IMPORTED_MODULE_7__components_home_home_component__["a" /* HomeComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_26__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'customers', component: __WEBPACK_IMPORTED_MODULE_8__components_customers_customers_component__["a" /* CustomersComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_26__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'customers/:id', component: __WEBPACK_IMPORTED_MODULE_14__components_customer_customer_component__["a" /* CustomerComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_26__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'inquiries', component: __WEBPACK_IMPORTED_MODULE_11__components_inquiries_inquiries_component__["a" /* InquiriesComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_26__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'bids', component: __WEBPACK_IMPORTED_MODULE_12__components_bids_bids_component__["a" /* BidsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_26__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'jobs', component: __WEBPACK_IMPORTED_MODULE_13__components_jobs_jobs_component__["a" /* JobsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_26__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'register', component: __WEBPACK_IMPORTED_MODULE_10__components_register_register_component__["a" /* RegisterComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_26__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'create-bid/:id', component: __WEBPACK_IMPORTED_MODULE_15__components_create_bid_create_bid_component__["a" /* CreateBidComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_26__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'materials', component: __WEBPACK_IMPORTED_MODULE_16__components_materials_materials_component__["a" /* MaterialsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_26__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'bids/:id', component: __WEBPACK_IMPORTED_MODULE_17__components_bid_bid_component__["a" /* BidComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_26__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'inquiries/:id', component: __WEBPACK_IMPORTED_MODULE_18__components_inquiry_inquiry_component__["a" /* InquiryComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_26__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'jobs/:id', component: __WEBPACK_IMPORTED_MODULE_19__components_job_job_component__["a" /* JobComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_26__guards_auth_guard__["a" /* AuthGuard */]] }
 ];
 var AppModule = (function () {
     function AppModule() {
@@ -174,7 +177,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_15__components_create_bid_create_bid_component__["a" /* CreateBidComponent */],
             __WEBPACK_IMPORTED_MODULE_16__components_materials_materials_component__["a" /* MaterialsComponent */],
             __WEBPACK_IMPORTED_MODULE_17__components_bid_bid_component__["a" /* BidComponent */],
-            __WEBPACK_IMPORTED_MODULE_18__components_inquiry_inquiry_component__["a" /* InquiryComponent */]
+            __WEBPACK_IMPORTED_MODULE_18__components_inquiry_inquiry_component__["a" /* InquiryComponent */],
+            __WEBPACK_IMPORTED_MODULE_19__components_job_job_component__["a" /* JobComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -190,13 +194,13 @@ AppModule = __decorate([
             MdMenuModule*/
         ],
         providers: [
-            __WEBPACK_IMPORTED_MODULE_19__services_customer_service__["a" /* CustomerService */],
-            __WEBPACK_IMPORTED_MODULE_20__services_inquiry_service__["a" /* InquiryService */],
-            __WEBPACK_IMPORTED_MODULE_21__services_bid_service__["a" /* BidService */],
-            __WEBPACK_IMPORTED_MODULE_22__services_job_service__["a" /* JobService */],
-            __WEBPACK_IMPORTED_MODULE_23__services_material_service__["a" /* MaterialService */],
-            __WEBPACK_IMPORTED_MODULE_24__services_auth_service__["a" /* AuthService */],
-            __WEBPACK_IMPORTED_MODULE_25__guards_auth_guard__["a" /* AuthGuard */]
+            __WEBPACK_IMPORTED_MODULE_20__services_customer_service__["a" /* CustomerService */],
+            __WEBPACK_IMPORTED_MODULE_21__services_inquiry_service__["a" /* InquiryService */],
+            __WEBPACK_IMPORTED_MODULE_22__services_bid_service__["a" /* BidService */],
+            __WEBPACK_IMPORTED_MODULE_23__services_job_service__["a" /* JobService */],
+            __WEBPACK_IMPORTED_MODULE_24__services_material_service__["a" /* MaterialService */],
+            __WEBPACK_IMPORTED_MODULE_25__services_auth_service__["a" /* AuthService */],
+            __WEBPACK_IMPORTED_MODULE_26__guards_auth_guard__["a" /* AuthGuard */]
         ],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */]]
     })
@@ -310,17 +314,6 @@ var BidComponent = (function () {
             else {
                 console.log(data.msg);
             }
-        });
-        this.selectedMaterials.forEach(function (selectedMaterial) {
-            _this.jobService.createJobMaterial(selectedMaterial).subscribe(function (data) {
-                if (data.success) {
-                    console.log(data.msg);
-                    _this.ngOnInit();
-                }
-                else {
-                    console.log(data.msg);
-                }
-            });
         });
         this.router.navigate(['/jobs']);
     };
@@ -894,7 +887,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/inquiry/inquiry.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\n  <button class=\"btn btn-default\" [routerLink]=\"['/inquiries']\">Go Back</button>  \n</div>\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\n  <ng-container *ngIf=\"inquiry; else noInquiry\">\n    <h2 class=\"page-header\">Inquiry #{{inquiry[0].inquiryID}}</h2>\n    <h4>Details</h4>\n    <table class=\"table table-striped table-hover\">\n      <thead>\n        <tr>\n          <th>Received Date</th>\n          <th>Accepted/Declined Date</th>\n          <th>Description</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr>\n          <td>{{inquiry[0].receivedDate | date: 'MM/dd/yyyy'}}</td>\n          <td>{{inquiry[0].endDate | date: 'MM/dd/yyyy'}}</td>\n          <td>{{inquiry[0].description}}</td>\n        </tr>\n      </tbody>\n    </table>\n  </ng-container>\n  <ng-template #noInquiry>\n    <h2 class=\"page-header\">No Inquiries</h2>\n    <p>If this is incorrect, try refreshing the page.</p>\n  </ng-template>\n</div>\n\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\n  <form (submit)=\"onCreate()\">\n    <h2 class=\"page-header\">Create Bid</h2>\n    <div class=\"form-group\">\n      <label>Bid Price</label>\n      <input type=\"text\" [(ngModel)]=\"bidPrice\" name=\"bidPrice\" placeholder=\"Bid Price\" class=\"form-control\" required>\n    </div>\n    <div class=\"form-group\">\n      <label>Current Date</label>\n      <input type=\"text\" [(ngModel)]=\"createdDate\" name=\"createdDate\" placeholder=\"Current Date\" class=\"form-control\" required>\n    </div>\n    <h3>Estimated Costs</h3>\n    <div class=\"form-group\">\n      <label>Labor Cost</label>\n      <input type=\"text\" [(ngModel)]=\"bidLabor\" name=\"bidLabor\" placeholder=\"Labor Cost\" class=\"form-control\" required>\n    </div>\n    <label>Materials Cost</label>\n    <div class=\"dropdown\">\n      <button class=\"btn btn-primary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">Add Materials<span class=\"caret\"></span></button>\n      <ul class=\"dropdown-menu\">\n        <li *ngFor=\"let material of materials;\"><a (click)=\"onAddMaterial(material)\">{{material.materialName}}</a></li>\n      </ul>\n    </div>\n    <table class=\"table table-striped table-hover\">\n      <thead>\n        <tr>\n          <th>Name</th>\n          <th>Quantity</th>\n          <th>Per Unit Cost</th>\n        </tr>\n        </thead>\n      <tbody>\n        <tr *ngFor=\"let selectedMaterial of selectedMaterials;\">\n          <td>{{selectedMaterial.materialName}}</td>\n          <td><input type=\"text\" [(ngModel)]=\"selectedMaterial.quantity\" name=\"quantity\" placeholder=\"Quantity\" class=\"form-control\" required></td>\n          <td><input type=\"text\" [(ngModel)]=\"selectedMaterial.perUnitCost\" name=\"perUnitCost\" placeholder=\"Per Unit Cost\" class=\"form-control\" required></td>\n        </tr>\n      </tbody>\n    </table>\n    <button type=\"submit\" class=\"btn btn-primary\">Create</button>\n    <button type=\"reset\" class=\"btn btn-danger\" (click)=\"onClear()\">Clear</button>\n  </form>\n</div>"
+module.exports = "<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <button class=\"btn btn-default\" [routerLink]=\"['/inquiries']\">Go Back</button>  \r\n</div>\r\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <ng-container *ngIf=\"inquiry; else noInquiry\">\r\n    <h2 class=\"page-header\">Inquiry #{{inquiry[0].inquiryID}}</h2>\r\n    <h4>Details</h4>\r\n    <table class=\"table table-striped table-hover\">\r\n      <thead>\r\n        <tr>\r\n          <th>Received Date</th>\r\n          <th>Accepted/Declined Date</th>\r\n          <th>Description</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr>\r\n          <td>{{inquiry[0].receivedDate | date: 'MM/dd/yyyy'}}</td>\r\n          <td>{{inquiry[0].endDate | date: 'MM/dd/yyyy'}}</td>\r\n          <td>{{inquiry[0].description}}</td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </ng-container>\r\n  <ng-template #noInquiry>\r\n    <h2 class=\"page-header\">No Inquiries</h2>\r\n    <p>If this is incorrect, try refreshing the page.</p>\r\n  </ng-template>\r\n</div>\r\n\r\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <form (submit)=\"onCreate()\">\r\n    <h2 class=\"page-header\">Create Bid</h2>\r\n    <div class=\"form-group\">\r\n      <label>Bid Price</label>\r\n      <input type=\"text\" [(ngModel)]=\"bidPrice\" name=\"bidPrice\" placeholder=\"Bid Price\" class=\"form-control\" required>\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label>Current Date</label>\r\n      <input type=\"text\" [(ngModel)]=\"createdDate\" name=\"createdDate\" placeholder=\"Current Date\" class=\"form-control\" required>\r\n    </div>\r\n    <h3>Estimated Costs</h3>\r\n    <div class=\"form-group\">\r\n      <label>Labor Cost</label>\r\n      <input type=\"text\" [(ngModel)]=\"bidLabor\" name=\"bidLabor\" placeholder=\"Labor Cost\" class=\"form-control\" required>\r\n    </div>\r\n    <label>Materials Cost</label>\r\n    <div class=\"dropdown\">\r\n      <button class=\"btn btn-primary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">Add Materials<span class=\"caret\"></span></button>\r\n      <ul class=\"dropdown-menu\">\r\n        <li *ngFor=\"let material of materials;\"><a (click)=\"onAddMaterial(material)\">{{material.materialName}}</a></li>\r\n      </ul>\r\n    </div>\r\n    <table class=\"table table-striped table-hover\">\r\n      <thead>\r\n        <tr>\r\n          <th>Name</th>\r\n          <th>Quantity</th>\r\n          <th>Per Unit Cost</th>\r\n        </tr>\r\n        </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let selectedMaterial of selectedMaterials;\">\r\n          <td>{{selectedMaterial.materialName}}</td>\r\n          <td><input type=\"text\" [(ngModel)]=\"selectedMaterial.quantity\" name=\"quantity\" placeholder=\"Quantity\" class=\"form-control\" required></td>\r\n          <td><input type=\"text\" [(ngModel)]=\"selectedMaterial.perUnitCost\" name=\"perUnitCost\" placeholder=\"Per Unit Cost\" class=\"form-control\" required></td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n    <button type=\"submit\" class=\"btn btn-primary\">Create</button>\r\n    <button type=\"reset\" class=\"btn btn-danger\" (click)=\"onClear()\">Clear</button>\r\n  </form>\r\n</div>"
 
 /***/ }),
 
@@ -1006,6 +999,144 @@ var _a, _b, _c, _d, _e;
 
 /***/ }),
 
+/***/ "../../../../../src/app/components/job/job.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/job/job.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\n  <button class=\"btn btn-default\" [routerLink]=\"['/jobs']\">Go Back</button>  \n</div>\n\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\n  <ng-container *ngIf=\"job; else noJob\">\n    <h2 class=\"page-header\">Job #{{job[0].jobID}}</h2>\n    <h4>Details</h4>\n    <table class=\"table table-striped table-hover\">\n      <thead>\n        <tr>\n          <th>Revenue</th>\n          <th>Created Date</th>\n          <th>Completion Date</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr>\n          <td>{{job[0].jobRevenue}}</td>\n          <td>{{job[0].createdDate | date: 'MM/dd/yyyy'}}</td>\n          <td>{{job[0].endDate | date: 'MM/dd/yyyy'}}</td>\n        </tr>\n      </tbody>\n    </table>\n    <h4>Costs</h4>\n    <label>Labor Cost</label>\n    <table class=\"table table-striped table-hover\">\n      <tbody>\n        <tr>\n          <td>{{job[0].jobLabor}}</td>\n        </tr>\n      </tbody>\n    </table>\n    <label>Materials Cost</label>\n    <table class=\"table table-striped table-hover\">\n      <thead>\n        <tr>\n          <th>ID</th>\n          <th>Quantity</th>\n          <th>Per Unit Cost</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let jobMaterial of jobMaterials\">\n          <td>{{jobMaterial.materialID}}</td>\n          <td>{{jobMaterial.quantity}}</td>\n          <td>{{jobMaterial.perUnitCost}}</td>\n        </tr>\n      </tbody>\n    </table>\n  </ng-container>\n  <ng-template #noBid>\n    <h2 class=\"page-header\">No Bids</h2>\n    <p>If this is incorrect, try refreshing the page.</p>\n  </ng-template>\n</div>\n\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\n  <h2 class=\"page-header\">Update Job</h2>\n  <form (submit)=\"onUpdate()\">\n    <div class=\"form-group\">\n      <label>Revenue</label>\n      <input type=\"text\" [(ngModel)]=\"jobRevenue\" name=\"jobRevenue\" placeholder=\"Revenue\" class=\"form-control\" required>\n    </div>\n    <div class=\"form-group\">\n      <label>Labor Cost</label>\n      <input type=\"text\" [(ngModel)]=\"jobLabor\" name=\"jobLabor\" placeholder=\"Labor Cost\" class=\"form-control\" required>\n    </div>\n    <div class=\"form-group\">\n      <label>Created Date</label>\n      <input type=\"text\" [(ngModel)]=\"createdDate\" name=\"createdDate\" placeholder=\"YYYY-MM-DD\" class=\"form-control\" required>\n    </div>\n    <div class=\"form-group\">\n      <label>Completion Date</label>\n      <input type=\"text\" [(ngModel)]=\"endDate\" name=\"endDate\" placeholder=\"YYYY-MM-DD\" class=\"form-control\" required>\n    </div>\n    <label>Materials Cost</label>\n    <div class=\"dropdown\">\n      <button class=\"btn btn-primary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">Add Materials<span class=\"caret\"></span></button>\n      <ul class=\"dropdown-menu\">\n        <li *ngFor=\"let material of materials;\"><a (click)=\"onAddMaterial(material)\">{{material.materialName}}</a></li>\n      </ul>\n    </div>\n    <table class=\"table table-striped table-hover\">\n      <thead>\n        <tr>\n          <th>Name</th>\n          <th>Quantity</th>\n          <th>Per Unit Cost</th>\n        </tr>\n        </thead>\n      <tbody>\n        <tr *ngFor=\"let selectedMaterial of selectedMaterials;\">\n          <td>{{selectedMaterial.materialName}}</td>\n          <td><input type=\"text\" [(ngModel)]=\"selectedMaterial.quantity\" name=\"quantity\" placeholder=\"Quantity\" class=\"form-control\" required></td>\n          <td><input type=\"text\" [(ngModel)]=\"selectedMaterial.perUnitCost\" name=\"perUnitCost\" placeholder=\"Per Unit Cost\" class=\"form-control\" required></td>\n        </tr>\n      </tbody>\n    </table>\n    <button type=\"submit\" class=\"btn btn-primary\">Update</button>\n    <button type=\"reset\" class=\"btn btn-danger\" (click)=\"onClear()\">Clear</button>\n  </form>\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/job/job.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return JobComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_job_service__ = __webpack_require__("../../../../../src/app/services/job.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_material_service__ = __webpack_require__("../../../../../src/app/services/material.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var JobComponent = (function () {
+    function JobComponent(router, route, jobService, materialService) {
+        this.router = router;
+        this.route = route;
+        this.jobService = jobService;
+        this.materialService = materialService;
+        this.jobLabor = null;
+        this.jobRevenue = null;
+        this.jobStatus = null;
+        this.createdDate = null;
+        this.endDate = null;
+        this.selectedMaterials = [];
+    }
+    JobComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.id = this.route.snapshot.params['id'];
+        this.jobService.getJobById(this.id).subscribe(function (job) {
+            _this.job = job;
+        });
+        this.jobService.getJobMaterialsById(this.id).subscribe(function (jobMaterials) {
+            _this.jobMaterials = jobMaterials;
+        });
+        this.materialService.getAllMaterials().subscribe(function (materials) {
+            _this.materials = materials.materials;
+        });
+    };
+    JobComponent.prototype.onAddMaterial = function (material) {
+        this.selectedMaterials.push(material);
+    };
+    JobComponent.prototype.onClear = function () {
+        this.selectedMaterials = [];
+    };
+    JobComponent.prototype.onUpdate = function () {
+        /*
+        // To help with date on single update API call
+        if(this.createdDate != null){
+          this.createdDate = `"${this.createdDate}"`;
+        }
+        if(this.endDate != null){
+          this.endDate = `"${this.endDate}"`;
+        }
+    
+        let updatedJob = {
+          jobID: this.id,
+          jobLabor: this.jobLabor,
+          jobRevenue: this.jobRevenue,
+          jobStatus: this.jobStatus,
+          createdDate: this.createdDate,
+          endDate: this.endDate
+        }
+    
+        console.log(updatedJob);
+        */
+        var _this = this;
+        this.selectedMaterials.forEach(function (selectedMaterial) {
+            _this.jobService.createJobMaterial(_this.id, selectedMaterial).subscribe(function (data) {
+                if (data.success) {
+                    console.log(data.msg);
+                }
+                else {
+                    console.log(data.msg);
+                }
+            });
+        });
+        /*
+        this.jobService.updateJob(updatedJob).subscribe((data) => {
+          if(data.success){
+            console.log(data.msg);
+          } else{
+            console.log(data.msg);
+          }
+        });*/
+        this.onClear();
+        this.ngOnInit();
+    };
+    return JobComponent;
+}());
+JobComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-job',
+        template: __webpack_require__("../../../../../src/app/components/job/job.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/components/job/job.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_job_service__["a" /* JobService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_job_service__["a" /* JobService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__services_material_service__["a" /* MaterialService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_material_service__["a" /* MaterialService */]) === "function" && _d || Object])
+], JobComponent);
+
+var _a, _b, _c, _d;
+//# sourceMappingURL=job.component.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/components/jobs/jobs.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1027,7 +1158,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/jobs/jobs.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<button class=\"btn btn-default\" [routerLink]=\"['/home']\">Go Home</button>\r\n<ng-container *ngIf=\"jobs; else noJobs\">\r\n    <h2 class=\"page-header\">Jobs</h2>\r\n    <div class=\"panel-group\" id=\"accordion\">\r\n      <div class=\"panel panel-default\" *ngFor=\"let job of jobs\">\r\n        <div class=\"panel-heading\">\r\n          <h4 class=\"panel-title\">\r\n            <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#{{job.jobID + '-details'}}\">Job ID: {{job.jobID}}</a>\r\n          </h4>\r\n        </div>\r\n        <div attr.id=\"{{job.jobID + '-details'}}\" class=\"panel-collapse collapse\">\r\n          <div class=\"panel-body\">\r\n            <li class=\"list-group-item\"><b>Job Cost:</b> ${{job.jobCost}}</li>\r\n            <li class=\"list-group-item\"><b>Job Income:</b> ${{job.jobIncome}}</li>\r\n            <li class=\"list-group-item\"><b>Job Status:</b> {{job.jobStatus}}</li>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n</ng-container>\r\n<ng-template #noJobs>\r\n  <h2 class=\"page-header\">Loading...</h2>\r\n  <p>Try refreshing the page if there is a significant delay.</p>\r\n</ng-template>"
+module.exports = "<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\n  <button class=\"btn btn-default\" [routerLink]=\"['/home']\">Go Home</button>\n</div>\n\n<ng-container *ngIf=\"jobs; else noJobs\">\n  <ng-container *ngIf=\"inProgressJobs[0]; else noInProgressJobs\">\n    <div class=\"col-xs-12 col-sm-12 col-md-6 col-lg-6\">\n      <h2 class=\"page-header\">In Progress Jobs</h2>\n      <h4>Click To View Details</h4>\n      <table class=\"table table-striped table-hover\">\n        <thead>\n          <tr>\n            <th>ID</th>\n            <th>Revenue</th>\n            <th>Created Date</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let inProgressJob of inProgressJobs;\" [routerLink]=\"['/jobs/'+inProgressJob.jobID]\">\n            <td>{{inProgressJob.jobID}}</td>\n            <td>{{inProgressJob.jobRevenue}}</td>\n            <td>{{inProgressJob.createdDate | date: 'MM/dd/yyyy'}}</td>\n          </tr>\n        </tbody>\n      </table>  \n    </div>\n  </ng-container>\n  <ng-template #noInProgressJobs>\n    <div class=\"col-xs-12 col-sm-12 col-md-6 col-lg-6\">\n      <h2 class=\"page-header\">No Jobs In Progress</h2>\n      <p>If this is incorrect, try refreshing the page.</p>\n    </div>\n  </ng-template>\n  \n  <ng-container *ngIf=\"completedJobs[0]; else noCompletedJobs\">\n    <div class=\"col-xs-12 col-sm-12 col-md-6 col-lg-6\">\n      <h2 class=\"page-header\">Completed Jobs</h2>\n      <h4>Click To View Details</h4>\n      <table class=\"table table-striped table-hover\">\n        <thead>\n          <tr>\n            <th>ID</th>\n            <th>Labor Cost</th>\n            <th>Material Cost</th>\n            <th>Income</th>\n            <th>Created Date</th>\n            <th>Completed Date</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let completedJob of completedJobs;\" [routerLink]=\"['/jobs/'+completedJob.jobID]\">\n            <td>{{completedJob.jobID}}</td>\n            <td>{{completedJob.jobLabor}}</td>\n            <td>Net Income</td>\n            <td>{{completedJob.endDate | date: 'MM/dd/yyyy'}}</td>\n          </tr>\n        </tbody>\n      </table>  \n    </div>\n  </ng-container>\n  <ng-template #noCompletedJobs>\n    <div class=\"col-xs-12 col-sm-12 col-md-6 col-lg-6\">\n      <h2 class=\"page-header\">No Completed Jobs</h2>\n      <p>If this is incorrect, try refreshing the page.</p>\n    </div>\n  </ng-template>\n</ng-container>\n<ng-template #noJobs>\n  <div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\n    <h2 class=\"page-header\">No Jobs</h2>\n    <p>If this is incorrect, try refreshing the page.</p>\n  </div>\n</ng-template>"
 
 /***/ }),
 
@@ -1056,7 +1187,9 @@ var JobsComponent = (function () {
     JobsComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.jobService.getAllJobs().subscribe(function (jobs) {
-            _this.jobs = jobs.jobs;
+            _this.jobs = jobs;
+            _this.inProgressJobs = jobs.inProgressJobs;
+            _this.completedJobs = jobs.completedJobs;
         });
     };
     return JobsComponent;
@@ -1096,7 +1229,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2 class=\"page-header\">Login</h2>\r\n<form (submit)=\"onLogin()\">\r\n  <div class=\"form-group\">\r\n    <label>Username</label>\r\n    <input type=\"text\" [(ngModel)]=\"username\" name=\"username\" placeholder=\"Username\" class=\"form-control\" required>\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <label>Password</label>\r\n    <input type=\"password\" [(ngModel)]=\"password\" name=\"password\" placeholder=\"Password\" class=\"form-control\" required>\r\n  </div>\r\n  <button type=\"submit\" class=\"btn btn-primary\">Login</button>\r\n  <button type=\"reset\" class=\"btn btn-danger\">Clear</button>\r\n</form>"
+module.exports = "<h2 class=\"page-header\">Login</h2>\n<form (submit)=\"onLogin()\">\n  <div class=\"form-group\">\n    <label>Username</label>\n    <input type=\"text\" [(ngModel)]=\"username\" name=\"username\" placeholder=\"Username\" class=\"form-control\" required>\n  </div>\n  <div class=\"form-group\">\n    <label>Password</label>\n    <input type=\"password\" [(ngModel)]=\"password\" name=\"password\" placeholder=\"Password\" class=\"form-control\" required>\n  </div>\n  <button type=\"submit\" class=\"btn btn-primary\">Login</button>\n  <button type=\"reset\" class=\"btn btn-danger\">Clear</button>\n</form>"
 
 /***/ }),
 
@@ -1337,7 +1470,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/register/register.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<button class=\"btn btn-default\" [routerLink]=\"['/home']\">Go Home</button>\r\n<h2 class=\"page-header\">Register A New User</h2>\r\n<form (submit)=\"onRegister()\">\r\n  <div class=\"form-group\">\r\n    <label>Name</label>\r\n    <input type=\"text\" [(ngModel)]=\"name\" name=\"name\" placeholder=\"Name\" class=\"form-control\" required>\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <label>Username</label>\r\n    <input type=\"text\" [(ngModel)]=\"username\" name=\"username\" placeholder=\"Username\" class=\"form-control\" required>\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <label>Password</label>\r\n    <input type=\"password\" [(ngModel)]=\"password\" name=\"password\" placeholder=\"Password\" class=\"form-control\" required>\r\n  </div>\r\n  <button type=\"submit\" class=\"btn btn-primary\">Register</button>\r\n  <button type=\"reset\" class=\"btn btn-danger\">Clear</button>\r\n</form>"
+module.exports = "<button class=\"btn btn-default\" [routerLink]=\"['/home']\">Go Home</button>\n<h2 class=\"page-header\">Register A New User</h2>\n<form (submit)=\"onRegister()\">\n  <div class=\"form-group\">\n    <label>Name</label>\n    <input type=\"text\" [(ngModel)]=\"name\" name=\"name\" placeholder=\"Name\" class=\"form-control\" required>\n  </div>\n  <div class=\"form-group\">\n    <label>Username</label>\n    <input type=\"text\" [(ngModel)]=\"username\" name=\"username\" placeholder=\"Username\" class=\"form-control\" required>\n  </div>\n  <div class=\"form-group\">\n    <label>Password</label>\n    <input type=\"password\" [(ngModel)]=\"password\" name=\"password\" placeholder=\"Password\" class=\"form-control\" required>\n  </div>\n  <button type=\"submit\" class=\"btn btn-primary\">Register</button>\n  <button type=\"reset\" class=\"btn btn-danger\">Clear</button>\n</form>"
 
 /***/ }),
 
@@ -1773,6 +1906,13 @@ var JobService = (function () {
         headers.append('Content-Type', 'application/json');
         return this.http.get(this.localHttp + "/jobs/all", { headers: headers }).map(function (response) { return response.json(); });
     };
+    JobService.prototype.getJobById = function (id) {
+        this.authService.loadToken();
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        headers.append('Authorization', this.authService.authToken);
+        headers.append('Content-Type', 'application/json');
+        return this.http.get(this.localHttp + "/jobs/" + id, { headers: headers }).map(function (response) { return response.json(); });
+    };
     JobService.prototype.getCurrentJobs = function () {
         this.authService.loadToken();
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
@@ -1794,12 +1934,19 @@ var JobService = (function () {
         headers.append('Authorization', this.authService.authToken);
         return this.http.post(this.localHttp + "/jobs/new", JSON.stringify(newJob), { headers: headers }).map(function (response) { return response.json(); });
     };
-    JobService.prototype.createJobMaterial = function (newJobMaterial) {
+    JobService.prototype.updateJob = function (updatedJob) {
         this.authService.loadToken();
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', this.authService.authToken);
-        return this.http.post(this.localHttp + "/jobs/new/job-material", JSON.stringify(newJobMaterial), { headers: headers }).map(function (response) { return response.json(); });
+        return this.http.post(this.localHttp + "/jobs/update", JSON.stringify(updatedJob), { headers: headers }).map(function (response) { return response.json(); });
+    };
+    JobService.prototype.createJobMaterial = function (id, newJobMaterial) {
+        this.authService.loadToken();
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', this.authService.authToken);
+        return this.http.post(this.localHttp + "/jobs/" + id + "/new/job-material", JSON.stringify(newJobMaterial), { headers: headers }).map(function (response) { return response.json(); });
     };
     return JobService;
 }());

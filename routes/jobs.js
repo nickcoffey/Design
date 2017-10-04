@@ -7,10 +7,23 @@ const passport = require('passport');
 // Get all jobs
 router.get('/all', passport.authenticate('jwt', {session: false}), (request, response, next) => {
     job.getAllJobs((jobs) => {
+        const inProgressJobs = [];
+        const completedJobs = [];
+
         if(!jobs){
             return err;
         } else{
-            return response.json({jobs: jobs});
+            jobs.forEach(job => {
+                if(job.jobStatus == "IN-PROGRESS"){
+                    inProgressJobs.push(job);
+                } else if(job.jobStatus == "ACCEPTED"){
+                    completedJobs.push(job);
+                }
+            });
+            return response.json({
+                inProgressJobs: inProgressJobs,
+                completedJobs: completedJobs
+            });
         }
     });
 });
@@ -38,6 +51,18 @@ router.get('/:id', passport.authenticate('jwt', {session: false}), (request, res
     });
 });
 
+// Get job materials by id
+router.get('/:id/job-materials', passport.authenticate('jwt', {session: false}), (request, response, next) => {
+    const id = request.params.id;
+    job.getJobMaterialsById(id, (jobMaterials) => {
+        if(!jobMaterials){
+            return err;
+        } else{
+            return response.json(jobMaterials);
+        }
+    });
+});
+
 // Create job
 router.post('/new', passport.authenticate('jwt', {session: false}), (request, response, next) => {
     let newJob = {
@@ -61,18 +86,46 @@ router.post('/new', passport.authenticate('jwt', {session: false}), (request, re
 });
 
 // Create job material
-router.post('/new/job-material', passport.authenticate('jwt', {session: false}), (request, response, next) => {
+router.post('/:id/new/job-material', passport.authenticate('jwt', {session: false}), (request, response, next) => {
+    const id = request.params.id;
     let newJobMaterial = {
         materialID: request.body.materialID,
         quantity: request.body.quantity,
         perUnitCost: request.body.perUnitCost
     };
     
-    job.createJobMaterial(newJobMaterial, (message) => {
+    job.createJobMaterial(id, newJobMaterial, (message) => {
         if(message.message == ""){
             response.json({
                 success: true,
                 msg: 'Job material created'
+            });
+        } else{
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
+// Update job
+router.post('/update', passport.authenticate('jwt', {session: false}), (request, response, next) => {
+    let updatedJob = {
+        jobID: request.body.jobID,
+        jobLabor: request.body.jobLabor,
+        jobRevenue: request.body.jobRevenue,
+        jobStatus: request.body.jobStatus,
+        createdDate: request.body.createdDate,
+        endDate: request.body.endDate
+    }
+    console.log(updatedJob);
+
+    job.updateJob(updatedJob, (message) => {
+        if(message.message == ""){
+            response.json({
+                success: true,
+                msg: 'Job updated'
             });
         } else{
             response.json({

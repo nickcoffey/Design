@@ -35,7 +35,7 @@ module.exports.getJobMaterialsById = function(id, callback){
 }
 
 module.exports.createJob = function(newJob, callback){
-    const queryString = `INSERT INTO Job (bidID, jobStatus, createdDate) VALUES ((SELECT bidID FROM Bid WHERE bidID=${newJob.bidID}), "PENDING", "${newJob.createdDate}")`;
+    const queryString = `INSERT INTO Job (bidID, jobStatus, createdDate) VALUES ((SELECT bidID FROM Bid WHERE bidID=${newJob.bidID}), "IN-PROGRESS", "${newJob.createdDate}")`;
     connection.query(queryString, (error, rows, fields) => {
         if(!error){
             callback(rows);
@@ -45,8 +45,8 @@ module.exports.createJob = function(newJob, callback){
     });
 }
 
-module.exports.createJobMaterial = function(newJobMaterial, callback){
-    const queryString = `INSERT INTO JobMaterial (materialID, jobID, quantity, perUnitCost) VALUES ((SELECT materialID FROM Material WHERE materialID=${newJobMaterial.materialID}), (SELECT MAX(jobID) AS jobID FROM Job), ${newJobMaterial.quantity}, ${newJobMaterial.perUnitCost})`;
+module.exports.createJobMaterial = function(id, newJobMaterial, callback){
+    const queryString = `INSERT INTO JobMaterial (materialID, jobID, quantity, perUnitCost) VALUES ((SELECT materialID FROM Material WHERE materialID=${newJobMaterial.materialID}), ${id}, ${newJobMaterial.quantity}, ${newJobMaterial.perUnitCost})`;
     connection.query(queryString, (error, rows, fields) => {
         if(!error){
             callback(rows);
@@ -58,6 +58,18 @@ module.exports.createJobMaterial = function(newJobMaterial, callback){
 
 module.exports.getCurrentJobs = function(callback){
     const queryString = `SELECT * FROM currentJobs`;
+    connection.query(queryString, (error, rows, fields) => {
+        if(!error){
+            callback(rows);
+        } else{
+            return error;
+        }
+    });
+}
+
+module.exports.updateJob = function(updatedJob, callback){
+    console.log(updatedJob);
+    const queryString = `UPDATE Job SET jobLabor=${updatedJob.jobLabor}, jobRevenue=${updatedJob.jobRevenue}, jobStatus="${updatedJob.jobStatus}", createdDate=${updatedJob.createdDate}, endDate=${updatedJob.endDate} WHERE jobID=${updatedJob.jobID}`;
     connection.query(queryString, (error, rows, fields) => {
         if(!error){
             callback(rows);

@@ -77,16 +77,6 @@ export class BidComponent implements OnInit {
         console.log(data.msg);
       }
     });
-    this.selectedMaterials.forEach(selectedMaterial => {
-      this.jobService.createJobMaterial(selectedMaterial).subscribe((data) => {
-        if(data.success){
-          console.log(data.msg);
-          this.ngOnInit();
-        } else{
-          console.log(data.msg);
-        }
-      });
-    });
 
     this.router.navigate(['/jobs']);
   }

@@ -21,6 +21,14 @@ export class JobService {
     return this.http.get(`${this.localHttp}/jobs/all`, {headers: headers}).map(response => response.json());
   }
 
+  getJobById(id){
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Authorization',this.authService.authToken);
+    headers.append('Content-Type','application/json');
+    return this.http.get(`${this.localHttp}/jobs/${id}`, {headers: headers}).map(response => response.json());
+  }
+
   getCurrentJobs(){
     this.authService.loadToken();
     let headers = new Headers();
@@ -45,11 +53,19 @@ export class JobService {
     return this.http.post(`${this.localHttp}/jobs/new`, JSON.stringify(newJob), {headers: headers}).map(response => response.json());
   }
 
-  createJobMaterial(newJobMaterial){
+  updateJob(updatedJob){
     this.authService.loadToken();
     let headers = new Headers();
     headers.append('Content-Type','application/json');
     headers.append('Authorization',this.authService.authToken);
-    return this.http.post(`${this.localHttp}/jobs/new/job-material`, JSON.stringify(newJobMaterial), {headers: headers}).map(response => response.json());
+    return this.http.post(`${this.localHttp}/jobs/update`, JSON.stringify(updatedJob), {headers: headers}).map(response => response.json());
+  }
+
+  createJobMaterial(id, newJobMaterial){
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    headers.append('Authorization',this.authService.authToken);
+    return this.http.post(`${this.localHttp}/jobs/${id}/new/job-material`, JSON.stringify(newJobMaterial), {headers: headers}).map(response => response.json());
   }
 }

@@ -48,7 +48,7 @@ router.get('/:id', passport.authenticate('jwt', {session: false}), (request, res
 router.get('/:id/bid-materials', passport.authenticate('jwt', {session: false}), (request, response, next) => {
     const id = request.params.id;
     bid.getBidMaterialsById(id, (bidMaterials) => {
-        if(!bid){
+        if(!bidMaterials){
             return err;
         } else{
             return response.json(bidMaterials);
