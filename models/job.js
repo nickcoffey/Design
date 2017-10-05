@@ -56,6 +56,17 @@ module.exports.createJobMaterial = function(id, newJobMaterial, callback){
     });
 }
 
+module.exports.deleteJobMaterial = function(jobMaterial, callback){
+    const queryString = `DELETE FROM JobMaterial WHERE (materialID=${jobMaterial.materialID} AND jobID=${jobMaterial.jobID})`;
+    connection.query(queryString, (error, rows, fields) => {
+        if(!error){
+            callback(rows);
+        } else{
+            return error;
+        }
+    });
+}
+
 module.exports.getCurrentJobs = function(callback){
     const queryString = `SELECT * FROM currentJobs`;
     connection.query(queryString, (error, rows, fields) => {
@@ -70,6 +81,17 @@ module.exports.getCurrentJobs = function(callback){
 module.exports.updateJob = function(updatedJob, callback){
     console.log(updatedJob);
     const queryString = `UPDATE Job SET jobLabor=${updatedJob.jobLabor}, jobRevenue=${updatedJob.jobRevenue}, jobStatus="${updatedJob.jobStatus}", createdDate=${updatedJob.createdDate}, endDate=${updatedJob.endDate} WHERE jobID=${updatedJob.jobID}`;
+    connection.query(queryString, (error, rows, fields) => {
+        if(!error){
+            callback(rows);
+        } else{
+            return error;
+        }
+    });
+}
+
+module.exports.deleteJob = function(id, callback){
+    const queryString = `DELETE FROM Job WHERE jobID=${id}`;
     connection.query(queryString, (error, rows, fields) => {
         if(!error){
             callback(rows);

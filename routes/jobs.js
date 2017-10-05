@@ -109,6 +109,28 @@ router.post('/:id/new/job-material', passport.authenticate('jwt', {session: fals
     });
 });
 
+// Delete job material
+router.post('/delete/job-material', passport.authenticate('jwt', {session: false}), (request, response, next) => {
+    let jobMaterial = {
+        materialID: request.body.materialID,
+        jobID: request.body.jobID
+    };
+
+    job.deleteJobMaterial(jobMaterial, (message) => {
+        if(message.message == ""){
+            response.json({
+                success: true,
+                msg: 'Job material deleted'
+            });
+        } else{
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
 // Update job
 router.post('/update', passport.authenticate('jwt', {session: false}), (request, response, next) => {
     let updatedJob = {
@@ -126,6 +148,25 @@ router.post('/update', passport.authenticate('jwt', {session: false}), (request,
             response.json({
                 success: true,
                 msg: 'Job updated'
+            });
+        } else{
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
+// Delete job
+router.post('/delete/:id', passport.authenticate('jwt', {session: false}), (request, response, next) => {
+    const id = request.params.id;
+
+    job.deleteJob(id, (message) => {
+        if(message.message == ""){
+            response.json({
+                success: true,
+                msg: 'Job Deleted'
             });
         } else{
             response.json({

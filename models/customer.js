@@ -33,3 +33,14 @@ module.exports.createCustomer = function(newCustomer, callback){
         }
     });
 }
+
+module.exports.deleteCustomer = function(id, callback){
+    const queryString = `DELETE FROM Customer WHERE customerID=${id}`;
+    connection.query(queryString, (error, rows, fields) => {
+        if(!error){
+            callback(rows);
+        } else{
+            return error;
+        }
+    });
+}

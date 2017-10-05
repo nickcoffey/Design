@@ -90,4 +90,23 @@ router.post('/update-status', passport.authenticate('jwt', {session: false}), (r
     });
 });
 
+// Delete inquiry
+router.post('/delete/:id', passport.authenticate('jwt', {session: false}), (request, response, next) => {
+    const id = request.params.id;
+
+    inquiry.deleteInquiry(id, (message) => {
+        if(message.message == ""){
+            response.json({
+                success: true,
+                msg: 'Inquiry Deleted'
+            });
+        } else{
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
 module.exports = router;

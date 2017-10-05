@@ -22,3 +22,14 @@ module.exports.createMaterial = function(newMaterial, callback){
         }
     });
 }
+
+module.exports.deleteMaterial = function(id, callback){
+    const queryString = `DELETE FROM Material WHERE materialID=${id}`;
+    connection.query(queryString, (error, rows, fields) => {
+        if(!error){
+            callback(rows);
+        } else{
+            return error;
+        }
+    });
+}

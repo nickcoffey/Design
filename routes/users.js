@@ -77,4 +77,24 @@ router.post('/authenticate', (request, response, next) => {
         });
     });
 });
+
+// Delete user
+router.post('/delete/:username', passport.authenticate('jwt', {session: false}), (request, response, next) => {
+    const username = request.params.username;
+
+    User.deleteUser(username, (message) => {
+        if(message.message == ""){
+            response.json({
+                success: true,
+                msg: 'User Deleted'
+            });
+        } else{
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
 module.exports = router;

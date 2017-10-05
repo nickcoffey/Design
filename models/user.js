@@ -42,3 +42,14 @@ module.exports.comparePassword = function(candidatePassword, hash, callback){
         }
     });
 }
+
+module.exports.deleteUser = function(username, callback){
+    const queryString = `DELETE FROM User WHERE username="${username}"`;
+    connection.query(queryString, (error, rows, fields) => {
+        if(!error){
+            callback(rows);
+        } else{
+            return error;
+        }
+    });
+}

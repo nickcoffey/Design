@@ -103,6 +103,28 @@ router.post('/new/bid-material', passport.authenticate('jwt', {session: false}),
     });
 });
 
+// Delete bid material
+router.post('/delete/bid-material', passport.authenticate('jwt', {session: false}), (request, response, next) => {
+    let bidMaterial = {
+        materialID: request.body.materialID,
+        bidID: request.body.bidID
+    };
+
+    bid.deleteBidMaterial(bidMaterial, (message) => {
+        if(message.message == ""){
+            response.json({
+                success: true,
+                msg: 'Bid material deleted'
+            });
+        } else{
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
 // Update bid status
 router.post('/update-status', passport.authenticate('jwt', {session: false}), (request, response, next) => {
     let updatedBid = {
@@ -115,6 +137,25 @@ router.post('/update-status', passport.authenticate('jwt', {session: false}), (r
             response.json({
                 success: true,
                 msg: 'Bid status updated'
+            });
+        } else{
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
+// Delete bid
+router.post('/delete/:id', passport.authenticate('jwt', {session: false}), (request, response, next) => {
+    const id = request.params.id;
+
+    bid.deleteBid(id, (message) => {
+        if(message.message == ""){
+            response.json({
+                success: true,
+                msg: 'Bid Deleted'
             });
         } else{
             response.json({

@@ -44,3 +44,14 @@ module.exports.updateInquiryStatus = function(updatedInquiry, callback){
         }
     });
 }
+
+module.exports.deleteInquiry = function(id, callback){
+    const queryString = `DELETE FROM Inquiry WHERE inquiryID=${id}`;
+    connection.query(queryString, (error, rows, fields) => {
+        if(!error){
+            callback(rows);
+        } else{
+            return error;
+        }
+    });
+}

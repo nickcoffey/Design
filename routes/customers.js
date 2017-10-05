@@ -51,4 +51,23 @@ router.post('/new', passport.authenticate('jwt', {session: false}), (request, re
     });
 });
 
+// Delete customer
+router.post('/delete/:id', passport.authenticate('jwt', {session: false}), (request, response, next) => {
+    const id = request.params.id;
+
+    customer.deleteCustomer(id, (message) => {
+        if(message.message == ""){
+            response.json({
+                success: true,
+                msg: 'Customer Deleted'
+            });
+        } else{
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
 module.exports = router;

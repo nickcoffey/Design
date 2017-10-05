@@ -56,8 +56,30 @@ module.exports.createBidMaterial = function(newBidMaterial, callback){
     });
 }
 
+module.exports.deleteBidMaterial = function(bidMaterial, callback){
+    const queryString = `DELETE FROM BidMaterial WHERE (materialID=${bidMaterial.materialID} AND bidID=${bidMaterial.bidID})`;
+    connection.query(queryString, (error, rows, fields) => {
+        if(!error){
+            callback(rows);
+        } else{
+            return error;
+        }
+    });
+}
+
 module.exports.updateBidStatus = function(updatedBid, callback){
     const queryString = `UPDATE Bid SET bidStatus = "${updatedBid.bidStatus}", endDate=NOW() WHERE bidID=${updatedBid.bidID}`;
+    connection.query(queryString, (error, rows, fields) => {
+        if(!error){
+            callback(rows);
+        } else{
+            return error;
+        }
+    });
+}
+
+module.exports.deleteBid = function(id, callback){
+    const queryString = `DELETE FROM Bid WHERE bidID=${id}`;
     connection.query(queryString, (error, rows, fields) => {
         if(!error){
             callback(rows);
