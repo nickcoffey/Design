@@ -29,6 +29,14 @@ export class CustomerService {
     return this.http.get(`${this.localHttp}/customers/${id}`, {headers: headers}).map(response => response.json());
   }
 
+  deleteCustomer(id){
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    headers.append('Authorization', this.authService.authToken);
+    return this.http.post(`${this.localHttp}/customers/delete/${id}`, JSON.stringify({}), {headers: headers}).map(response => response.json());
+  }
+
   createCustomer(newCustomer){
     this.authService.loadToken();
     let headers = new Headers();

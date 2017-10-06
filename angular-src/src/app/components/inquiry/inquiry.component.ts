@@ -89,6 +89,17 @@ export class InquiryComponent implements OnInit {
 
     this.router.navigate(['/bids']);
   }
+
+  onDelete(){
+    this.inquiryService.deleteInquiry(this.id).subscribe((data) => {
+      if(data.success){
+        console.log(data.msg);
+        this.router.navigate(['/inquiries']);
+      } else{
+        console.log(data.msg);
+      }
+    });
+  }
 }
 
 interface SelectedMaterial {

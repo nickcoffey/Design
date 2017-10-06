@@ -80,6 +80,17 @@ export class BidComponent implements OnInit {
 
     this.router.navigate(['/jobs']);
   }
+
+  onDelete(){
+    this.bidService.deleteBid(this.id).subscribe((data) => {
+      if(data.success){
+        console.log(data.msg);
+        this.router.navigate(['/bids']);
+      } else{
+        console.log(data.msg);
+      }
+    });
+  }
 }
 
 interface SelectedMaterial {

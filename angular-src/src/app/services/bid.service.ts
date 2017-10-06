@@ -45,6 +45,14 @@ export class BidService {
     return this.http.post(`${this.localHttp}/bids/new`, JSON.stringify(newBid), {headers: headers}).map(response => response.json());
   }
 
+  deleteBid(id){
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    headers.append('Authorization', this.authService.authToken);
+    return this.http.post(`${this.localHttp}/bids/delete/${id}`, JSON.stringify({}), {headers: headers}).map(response => response.json());
+  }
+
   createBidMaterial(newBidMaterial){
     this.authService.loadToken();
     let headers = new Headers();

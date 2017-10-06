@@ -48,6 +48,7 @@
       </tbody>
     </table>
   </ng-container>
+  <button class="btn btn-danger" data-toggle="modal" href='#delete-modal'>Delete Bid</button>
   <ng-template #noBid>
     <h2 class="page-header">No Bids</h2>
     <p>If this is incorrect, try refreshing the page.</p>
@@ -64,4 +65,23 @@
     <button type="submit" class="btn btn-primary">Create</button>
     <button type="reset" class="btn btn-danger">Clear</button>
   </form>  
+</div>
+
+<!--                Delete Popup                -->
+<div class="modal fade" id="delete-modal">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title">Warning</h4>
+          </div>
+          <div class="modal-body">
+              <p>Are you sure you want to delete this bid?</p>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onDelete()">Yes</button>
+          </div>
+      </div>
+  </div>
 </div>

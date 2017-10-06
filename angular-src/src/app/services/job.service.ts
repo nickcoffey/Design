@@ -53,6 +53,14 @@ export class JobService {
     return this.http.post(`${this.localHttp}/jobs/new`, JSON.stringify(newJob), {headers: headers}).map(response => response.json());
   }
 
+  deleteJob(id){
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    headers.append('Authorization', this.authService.authToken);
+    return this.http.post(`${this.localHttp}/jobs/delete/${id}`, JSON.stringify({}), {headers: headers}).map(response => response.json());
+  }
+
   updateJob(updatedJob){
     this.authService.loadToken();
     let headers = new Headers();

@@ -97,6 +97,17 @@ export class JobComponent implements OnInit {
 
     this.ngOnInit();
   }
+
+  onDelete(){
+    this.jobService.deleteJob(this.id).subscribe((data) => {
+      if(data.success){
+        console.log(data.msg);
+        this.router.navigate(['/jobs']);
+      } else{
+        console.log(data.msg);
+      }
+    });
+  }
 }
 
 interface SelectedMaterial {

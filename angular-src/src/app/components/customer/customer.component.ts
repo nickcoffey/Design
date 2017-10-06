@@ -45,4 +45,15 @@ export class CustomerComponent implements OnInit {
       }
     });
   }
+
+  onDelete(){
+    this.customerService.deleteCustomer(this.id).subscribe((data) => {
+      if(data.success){
+        console.log(data.msg);
+        this.router.navigate(['/customers']);
+      } else{
+        console.log(data.msg);
+      }
+    });
+  }
 }
