@@ -15,7 +15,8 @@
     "jsonwebtoken": "*",
     "mysql": "*",
     "passport": "*",
-    "passport-jwt": "*"
+    "passport-jwt": "*",
+    "sqlstring": "^2.3.0"
   },
   "author": "Nick Coffey",
   "license": "ISC"

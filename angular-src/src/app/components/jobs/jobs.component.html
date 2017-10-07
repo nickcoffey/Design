@@ -2,8 +2,8 @@
   <button class="btn btn-default" [routerLink]="['/home']">Go Home</button>
 </div>
 
-<ng-container *ngIf="jobs; else noJobs">
-  <ng-container *ngIf="inProgressJobs[0]; else noInProgressJobs">
+<ng-container *ngIf="inProgressLength!=0 || completedLength!=0; else noJobs">
+  <ng-container *ngIf="inProgressLength!=0; else noInProgressJobs">
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
       <h2 class="page-header">In Progress Jobs</h2>
       <h4>Click To View Details</h4>
@@ -32,7 +32,7 @@
     </div>
   </ng-template>
   
-  <ng-container *ngIf="completedJobs[0]; else noCompletedJobs">
+  <ng-container *ngIf="completedLength!=0; else noCompletedJobs">
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
       <h2 class="page-header">Completed Jobs</h2>
       <h4>Click To View Details</h4>

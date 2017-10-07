@@ -141,7 +141,14 @@ router.post('/update', passport.authenticate('jwt', {session: false}), (request,
         createdDate: request.body.createdDate,
         endDate: request.body.endDate
     }
-    console.log(updatedJob);
+
+    if(updatedJob.jobLabor == null || updatedJob.jobLabor == undefined || updatedJob.jobLabor == ""){
+        delete updatedJob.jobLabor;
+        console.log(updatedJob);
+    }
+
+    /************************************ FINISH THIS **************************************/
+
 
     job.updateJob(updatedJob, (message) => {
         if(message.message == ""){

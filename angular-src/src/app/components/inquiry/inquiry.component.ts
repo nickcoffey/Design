@@ -44,6 +44,10 @@ export class InquiryComponent implements OnInit {
     this.selectedMaterials.push(material);
   }
 
+  onRemoveMaterial(id){
+    this.selectedMaterials.splice(id, 1);
+  }
+
   onClear(){
     this.selectedMaterials = [];
   }

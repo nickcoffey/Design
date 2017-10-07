@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { BidService } from '../../services/bid.service';
 import { MaterialService } from '../../services/material.service';
 import { JobService } from '../../services/job.service';
+import { InquiryService } from '../../services/inquiry.service';
 
 @Component({
   selector: 'app-bid',
@@ -24,7 +25,8 @@ export class BidComponent implements OnInit {
     private route:ActivatedRoute,
     private bidService:BidService,
     private materialService:MaterialService,
-    private jobService:JobService
+    private jobService:JobService,
+    private inquiryService:InquiryService
   ) { }
 
   ngOnInit() {
@@ -83,6 +85,19 @@ export class BidComponent implements OnInit {
 
   onDelete(){
     this.bidService.deleteBid(this.id).subscribe((data) => {
+      if(data.success){
+        console.log(data.msg);
+      } else{
+        console.log(data.msg);
+      }
+    });
+
+    let updateInquiry = {
+      inquiryID: this.bid[0].inquiryID,
+      inquiryStatus: "PENDING"
+    };
+
+    this.inquiryService.updateInquiryStatus(updateInquiry).subscribe((data) => {
       if(data.success){
         console.log(data.msg);
         this.router.navigate(['/bids']);

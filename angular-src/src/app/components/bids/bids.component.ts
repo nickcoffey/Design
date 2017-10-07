@@ -11,8 +11,11 @@ export class BidsComponent implements OnInit {
 
   bids:any;
   pendingBids:any;
+  pendingLength:any;
   acceptedBids:any;
+  acceptedLength:any;
   declinedBids:any;
+  declinedLength:any;
 
   constructor(
     private bidService:BidService,
@@ -22,9 +25,16 @@ export class BidsComponent implements OnInit {
   ngOnInit() {
     this.bidService.getAllBids().subscribe((bids) => {
       this.bids = bids;
+      console.log(this.bids);
       this.pendingBids = bids.pendingBids;
+      this.pendingLength = bids.pendingBids.length;
+      console.log('Pending '+this.pendingLength);
       this.acceptedBids = bids.acceptedBids;
+      this.acceptedLength = bids.acceptedBids.length;
+      console.log('Accepted '+this.acceptedLength);
       this.declinedBids = bids.declinedBids;
+      this.declinedLength = bids.declinedBids.length;
+      console.log('Declined '+this.declinedLength);
     });
   }
 

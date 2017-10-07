@@ -1,5 +1,6 @@
 const connection = require('../app');
 const config = require('../config/database');
+const sqlString = require('sqlstring');
 
 module.exports.getAllJobs = function(callback){
     const queryString = 'SELECT * FROM Job'; 
@@ -79,15 +80,17 @@ module.exports.getCurrentJobs = function(callback){
 }
 
 module.exports.updateJob = function(updatedJob, callback){
-    console.log(updatedJob);
-    const queryString = `UPDATE Job SET jobLabor=${updatedJob.jobLabor}, jobRevenue=${updatedJob.jobRevenue}, jobStatus="${updatedJob.jobStatus}", createdDate=${updatedJob.createdDate}, endDate=${updatedJob.endDate} WHERE jobID=${updatedJob.jobID}`;
-    connection.query(queryString, (error, rows, fields) => {
+    //const queryString = `UPDATE Job SET jobLabor=${updatedJob.jobLabor}, jobRevenue=${updatedJob.jobRevenue}, jobStatus="${updatedJob.jobStatus}", createdDate=${updatedJob.createdDate}, endDate=${updatedJob.endDate} WHERE jobID=${updatedJob.jobID}`;
+    const queryString = sqlString.format(`UPDATE Job SET ? WHERE jobID = ?`, [updatedJob, updatedJob.jobID]);
+    console.log(queryString);
+    return queryString;
+    /*connection.query(queryString, (error, rows, fields) => {
         if(!error){
             callback(rows);
         } else{
             return error;
         }
-    });
+    });*/
 }
 
 module.exports.deleteJob = function(id, callback){

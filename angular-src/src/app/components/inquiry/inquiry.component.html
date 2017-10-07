@@ -61,10 +61,11 @@
         </tr>
         </thead>
       <tbody>
-        <tr *ngFor="let selectedMaterial of selectedMaterials;">
+        <tr *ngFor="let selectedMaterial of selectedMaterials; let i = index">
           <td>{{selectedMaterial.materialName}}</td>
           <td><input type="text" [(ngModel)]="selectedMaterial.quantity" name="quantity" placeholder="Quantity" class="form-control" required></td>
           <td><input type="text" [(ngModel)]="selectedMaterial.perUnitCost" name="perUnitCost" placeholder="Per Unit Cost" class="form-control" required></td>
+          <td><button type="button" class="close" (click)="onRemoveMaterial(i)">&times;</button></td>
         </tr>
       </tbody>
     </table>

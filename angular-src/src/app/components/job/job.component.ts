@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { JobService } from '../../services/job.service';
 import { MaterialService } from '../../services/material.service';
+import { BidService } from '../../services/bid.service';
 
 @Component({
   selector: 'app-job',
@@ -26,7 +27,8 @@ export class JobComponent implements OnInit {
     private router:Router,
     private route:ActivatedRoute,
     private jobService:JobService,
-    private materialService:MaterialService
+    private materialService:MaterialService,
+    private bidService:BidService
   ) { }
 
   ngOnInit() {
@@ -54,7 +56,6 @@ export class JobComponent implements OnInit {
   }
 
   onUpdate(){
-    /*
     // To help with date on single update API call
     if(this.createdDate != null){
       this.createdDate = `"${this.createdDate}"`;
@@ -73,7 +74,6 @@ export class JobComponent implements OnInit {
     }
 
     console.log(updatedJob);
-    */
 
     this.selectedMaterials.forEach(selectedMaterial => {
       this.jobService.createJobMaterial(this.id, selectedMaterial).subscribe((data) => {
@@ -85,14 +85,13 @@ export class JobComponent implements OnInit {
       });
     });
 
-    /*
     this.jobService.updateJob(updatedJob).subscribe((data) => {
       if(data.success){
         console.log(data.msg);
       } else{
         console.log(data.msg);
       }
-    });*/
+    });
     this.onClear();
 
     this.ngOnInit();
@@ -100,6 +99,19 @@ export class JobComponent implements OnInit {
 
   onDelete(){
     this.jobService.deleteJob(this.id).subscribe((data) => {
+      if(data.success){
+        console.log(data.msg);
+      } else{
+        console.log(data.msg);
+      }
+    });
+
+    let updatedBid = {
+      bidID: this.job[0].bidID,
+      bidStatus: "PENDING"
+    };
+
+    this.bidService.updateBidStatus(updatedBid).subscribe((data) => {
       if(data.success){
         console.log(data.msg);
         this.router.navigate(['/jobs']);

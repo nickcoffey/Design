@@ -32,8 +32,8 @@
   <button class="btn btn-default" [routerLink]="['/home']">Go Home</button>
 </div>
   
-<ng-container *ngIf="bids; else noBids">
-  <ng-container *ngIf="pendingBids[0]; else noPendingBids">
+<ng-container *ngIf="pendingLength!=0 || acceptedLength!=0 || declinedLength!=0; else noBids">
+  <ng-container *ngIf="pendingLength!=0; else noPendingBids">
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
       <h2 class="page-header">Pending Bids</h2>
       <h4>Click To View Details</h4>
@@ -62,7 +62,7 @@
     </div>
   </ng-template>
   
-  <ng-container *ngIf="acceptedBids[0]; else noAcceptedBids">
+  <ng-container *ngIf="acceptedLength!=0; else noAcceptedBids">
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
       <h2 class="page-header">Accepted Bids</h2>
       <h4>Click To View Details</h4>
@@ -91,7 +91,7 @@
     </div>
   </ng-template>
   
-  <ng-container *ngIf="declinedBids[0]; else noDeclinedBids">
+  <ng-container *ngIf="declinedLength!=0; else noDeclinedBids">
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
       <h2 class="page-header">Declined Bids</h2>
       <h4>Click To View Details</h4>

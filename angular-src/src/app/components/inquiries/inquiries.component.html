@@ -2,8 +2,8 @@
   <button class="btn btn-default" [routerLink]="['/home']">Go Home</button>
 </div>
 
-<ng-container *ngIf="inquiries; else noInquiries">
-  <ng-container *ngIf="pendingInquiries; else noPendingInquiries">
+<ng-container *ngIf="pendingLength!=0 || acceptedLength!=0 || declinedLength!=0; else noInquiries">
+  <ng-container *ngIf="pendingLength!=0; else noPendingInquiries">
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
       <h2 class="page-header">Pending Inquiries</h2>
       <h4>Click To View Details</h4>
@@ -30,7 +30,7 @@
     </div>
   </ng-template>
 
-  <ng-container *ngIf="acceptedInquiries; else noAcceptedInquiries">
+  <ng-container *ngIf="acceptedLength!=0; else noAcceptedInquiries">
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
       <h2 class="page-header">Accepted Inquiries</h2>
       <h4>Click To View Details</h4>
@@ -57,7 +57,7 @@
     </div>
   </ng-template>
 
-  <ng-container *ngIf="declinedInquiries; else noDeclinedInquiries">
+  <ng-container *ngIf="declinedLength!=0; else noDeclinedInquiries">
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
       <h2 class="page-header">Declined Inquiries</h2>
       <h4>Click To View Details</h4>
