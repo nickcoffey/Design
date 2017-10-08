@@ -69,11 +69,27 @@ export class JobService {
     return this.http.post(`${this.localHttp}/jobs/update`, JSON.stringify(updatedJob), {headers: headers}).map(response => response.json());
   }
 
+  updateJobStatus(updatedJob){
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    headers.append('Authorization',this.authService.authToken);
+    return this.http.post(`${this.localHttp}/jobs/update-status`, JSON.stringify(updatedJob), {headers: headers}).map(response => response.json());
+  }
+
   createJobMaterial(id, newJobMaterial){
     this.authService.loadToken();
     let headers = new Headers();
     headers.append('Content-Type','application/json');
     headers.append('Authorization',this.authService.authToken);
     return this.http.post(`${this.localHttp}/jobs/${id}/new/job-material`, JSON.stringify(newJobMaterial), {headers: headers}).map(response => response.json());
+  }
+
+  deleteJobMaterial(jobMaterial){
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    headers.append('Authorization', this.authService.authToken);
+    return this.http.post(`${this.localHttp}/jobs/delete/job-material`, JSON.stringify(jobMaterial), {headers: headers}).map(response => response.json());
   }
 }

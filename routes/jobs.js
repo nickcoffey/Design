@@ -16,7 +16,7 @@ router.get('/all', passport.authenticate('jwt', {session: false}), (request, res
             jobs.forEach(job => {
                 if(job.jobStatus == "IN-PROGRESS"){
                     inProgressJobs.push(job);
-                } else if(job.jobStatus == "ACCEPTED"){
+                } else if(job.jobStatus == "COMPLETED"){
                     completedJobs.push(job);
                 }
             });
@@ -144,17 +144,47 @@ router.post('/update', passport.authenticate('jwt', {session: false}), (request,
 
     if(updatedJob.jobLabor == null || updatedJob.jobLabor == undefined || updatedJob.jobLabor == ""){
         delete updatedJob.jobLabor;
-        console.log(updatedJob);
     }
-
-    /************************************ FINISH THIS **************************************/
-
+    if(updatedJob.jobRevenue == null || updatedJob.jobRevenue == undefined || updatedJob.jobRevenue == ""){
+        delete updatedJob.jobRevenue;
+    }
+    if(updatedJob.jobStatus == null || updatedJob.jobStatus == undefined || updatedJob.jobStatus == ""){
+        delete updatedJob.jobStatus;
+    }
+    if(updatedJob.createdDate == null || updatedJob.createdDate == undefined || updatedJob.createdDate == ""){
+        delete updatedJob.createdDate;
+    }
+    if(updatedJob.endDate == null || updatedJob.endDate == undefined || updatedJob.endDate == ""){
+        delete updatedJob.endDate;
+    }
 
     job.updateJob(updatedJob, (message) => {
         if(message.message == ""){
             response.json({
                 success: true,
                 msg: 'Job updated'
+            });
+        } else{
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
+// Update job status
+router.post('/update-status', passport.authenticate('jwt', {session: false}), (request, response, next) => {
+    let updatedJob = {
+        jobID: request.body.jobID,
+        jobStatus: request.body.jobStatus
+    };
+
+    job.updateJobStatus(updatedJob, (message) => {
+        if(message.message.includes("Rows matched: 1  Changed: 1  Warnings: 0")){
+            response.json({
+                success: true,
+                msg: 'Job status updated'
             });
         } else{
             response.json({

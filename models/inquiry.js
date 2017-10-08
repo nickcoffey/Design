@@ -24,7 +24,7 @@ module.exports.getInquiryById = function(id, callback){
 }
 
 module.exports.createInquiry = function(newInquiry, callback){
-    const queryString = `INSERT INTO Inquiry (customerID, description, inquiryStatus, receivedDate) VALUES ((SELECT customerID FROM Customer WHERE customerID=${newInquiry.customerID}), "${newInquiry.description}", "PENDING", "${newInquiry.receivedDate}")`;
+    const queryString = `INSERT INTO Inquiry (customerID, description, inquiryStatus, receivedDate) VALUES ((SELECT customerID FROM Customer WHERE customerID=${newInquiry.customerID}), "${newInquiry.description}", "PENDING", NOW())`;
     connection.query(queryString, (error, rows, fields) => {
         if(!error){
             callback(rows);

@@ -35,7 +35,7 @@ module.exports.getBidMaterialsById = function(id, callback){
 }
 
 module.exports.createBid = function(newBid, callback){
-    const queryString = `INSERT INTO Bid (inquiryID, bidStatus, bidLabor, bidPrice, createdDate) VALUES ((SELECT inquiryID FROM Inquiry WHERE inquiryID=${newBid.inquiryID}), "PENDING", ${newBid.bidLabor}, ${newBid.bidPrice}, "${newBid.createdDate}")`;
+    const queryString = `INSERT INTO Bid (inquiryID, bidStatus, bidLabor, bidPrice, createdDate) VALUES ((SELECT inquiryID FROM Inquiry WHERE inquiryID=${newBid.inquiryID}), "PENDING", ${newBid.bidLabor}, ${newBid.bidPrice}, NOW())`;
     connection.query(queryString, (error, rows, fields) => {
         if(!error){
             callback(rows);

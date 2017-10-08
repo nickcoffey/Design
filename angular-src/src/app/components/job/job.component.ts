@@ -19,9 +19,10 @@ export class JobComponent implements OnInit {
   createdDate:any = null;
   endDate:any = null;
   jobMaterials:any;
-
   materials:any;
   selectedMaterials:SelectedMaterial[] = [];
+  materialID:any;
+  status:any;
 
   constructor(
     private router:Router,
@@ -36,6 +37,7 @@ export class JobComponent implements OnInit {
 
     this.jobService.getJobById(this.id).subscribe((job) => {
       this.job = job;
+      this.status = job[0].jobStatus;
     });
 
     this.jobService.getJobMaterialsById(this.id).subscribe((jobMaterials) => {
@@ -57,17 +59,17 @@ export class JobComponent implements OnInit {
 
   onUpdate(){
     // To help with date on single update API call
-    if(this.createdDate != null){
+    /*if(this.createdDate != null){
       this.createdDate = `"${this.createdDate}"`;
     }
     if(this.endDate != null){
       this.endDate = `"${this.endDate}"`;
-    }
+    }*/
 
     let updatedJob = {
       jobID: this.id,
-      jobLabor: this.jobLabor,
-      jobRevenue: this.jobRevenue,
+      jobLabor: Number(this.jobLabor) + Number(this.job[0].jobLabor),
+      jobRevenue: Number(this.jobRevenue) + Number(this.job[0].jobRevenue),
       jobStatus: this.jobStatus,
       createdDate: this.createdDate,
       endDate: this.endDate
@@ -97,7 +99,7 @@ export class JobComponent implements OnInit {
     this.ngOnInit();
   }
 
-  onDelete(){
+  onDeleteJob(){
     this.jobService.deleteJob(this.id).subscribe((data) => {
       if(data.success){
         console.log(data.msg);
@@ -112,6 +114,42 @@ export class JobComponent implements OnInit {
     };
 
     this.bidService.updateBidStatus(updatedBid).subscribe((data) => {
+      if(data.success){
+        console.log(data.msg);
+        this.router.navigate(['/jobs']);
+      } else{
+        console.log(data.msg);
+      }
+    });
+  }
+
+  onClickDeleteMaterial(id){
+    this.materialID = id;
+  }
+
+  onDeleteMaterial(){
+    let jobMaterial = {
+      materialID: this.materialID,
+      jobID: this.id
+    };
+
+    this.jobService.deleteJobMaterial(jobMaterial).subscribe((data) => {
+      if(data.success){
+        console.log(data.msg);
+        this.ngOnInit();
+      } else{
+        console.log(data.msg);
+      }
+    });
+  }
+
+  onFinish(){
+    let updatedJob = {
+      jobID: this.id,
+      jobStatus: "COMPLETED"
+    };
+
+    this.jobService.updateJobStatus(updatedJob).subscribe((data) => {
       if(data.success){
         console.log(data.msg);
         this.router.navigate(['/jobs']);

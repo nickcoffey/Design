@@ -36,7 +36,7 @@ module.exports.getJobMaterialsById = function(id, callback){
 }
 
 module.exports.createJob = function(newJob, callback){
-    const queryString = `INSERT INTO Job (bidID, jobStatus, createdDate) VALUES ((SELECT bidID FROM Bid WHERE bidID=${newJob.bidID}), "IN-PROGRESS", "${newJob.createdDate}")`;
+    const queryString = `INSERT INTO Job (bidID, jobStatus, createdDate) VALUES ((SELECT bidID FROM Bid WHERE bidID=${newJob.bidID}), "IN-PROGRESS", NOW())`;
     connection.query(queryString, (error, rows, fields) => {
         if(!error){
             callback(rows);
@@ -80,17 +80,26 @@ module.exports.getCurrentJobs = function(callback){
 }
 
 module.exports.updateJob = function(updatedJob, callback){
-    //const queryString = `UPDATE Job SET jobLabor=${updatedJob.jobLabor}, jobRevenue=${updatedJob.jobRevenue}, jobStatus="${updatedJob.jobStatus}", createdDate=${updatedJob.createdDate}, endDate=${updatedJob.endDate} WHERE jobID=${updatedJob.jobID}`;
     const queryString = sqlString.format(`UPDATE Job SET ? WHERE jobID = ?`, [updatedJob, updatedJob.jobID]);
     console.log(queryString);
-    return queryString;
-    /*connection.query(queryString, (error, rows, fields) => {
+    connection.query(queryString, (error, rows, fields) => {
         if(!error){
             callback(rows);
         } else{
             return error;
         }
-    });*/
+    });
+}
+
+module.exports.updateJobStatus = function(updatedJob, callback){
+    const queryString = `UPDATE Job SET jobStatus = "${updatedJob.jobStatus}", endDate=NOW() WHERE jobID=${updatedJob.jobID}`;
+    connection.query(queryString, (error, rows, fields) => {
+        if(!error){
+            callback(rows);
+        } else{
+            return error;
+        }
+    });
 }
 
 module.exports.deleteJob = function(id, callback){

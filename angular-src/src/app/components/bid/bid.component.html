@@ -1,7 +1,7 @@
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
   <button class="btn btn-default" [routerLink]="['/bids']">Go Back</button>  
 </div>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
   <ng-container *ngIf="bid; else noBid">
     <h2 class="page-header">Bid #{{bid[0].bidID}}</h2>
     <h4>Details</h4>
@@ -55,15 +55,15 @@
   </ng-template>
 </div>
 
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
   <h2 class="page-header">Create A New Job</h2>
   <form (submit)="onCreate()">
-    <div class="form-group">
+    <!--<div class="form-group">
       <label>Created Date</label>
       <input type="text" [(ngModel)]="createdDate" name="createdDate" placeholder="YYYY-MM-DD" class="form-control" required>
-    </div>
+    </div>-->
     <button type="submit" class="btn btn-primary">Create</button>
-    <button type="reset" class="btn btn-danger">Clear</button>
+    <!--<button type="reset" class="btn btn-danger">Clear</button>-->
   </form>  
 </div>
 
