@@ -166,4 +166,47 @@ router.post('/delete/:id', passport.authenticate('jwt', {session: false}), (requ
     });
 });
 
+// Update bid
+router.post('/update', passport.authenticate('jwt', {session: false}), (request, response, next) => {
+    let updatedBid = {
+        bidID: request.body.bidID,
+        bidPrice: request.body.bidPrice,
+        bidLabor: request.body.bidLabor,
+        bidStatus: request.body.bidStatus,
+        createdDate: request.body.createdDate,
+        endDate: request.body.endDate
+    }
+
+    if(updatedBid.bidPrice == null || updatedBid.bidPrice == undefined || updatedBid.bidPrice == ""){
+        delete updatedBid.bidPrice;
+    }
+    if(updatedBid.bidLabor == null || updatedBid.bidLabor == undefined || updatedBid.bidLabor == ""){
+        delete updatedBid.bidLabor;
+    }
+    if(updatedBid.bidStatus == null || updatedBid.bidStatus == undefined || updatedBid.bidStatus == ""){
+        delete updatedBid.bidStatus;
+    }
+    if(updatedBid.createdDate == null || updatedBid.createdDate == undefined || updatedBid.createdDate == ""){
+        delete updatedBid.createdDate;
+    }
+    if(updatedBid.endDate == null || updatedBid.endDate == undefined || updatedBid.endDate == ""){
+        delete updatedBid.endDate;
+    }
+
+    bid.updateBid(updatedBid, (message) => {
+        if(message.message == ""){
+            response.json({
+                success: true,
+                msg: 'Bid updated',
+                id: message.insertId
+            });
+        } else{
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
 module.exports = router;

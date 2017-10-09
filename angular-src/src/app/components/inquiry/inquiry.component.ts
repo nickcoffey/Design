@@ -63,6 +63,7 @@ export class InquiryComponent implements OnInit {
       inquiryID: this.id,
       inquiryStatus: "ACCEPTED"
     };
+    let bidID = 0;
 
     this.bidService.createBid(newBid).subscribe((data) => {
       if(data.success){
@@ -70,6 +71,7 @@ export class InquiryComponent implements OnInit {
         this.ngOnInit();
       } else{
         console.log(data.msg);
+        bidID = data.id;
       }
     });
     this.inquiryService.updateInquiryStatus(updatedInquiry).subscribe((data) => {
@@ -91,7 +93,7 @@ export class InquiryComponent implements OnInit {
       });
     });
 
-    this.router.navigate(['/bids']);
+    this.router.navigate([`/bids/${bidID}`]);
   }
 
   onDelete(){

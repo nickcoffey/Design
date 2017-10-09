@@ -15,8 +15,11 @@ export class BidComponent implements OnInit {
   id:any;
   bid:any;
   bidMaterials:any;
-
+  bidPrice:any;
+  bidLabor:any;
+  bidStatus:any;
   createdDate:any;
+  endDate:any;
   materials:any;
   selectedMaterials:SelectedMaterial[] = [];
 
@@ -105,6 +108,40 @@ export class BidComponent implements OnInit {
         console.log(data.msg);
       }
     });
+  }
+
+  onUpdate(){
+    let updatedBid = {
+      bidID: this.id,
+      bidPrice: this.bidPrice,
+      bidLabor: this.bidLabor,
+      bidStatus: this.bidStatus,
+      createdDate: this.createdDate,
+      endDate: this.endDate
+    }
+
+    console.log(updatedBid);
+
+    /*this.selectedMaterials.forEach(selectedMaterial => {
+      this.bidService.createBidMaterial(this.id, selectedMaterial).subscribe((data) => {
+        if(data.success){
+          console.log(data.msg);
+        } else{
+          console.log(data.msg);
+        }
+      });
+    });
+
+    this.jobService.updateJob(updatedJob).subscribe((data) => {
+      if(data.success){
+        console.log(data.msg);
+      } else{
+        console.log(data.msg);
+      }
+    });
+    this.onClear();
+
+    this.ngOnInit();*/
   }
 }
 

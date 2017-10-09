@@ -1,5 +1,6 @@
 const connection = require('../app');
 const config = require('../config/database');
+const sqlString = require('sqlstring');
 
 module.exports.getAllBids = function(callback){
     const queryString = 'SELECT * FROM Bid'; 
@@ -56,6 +57,17 @@ module.exports.createBidMaterial = function(newBidMaterial, callback){
     });
 }
 
+module.exports.createBidMaterialById = function(bidID, newBidMaterial, callback){
+    const queryString = `INSERT INTO BidMaterial (materialID, bidID, quantity, perUnitCost) VALUES ((SELECT materialID FROM Material WHERE materialID=${newBidMaterial.materialID}), ${bidID}, ${newBidMaterial.quantity}, ${newBidMaterial.perUnitCost})`;
+    connection.query(queryString, (error, rows, fields) => {
+        if(!error){
+            callback(rows);
+        } else{
+            return error;
+        }
+    });
+}
+
 module.exports.deleteBidMaterial = function(bidMaterial, callback){
     const queryString = `DELETE FROM BidMaterial WHERE (materialID=${bidMaterial.materialID} AND bidID=${bidMaterial.bidID})`;
     connection.query(queryString, (error, rows, fields) => {
@@ -80,6 +92,18 @@ module.exports.updateBidStatus = function(updatedBid, callback){
 
 module.exports.deleteBid = function(id, callback){
     const queryString = `DELETE FROM Bid WHERE bidID=${id}`;
+    connection.query(queryString, (error, rows, fields) => {
+        if(!error){
+            callback(rows);
+        } else{
+            return error;
+        }
+    });
+}
+
+module.exports.updateBid = function(updatedBid, callback){
+    const queryString = sqlString.format(`UPDATE Bid SET ? WHERE bidID = ?`, [updatedBid, updatedBid.bidID]);
+    console.log(queryString);
     connection.query(queryString, (error, rows, fields) => {
         if(!error){
             callback(rows);
