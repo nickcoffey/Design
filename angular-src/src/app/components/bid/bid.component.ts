@@ -41,19 +41,35 @@ export class BidComponent implements OnInit {
 
     this.bidService.getBidMaterialsById(this.id).subscribe((bidMaterials) => {
       this.bidMaterials = bidMaterials;
-    });
 
-    this.materialService.getAllMaterials().subscribe((materials) => {
-      this.materials = materials.materials;
+      this.materialService.getAllMaterials().subscribe((materials) => {
+        this.materials = materials.materials;
+
+        for(let i = 0; i < this.materials.length; i++){
+          for(let k = 0; k < this.bidMaterials.length; k++){
+            if(this.materials[i].materialID == this.bidMaterials[k].materialID){
+              this.materials.splice(i, 1);
+            }
+          }
+        }
+      });
     });
   }
 
-  onAddMaterial(material){
+  onAddMaterial(material, id){
     this.selectedMaterials.push(material);
+    this.materials.splice(id, 1);
+  }
+
+  onRemoveMaterial(material, id){
+    this.selectedMaterials.splice(id, 1);
+    this.materials.push(material);
+    //this.ngOnInit();
   }
 
   onClear(){
     this.selectedMaterials = [];
+    this.ngOnInit();
   }
 
   onCreate(){
@@ -110,6 +126,24 @@ export class BidComponent implements OnInit {
     });
   }
 
+  onDeleteBidMaterial(materialID, bidID){
+    let bidMaterial = {
+      materialID: materialID,
+      bidID: bidID
+    }
+
+    console.log(bidMaterial);
+
+    this.bidService.deleteBidMaterial(bidMaterial).subscribe((data) => {
+      if(data.success){
+        console.log(data.msg);
+        this.ngOnInit();
+      } else{
+        console.log(data.msg);
+      }
+    });
+  }
+
   onUpdate(){
     let updatedBid = {
       bidID: this.id,
@@ -120,10 +154,8 @@ export class BidComponent implements OnInit {
       endDate: this.endDate
     }
 
-    console.log(updatedBid);
-
-    /*this.selectedMaterials.forEach(selectedMaterial => {
-      this.bidService.createBidMaterial(this.id, selectedMaterial).subscribe((data) => {
+    this.selectedMaterials.forEach(selectedMaterial => {
+      this.bidService.createBidMaterialById(this.id, selectedMaterial).subscribe((data) => {
         if(data.success){
           console.log(data.msg);
         } else{
@@ -132,7 +164,7 @@ export class BidComponent implements OnInit {
       });
     });
 
-    this.jobService.updateJob(updatedJob).subscribe((data) => {
+    this.bidService.updateBid(updatedBid).subscribe((data) => {
       if(data.success){
         console.log(data.msg);
       } else{
@@ -141,7 +173,7 @@ export class BidComponent implements OnInit {
     });
     this.onClear();
 
-    this.ngOnInit();*/
+    this.ngOnInit();
   }
 }
 

@@ -9,12 +9,16 @@ import { AuthService } from '../../services/auth.service';
 })
 export class NavbarComponent implements OnInit {
 
+  loggedIn:any;
+
   constructor(
     private router:Router,
     private authService:AuthService
   ) { }
 
   ngOnInit() {
+    this.loggedIn = this.authService.loggedIn();
+    console.log(this.loggedIn);
   }
 
   onLogout(){

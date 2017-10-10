@@ -59,6 +59,7 @@ module.exports.createBidMaterial = function(newBidMaterial, callback){
 
 module.exports.createBidMaterialById = function(bidID, newBidMaterial, callback){
     const queryString = `INSERT INTO BidMaterial (materialID, bidID, quantity, perUnitCost) VALUES ((SELECT materialID FROM Material WHERE materialID=${newBidMaterial.materialID}), ${bidID}, ${newBidMaterial.quantity}, ${newBidMaterial.perUnitCost})`;
+    console.log(queryString);
     connection.query(queryString, (error, rows, fields) => {
         if(!error){
             callback(rows);

@@ -40,16 +40,19 @@ export class InquiryComponent implements OnInit {
     });
   }
 
-  onAddMaterial(material){
+  onAddMaterial(material, id){
     this.selectedMaterials.push(material);
+    this.materials.splice(id, 1);
   }
 
-  onRemoveMaterial(id){
+  onRemoveMaterial(material, id){
     this.selectedMaterials.splice(id, 1);
+    this.materials.push(material);
   }
 
   onClear(){
     this.selectedMaterials = [];
+    this.ngOnInit();
   }
 
   onCreate(){
@@ -63,21 +66,17 @@ export class InquiryComponent implements OnInit {
       inquiryID: this.id,
       inquiryStatus: "ACCEPTED"
     };
-    let bidID = 0;
 
     this.bidService.createBid(newBid).subscribe((data) => {
       if(data.success){
         console.log(data.msg);
-        this.ngOnInit();
       } else{
         console.log(data.msg);
-        bidID = data.id;
       }
     });
     this.inquiryService.updateInquiryStatus(updatedInquiry).subscribe((data) => {
       if(data.success){
         console.log(data.msg);
-        this.ngOnInit();
       } else{
         console.log(data.msg);
       }
@@ -86,14 +85,13 @@ export class InquiryComponent implements OnInit {
       this.bidService.createBidMaterial(selectedMaterial).subscribe((data) => {
         if(data.success){
           console.log(data.msg);
-          this.ngOnInit();
         } else{
           console.log(data.msg);
         }
       });
     });
 
-    this.router.navigate([`/bids/${bidID}`]);
+    this.router.navigate([`/bids`]);
   }
 
   onDelete(){

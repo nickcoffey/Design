@@ -42,15 +42,30 @@ export class JobComponent implements OnInit {
 
     this.jobService.getJobMaterialsById(this.id).subscribe((jobMaterials) => {
       this.jobMaterials = jobMaterials;
-    });
 
-    this.materialService.getAllMaterials().subscribe((materials) => {
-      this.materials = materials.materials;
+      this.materialService.getAllMaterials().subscribe((materials) => {
+        this.materials = materials.materials;
+
+        for(let i = 0; i < this.materials.length; i++){
+          for(let k = 0; k < this.jobMaterials.length; k++){
+            if(this.materials[i].materialID == this.jobMaterials[k].materialID){
+              this.materials.splice(i, 1);
+            }
+          }
+        }
+      });
     });
   }
 
-  onAddMaterial(material){
+  onAddMaterial(material, id){
     this.selectedMaterials.push(material);
+    this.materials.splice(id, 1);
+  }
+
+  onRemoveMaterial(material, id){
+    this.selectedMaterials.splice(id, 1);
+    this.materials.push(material);
+    //this.ngOnInit();
   }
 
   onClear(){

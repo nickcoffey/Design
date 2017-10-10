@@ -31,9 +31,9 @@
         </tr>
       </tbody>
     </table>
-    <label>Materials Cost</label>
+    <label *ngIf="jobMaterials[0] != null;">Materials Cost</label>
     <table class="table table-striped table-hover">
-      <thead>
+      <thead *ngIf="jobMaterials[0] != null;">
         <tr>
           <th>ID</th>
           <th>Quantity</th>
@@ -79,15 +79,20 @@
         <label>Completion Date</label>
         <input type="text" [(ngModel)]="endDate" name="endDate" placeholder="YYYY-MM-DD" class="form-control" required>
       </div>-->
-      <label>Materials Cost</label>
+      <label>Add Materials</label>
       <div class="dropdown">
         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Add Materials<span class="caret"></span></button>
         <ul class="dropdown-menu">
-          <li *ngFor="let material of materials;"><a (click)="onAddMaterial(material)">{{material.materialName}}</a></li>
+          <ng-container *ngIf="materials[0] != null; else noMaterials">
+            <li *ngFor="let material of materials; let i = index;"><a (click)="onAddMaterial(material, i)">{{material.materialName}}</a></li>
+          </ng-container>
+          <ng-template #noMaterials>
+            <li><a>No more materials</a></li>
+          </ng-template>
         </ul>
       </div>
       <table class="table table-striped table-hover">
-        <thead>
+        <thead *ngIf="selectedMaterials[0] != null;">
           <tr>
             <th>Name</th>
             <th>Quantity</th>
@@ -95,10 +100,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let selectedMaterial of selectedMaterials;">
+          <tr *ngFor="let selectedMaterial of selectedMaterials; let i = index;">
             <td>{{selectedMaterial.materialName}}</td>
             <td><input type="text" [(ngModel)]="selectedMaterial.quantity" name="quantity" placeholder="Quantity" class="form-control" required></td>
             <td><input type="text" [(ngModel)]="selectedMaterial.perUnitCost" name="perUnitCost" placeholder="Per Unit Cost" class="form-control" required></td>
+            <td><button type="button" class="close" (click)="onRemoveMaterial(selectedMaterial, i)">&times;</button></td>
           </tr>
         </tbody>
       </table>

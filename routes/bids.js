@@ -69,7 +69,8 @@ router.post('/new', passport.authenticate('jwt', {session: false}), (request, re
         if(message.message == ""){
             response.json({
                 success: true,
-                msg: 'Bid created'
+                msg: 'Bid created',
+                id: message.insertId
             });
         } else{
             response.json({
@@ -89,6 +90,30 @@ router.post('/new/bid-material', passport.authenticate('jwt', {session: false}),
     };
     
     bid.createBidMaterial(newBidMaterial, (message) => {
+        if(message.message == ""){
+            response.json({
+                success: true,
+                msg: 'Bid material created'
+            });
+        } else{
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
+// Create bid material by ID
+router.post('/:id/new/bid-material', passport.authenticate('jwt', {session: false}), (request, response, next) => {
+    const bidID = request.params.id;
+    let newBidMaterial = {
+        materialID: request.body.materialID,
+        quantity: request.body.quantity,
+        perUnitCost: request.body.perUnitCost
+    };
+    
+    bid.createBidMaterialById(bidID, newBidMaterial, (message) => {
         if(message.message == ""){
             response.json({
                 success: true,
@@ -197,8 +222,7 @@ router.post('/update', passport.authenticate('jwt', {session: false}), (request,
         if(message.message == ""){
             response.json({
                 success: true,
-                msg: 'Bid updated',
-                id: message.insertId
+                msg: 'Bid updated'
             });
         } else{
             response.json({

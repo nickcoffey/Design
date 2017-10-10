@@ -53,6 +53,14 @@ export class BidService {
     return this.http.post(`${this.localHttp}/bids/delete/${id}`, JSON.stringify({}), {headers: headers}).map(response => response.json());
   }
 
+  updateBid(updatedBid){
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    headers.append('Authorization',this.authService.authToken);
+    return this.http.post(`${this.localHttp}/bids/update`, JSON.stringify(updatedBid), {headers: headers}).map(response => response.json());
+  }
+
   createBidMaterial(newBidMaterial){
     this.authService.loadToken();
     let headers = new Headers();
@@ -67,5 +75,21 @@ export class BidService {
     headers.append('Content-Type','application/json');
     headers.append('Authorization',this.authService.authToken);
     return this.http.post(`${this.localHttp}/bids/update-status`, JSON.stringify(updatedBid), {headers: headers}).map(response => response.json());
+  }
+
+  createBidMaterialById(id, bidMaterial){
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    headers.append('Authorization',this.authService.authToken);
+    return this.http.post(`${this.localHttp}/bids/${id}/new/bid-material`, JSON.stringify(bidMaterial), {headers: headers}).map(response => response.json());
+  }
+
+  deleteBidMaterial(bidMaterial){
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    headers.append('Authorization', this.authService.authToken);
+    return this.http.post(`${this.localHttp}/bids/delete/bid-material`, JSON.stringify(bidMaterial), {headers: headers}).map(response => response.json());
   }
 }
