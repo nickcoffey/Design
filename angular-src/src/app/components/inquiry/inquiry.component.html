@@ -21,7 +21,19 @@
         </tr>
       </tbody>
     </table>
+    <button class="btn btn-primary" href="#updateInquiry" data-toggle="collapse">Update Inquiry</button>
     <button class="btn btn-danger" data-toggle="modal" href='#delete-modal'>Delete Inquiry</button>
+    <div id="updateInquiry" class="collapse">
+      <form (submit)="onUpdate()">
+        <h2 class="page-header">Update Inquiry</h2>
+        <div class="form-group">
+          <label for="">Description</label>
+          <textarea type="text" class="form-control" [(ngModel)]="description" name="description" placeholder="Description"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="reset" class="btn btn-danger">Clear</button>
+      </form>   
+    </div>
   </ng-container>
   <ng-template #noInquiry>
     <h2 class="page-header">No Inquiries</h2>

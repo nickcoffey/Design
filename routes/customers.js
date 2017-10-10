@@ -70,4 +70,38 @@ router.post('/delete/:id', passport.authenticate('jwt', {session: false}), (requ
     });
 });
 
+// Update customer
+router.post('/update', passport.authenticate('jwt', {session: false}), (request, response, next) => {
+    let updatedCustomer = {
+        customerID: request.body.customerID,
+        address: request.body.address,
+        email: request.body.email,
+        phone: request.body.phone
+    }
+
+    if(updatedCustomer.address == null || updatedCustomer.address == undefined || updatedCustomer.address == ""){
+        delete updatedCustomer.address;
+    }
+    if(updatedCustomer.email == null || updatedCustomer.email == undefined || updatedCustomer.email == ""){
+        delete updatedCustomer.email;
+    }
+    if(updatedCustomer.phone == null || updatedCustomer.phone == undefined || updatedCustomer.phone == ""){
+        delete updatedCustomer.phone;
+    }
+
+    customer.updateCustomer(updatedCustomer, (message) => {
+        if(message.message == ""){
+            response.json({
+                success: true,
+                msg: 'Customer updated'
+            });
+        } else{
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
 module.exports = router;

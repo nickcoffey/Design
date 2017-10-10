@@ -15,7 +15,8 @@
         <tr *ngFor="let material of materials">
           <td>{{material.materialID}}</td>
           <td>{{material.materialName}}</td>
-          <button class="btn btn-danger" (click)="onDeleteClick(material.materialID)" data-toggle="modal" href='#delete-modal'>Delete</button>
+          <td><button type="button" class="close" (click)="onDeleteClick(material.materialID)" data-toggle="modal" href='#delete-modal'>&times;</button></td>
+          <!--<button class="btn btn-danger" (click)="onDeleteClick(material.materialID)" data-toggle="modal" href='#delete-modal'>Delete</button>-->
         </tr>
       </tbody>
     </table>

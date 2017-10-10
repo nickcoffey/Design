@@ -44,4 +44,12 @@ export class CustomerService {
     headers.append('Authorization',this.authService.authToken);
     return this.http.post(`${this.localHttp}/customers/new`, JSON.stringify(newCustomer), {headers: headers}).map(response => response.json());
   }
+
+  updateCustomer(updatedCustomer){
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    headers.append('Authorization',this.authService.authToken);
+    return this.http.post(`${this.localHttp}/customers/update`, JSON.stringify(updatedCustomer), {headers: headers}).map(response => response.json());
+  }
 }

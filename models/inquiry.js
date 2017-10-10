@@ -1,5 +1,6 @@
 const connection = require('../app');
 const config = require('../config/database');
+const sqlString = require('sqlstring');
 
 module.exports.getAllInquiries = function(callback){
     const queryString = 'SELECT * FROM Inquiry'; 
@@ -35,7 +36,13 @@ module.exports.createInquiry = function(newInquiry, callback){
 }
 
 module.exports.updateInquiryStatus = function(updatedInquiry, callback){
-    const queryString = `UPDATE Inquiry SET inquiryStatus = "${updatedInquiry.inquiryStatus}", endDate=NOW() WHERE inquiryID=${updatedInquiry.inquiryID}`;
+    let queryString = null;
+    if(updatedInquiry.removeEndDate == true){
+        queryString = `UPDATE Inquiry SET inquiryStatus = "${updatedInquiry.inquiryStatus}", endDate=null WHERE inquiryID=${updatedInquiry.inquiryID}`;
+    } else if(updatedInquiry.removeEndDate == false){
+        queryString = `UPDATE Inquiry SET inquiryStatus = "${updatedInquiry.inquiryStatus}", endDate=NOW() WHERE inquiryID=${updatedInquiry.inquiryID}`;
+    }
+    
     connection.query(queryString, (error, rows, fields) => {
         if(!error){
             callback(rows);
@@ -47,6 +54,18 @@ module.exports.updateInquiryStatus = function(updatedInquiry, callback){
 
 module.exports.deleteInquiry = function(id, callback){
     const queryString = `DELETE FROM Inquiry WHERE inquiryID=${id}`;
+    connection.query(queryString, (error, rows, fields) => {
+        if(!error){
+            callback(rows);
+        } else{
+            return error;
+        }
+    });
+}
+
+module.exports.updateInquiry = function(updatedInquiry, callback){
+    const queryString = sqlString.format(`UPDATE Inquiry SET ? WHERE inquiryID = ?`, [updatedInquiry, updatedInquiry.inquiryID]);
+    console.log(queryString);
     connection.query(queryString, (error, rows, fields) => {
         if(!error){
             callback(rows);

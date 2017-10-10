@@ -14,6 +14,9 @@ export class CustomerComponent implements OnInit {
   customer:any;
   description:any;
   receivedDate:any;
+  address:any;
+  email:any;
+  phone:any;
 
   constructor(
     private customerService:CustomerService,
@@ -55,5 +58,24 @@ export class CustomerComponent implements OnInit {
         console.log(data.msg);
       }
     });
+  }
+
+  onUpdate(){
+    let updatedCustomer = {
+      customerID: this.id,
+      address: this.address,
+      email: this.email,
+      phone: this.phone
+    }
+
+    this.customerService.updateCustomer(updatedCustomer).subscribe((data) => {
+      if(data.success){
+        console.log(data.msg);
+      } else{
+        console.log(data.msg);
+      }
+    });
+
+    this.ngOnInit();
   }
 }

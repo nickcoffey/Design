@@ -34,6 +34,7 @@ router.get('/all/current', passport.authenticate('jwt', {session: false}), (requ
         if(!jobs){
             return err;
         } else{
+            console.log(jobs);
             return response.json({jobs: jobs});
         }
     });

@@ -111,12 +111,13 @@ export class BidComponent implements OnInit {
       }
     });
 
-    let updateInquiry = {
+    let updatedInquiry = {
       inquiryID: this.bid[0].inquiryID,
-      inquiryStatus: "PENDING"
+      inquiryStatus: "PENDING",
+      removeEndDate: true
     };
 
-    this.inquiryService.updateInquiryStatus(updateInquiry).subscribe((data) => {
+    this.inquiryService.updateInquiryStatus(updatedInquiry).subscribe((data) => {
       if(data.success){
         console.log(data.msg);
         this.router.navigate(['/bids']);

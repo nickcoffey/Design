@@ -72,7 +72,8 @@ router.post('/new', passport.authenticate('jwt', {session: false}), (request, re
 router.post('/update-status', passport.authenticate('jwt', {session: false}), (request, response, next) => {
     let updatedInquiry = {
         inquiryID: request.body.inquiryID,
-        inquiryStatus: request.body.inquiryStatus
+        inquiryStatus: request.body.inquiryStatus,
+        removeEndDate: request.body.removeEndDate
     };
 
     inquiry.updateInquiryStatus(updatedInquiry, (message) => {
@@ -99,6 +100,32 @@ router.post('/delete/:id', passport.authenticate('jwt', {session: false}), (requ
             response.json({
                 success: true,
                 msg: 'Inquiry Deleted'
+            });
+        } else{
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
+// Update inquiry
+router.post('/update', passport.authenticate('jwt', {session: false}), (request, response, next) => {
+    let updatedInquiry = {
+        inquiryID: request.body.inquiryID,
+        description: request.body.description
+    }
+
+    if(updatedInquiry.description == null || updatedInquiry.description == undefined || updatedInquiry.description == ""){
+        delete updatedInquiry.description;
+    }
+
+    inquiry.updateInquiry(updatedInquiry, (message) => {
+        if(message.message == ""){
+            response.json({
+                success: true,
+                msg: 'Inquiry updated'
             });
         } else{
             response.json({

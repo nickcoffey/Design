@@ -45,6 +45,14 @@ export class InquiryService {
     return this.http.post(`${this.localHttp}/inquiries/delete/${id}`, JSON.stringify({}), {headers: headers}).map(response => response.json());
   }
 
+  updateInquiry(updatedInquiry){
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    headers.append('Authorization',this.authService.authToken);
+    return this.http.post(`${this.localHttp}/inquiries/update`, JSON.stringify(updatedInquiry), {headers: headers}).map(response => response.json());
+  }
+
   updateInquiryStatus(updatedInquiry){
     this.authService.loadToken();
     let headers = new Headers();

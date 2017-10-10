@@ -1,5 +1,6 @@
 const connection = require('../app');
 const config = require('../config/database');
+const sqlString = require('sqlstring');
 
 module.exports.getAllCustomers = function(callback){
     const queryString = 'SELECT * FROM Customer'; 
@@ -36,6 +37,17 @@ module.exports.createCustomer = function(newCustomer, callback){
 
 module.exports.deleteCustomer = function(id, callback){
     const queryString = `DELETE FROM Customer WHERE customerID=${id}`;
+    connection.query(queryString, (error, rows, fields) => {
+        if(!error){
+            callback(rows);
+        } else{
+            return error;
+        }
+    });
+}
+
+module.exports.updateCustomer = function(updatedCustomer, callback){
+    const queryString = sqlString.format(`UPDATE Customer SET ? WHERE customerID = ?`, [updatedCustomer, updatedCustomer.customerID]);
     connection.query(queryString, (error, rows, fields) => {
         if(!error){
             callback(rows);

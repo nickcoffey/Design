@@ -13,12 +13,12 @@ export class InquiryComponent implements OnInit {
 
   id:any;
   inquiry:any;
-
   bidPrice:any;
   createdDate:any;
   bidLabor:any;
   materials:any;
   selectedMaterials:SelectedMaterial[] = [];
+  description:any;
 
   constructor(
     private router:Router,
@@ -64,7 +64,8 @@ export class InquiryComponent implements OnInit {
     };
     const updatedInquiry = {
       inquiryID: this.id,
-      inquiryStatus: "ACCEPTED"
+      inquiryStatus: "ACCEPTED",
+      removeEndDate: false
     };
 
     this.bidService.createBid(newBid).subscribe((data) => {
@@ -92,6 +93,23 @@ export class InquiryComponent implements OnInit {
     });
 
     this.router.navigate([`/bids`]);
+  }
+
+  onUpdate(){
+    let updatedInquiry = {
+      inquiryID: this.id,
+      description: this.description
+    }
+
+    this.inquiryService.updateInquiry(updatedInquiry).subscribe((data) => {
+      if(data.success){
+        console.log(data.msg);
+      } else{
+        console.log(data.msg);
+      }
+    });
+
+    this.ngOnInit();
   }
 
   onDelete(){

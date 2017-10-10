@@ -22,7 +22,27 @@
       </tbody>
     </table>
   </ng-container>
+  <button class="btn btn-primary" href="#updateCustomer" data-toggle="collapse">Update Customer</button>
   <button class="btn btn-danger" data-toggle="modal" href='#delete-modal'>Delete Customer</button>
+  <div id="updateCustomer" class="collapse">
+    <form (submit)="onUpdate()">
+      <h2 class="page-header">Update Customer</h2>
+      <div class="form-group">
+        <label for="">Address</label>
+        <input type="text" class="form-control" [(ngModel)]="address" name="address" placeholder="Address" />
+      </div>
+      <div class="form-group">
+        <label for="">Email</label>
+        <input type="text" class="form-control" [(ngModel)]="email" name="email" placeholder="Email" />
+      </div>
+      <div class="form-group">
+        <label for="">Phone</label>
+        <input type="text" class="form-control" [(ngModel)]="phone" name="phone" placeholder="Phone" />
+      </div>
+      <button type="submit" class="btn btn-primary">Update</button>
+      <button type="reset" class="btn btn-danger">Clear</button>
+    </form>   
+  </div>
   <ng-template #noCustomer>
     <h2 class="page-header">No Customers</h2>
     <p>If this is incorrect, try refreshing the page.</p>
