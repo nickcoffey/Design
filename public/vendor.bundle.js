@@ -1,5 +1,1156 @@
 webpackJsonp(["vendor"],{
 
+/***/ "../../../../angular-4-data-table/dist/components/column.component.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__("../../../core/@angular/core.es5.js");
+var DataTableColumn = (function () {
+    function DataTableColumn() {
+        this.sortable = false;
+        this.resizable = false;
+        this.visible = true;
+        this.styleClassObject = {}; // for [ngClass]
+    }
+    DataTableColumn.prototype.getCellColor = function (row, index) {
+        if (this.cellColors !== undefined) {
+            return this.cellColors(row.item, row, this, index);
+        }
+    };
+    DataTableColumn.prototype.ngOnInit = function () {
+        this._initCellClass();
+    };
+    DataTableColumn.prototype._initCellClass = function () {
+        if (!this.styleClass && this.property) {
+            if (/^[a-zA-Z0-9_]+$/.test(this.property)) {
+                this.styleClass = 'column-' + this.property;
+            }
+            else {
+                this.styleClass = 'column-' + this.property.replace(/[^a-zA-Z0-9_]/g, '');
+            }
+        }
+        if (this.styleClass != null) {
+            this.styleClassObject = (_a = {},
+                _a[this.styleClass] = true,
+                _a);
+        }
+        var _a;
+    };
+    return DataTableColumn;
+}());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], DataTableColumn.prototype, "header", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], DataTableColumn.prototype, "sortable", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], DataTableColumn.prototype, "resizable", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], DataTableColumn.prototype, "property", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], DataTableColumn.prototype, "styleClass", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Function)
+], DataTableColumn.prototype, "cellColors", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], DataTableColumn.prototype, "width", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], DataTableColumn.prototype, "visible", void 0);
+__decorate([
+    core_1.ContentChild('dataTableCell'),
+    __metadata("design:type", Object)
+], DataTableColumn.prototype, "cellTemplate", void 0);
+__decorate([
+    core_1.ContentChild('dataTableHeader'),
+    __metadata("design:type", Object)
+], DataTableColumn.prototype, "headerTemplate", void 0);
+DataTableColumn = __decorate([
+    core_1.Directive({
+        selector: 'data-table-column'
+    })
+], DataTableColumn);
+exports.DataTableColumn = DataTableColumn;
+//# sourceMappingURL=/components/column.component.js.map
+
+/***/ }),
+
+/***/ "../../../../angular-4-data-table/dist/components/header.component.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var core_1 = __webpack_require__("../../../core/@angular/core.es5.js");
+var table_component_1 = __webpack_require__("../../../../angular-4-data-table/dist/components/table.component.js");
+var header_template_1 = __webpack_require__("../../../../angular-4-data-table/dist/components/header.template.js");
+var header_style_1 = __webpack_require__("../../../../angular-4-data-table/dist/components/header.style.js");
+var DataTableHeader = (function () {
+    function DataTableHeader(dataTable) {
+        this.dataTable = dataTable;
+        this.columnSelectorOpen = false;
+    }
+    DataTableHeader.prototype._closeSelector = function () {
+        this.columnSelectorOpen = false;
+    };
+    return DataTableHeader;
+}());
+DataTableHeader = __decorate([
+    core_1.Component({
+        moduleId: module.i,
+        selector: 'data-table-header',
+        template: header_template_1.HEADER_TEMPLATE,
+        styles: [header_style_1.HEADER_STYLE],
+        host: {
+            '(document:click)': '_closeSelector()'
+        }
+    }),
+    __param(0, core_1.Inject(core_1.forwardRef(function () { return table_component_1.DataTable; }))),
+    __metadata("design:paramtypes", [table_component_1.DataTable])
+], DataTableHeader);
+exports.DataTableHeader = DataTableHeader;
+//# sourceMappingURL=/components/header.component.js.map
+
+/***/ }),
+
+/***/ "../../../../angular-4-data-table/dist/components/header.style.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.HEADER_STYLE = "\n.data-table-header {\n    min-height: 25px;\n    margin-bottom: 10px;\n}\n.title {\n    display: inline-block;\n    margin: 5px 0 0 5px;\n}\n.button-panel {\n    float: right;\n}\n.button-panel button {\n    outline: none !important;\n}\n\n.column-selector-wrapper {\n    position: relative;\n}\n.column-selector-box {\n    box-shadow: 0 0 10px lightgray;\n    width: 150px;\n    padding: 10px;\n    position: absolute;\n    right: 0;\n    top: 1px;\n    z-index: 1060;\n}\n.column-selector-box .checkbox {\n    margin-bottom: 4px;\n}\n.column-selector-fixed-column {\n    font-style: italic;\n}\n";
+//# sourceMappingURL=/components/header.style.js.map
+
+/***/ }),
+
+/***/ "../../../../angular-4-data-table/dist/components/header.template.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.HEADER_TEMPLATE = "\n<div class=\"data-table-header\">\n    <h4 class=\"title\" [textContent]=\"dataTable.headerTitle\"></h4>\n    <div class=\"button-panel\">\n        <button type=\"button\" class=\"btn btn-default btn-sm refresh-button\"\n            (click)=\"dataTable.reloadItems()\">\n            <span class=\"glyphicon glyphicon-refresh\"></span>\n        </button>\n        <button type=\"button\" class=\"btn btn-default btn-sm column-selector-button\" [class.active]=\"columnSelectorOpen\"\n            (click)=\"columnSelectorOpen = !columnSelectorOpen; $event.stopPropagation()\" >\n            <span class=\"glyphicon glyphicon-list\"></span>\n        </button>\n        <div class=\"column-selector-wrapper\" (click)=\"$event.stopPropagation()\">\n            <div *ngIf=\"columnSelectorOpen\" class=\"column-selector-box panel panel-default\">\n                <div *ngIf=\"dataTable.expandableRows\" class=\"column-selector-fixed-column checkbox\">\n                    <label>\n                        <input type=\"checkbox\" [(ngModel)]=\"dataTable.expandColumnVisible\"/>\n                        <span>{{dataTable.translations.expandColumn}}</span>\n                    </label>\n                </div>\n                <div *ngIf=\"dataTable.indexColumn\" class=\"column-selector-fixed-column checkbox\">\n                    <label>\n                        <input type=\"checkbox\" [(ngModel)]=\"dataTable.indexColumnVisible\"/>\n                        <span>{{dataTable.translations.indexColumn}}</span>\n                    </label>\n                </div>\n                <div *ngIf=\"dataTable.selectColumn\" class=\"column-selector-fixed-column checkbox\">\n                    <label>\n                        <input type=\"checkbox\" [(ngModel)]=\"dataTable.selectColumnVisible\"/>\n                        <span>{{dataTable.translations.selectColumn}}</span>\n                    </label>\n                </div>\n                <div *ngFor=\"let column of dataTable.columns\" class=\"column-selector-column checkbox\">\n                    <label>\n                        <input type=\"checkbox\" [(ngModel)]=\"column.visible\"/>\n                        <span [textContent]=\"column.header\"></span>\n                    </label>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n";
+//# sourceMappingURL=/components/header.template.js.map
+
+/***/ }),
+
+/***/ "../../../../angular-4-data-table/dist/components/pagination.component.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var core_1 = __webpack_require__("../../../core/@angular/core.es5.js");
+var table_component_1 = __webpack_require__("../../../../angular-4-data-table/dist/components/table.component.js");
+var pagination_template_1 = __webpack_require__("../../../../angular-4-data-table/dist/components/pagination.template.js");
+var pagination_style_1 = __webpack_require__("../../../../angular-4-data-table/dist/components/pagination.style.js");
+var DataTablePagination = (function () {
+    function DataTablePagination(dataTable) {
+        this.dataTable = dataTable;
+    }
+    DataTablePagination.prototype.pageBack = function () {
+        this.dataTable.offset -= Math.min(this.dataTable.limit, this.dataTable.offset);
+    };
+    DataTablePagination.prototype.pageForward = function () {
+        this.dataTable.offset += this.dataTable.limit;
+    };
+    DataTablePagination.prototype.pageFirst = function () {
+        this.dataTable.offset = 0;
+    };
+    DataTablePagination.prototype.pageLast = function () {
+        this.dataTable.offset = (this.maxPage - 1) * this.dataTable.limit;
+    };
+    Object.defineProperty(DataTablePagination.prototype, "maxPage", {
+        get: function () {
+            return Math.ceil(this.dataTable.itemCount / this.dataTable.limit);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DataTablePagination.prototype, "limit", {
+        get: function () {
+            return this.dataTable.limit;
+        },
+        set: function (value) {
+            this.dataTable.limit = Number(value); // TODO better way to handle that value of number <input> is string?
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DataTablePagination.prototype, "page", {
+        get: function () {
+            return this.dataTable.page;
+        },
+        set: function (value) {
+            this.dataTable.page = Number(value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return DataTablePagination;
+}());
+DataTablePagination = __decorate([
+    core_1.Component({
+        moduleId: module.i,
+        selector: 'data-table-pagination',
+        template: pagination_template_1.PAGINATION_TEMPLATE,
+        styles: [pagination_style_1.PAGINATION_STYLE]
+    }),
+    __param(0, core_1.Inject(core_1.forwardRef(function () { return table_component_1.DataTable; }))),
+    __metadata("design:paramtypes", [table_component_1.DataTable])
+], DataTablePagination);
+exports.DataTablePagination = DataTablePagination;
+//# sourceMappingURL=/components/pagination.component.js.map
+
+/***/ }),
+
+/***/ "../../../../angular-4-data-table/dist/components/pagination.style.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.PAGINATION_STYLE = "\n.pagination-box {\n    position: relative;\n    margin-top: -10px;\n}\n.pagination-range {\n    margin-top: 7px;\n    margin-left: 3px;\n    display: inline-block;\n}\n.pagination-controllers {\n    float: right;\n}\n.pagination-controllers input {\n    min-width: 60px;\n    /*padding: 1px 0px 0px 5px;*/\n    text-align: right;\n}\n\n.pagination-limit {\n    margin-right: 25px;\n    display: inline-table;\n    width: 150px;\n}\n.pagination-pages {\n    display: inline-block;\n}\n.pagination-page {\n    width: 110px;\n    display: inline-table;\n}\n.pagination-box button {\n    outline: none !important;\n}\n.pagination-prevpage,\n.pagination-nextpage,\n.pagination-firstpage,\n.pagination-lastpage {\n    vertical-align: top;\n}\n.pagination-reload {\n    color: gray;\n    font-size: 12px;\n}\n";
+//# sourceMappingURL=/components/pagination.style.js.map
+
+/***/ }),
+
+/***/ "../../../../angular-4-data-table/dist/components/pagination.template.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.PAGINATION_TEMPLATE = "\n<div class=\"pagination-box\">\n    <div class=\"pagination-range\">\n        {{dataTable.translations.paginationRange}}:\n        <span [textContent]=\"dataTable.offset + 1\"></span>\n        -\n        <span [textContent]=\"[dataTable.offset + dataTable.limit , dataTable.itemCount] | min\"></span>\n        /\n        <span [textContent]=\"dataTable.itemCount\"></span>\n    </div>\n    <div class=\"pagination-controllers\">\n        <div class=\"pagination-limit\">\n            <div class=\"input-group\">\n                <span class=\"input-group-addon\">{{dataTable.translations.paginationLimit}}:</span>\n                <input #limitInput type=\"number\" class=\"form-control\" min=\"1\" step=\"1\"\n                       [ngModel]=\"limit\" (blur)=\"limit = limitInput.value\"\n                       (keyup.enter)=\"limit = limitInput.value\" (keyup.esc)=\"limitInput.value = limit\"/>\n            </div>\n        </div>\n        <div class=\" pagination-pages\">\n            <button [disabled]=\"dataTable.offset <= 0\" (click)=\"pageFirst()\" class=\"btn btn-default pagination-firstpage\">&laquo;</button>\n            <button [disabled]=\"dataTable.offset <= 0\" (click)=\"pageBack()\" class=\"btn btn-default pagination-prevpage\">&lsaquo;</button>\n            <div class=\"pagination-page\">\n                <div class=\"input-group\">\n                    <input #pageInput type=\"number\" class=\"form-control\" min=\"1\" step=\"1\" max=\"{{maxPage}}\"\n                           [ngModel]=\"page\" (blur)=\"page = pageInput.value\"\n                           (keyup.enter)=\"page = pageInput.value\" (keyup.esc)=\"pageInput.value = page\"/>\n                    <div class=\"input-group-addon\">\n                        <span>/</span>\n                        <span [textContent]=\"dataTable.lastPage\"></span>\n                    </div>\n                </div>\n            </div>\n            <button [disabled]=\"(dataTable.offset + dataTable.limit) >= dataTable.itemCount\" (click)=\"pageForward()\" class=\"btn btn-default pagination-nextpage\">&rsaquo;</button>\n            <button [disabled]=\"(dataTable.offset + dataTable.limit) >= dataTable.itemCount\" (click)=\"pageLast()\" class=\"btn btn-default pagination-lastpage\">&raquo;</button>\n        </div>\n    </div>\n</div>\n";
+//# sourceMappingURL=/components/pagination.template.js.map
+
+/***/ }),
+
+/***/ "../../../../angular-4-data-table/dist/components/row.component.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var core_1 = __webpack_require__("../../../core/@angular/core.es5.js");
+var table_component_1 = __webpack_require__("../../../../angular-4-data-table/dist/components/table.component.js");
+var row_template_1 = __webpack_require__("../../../../angular-4-data-table/dist/components/row.template.js");
+var row_style_1 = __webpack_require__("../../../../angular-4-data-table/dist/components/row.style.js");
+var DataTableRow = (function () {
+    function DataTableRow(dataTable) {
+        this.dataTable = dataTable;
+        this.selectedChange = new core_1.EventEmitter();
+        this._this = this; // FIXME is there no template keyword for this in angular 2?
+    }
+    Object.defineProperty(DataTableRow.prototype, "selected", {
+        get: function () {
+            return this._selected;
+        },
+        set: function (selected) {
+            this._selected = selected;
+            this.selectedChange.emit(selected);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DataTableRow.prototype, "displayIndex", {
+        // other:
+        get: function () {
+            if (this.dataTable.pagination) {
+                return this.dataTable.displayParams.offset + this.index + 1;
+            }
+            else {
+                return this.index + 1;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    DataTableRow.prototype.getTooltip = function () {
+        if (this.dataTable.rowTooltip) {
+            return this.dataTable.rowTooltip(this.item, this, this.index);
+        }
+        return '';
+    };
+    DataTableRow.prototype.ngOnDestroy = function () {
+        this.selected = false;
+    };
+    return DataTableRow;
+}());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], DataTableRow.prototype, "item", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Number)
+], DataTableRow.prototype, "index", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], DataTableRow.prototype, "selectedChange", void 0);
+DataTableRow = __decorate([
+    core_1.Component({
+        moduleId: module.i,
+        selector: '[dataTableRow]',
+        template: row_template_1.ROW_TEMPLATE,
+        styles: [row_style_1.ROW_STYLE]
+    }),
+    __param(0, core_1.Inject(core_1.forwardRef(function () { return table_component_1.DataTable; }))),
+    __metadata("design:paramtypes", [table_component_1.DataTable])
+], DataTableRow);
+exports.DataTableRow = DataTableRow;
+//# sourceMappingURL=/components/row.component.js.map
+
+/***/ }),
+
+/***/ "../../../../angular-4-data-table/dist/components/row.style.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.ROW_STYLE = "\n.select-column {\n    text-align: center;\n}\n\n.row-expand-button {\n    cursor: pointer;\n    text-align: center;\n}\n\n.clickable {\n    cursor: pointer;\n}\n";
+//# sourceMappingURL=/components/row.style.js.map
+
+/***/ }),
+
+/***/ "../../../../angular-4-data-table/dist/components/row.template.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.ROW_TEMPLATE = "\n<tr\tclass=\"data-table-row\"\n    [title]=\"getTooltip()\"\n    [style.background-color]=\"dataTable.getRowColor(item, index, _this)\"\n    [class.row-odd]=\"index % 2 === 0\"\n    [class.row-even]=\"index % 2 === 1\"\n    [class.selected]=\"selected\"\n    [class.clickable]=\"dataTable.selectOnRowClick\"\n    (dblclick)=\"dataTable.rowDoubleClicked(_this, $event)\"\n    (click)=\"dataTable.rowClicked(_this, $event)\"\n    >\n    <td [hide]=\"!dataTable.expandColumnVisible\" (click)=\"expanded = !expanded; $event.stopPropagation()\" class=\"row-expand-button\">\n        <span class=\"glyphicon glyphicon-triangle-right\" [hide]=\"expanded\"></span>\n        <span class=\"glyphicon glyphicon-triangle-bottom\" [hide]=\"!expanded\"></span>\n    </td>\n    <td [hide]=\"!dataTable.indexColumnVisible\" class=\"index-column\" [textContent]=\"displayIndex\"></td>\n    <td [hide]=\"!dataTable.selectColumnVisible\" class=\"select-column\">\n        <input type=\"checkbox\" [(ngModel)]=\"selected\"/>\n    </td>\n    <td *ngFor=\"let column of dataTable.columns\" [hide]=\"!column.visible\" [ngClass]=\"column.styleClassObject\" class=\"data-column\"\n        [style.background-color]=\"column.getCellColor(_this, index)\">\n        <div *ngIf=\"!column.cellTemplate\" [textContent]=\"item[column.property]\"></div>\n        <div *ngIf=\"column.cellTemplate\" [ngTemplateOutlet]=\"column.cellTemplate\" [ngOutletContext]=\"{column: column, row: _this, item: item}\"></div>\n    </td>\n</tr>\n<tr *ngIf=\"dataTable.expandableRows\" [hide]=\"!expanded\" class=\"row-expansion\">\n    <td [attr.colspan]=\"dataTable.columnCount\">\n        <div [ngTemplateOutlet]=\"dataTable.expandTemplate\" [ngOutletContext]=\"{row: _this, item: item}\"></div>\n    </td>\n</tr>\n";
+//# sourceMappingURL=/components/row.template.js.map
+
+/***/ }),
+
+/***/ "../../../../angular-4-data-table/dist/components/table.component.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__("../../../core/@angular/core.es5.js");
+var column_component_1 = __webpack_require__("../../../../angular-4-data-table/dist/components/column.component.js");
+var row_component_1 = __webpack_require__("../../../../angular-4-data-table/dist/components/row.component.js");
+var default_translations_type_1 = __webpack_require__("../../../../angular-4-data-table/dist/types/default-translations.type.js");
+var drag_1 = __webpack_require__("../../../../angular-4-data-table/dist/utils/drag.js");
+var table_template_1 = __webpack_require__("../../../../angular-4-data-table/dist/components/table.template.js");
+var table_style_1 = __webpack_require__("../../../../angular-4-data-table/dist/components/table.style.js");
+var DataTable = (function () {
+    function DataTable() {
+        this._items = [];
+        this.header = true;
+        this.pagination = true;
+        this.indexColumn = true;
+        this.indexColumnHeader = '';
+        this.selectColumn = false;
+        this.multiSelect = true;
+        this.substituteRows = true;
+        this.expandableRows = false;
+        this.translations = default_translations_type_1.defaultTranslations;
+        this.selectOnRowClick = false;
+        this.autoReload = true;
+        this.showReloading = false;
+        this._sortAsc = true;
+        this._offset = 0;
+        this._limit = 10;
+        // Reloading:
+        this._reloading = false;
+        this.reload = new core_1.EventEmitter();
+        this._displayParams = {}; // params of the last finished reload
+        this._scheduledReload = null;
+        // event handlers:
+        this.rowClick = new core_1.EventEmitter();
+        this.rowDoubleClick = new core_1.EventEmitter();
+        this.headerClick = new core_1.EventEmitter();
+        this.cellClick = new core_1.EventEmitter();
+        this.selectedRows = [];
+        this._selectAllCheckbox = false;
+        // column resizing:
+        this._resizeInProgress = false;
+        this.resizeLimit = 30;
+    }
+    Object.defineProperty(DataTable.prototype, "items", {
+        get: function () {
+            return this._items;
+        },
+        set: function (items) {
+            this._items = items;
+            this._onReloadFinished();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DataTable.prototype, "sortBy", {
+        get: function () {
+            return this._sortBy;
+        },
+        set: function (value) {
+            this._sortBy = value;
+            this._triggerReload();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DataTable.prototype, "sortAsc", {
+        get: function () {
+            return this._sortAsc;
+        },
+        set: function (value) {
+            this._sortAsc = value;
+            this._triggerReload();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DataTable.prototype, "offset", {
+        get: function () {
+            return this._offset;
+        },
+        set: function (value) {
+            this._offset = value;
+            this._triggerReload();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DataTable.prototype, "limit", {
+        get: function () {
+            return this._limit;
+        },
+        set: function (value) {
+            this._limit = value;
+            this._triggerReload();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DataTable.prototype, "page", {
+        // calculated property:
+        get: function () {
+            return Math.floor(this.offset / this.limit) + 1;
+        },
+        set: function (value) {
+            this.offset = (value - 1) * this.limit;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DataTable.prototype, "lastPage", {
+        get: function () {
+            return Math.ceil(this.itemCount / this.limit);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    // setting multiple observable properties simultaneously
+    DataTable.prototype.sort = function (sortBy, asc) {
+        this.sortBy = sortBy;
+        this.sortAsc = asc;
+    };
+    // init
+    DataTable.prototype.ngOnInit = function () {
+        this._initDefaultValues();
+        this._initDefaultClickEvents();
+        this._updateDisplayParams();
+        if (this.autoReload && this._scheduledReload == null) {
+            this.reloadItems();
+        }
+    };
+    DataTable.prototype._initDefaultValues = function () {
+        this.indexColumnVisible = this.indexColumn;
+        this.selectColumnVisible = this.selectColumn;
+        this.expandColumnVisible = this.expandableRows;
+    };
+    DataTable.prototype._initDefaultClickEvents = function () {
+        var _this = this;
+        this.headerClick.subscribe(function (tableEvent) { return _this.sortColumn(tableEvent.column); });
+        if (this.selectOnRowClick) {
+            this.rowClick.subscribe(function (tableEvent) { return tableEvent.row.selected = !tableEvent.row.selected; });
+        }
+    };
+    Object.defineProperty(DataTable.prototype, "reloading", {
+        get: function () {
+            return this._reloading;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    DataTable.prototype.reloadItems = function () {
+        this._reloading = true;
+        this.reload.emit(this._getRemoteParameters());
+    };
+    DataTable.prototype._onReloadFinished = function () {
+        this._updateDisplayParams();
+        this._selectAllCheckbox = false;
+        this._reloading = false;
+    };
+    Object.defineProperty(DataTable.prototype, "displayParams", {
+        get: function () {
+            return this._displayParams;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    DataTable.prototype._updateDisplayParams = function () {
+        this._displayParams = {
+            sortBy: this.sortBy,
+            sortAsc: this.sortAsc,
+            offset: this.offset,
+            limit: this.limit
+        };
+    };
+    // for avoiding cascading reloads if multiple params are set at once:
+    DataTable.prototype._triggerReload = function () {
+        var _this = this;
+        if (this._scheduledReload) {
+            clearTimeout(this._scheduledReload);
+        }
+        this._scheduledReload = setTimeout(function () {
+            _this.reloadItems();
+        });
+    };
+    DataTable.prototype.rowClicked = function (row, event) {
+        this.rowClick.emit({ row: row, event: event });
+    };
+    DataTable.prototype.rowDoubleClicked = function (row, event) {
+        this.rowDoubleClick.emit({ row: row, event: event });
+    };
+    DataTable.prototype.headerClicked = function (column, event) {
+        if (!this._resizeInProgress) {
+            this.headerClick.emit({ column: column, event: event });
+        }
+        else {
+            this._resizeInProgress = false; // this is because I can't prevent click from mousup of the drag end
+        }
+    };
+    DataTable.prototype.cellClicked = function (column, row, event) {
+        this.cellClick.emit({ row: row, column: column, event: event });
+    };
+    // functions:
+    DataTable.prototype._getRemoteParameters = function () {
+        var params = {};
+        if (this.sortBy) {
+            params.sortBy = this.sortBy;
+            params.sortAsc = this.sortAsc;
+        }
+        if (this.pagination) {
+            params.offset = this.offset;
+            params.limit = this.limit;
+        }
+        return params;
+    };
+    DataTable.prototype.sortColumn = function (column) {
+        if (column.sortable) {
+            var ascending = this.sortBy === column.property ? !this.sortAsc : true;
+            this.sort(column.property, ascending);
+        }
+    };
+    Object.defineProperty(DataTable.prototype, "columnCount", {
+        get: function () {
+            var count = 0;
+            count += this.indexColumnVisible ? 1 : 0;
+            count += this.selectColumnVisible ? 1 : 0;
+            count += this.expandColumnVisible ? 1 : 0;
+            this.columns.toArray().forEach(function (column) {
+                count += column.visible ? 1 : 0;
+            });
+            return count;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    DataTable.prototype.getRowColor = function (item, index, row) {
+        if (this.rowColors !== undefined) {
+            return this.rowColors(item, row, index);
+        }
+    };
+    Object.defineProperty(DataTable.prototype, "selectAllCheckbox", {
+        get: function () {
+            return this._selectAllCheckbox;
+        },
+        set: function (value) {
+            this._selectAllCheckbox = value;
+            this._onSelectAllChanged(value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    DataTable.prototype._onSelectAllChanged = function (value) {
+        this.rows.toArray().forEach(function (row) { return row.selected = value; });
+    };
+    DataTable.prototype.onRowSelectChanged = function (row) {
+        // maintain the selectedRow(s) view
+        if (this.multiSelect) {
+            var index = this.selectedRows.indexOf(row);
+            if (row.selected && index < 0) {
+                this.selectedRows.push(row);
+            }
+            else if (!row.selected && index >= 0) {
+                this.selectedRows.splice(index, 1);
+            }
+        }
+        else {
+            if (row.selected) {
+                this.selectedRow = row;
+            }
+            else if (this.selectedRow === row) {
+                this.selectedRow = undefined;
+            }
+        }
+        // unselect all other rows:
+        if (row.selected && !this.multiSelect) {
+            this.rows.toArray().filter(function (row_) { return row_.selected; }).forEach(function (row_) {
+                if (row_ !== row) {
+                    row_.selected = false;
+                }
+            });
+        }
+    };
+    Object.defineProperty(DataTable.prototype, "substituteItems", {
+        // other:
+        get: function () {
+            return Array.from({ length: this.displayParams.limit - this.items.length });
+        },
+        enumerable: true,
+        configurable: true
+    });
+    DataTable.prototype.resizeColumnStart = function (event, column, columnElement) {
+        var _this = this;
+        this._resizeInProgress = true;
+        drag_1.drag(event, {
+            move: function (moveEvent, dx) {
+                if (_this._isResizeInLimit(columnElement, dx)) {
+                    column.width = columnElement.offsetWidth + dx;
+                }
+            },
+        });
+    };
+    DataTable.prototype._isResizeInLimit = function (columnElement, dx) {
+        /* This is needed because CSS min-width didn't work on table-layout: fixed.
+         Without the limits, resizing can make the next column disappear completely,
+         and even increase the table width. The current implementation suffers from the fact,
+         that offsetWidth sometimes contains out-of-date values. */
+        if ((dx < 0 && (columnElement.offsetWidth + dx) <= this.resizeLimit) ||
+            !columnElement.nextElementSibling ||
+            (dx >= 0 && (columnElement.nextElementSibling.offsetWidth + dx) <= this.resizeLimit)) {
+            return false;
+        }
+        return true;
+    };
+    return DataTable;
+}());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object),
+    __metadata("design:paramtypes", [Array])
+], DataTable.prototype, "items", null);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Number)
+], DataTable.prototype, "itemCount", void 0);
+__decorate([
+    core_1.ContentChildren(column_component_1.DataTableColumn),
+    __metadata("design:type", core_1.QueryList)
+], DataTable.prototype, "columns", void 0);
+__decorate([
+    core_1.ViewChildren(row_component_1.DataTableRow),
+    __metadata("design:type", core_1.QueryList)
+], DataTable.prototype, "rows", void 0);
+__decorate([
+    core_1.ContentChild('dataTableExpand'),
+    __metadata("design:type", core_1.TemplateRef)
+], DataTable.prototype, "expandTemplate", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], DataTable.prototype, "headerTitle", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], DataTable.prototype, "header", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], DataTable.prototype, "pagination", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], DataTable.prototype, "indexColumn", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], DataTable.prototype, "indexColumnHeader", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Function)
+], DataTable.prototype, "rowColors", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Function)
+], DataTable.prototype, "rowTooltip", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], DataTable.prototype, "selectColumn", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], DataTable.prototype, "multiSelect", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], DataTable.prototype, "substituteRows", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], DataTable.prototype, "expandableRows", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], DataTable.prototype, "translations", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], DataTable.prototype, "selectOnRowClick", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], DataTable.prototype, "autoReload", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], DataTable.prototype, "showReloading", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object),
+    __metadata("design:paramtypes", [Object])
+], DataTable.prototype, "sortBy", null);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object),
+    __metadata("design:paramtypes", [Object])
+], DataTable.prototype, "sortAsc", null);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object),
+    __metadata("design:paramtypes", [Object])
+], DataTable.prototype, "offset", null);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object),
+    __metadata("design:paramtypes", [Object])
+], DataTable.prototype, "limit", null);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object),
+    __metadata("design:paramtypes", [Object])
+], DataTable.prototype, "page", null);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], DataTable.prototype, "reload", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], DataTable.prototype, "rowClick", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], DataTable.prototype, "rowDoubleClick", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], DataTable.prototype, "headerClick", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], DataTable.prototype, "cellClick", void 0);
+DataTable = __decorate([
+    core_1.Component({
+        moduleId: module.i,
+        selector: 'data-table',
+        template: table_template_1.TABLE_TEMPLATE,
+        styles: [table_style_1.TABLE_STYLE]
+    })
+], DataTable);
+exports.DataTable = DataTable;
+//# sourceMappingURL=/components/table.component.js.map
+
+/***/ }),
+
+/***/ "../../../../angular-4-data-table/dist/components/table.style.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.TABLE_STYLE = "\n/* bootstrap override: */\n\n:host /deep/ .data-table.table > tbody+tbody {\n    border-top: none;\n}\n:host /deep/ .data-table.table td {\n    vertical-align: middle;\n}\n\n:host /deep/ .data-table > thead > tr > th,\n:host /deep/ .data-table > tbody > tr > td {\n\toverflow: hidden;\n}\n\n/* I can't use the bootstrap striped table, because of the expandable rows */\n:host /deep/ .row-odd {\n    background-color: #F6F6F6;\n}\n:host /deep/ .row-even {\n}\n\n.data-table .substitute-rows > tr:hover,\n:host /deep/ .data-table .data-table-row:hover {\n    background-color: #ECECEC;\n}\n/* table itself: */\n\n.data-table {\n    box-shadow: 0 0 15px rgb(236, 236, 236);\n    table-layout: fixed;\n}\n\n/* header cells: */\n\n.column-header {\n    position: relative;\n}\n.expand-column-header {\n\twidth: 50px;\n}\n.select-column-header {\n\twidth: 50px;\n\ttext-align: center;\n}\n.index-column-header {\n\twidth: 40px;\n}\n.column-header.sortable {\n    cursor: pointer;\n}\n.column-header .column-sort-icon {\n\tfloat: right;\n}\n.column-header.resizable .column-sort-icon {\n    margin-right: 8px;\n}\n.column-header .column-sort-icon .column-sortable-icon {\n    color: lightgray;\n}\n.column-header .column-resize-handle {\n    position: absolute;\n    top: 0;\n    right: 0;\n    margin: 0;\n    padding: 0;\n    width: 8px;\n    height: 100%;\n    cursor: col-resize;\n}\n\n/* cover: */\n\n.data-table-box {\n    position: relative;\n}\n\n.loading-cover {\n   position: absolute;\n   width: 100%;\n   height: 100%;\n   background-color: rgba(255, 255, 255, 0.3);\n   top: 0;\n}\n";
+//# sourceMappingURL=/components/table.style.js.map
+
+/***/ }),
+
+/***/ "../../../../angular-4-data-table/dist/components/table.template.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.TABLE_TEMPLATE = "\n<div class=\"data-table-wrapper\">\n    <data-table-header *ngIf=\"header\"></data-table-header>\n\n    <div class=\"data-table-box\">\n        <table class=\"table table-condensed table-bordered data-table\">\n            <thead>\n                <tr>\n                    <th [hide]=\"!expandColumnVisible\" class=\"expand-column-header\">\n                    <th [hide]=\"!indexColumnVisible\" class=\"index-column-header\">\n                        <span [textContent]=\"indexColumnHeader\"></span>\n                    </th>\n                    <th [hide]=\"!selectColumnVisible\" class=\"select-column-header\">\n                        <input [hide]=\"!multiSelect\" type=\"checkbox\" [(ngModel)]=\"selectAllCheckbox\"/>\n                    </th>\n                    <th *ngFor=\"let column of columns\" #th [hide]=\"!column.visible\" (click)=\"headerClicked(column, $event)\"\n                        [class.sortable]=\"column.sortable\" [class.resizable]=\"column.resizable\"\n                        [ngClass]=\"column.styleClassObject\" class=\"column-header\" [style.width]=\"column.width | px\">\n                        <span *ngIf=\"!column.headerTemplate\" [textContent]=\"column.header\"></span>\n                        <span *ngIf=\"column.headerTemplate\" [ngTemplateOutlet]=\"column.headerTemplate\" [ngOutletContext]=\"{column: column}\"></span>\n                        <span class=\"column-sort-icon\" *ngIf=\"column.sortable\">\n                            <span class=\"glyphicon glyphicon-sort column-sortable-icon\" [hide]=\"column.property === sortBy\"></span>\n                            <span [hide]=\"column.property !== sortBy\">\n                                <span class=\"glyphicon glyphicon-triangle-top\" [hide]=\"sortAsc\"></span>\n                                <span class=\"glyphicon glyphicon-triangle-bottom\" [hide]=\"!sortAsc\"></span>\n                            </span>\n                        </span>\n                        <span *ngIf=\"column.resizable\" class=\"column-resize-handle\" (mousedown)=\"resizeColumnStart($event, column, th)\"></span>\n                    </th>\n                </tr>\n            </thead>\n            <tbody *ngFor=\"let item of items; let index=index\" class=\"data-table-row-wrapper\"\n                   dataTableRow #row [item]=\"item\" [index]=\"index\" (selectedChange)=\"onRowSelectChanged(row)\">\n            </tbody>\n            <tbody class=\"substitute-rows\" *ngIf=\"pagination && substituteRows\">\n                <tr *ngFor=\"let item of substituteItems, let index = index\"\n                    [class.row-odd]=\"(index + items.length) % 2 === 0\"\n                    [class.row-even]=\"(index + items.length) % 2 === 1\"\n                    >\n                    <td [hide]=\"!expandColumnVisible\"></td>\n                    <td [hide]=\"!indexColumnVisible\">&nbsp;</td>\n                    <td [hide]=\"!selectColumnVisible\"></td>\n                    <td *ngFor=\"let column of columns\" [hide]=\"!column.visible\">\n                </tr>\n            </tbody>\n        </table>\n        <div class=\"loading-cover\" *ngIf=\"showReloading && reloading\"></div>\n    </div>\n\n    <data-table-pagination *ngIf=\"pagination\"></data-table-pagination>\n</div>\n";
+//# sourceMappingURL=/components/table.template.js.map
+
+/***/ }),
+
+/***/ "../../../../angular-4-data-table/dist/index.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+var core_1 = __webpack_require__("../../../core/@angular/core.es5.js");
+var common_1 = __webpack_require__("../../../common/@angular/common.es5.js");
+var forms_1 = __webpack_require__("../../../forms/@angular/forms.es5.js");
+var table_component_1 = __webpack_require__("../../../../angular-4-data-table/dist/components/table.component.js");
+exports.DataTable = table_component_1.DataTable;
+var column_component_1 = __webpack_require__("../../../../angular-4-data-table/dist/components/column.component.js");
+exports.DataTableColumn = column_component_1.DataTableColumn;
+var row_component_1 = __webpack_require__("../../../../angular-4-data-table/dist/components/row.component.js");
+exports.DataTableRow = row_component_1.DataTableRow;
+var pagination_component_1 = __webpack_require__("../../../../angular-4-data-table/dist/components/pagination.component.js");
+exports.DataTablePagination = pagination_component_1.DataTablePagination;
+var header_component_1 = __webpack_require__("../../../../angular-4-data-table/dist/components/header.component.js");
+exports.DataTableHeader = header_component_1.DataTableHeader;
+var px_1 = __webpack_require__("../../../../angular-4-data-table/dist/utils/px.js");
+var hide_1 = __webpack_require__("../../../../angular-4-data-table/dist/utils/hide.js");
+var min_1 = __webpack_require__("../../../../angular-4-data-table/dist/utils/min.js");
+var default_translations_type_1 = __webpack_require__("../../../../angular-4-data-table/dist/types/default-translations.type.js");
+exports.defaultTranslations = default_translations_type_1.defaultTranslations;
+__export(__webpack_require__("../../../../angular-4-data-table/dist/tools/data-table-resource.js"));
+exports.DATA_TABLE_DIRECTIVES = [table_component_1.DataTable, column_component_1.DataTableColumn];
+var DataTableModule = (function () {
+    function DataTableModule() {
+    }
+    return DataTableModule;
+}());
+DataTableModule = __decorate([
+    core_1.NgModule({
+        imports: [common_1.CommonModule, forms_1.FormsModule],
+        declarations: [
+            table_component_1.DataTable, column_component_1.DataTableColumn,
+            row_component_1.DataTableRow, pagination_component_1.DataTablePagination, header_component_1.DataTableHeader,
+            px_1.PixelConverter, hide_1.Hide, min_1.MinPipe
+        ],
+        exports: [table_component_1.DataTable, column_component_1.DataTableColumn]
+    })
+], DataTableModule);
+exports.DataTableModule = DataTableModule;
+//# sourceMappingURL=/index.js.map
+
+/***/ }),
+
+/***/ "../../../../angular-4-data-table/dist/tools/data-table-resource.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var DataTableResource = (function () {
+    function DataTableResource(items) {
+        this.items = items;
+    }
+    DataTableResource.prototype.query = function (params, filter) {
+        var result = [];
+        if (filter) {
+            result = this.items.filter(filter);
+        }
+        else {
+            result = this.items.slice(); // shallow copy to use for sorting instead of changing the original
+        }
+        if (params.sortBy) {
+            result.sort(function (a, b) {
+                if (typeof a[params.sortBy] === 'string') {
+                    return a[params.sortBy].localeCompare(b[params.sortBy]);
+                }
+                else {
+                    return a[params.sortBy] - b[params.sortBy];
+                }
+            });
+            if (params.sortAsc === false) {
+                result.reverse();
+            }
+        }
+        if (params.offset !== undefined) {
+            if (params.limit === undefined) {
+                result = result.slice(params.offset, result.length);
+            }
+            else {
+                result = result.slice(params.offset, params.offset + params.limit);
+            }
+        }
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () { return resolve(result); });
+        });
+    };
+    DataTableResource.prototype.count = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () { return resolve(_this.items.length); });
+        });
+    };
+    return DataTableResource;
+}());
+exports.DataTableResource = DataTableResource;
+//# sourceMappingURL=/tools/data-table-resource.js.map
+
+/***/ }),
+
+/***/ "../../../../angular-4-data-table/dist/types/default-translations.type.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.defaultTranslations = {
+    indexColumn: 'index',
+    selectColumn: 'select',
+    expandColumn: 'expand',
+    paginationLimit: 'Limit',
+    paginationRange: 'Results'
+};
+//# sourceMappingURL=/types/default-translations.type.js.map
+
+/***/ }),
+
+/***/ "../../../../angular-4-data-table/dist/utils/drag.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function drag(event, _a) {
+    var move = _a.move, up = _a.up;
+    var startX = event.pageX;
+    var startY = event.pageY;
+    var x = startX;
+    var y = startY;
+    var moved = false;
+    function mouseMoveHandler(event) {
+        var dx = event.pageX - x;
+        var dy = event.pageY - y;
+        x = event.pageX;
+        y = event.pageY;
+        if (dx || dy)
+            moved = true;
+        move(event, dx, dy, x, y);
+        event.preventDefault(); // to avoid text selection
+    }
+    function mouseUpHandler(event) {
+        x = event.pageX;
+        y = event.pageY;
+        document.removeEventListener('mousemove', mouseMoveHandler);
+        document.removeEventListener('mouseup', mouseUpHandler);
+        if (up)
+            up(event, x, y, moved);
+    }
+    document.addEventListener('mousemove', mouseMoveHandler);
+    document.addEventListener('mouseup', mouseUpHandler);
+}
+exports.drag = drag;
+//# sourceMappingURL=/utils/drag.js.map
+
+/***/ }),
+
+/***/ "../../../../angular-4-data-table/dist/utils/hide.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__("../../../core/@angular/core.es5.js");
+function isBlank(obj) {
+    return obj === undefined || obj === null;
+}
+var Hide = (function () {
+    function Hide(_elementRef, _renderer) {
+        this._elementRef = _elementRef;
+        this._renderer = _renderer;
+        this._prevCondition = null;
+    }
+    Object.defineProperty(Hide.prototype, "hide", {
+        set: function (newCondition) {
+            this.initDisplayStyle();
+            if (newCondition && (isBlank(this._prevCondition) || !this._prevCondition)) {
+                this._prevCondition = true;
+                this._renderer.setElementStyle(this._elementRef.nativeElement, 'display', 'none');
+            }
+            else if (!newCondition && (isBlank(this._prevCondition) || this._prevCondition)) {
+                this._prevCondition = false;
+                this._renderer.setElementStyle(this._elementRef.nativeElement, 'display', this._displayStyle);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Hide.prototype.initDisplayStyle = function () {
+        if (this._displayStyle === undefined) {
+            var displayStyle = this._elementRef.nativeElement.style.display;
+            if (displayStyle && displayStyle !== 'none') {
+                this._displayStyle = displayStyle;
+            }
+        }
+    };
+    return Hide;
+}());
+Hide = __decorate([
+    core_1.Directive({ selector: '[hide]', inputs: ['hide'] }),
+    __metadata("design:paramtypes", [core_1.ElementRef, core_1.Renderer])
+], Hide);
+exports.Hide = Hide;
+//# sourceMappingURL=/utils/hide.js.map
+
+/***/ }),
+
+/***/ "../../../../angular-4-data-table/dist/utils/min.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var core_1 = __webpack_require__("../../../core/@angular/core.es5.js");
+var MinPipe = (function () {
+    function MinPipe() {
+    }
+    MinPipe.prototype.transform = function (value, args) {
+        return Math.min.apply(null, value);
+    };
+    return MinPipe;
+}());
+MinPipe = __decorate([
+    core_1.Pipe({
+        name: 'min'
+    })
+], MinPipe);
+exports.MinPipe = MinPipe;
+//# sourceMappingURL=/utils/min.js.map
+
+/***/ }),
+
+/***/ "../../../../angular-4-data-table/dist/utils/px.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var core_1 = __webpack_require__("../../../core/@angular/core.es5.js");
+var PixelConverter = (function () {
+    function PixelConverter() {
+    }
+    PixelConverter.prototype.transform = function (value, args) {
+        if (value === undefined) {
+            return;
+        }
+        if (typeof value === 'string') {
+            return value;
+        }
+        if (typeof value === 'number') {
+            return value + 'px';
+        }
+    };
+    return PixelConverter;
+}());
+PixelConverter = __decorate([
+    core_1.Pipe({
+        name: 'px'
+    })
+], PixelConverter);
+exports.PixelConverter = PixelConverter;
+//# sourceMappingURL=/utils/px.js.map
+
+/***/ }),
+
 /***/ "../../../../angular2-jwt/angular2-jwt.js":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7921,56 +9072,57 @@ module.exports = g;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export NgLocaleLocalization */
-/* unused harmony export NgLocalization */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return parseCookieValue; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return CommonModule; });
-/* unused harmony export DeprecatedI18NPipesModule */
-/* unused harmony export NgClass */
-/* unused harmony export NgFor */
-/* unused harmony export NgForOf */
-/* unused harmony export NgForOfContext */
-/* unused harmony export NgIf */
-/* unused harmony export NgIfContext */
-/* unused harmony export NgPlural */
-/* unused harmony export NgPluralCase */
-/* unused harmony export NgStyle */
-/* unused harmony export NgSwitch */
-/* unused harmony export NgSwitchCase */
-/* unused harmony export NgSwitchDefault */
-/* unused harmony export NgTemplateOutlet */
-/* unused harmony export NgComponentOutlet */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return DOCUMENT; });
-/* unused harmony export AsyncPipe */
-/* unused harmony export DatePipe */
-/* unused harmony export I18nPluralPipe */
-/* unused harmony export I18nSelectPipe */
-/* unused harmony export JsonPipe */
-/* unused harmony export LowerCasePipe */
-/* unused harmony export CurrencyPipe */
-/* unused harmony export DecimalPipe */
-/* unused harmony export PercentPipe */
-/* unused harmony export SlicePipe */
-/* unused harmony export UpperCasePipe */
-/* unused harmony export TitleCasePipe */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return PLATFORM_BROWSER_ID; });
-/* unused harmony export ɵPLATFORM_SERVER_ID */
-/* unused harmony export ɵPLATFORM_WORKER_APP_ID */
-/* unused harmony export ɵPLATFORM_WORKER_UI_ID */
-/* unused harmony export isPlatformBrowser */
-/* unused harmony export isPlatformServer */
-/* unused harmony export isPlatformWorkerApp */
-/* unused harmony export isPlatformWorkerUi */
-/* unused harmony export VERSION */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return PlatformLocation; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return LOCATION_INITIALIZED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return LocationStrategy; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return APP_BASE_HREF; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return HashLocationStrategy; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return PathLocationStrategy; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return Location; });
-/* unused harmony export ɵa */
-/* unused harmony export ɵb */
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NgLocaleLocalization", function() { return NgLocaleLocalization; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NgLocalization", function() { return NgLocalization; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵparseCookieValue", function() { return parseCookieValue; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CommonModule", function() { return CommonModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DeprecatedI18NPipesModule", function() { return DeprecatedI18NPipesModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NgClass", function() { return NgClass; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NgFor", function() { return NgFor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NgForOf", function() { return NgForOf; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NgForOfContext", function() { return NgForOfContext; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NgIf", function() { return NgIf; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NgIfContext", function() { return NgIfContext; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NgPlural", function() { return NgPlural; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NgPluralCase", function() { return NgPluralCase; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NgStyle", function() { return NgStyle; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NgSwitch", function() { return NgSwitch; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NgSwitchCase", function() { return NgSwitchCase; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NgSwitchDefault", function() { return NgSwitchDefault; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NgTemplateOutlet", function() { return NgTemplateOutlet; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NgComponentOutlet", function() { return NgComponentOutlet; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DOCUMENT", function() { return DOCUMENT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AsyncPipe", function() { return AsyncPipe; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DatePipe", function() { return DatePipe; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "I18nPluralPipe", function() { return I18nPluralPipe; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "I18nSelectPipe", function() { return I18nSelectPipe; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "JsonPipe", function() { return JsonPipe; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LowerCasePipe", function() { return LowerCasePipe; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CurrencyPipe", function() { return CurrencyPipe; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DecimalPipe", function() { return DecimalPipe; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PercentPipe", function() { return PercentPipe; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SlicePipe", function() { return SlicePipe; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UpperCasePipe", function() { return UpperCasePipe; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TitleCasePipe", function() { return TitleCasePipe; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵPLATFORM_BROWSER_ID", function() { return PLATFORM_BROWSER_ID; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵPLATFORM_SERVER_ID", function() { return PLATFORM_SERVER_ID; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵPLATFORM_WORKER_APP_ID", function() { return PLATFORM_WORKER_APP_ID; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵPLATFORM_WORKER_UI_ID", function() { return PLATFORM_WORKER_UI_ID; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isPlatformBrowser", function() { return isPlatformBrowser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isPlatformServer", function() { return isPlatformServer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isPlatformWorkerApp", function() { return isPlatformWorkerApp; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isPlatformWorkerUi", function() { return isPlatformWorkerUi; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VERSION", function() { return VERSION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PlatformLocation", function() { return PlatformLocation; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOCATION_INITIALIZED", function() { return LOCATION_INITIALIZED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LocationStrategy", function() { return LocationStrategy; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "APP_BASE_HREF", function() { return APP_BASE_HREF; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HashLocationStrategy", function() { return HashLocationStrategy; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PathLocationStrategy", function() { return PathLocationStrategy; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Location", function() { return Location; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵa", function() { return COMMON_DIRECTIVES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵb", function() { return COMMON_PIPES; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__("../../../../tslib/tslib.es6.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 
@@ -55071,77 +56223,78 @@ function transition$$1(stateChangeExpr, steps) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export AbstractControlDirective */
-/* unused harmony export AbstractFormGroupDirective */
-/* unused harmony export CheckboxControlValueAccessor */
-/* unused harmony export ControlContainer */
-/* unused harmony export NG_VALUE_ACCESSOR */
-/* unused harmony export COMPOSITION_BUFFER_MODE */
-/* unused harmony export DefaultValueAccessor */
-/* unused harmony export NgControl */
-/* unused harmony export NgControlStatus */
-/* unused harmony export NgControlStatusGroup */
-/* unused harmony export NgForm */
-/* unused harmony export NgModel */
-/* unused harmony export NgModelGroup */
-/* unused harmony export RadioControlValueAccessor */
-/* unused harmony export FormControlDirective */
-/* unused harmony export FormControlName */
-/* unused harmony export FormGroupDirective */
-/* unused harmony export FormArrayName */
-/* unused harmony export FormGroupName */
-/* unused harmony export NgSelectOption */
-/* unused harmony export SelectControlValueAccessor */
-/* unused harmony export SelectMultipleControlValueAccessor */
-/* unused harmony export CheckboxRequiredValidator */
-/* unused harmony export EmailValidator */
-/* unused harmony export MaxLengthValidator */
-/* unused harmony export MinLengthValidator */
-/* unused harmony export PatternValidator */
-/* unused harmony export RequiredValidator */
-/* unused harmony export FormBuilder */
-/* unused harmony export AbstractControl */
-/* unused harmony export FormArray */
-/* unused harmony export FormControl */
-/* unused harmony export FormGroup */
-/* unused harmony export NG_ASYNC_VALIDATORS */
-/* unused harmony export NG_VALIDATORS */
-/* unused harmony export Validators */
-/* unused harmony export VERSION */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FormsModule; });
-/* unused harmony export ReactiveFormsModule */
-/* unused harmony export ɵba */
-/* unused harmony export ɵz */
-/* unused harmony export ɵx */
-/* unused harmony export ɵy */
-/* unused harmony export ɵa */
-/* unused harmony export ɵb */
-/* unused harmony export ɵc */
-/* unused harmony export ɵd */
-/* unused harmony export ɵe */
-/* unused harmony export ɵf */
-/* unused harmony export ɵg */
-/* unused harmony export ɵbf */
-/* unused harmony export ɵbb */
-/* unused harmony export ɵbc */
-/* unused harmony export ɵh */
-/* unused harmony export ɵi */
-/* unused harmony export ɵbd */
-/* unused harmony export ɵbe */
-/* unused harmony export ɵj */
-/* unused harmony export ɵk */
-/* unused harmony export ɵl */
-/* unused harmony export ɵn */
-/* unused harmony export ɵm */
-/* unused harmony export ɵo */
-/* unused harmony export ɵq */
-/* unused harmony export ɵp */
-/* unused harmony export ɵs */
-/* unused harmony export ɵt */
-/* unused harmony export ɵv */
-/* unused harmony export ɵu */
-/* unused harmony export ɵw */
-/* unused harmony export ɵr */
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AbstractControlDirective", function() { return AbstractControlDirective; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AbstractFormGroupDirective", function() { return AbstractFormGroupDirective; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CheckboxControlValueAccessor", function() { return CheckboxControlValueAccessor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ControlContainer", function() { return ControlContainer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NG_VALUE_ACCESSOR", function() { return NG_VALUE_ACCESSOR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "COMPOSITION_BUFFER_MODE", function() { return COMPOSITION_BUFFER_MODE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DefaultValueAccessor", function() { return DefaultValueAccessor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NgControl", function() { return NgControl; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NgControlStatus", function() { return NgControlStatus; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NgControlStatusGroup", function() { return NgControlStatusGroup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NgForm", function() { return NgForm; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NgModel", function() { return NgModel; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NgModelGroup", function() { return NgModelGroup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RadioControlValueAccessor", function() { return RadioControlValueAccessor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormControlDirective", function() { return FormControlDirective; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormControlName", function() { return FormControlName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormGroupDirective", function() { return FormGroupDirective; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormArrayName", function() { return FormArrayName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormGroupName", function() { return FormGroupName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NgSelectOption", function() { return NgSelectOption; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SelectControlValueAccessor", function() { return SelectControlValueAccessor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SelectMultipleControlValueAccessor", function() { return SelectMultipleControlValueAccessor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CheckboxRequiredValidator", function() { return CheckboxRequiredValidator; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EmailValidator", function() { return EmailValidator; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MaxLengthValidator", function() { return MaxLengthValidator; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MinLengthValidator", function() { return MinLengthValidator; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PatternValidator", function() { return PatternValidator; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RequiredValidator", function() { return RequiredValidator; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormBuilder", function() { return FormBuilder; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AbstractControl", function() { return AbstractControl; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormArray", function() { return FormArray; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormControl", function() { return FormControl; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormGroup", function() { return FormGroup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NG_ASYNC_VALIDATORS", function() { return NG_ASYNC_VALIDATORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NG_VALIDATORS", function() { return NG_VALIDATORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Validators", function() { return Validators; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VERSION", function() { return VERSION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormsModule", function() { return FormsModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReactiveFormsModule", function() { return ReactiveFormsModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵba", function() { return InternalFormsSharedModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵz", function() { return REACTIVE_DRIVEN_DIRECTIVES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵx", function() { return SHARED_FORM_DIRECTIVES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵy", function() { return TEMPLATE_DRIVEN_DIRECTIVES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵa", function() { return CHECKBOX_VALUE_ACCESSOR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵb", function() { return DEFAULT_VALUE_ACCESSOR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵc", function() { return AbstractControlStatus; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵd", function() { return ngControlStatusHost; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵe", function() { return formDirectiveProvider; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵf", function() { return formControlBinding; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵg", function() { return modelGroupProvider; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵbf", function() { return NgNoValidate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵbb", function() { return NUMBER_VALUE_ACCESSOR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵbc", function() { return NumberValueAccessor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵh", function() { return RADIO_VALUE_ACCESSOR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵi", function() { return RadioControlRegistry; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵbd", function() { return RANGE_VALUE_ACCESSOR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵbe", function() { return RangeValueAccessor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵj", function() { return formControlBinding$1; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵk", function() { return controlNameBinding; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵl", function() { return formDirectiveProvider$1; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵn", function() { return formArrayNameProvider; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵm", function() { return formGroupNameProvider; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵo", function() { return SELECT_VALUE_ACCESSOR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵq", function() { return NgSelectMultipleOption; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵp", function() { return SELECT_MULTIPLE_VALUE_ACCESSOR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵs", function() { return CHECKBOX_REQUIRED_VALIDATOR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵt", function() { return EMAIL_VALIDATOR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵv", function() { return MAX_LENGTH_VALIDATOR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵu", function() { return MIN_LENGTH_VALIDATOR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵw", function() { return PATTERN_VALIDATOR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵr", function() { return REQUIRED_VALIDATOR; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__("../../../../tslib/tslib.es6.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_observable_forkJoin__ = __webpack_require__("../../../../rxjs/observable/forkJoin.js");
@@ -63568,7 +64721,7 @@ var INTERNAL_BROWSER_DYNAMIC_PLATFORM_PROVIDERS = [
         useValue: { providers: [{ provide: __WEBPACK_IMPORTED_MODULE_1__angular_compiler__["a" /* ResourceLoader */], useClass: ResourceLoaderImpl }] },
         multi: true
     },
-    { provide: __WEBPACK_IMPORTED_MODULE_2__angular_core__["PLATFORM_ID"], useValue: __WEBPACK_IMPORTED_MODULE_3__angular_common__["j" /* ɵPLATFORM_BROWSER_ID */] },
+    { provide: __WEBPACK_IMPORTED_MODULE_2__angular_core__["PLATFORM_ID"], useValue: __WEBPACK_IMPORTED_MODULE_3__angular_common__["ɵPLATFORM_BROWSER_ID"] },
 ];
 /**
  * @license
@@ -65461,7 +66614,7 @@ var BrowserDomAdapter = (function (_super) {
      * @param {?} name
      * @return {?}
      */
-    BrowserDomAdapter.prototype.getCookie = function (name) { return Object(__WEBPACK_IMPORTED_MODULE_1__angular_common__["k" /* ɵparseCookieValue */])(document.cookie, name); };
+    BrowserDomAdapter.prototype.getCookie = function (name) { return Object(__WEBPACK_IMPORTED_MODULE_1__angular_common__["ɵparseCookieValue"])(document.cookie, name); };
     /**
      * @param {?} name
      * @param {?} value
@@ -65516,7 +66669,7 @@ function relativePath(url) {
  *
  * @deprecated import from `\@angular/common` instead.
  */
-var DOCUMENT$1 = __WEBPACK_IMPORTED_MODULE_1__angular_common__["c" /* DOCUMENT */];
+var DOCUMENT$1 = __WEBPACK_IMPORTED_MODULE_1__angular_common__["DOCUMENT"];
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -65651,7 +66804,7 @@ var BrowserPlatformLocation = (function (_super) {
      */
     BrowserPlatformLocation.prototype.back = function () { this._history.back(); };
     return BrowserPlatformLocation;
-}(__WEBPACK_IMPORTED_MODULE_1__angular_common__["i" /* PlatformLocation */]));
+}(__WEBPACK_IMPORTED_MODULE_1__angular_common__["PlatformLocation"]));
 BrowserPlatformLocation.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_2__angular_core__["Injectable"] },
 ];
@@ -67823,9 +68976,9 @@ var SafeResourceUrlImpl = (function (_super) {
  * found in the LICENSE file at https://angular.io/license
  */
 var INTERNAL_BROWSER_PLATFORM_PROVIDERS = [
-    { provide: __WEBPACK_IMPORTED_MODULE_2__angular_core__["PLATFORM_ID"], useValue: __WEBPACK_IMPORTED_MODULE_1__angular_common__["j" /* ɵPLATFORM_BROWSER_ID */] },
+    { provide: __WEBPACK_IMPORTED_MODULE_2__angular_core__["PLATFORM_ID"], useValue: __WEBPACK_IMPORTED_MODULE_1__angular_common__["ɵPLATFORM_BROWSER_ID"] },
     { provide: __WEBPACK_IMPORTED_MODULE_2__angular_core__["PLATFORM_INITIALIZER"], useValue: initDomAdapter, multi: true },
-    { provide: __WEBPACK_IMPORTED_MODULE_1__angular_common__["i" /* PlatformLocation */], useClass: BrowserPlatformLocation },
+    { provide: __WEBPACK_IMPORTED_MODULE_1__angular_common__["PlatformLocation"], useClass: BrowserPlatformLocation },
     { provide: DOCUMENT$1, useFactory: _document, deps: [] },
 ];
 /**
@@ -67915,7 +69068,7 @@ BrowserModule.decorators = [
                     Meta,
                     Title,
                 ],
-                exports: [__WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */], __WEBPACK_IMPORTED_MODULE_2__angular_core__["ApplicationModule"]]
+                exports: [__WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"], __WEBPACK_IMPORTED_MODULE_2__angular_core__["ApplicationModule"]]
             },] },
 ];
 /**
@@ -73377,7 +74530,7 @@ RouterLinkWithHref.decorators = [
 RouterLinkWithHref.ctorParameters = function () { return [
     { type: Router, },
     { type: ActivatedRoute, },
-    { type: __WEBPACK_IMPORTED_MODULE_1__angular_common__["g" /* LocationStrategy */], },
+    { type: __WEBPACK_IMPORTED_MODULE_1__angular_common__["LocationStrategy"], },
 ]; };
 RouterLinkWithHref.propDecorators = {
     'target': [{ type: __WEBPACK_IMPORTED_MODULE_2__angular_core__["HostBinding"], args: ['attr.target',] }, { type: __WEBPACK_IMPORTED_MODULE_2__angular_core__["Input"] },],
@@ -74112,13 +75265,13 @@ var ROUTER_CONFIGURATION = new __WEBPACK_IMPORTED_MODULE_2__angular_core__["Inje
  */
 var ROUTER_FORROOT_GUARD = new __WEBPACK_IMPORTED_MODULE_2__angular_core__["InjectionToken"]('ROUTER_FORROOT_GUARD');
 var ROUTER_PROVIDERS = [
-    __WEBPACK_IMPORTED_MODULE_1__angular_common__["f" /* Location */],
+    __WEBPACK_IMPORTED_MODULE_1__angular_common__["Location"],
     { provide: UrlSerializer, useClass: DefaultUrlSerializer },
     {
         provide: Router,
         useFactory: setupRouter,
         deps: [
-            __WEBPACK_IMPORTED_MODULE_2__angular_core__["ApplicationRef"], UrlSerializer, ChildrenOutletContexts, __WEBPACK_IMPORTED_MODULE_1__angular_common__["f" /* Location */], __WEBPACK_IMPORTED_MODULE_2__angular_core__["Injector"],
+            __WEBPACK_IMPORTED_MODULE_2__angular_core__["ApplicationRef"], UrlSerializer, ChildrenOutletContexts, __WEBPACK_IMPORTED_MODULE_1__angular_common__["Location"], __WEBPACK_IMPORTED_MODULE_2__angular_core__["Injector"],
             __WEBPACK_IMPORTED_MODULE_2__angular_core__["NgModuleFactoryLoader"], __WEBPACK_IMPORTED_MODULE_2__angular_core__["Compiler"], ROUTES, ROUTER_CONFIGURATION,
             [UrlHandlingStrategy, new __WEBPACK_IMPORTED_MODULE_2__angular_core__["Optional"]()], [RouteReuseStrategy, new __WEBPACK_IMPORTED_MODULE_2__angular_core__["Optional"]()]
         ]
@@ -74222,10 +75375,10 @@ var RouterModule = (function () {
                 },
                 { provide: ROUTER_CONFIGURATION, useValue: config ? config : {} },
                 {
-                    provide: __WEBPACK_IMPORTED_MODULE_1__angular_common__["g" /* LocationStrategy */],
+                    provide: __WEBPACK_IMPORTED_MODULE_1__angular_common__["LocationStrategy"],
                     useFactory: provideLocationStrategy,
                     deps: [
-                        __WEBPACK_IMPORTED_MODULE_1__angular_common__["i" /* PlatformLocation */], [new __WEBPACK_IMPORTED_MODULE_2__angular_core__["Inject"](__WEBPACK_IMPORTED_MODULE_1__angular_common__["a" /* APP_BASE_HREF */]), new __WEBPACK_IMPORTED_MODULE_2__angular_core__["Optional"]()], ROUTER_CONFIGURATION
+                        __WEBPACK_IMPORTED_MODULE_1__angular_common__["PlatformLocation"], [new __WEBPACK_IMPORTED_MODULE_2__angular_core__["Inject"](__WEBPACK_IMPORTED_MODULE_1__angular_common__["APP_BASE_HREF"]), new __WEBPACK_IMPORTED_MODULE_2__angular_core__["Optional"]()], ROUTER_CONFIGURATION
                     ]
                 },
                 {
@@ -74266,8 +75419,8 @@ RouterModule.ctorParameters = function () { return [
  */
 function provideLocationStrategy(platformLocationStrategy, baseHref, options) {
     if (options === void 0) { options = {}; }
-    return options.useHash ? new __WEBPACK_IMPORTED_MODULE_1__angular_common__["d" /* HashLocationStrategy */](platformLocationStrategy, baseHref) :
-        new __WEBPACK_IMPORTED_MODULE_1__angular_common__["h" /* PathLocationStrategy */](platformLocationStrategy, baseHref);
+    return options.useHash ? new __WEBPACK_IMPORTED_MODULE_1__angular_common__["HashLocationStrategy"](platformLocationStrategy, baseHref) :
+        new __WEBPACK_IMPORTED_MODULE_1__angular_common__["PathLocationStrategy"](platformLocationStrategy, baseHref);
 }
 /**
  * @param {?} router
@@ -74371,7 +75524,7 @@ var RouterInitializer = (function () {
      */
     RouterInitializer.prototype.appInitializer = function () {
         var _this = this;
-        var /** @type {?} */ p = this.injector.get(__WEBPACK_IMPORTED_MODULE_1__angular_common__["e" /* LOCATION_INITIALIZED */], Promise.resolve(null));
+        var /** @type {?} */ p = this.injector.get(__WEBPACK_IMPORTED_MODULE_1__angular_common__["LOCATION_INITIALIZED"], Promise.resolve(null));
         return p.then(function () {
             var /** @type {?} */ resolve = ((null));
             var /** @type {?} */ res = new Promise(function (r) { return resolve = r; });

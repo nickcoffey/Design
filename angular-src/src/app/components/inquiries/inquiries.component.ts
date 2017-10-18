@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InquiryService } from '../../services/inquiry.service';
+import { DataTable, DataTableResource } from 'angular-4-data-table';
+declare var $;
 
 @Component({
   selector: 'app-inquiries',
@@ -16,6 +18,9 @@ export class InquiriesComponent implements OnInit {
   declinedInquiries:any;
   declinedLength:any;
 
+  pendingInquiriesResource:any;
+  pendingInquiriesCount = 0;
+
   constructor(
     private inquiryService:InquiryService
   ) { }
@@ -25,6 +30,7 @@ export class InquiriesComponent implements OnInit {
       this.inquiries = inquiries;
       this.pendingInquiries = inquiries.pendingInquiries;
       this.pendingLength = inquiries.pendingInquiries.length;
+      this.pendingInquiriesResource = new DataTableResource(this.pendingInquiries);      
       console.log('Pending '+this.pendingLength);
       this.acceptedInquiries = inquiries.acceptedInquiries;
       this.acceptedLength = inquiries.acceptedInquiries.length;
@@ -33,5 +39,9 @@ export class InquiriesComponent implements OnInit {
       this.declinedLength = inquiries.declinedInquiries.length;
       console.log('Declined '+this.declinedLength);
     });
+
+    $(document).ready(function() {
+      $('#example').DataTable();
+  } );
   }
 }
