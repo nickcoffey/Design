@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InquiryService } from '../../services/inquiry.service';
-import { DataTable, DataTableResource } from 'angular-4-data-table';
+import { Subject } from 'rxjs/Rx';
+//import { DataTable, DataTableResource } from 'angular-4-data-table';
 declare var $;
 
 @Component({
@@ -18,30 +19,42 @@ export class InquiriesComponent implements OnInit {
   declinedInquiries:any;
   declinedLength:any;
 
-  pendingInquiriesResource:any;
-  pendingInquiriesCount = 0;
+  // inquiriesResource:any;
+  // inquiriesCount = 0;
+
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
+  displayTable: Boolean = false;
 
   constructor(
     private inquiryService:InquiryService
   ) { }
 
   ngOnInit() {
+    this.dtOptions = {
+      pagingType: 'full_numbers'
+    };
+
     this.inquiryService.getAllInquiries().subscribe((inquiries) => {
-      this.inquiries = inquiries;
+      this.inquiries = inquiries.inquiries;
+      //this.inquiriesResource = new DataTableResource(this.inquiries);
       this.pendingInquiries = inquiries.pendingInquiries;
-      this.pendingLength = inquiries.pendingInquiries.length;
-      this.pendingInquiriesResource = new DataTableResource(this.pendingInquiries);      
-      console.log('Pending '+this.pendingLength);
+      this.pendingLength = inquiries.pendingInquiries.length;     
+      //console.log('Pending '+this.pendingLength);
       this.acceptedInquiries = inquiries.acceptedInquiries;
       this.acceptedLength = inquiries.acceptedInquiries.length;
-      console.log('Accepted '+this.acceptedLength);
+      //console.log('Accepted '+this.acceptedLength);
       this.declinedInquiries = inquiries.declinedInquiries;
       this.declinedLength = inquiries.declinedInquiries.length;
-      console.log('Declined '+this.declinedLength);
+      //console.log('Declined '+this.declinedLength);
+
+      this.dtTrigger.next();
+      this.displayTable = true;
     });
 
     $(document).ready(function() {
       $('#example').DataTable();
-  } );
+    });
   }
+
 }

@@ -25,6 +25,7 @@ router.get('/all', passport.authenticate('jwt', {session: false}), (request, res
             });
             //console.log({inquiries: inquiries});
             return response.json({
+                inquiries: inquiries,
                 pendingInquiries: pendingInquiries,
                 declinedInquiries: declinedInquiries,
                 acceptedInquiries: acceptedInquiries
