@@ -45,6 +45,14 @@ export class JobService {
     return this.http.get(`${this.localHttp}/jobs/${jobId}/job-materials`, {headers: headers}).map(response => response.json());
   }
 
+  getCurrentJobMaterialsCost(jobId){
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Authorization',this.authService.authToken);
+    headers.append('Content-Type','application/json');
+    return this.http.get(`${this.localHttp}/jobs/${jobId}/job-materials/cost`, {headers: headers}).map(response => response.json());
+  }
+
   createJob(newJob){
     this.authService.loadToken();
     let headers = new Headers();

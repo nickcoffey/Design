@@ -3,7 +3,7 @@ const config = require('../config/database');
 const sqlString = require('sqlstring');
 
 module.exports.getAllInquiries = function(callback){
-    const queryString = 'SELECT * FROM Inquiry'; 
+    const queryString = 'SELECT * FROM detailedInquiries'; 
     connection.query(queryString, (err, rows, fields) => {
         if(!err){
             callback(rows);
@@ -14,7 +14,7 @@ module.exports.getAllInquiries = function(callback){
 }
 
 module.exports.getInquiryById = function(id, callback){
-    const queryString = `SELECT * FROM Inquiry WHERE inquiryID=${id}`;
+    const queryString = `SELECT * FROM detailedInquiries WHERE inquiryID=${id}`;
     connection.query(queryString, (error, rows, fields) => {
         if(!error){
             callback(rows);

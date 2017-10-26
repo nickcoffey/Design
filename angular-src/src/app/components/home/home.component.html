@@ -8,17 +8,23 @@
   </div>
 </div>
 
-
 <h2 class="page-header">Current Jobs</h2>
-<!--<ng-container *ngIf="currentJobs; else noCurrentJobs">
-  <h2 class="page-header">Current Jobs</h2>
-  <ul class="list-group" *ngFor="let currentJob of currentJobs">
+<ng-container *ngIf="currentJobsLength !=0; else noCurrentJobs">
+  <ul class="list-group" *ngFor="let currentJob of currentJobs; let i = index" [routerLink]="['/jobs/'+currentJob.jobID]">
+    <h3 class="page-header">Job # {{currentJob.jobID}}</h3>
+    <h4>Click To View Details</h4>
     <li class="list-group-item"><b>Customer:</b> {{currentJob.customerName}}</li>
-    <li class="list-group-item"><b>Job Description:</b> {{currentJob.description}}</li>
-    <li class="list-group-item"><b>Budget:</b> 
+    <li class="list-group-item"><b>Budget:</b>
       <div class="progress">
-        <div id="costProgress" class="progress-bar" role="progressbar" [attr.aria-valuenow]="currentJob.jobCost" aria-valuemin="0" [attr.aria-valuemax]="currentJob.bidCost" [ngStyle]="{'min-width': '2em', 'width': (currentJob.jobCost/currentJob.bidCost)*100+ '%'}">
-          {{(currentJob.jobCost/currentJob.bidCost)*100}}%
+        <div id="costProgress" class="progress-bar" role="progressbar" [attr.aria-valuenow]="jobCosts[i]" aria-valuemin="0" [attr.aria-valuemax]="bidCosts[i]" [ngStyle]="{'min-width': '2em', 'width': (jobCosts[i]/bidCosts[i])*100+ '%'}">
+          {{jobCosts[i]/bidCosts[i]*100}}%
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item"><b>Revenue Collected:</b>
+      <div class="progress">
+        <div id="revenueProgress" class="progress-bar" role="progressbar" [attr.aria-valuenow]="currentJob.jobRevenue" aria-valuemin="0" [attr.aria-valuemax]="currentJob.bidPrice" [ngStyle]="{'min-width': '2em', 'width': (currentJob.jobRevenue/currentJob.bidPrice)*100+ '%'}">
+          {{currentJob.jobRevenue/currentJob.bidPrice*100}}%
         </div>
       </div>
     </li>
@@ -27,4 +33,4 @@
 <ng-template #noCurrentJobs>
   <h2 class="page-header">No Current Jobs</h2>
   <p>If this is incorrect, try refreshing the page.</p>
-</ng-template>-->
+</ng-template>

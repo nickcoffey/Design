@@ -21,6 +21,7 @@ router.get('/all', passport.authenticate('jwt', {session: false}), (request, res
                 }
             });
             return response.json({
+                jobs: jobs,
                 inProgressJobs: inProgressJobs,
                 completedJobs: completedJobs
             });
@@ -34,7 +35,6 @@ router.get('/all/current', passport.authenticate('jwt', {session: false}), (requ
         if(!jobs){
             return err;
         } else{
-            console.log(jobs);
             return response.json({jobs: jobs});
         }
     });
@@ -60,6 +60,18 @@ router.get('/:id/job-materials', passport.authenticate('jwt', {session: false}),
             return err;
         } else{
             return response.json(jobMaterials);
+        }
+    });
+});
+
+// Get job materials cost
+router.get('/:id/job-materials/cost', passport.authenticate('jwt', {session: false}), (request, response, next) => {
+    const id = request.params.id;
+    job.getCurrentJobMaterialsCost(id, (cost) => {
+        if(!cost){
+            return err;
+        } else{
+            return response.json(cost);
         }
     });
 });

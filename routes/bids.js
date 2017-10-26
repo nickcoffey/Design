@@ -24,6 +24,7 @@ router.get('/all', passport.authenticate('jwt', {session: false}), (request, res
                 } 
             });
             return response.json({
+                bids: bids,
                 pendingBids: pendingBids,
                 declinedBids: declinedBids,
                 acceptedBids: acceptedBids
@@ -52,6 +53,18 @@ router.get('/:id/bid-materials', passport.authenticate('jwt', {session: false}),
             return err;
         } else{
             return response.json(bidMaterials);
+        }
+    });
+});
+
+// Get bid materials cost
+router.get('/:id/bid-materials/cost', passport.authenticate('jwt', {session: false}), (request, response, next) => {
+    const id = request.params.id;
+    bid.getCurrentBidMaterialsCost(id, (cost) => {
+        if(!cost){
+            return err;
+        } else{
+            return response.json(cost);
         }
     });
 });

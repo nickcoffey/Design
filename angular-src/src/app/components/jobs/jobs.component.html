@@ -2,7 +2,40 @@
   <button class="btn btn-default" [routerLink]="['/home']">Go Home</button>
 </div>
 
-<ng-container *ngIf="inProgressLength!=0 || completedLength!=0; else noJobs">
+<ng-container *ngIf="jobsLength!=0; else noJobs">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <h2 class="page-header">Jobs</h2>
+    <h4>Click To View Details</h4>
+    <table *ngIf="displayTable" datatable [dtOptions]="dtOptions" class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Status</th>
+          <th>Customer</th>
+          <th>Created Date</th>
+          <th>Accepted/Declined Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let job of jobs;" [routerLink]="['/jobs/'+job.jobID]">
+          <td>{{job.jobID}}</td>
+          <td>{{job.jobStatus}}</td>
+          <td>{{job.customerName}}</td>
+          <td>{{job.createdDate | date: 'MM/dd/yyyy'}}</td>
+          <td>{{job.endDate | date: 'MM/dd/yyyy'}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-container>
+<ng-template #noJobs>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <h2 class="page-header">No Jobs</h2>
+    <p>If this is incorrect, try refreshing the page.</p>
+  </div>
+</ng-template>
+
+<!-- <ng-container *ngIf="inProgressLength!=0 || completedLength!=0; else noJobs">
   <ng-container *ngIf="inProgressLength!=0; else noInProgressJobs">
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
       <h2 class="page-header">In Progress Jobs</h2>
@@ -70,4 +103,4 @@
     <h2 class="page-header">No Jobs</h2>
     <p>If this is incorrect, try refreshing the page.</p>
   </div>
-</ng-template>
+</ng-template> -->

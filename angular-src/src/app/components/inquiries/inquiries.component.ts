@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { InquiryService } from '../../services/inquiry.service';
 import { Subject } from 'rxjs/Rx';
 //import { DataTable, DataTableResource } from 'angular-4-data-table';
-declare var $;
+//declare var $;
 
 @Component({
   selector: 'app-inquiries',
@@ -12,6 +12,7 @@ declare var $;
 export class InquiriesComponent implements OnInit {
 
   inquiries:any;
+  inquiriesLength:any;
   pendingInquiries:any;
   pendingLength:any;
   acceptedInquiries:any;
@@ -37,6 +38,7 @@ export class InquiriesComponent implements OnInit {
 
     this.inquiryService.getAllInquiries().subscribe((inquiries) => {
       this.inquiries = inquiries.inquiries;
+      this.inquiriesLength = inquiries.inquiries.length;
       //this.inquiriesResource = new DataTableResource(this.inquiries);
       this.pendingInquiries = inquiries.pendingInquiries;
       this.pendingLength = inquiries.pendingInquiries.length;     
@@ -52,9 +54,9 @@ export class InquiriesComponent implements OnInit {
       this.displayTable = true;
     });
 
-    $(document).ready(function() {
-      $('#example').DataTable();
-    });
+    // $(document).ready(function() {
+    //   $('#example').DataTable();
+    // });
   }
 
 }

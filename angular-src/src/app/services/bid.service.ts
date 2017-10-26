@@ -69,6 +69,14 @@ export class BidService {
     return this.http.post(`${this.localHttp}/bids/new/bid-material`, JSON.stringify(newBidMaterial), {headers: headers}).map(response => response.json());
   }
 
+  getCurrentBidMaterialsCost(bidID){
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Authorization',this.authService.authToken);
+    headers.append('Content-Type','application/json');
+    return this.http.get(`${this.localHttp}/bids/${bidID}/bid-materials/cost`, {headers: headers}).map(response => response.json());
+  }
+
   updateBidStatus(updatedBid){
     this.authService.loadToken();
     let headers = new Headers();

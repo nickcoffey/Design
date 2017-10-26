@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../../services/customer.service';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-customers',
@@ -15,14 +16,25 @@ export class CustomersComponent implements OnInit {
   address:any;
   phone:any;
 
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
+  displayTable: Boolean = false;
+
   constructor(
     private customerService:CustomerService,
     private router:Router
   ) { }
 
   ngOnInit() {
+    this.dtOptions = {
+      pagingType: 'full_numbers'
+    };
+
     this.customerService.getAllCustomers().subscribe((customers) => {
       this.customers = customers.customers;
+
+      this.dtTrigger.next();
+      this.displayTable = true;
     });
   }
 

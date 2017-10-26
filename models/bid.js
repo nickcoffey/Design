@@ -3,7 +3,7 @@ const config = require('../config/database');
 const sqlString = require('sqlstring');
 
 module.exports.getAllBids = function(callback){
-    const queryString = 'SELECT * FROM Bid'; 
+    const queryString = 'SELECT * FROM detailedBids'; 
     connection.query(queryString, (err, rows, fields) => {
         if(!err){
             callback(rows);
@@ -26,6 +26,17 @@ module.exports.getBidById = function(id, callback){
 
 module.exports.getBidMaterialsById = function(id, callback){
     const queryString = `SELECT * FROM BidMaterial WHERE bidID=${id}`;
+    connection.query(queryString, (error, rows, fields) => {
+        if(!error){
+            callback(rows);
+        } else{
+            return error;
+        }
+    });
+}
+
+module.exports.getCurrentBidMaterialsCost = function(id, callback){
+    const queryString = `SELECT SUM(BidMaterial.quantity*BidMaterial.perUnitCost) AS bidMaterialCost FROM BidMaterial JOIN Bid ON BidMaterial.bidID = Bid.bidID JOIN Job ON Bid.bidID = Job.bidID WHERE Job.jobID = ${id}`;
     connection.query(queryString, (error, rows, fields) => {
         if(!error){
             callback(rows);
