@@ -41,7 +41,7 @@
         <tr>
           <th>ID</th>
           <th>Status</th>
-          <th>Price</th>
+          <!-- <th>Price</th> -->
           <th>Customer</th>
           <th>Created Date</th>
           <th>Accepted/Declined Date</th>
@@ -51,7 +51,7 @@
         <tr *ngFor="let bid of bids;" [routerLink]="['/bids/'+bid.bidID]">
           <td>{{bid.bidID}}</td>
           <td>{{bid.bidStatus}}</td>
-          <td>{{bid.bidPrice}}</td>
+          <!-- <td>{{bid.bidPrice | currency: 'USD':true}}</td> -->
           <td>{{bid.customerName}}</td>
           <td>{{bid.createdDate | date: 'MM/dd/yyyy'}}</td>
           <td>{{bid.endDate | date: 'MM/dd/yyyy'}}</td>

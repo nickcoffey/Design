@@ -14,7 +14,7 @@ module.exports.getAllJobs = function(callback){
 }
 
 module.exports.getJobById = function(id, callback){
-    const queryString = `SELECT * FROM Job WHERE jobID=${id}`;
+    const queryString = `SELECT * FROM detailedJobs WHERE jobID=${id}`;
     connection.query(queryString, (error, rows, fields) => {
         if(!error){
             callback(rows);
@@ -25,7 +25,7 @@ module.exports.getJobById = function(id, callback){
 }
 
 module.exports.getJobMaterialsById = function(id, callback){
-    const queryString = `SELECT * FROM JobMaterial WHERE jobID=${id}`;
+    const queryString = `SELECT * FROM Material JOIN JobMaterial ON Material.materialID = JobMaterial.materialID WHERE jobID=${id}`;
     connection.query(queryString, (error, rows, fields) => {
         if(!error){
             callback(rows);
@@ -92,7 +92,7 @@ module.exports.getCurrentJobs = function(callback){
 
 module.exports.updateJob = function(updatedJob, callback){
     const queryString = sqlString.format(`UPDATE Job SET ? WHERE jobID = ?`, [updatedJob, updatedJob.jobID]);
-    console.log(queryString);
+    //console.log(queryString);
     connection.query(queryString, (error, rows, fields) => {
         if(!error){
             callback(rows);

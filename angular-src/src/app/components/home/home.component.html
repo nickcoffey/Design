@@ -17,14 +17,14 @@
     <li class="list-group-item"><b>Budget:</b>
       <div class="progress">
         <div id="costProgress" class="progress-bar" role="progressbar" [attr.aria-valuenow]="jobCosts[i]" aria-valuemin="0" [attr.aria-valuemax]="bidCosts[i]" [ngStyle]="{'min-width': '2em', 'width': (jobCosts[i]/bidCosts[i])*100+ '%'}">
-          {{jobCosts[i]/bidCosts[i]*100}}%
+          {{jobCosts[i]/bidCosts[i] | percent:'1.0-0'}}
         </div>
       </div>
     </li>
     <li class="list-group-item"><b>Revenue Collected:</b>
       <div class="progress">
         <div id="revenueProgress" class="progress-bar" role="progressbar" [attr.aria-valuenow]="currentJob.jobRevenue" aria-valuemin="0" [attr.aria-valuemax]="currentJob.bidPrice" [ngStyle]="{'min-width': '2em', 'width': (currentJob.jobRevenue/currentJob.bidPrice)*100+ '%'}">
-          {{currentJob.jobRevenue/currentJob.bidPrice*100}}%
+          {{currentJob.jobRevenue/currentJob.bidPrice | percent:'1.0-0'}}
         </div>
       </div>
     </li>

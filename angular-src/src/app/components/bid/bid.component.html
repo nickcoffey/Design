@@ -15,7 +15,7 @@
       </thead>
       <tbody>
         <tr>
-          <td>{{bid[0].bidPrice}}</td>
+          <td>{{bid[0].bidPrice | currency: 'USD':true}}</td>
           <td>{{bid[0].createdDate | date: 'MM/dd/yyyy'}}</td>
           <td>{{bid[0].endDate | date: 'MM/dd/yyyy'}}</td>
         </tr>
@@ -26,7 +26,7 @@
     <table class="table table-striped table-hover">
       <tbody>
         <tr>
-          <td>{{bid[0].bidLabor}}</td>
+          <td>{{bid[0].bidLabor | currency: 'USD':true}}</td>
         </tr>
       </tbody>
     </table>
@@ -34,16 +34,16 @@
     <table class="table table-striped table-hover">
       <thead *ngIf="bidMaterials[0] != null;">
         <tr>
-          <th>ID</th>
+          <th>Material</th>
           <th>Quantity</th>
           <th>Per Unit Cost</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let bidMaterial of bidMaterials">
-          <td>{{bidMaterial.materialID}}</td>
+          <td>{{bidMaterial.materialName}}</td>
           <td>{{bidMaterial.quantity}}</td>
-          <td>{{bidMaterial.perUnitCost}}</td>
+          <td>{{bidMaterial.perUnitCost | currency: 'USD':true}}</td>
           <td><button type="button" class="close" data-toggle="modal" href='#delete-material-modal'>&times;</button></td>  
           <!--                Delete Bid Popup                -->
           <div class="modal fade" id="delete-material-modal">

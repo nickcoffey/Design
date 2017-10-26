@@ -25,7 +25,7 @@ module.exports.getBidById = function(id, callback){
 }
 
 module.exports.getBidMaterialsById = function(id, callback){
-    const queryString = `SELECT * FROM BidMaterial WHERE bidID=${id}`;
+    const queryString = `SELECT * FROM Material JOIN BidMaterial ON Material.materialID = BidMaterial.materialID WHERE bidID=${id}`;
     connection.query(queryString, (error, rows, fields) => {
         if(!error){
             callback(rows);
