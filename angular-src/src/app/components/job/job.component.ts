@@ -23,6 +23,7 @@ export class JobComponent implements OnInit {
   selectedMaterials:SelectedMaterial[] = [];
   materialID:any;
   status:any;
+  bidMaterials:any;
 
   constructor(
     private router:Router,
@@ -38,6 +39,10 @@ export class JobComponent implements OnInit {
     this.jobService.getJobById(this.id).subscribe((job) => {
       this.job = job;
       this.status = job[0].jobStatus;
+
+      this.bidService.getBidMaterialsById(job[0].bidID).subscribe((bidMaterials) => {
+        this.bidMaterials = bidMaterials;
+      });
     });
 
     this.jobService.getJobMaterialsById(this.id).subscribe((jobMaterials) => {
