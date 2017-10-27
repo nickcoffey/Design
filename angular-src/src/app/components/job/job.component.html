@@ -206,7 +206,7 @@
         <h4 class="modal-title">Update Job</h4>
       </div>
       <div class="modal-body">
-        <form (submit)="onUpdate()">
+        <form (submit)="onUpdate()" style="padding-bottom: 20px;">
           <div class="form-group">
             <label>Add Revenue</label>
             <input type="text" [(ngModel)]="jobRevenue" name="jobRevenue" placeholder="Revenue" class="form-control" required>
@@ -252,11 +252,12 @@
               </tr>
             </tbody>
           </table>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" data-dismiss="modal">Update</button>
-            <button type="reset" class="btn btn-danger" (click)="onClear()">Clear</button>
-          </div>
+          <button type="submit" class="btn btn-primary">Update</button>
+          <button type="reset" class="btn btn-danger" (click)="onClear()">Clear</button>
         </form>
+        <div class="modal-footer">
+          <button class="btn btn-info" data-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>
