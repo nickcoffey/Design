@@ -48,7 +48,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let bid of bids;" [routerLink]="['/bids/'+bid.bidID]">
+        <tr *ngFor="let bid of bids;" id="{{bid.bidID}}" [routerLink]="['/bids/'+bid.bidID]">
           <td>{{bid.bidID}}</td>
           <td>{{bid.bidStatus}}</td>
           <!-- <td>{{bid.bidPrice | currency: 'USD':true}}</td> -->

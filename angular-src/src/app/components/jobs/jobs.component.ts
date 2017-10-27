@@ -8,40 +8,61 @@ import { Subject } from 'rxjs/Rx';
   styleUrls: ['./jobs.component.css']
 })
 export class JobsComponent implements OnInit {
-  
-  jobs:any;
-  jobsLength:any;
-  inProgressJobs:any;
-  inProgressLength:any;
-  completedJobs:any;
-  completedLength:any;
+
+  jobs: any;
+  jobsLength: any;
+  inProgressJobs: any;
+  inProgressLength: any;
+  completedJobs: any;
+  completedLength: any;
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   displayTable: Boolean = false;
 
   constructor(
-    private jobService:JobService
+    private jobService: JobService
   ) { }
 
   ngOnInit() {
-    this.dtOptions = {
-      pagingType: 'full_numbers'
-    };
-
     this.jobService.getAllJobs().subscribe((jobs) => {
       this.jobs = jobs.jobs;
       this.jobsLength = jobs.jobs.length;
-      this.inProgressJobs = jobs.inProgressJobs;
-      this.inProgressLength = jobs.inProgressJobs.length;
-      //console.log('In-progress '+this.inProgressLength);
-      this.completedJobs = jobs.completedJobs;
-      this.completedLength = jobs.completedJobs.length;
-      //console.log('Completed '+this.completedLength);
-
-      this.dtTrigger.next();
-      this.displayTable = true;
+      this.filterJobs(jobs);
+      this.setupDataTable();
     });
   }
 
+  ngAfterContentInit() {
+    this.applyTableColor();
+  }
+
+  applyTableColor() {
+    this.jobService.getAllJobs().subscribe(jobs => {
+      jobs.jobs.forEach(job => {
+        let id = job.jobID;
+        let status = job.jobStatus;
+        if (status == 'IN-PROGRESS') {
+          document.getElementById(id).classList.add('info');
+        } else if (status == 'COMPLETED') {
+          document.getElementById(id).classList.add('success');
+        } 
+      });
+    });
+  }
+
+  setupDataTable() {
+    this.dtOptions = {
+      pagingType: 'full_numbers'
+    };
+    this.dtTrigger.next();
+    this.displayTable = true;
+  }
+
+  filterJobs(jobs) {
+    this.inProgressJobs = jobs.inProgressJobs;
+    this.inProgressLength = jobs.inProgressJobs.length;
+    this.completedJobs = jobs.completedJobs;
+    this.completedLength = jobs.completedJobs.length;
+  }
 }

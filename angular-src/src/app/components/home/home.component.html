@@ -2,15 +2,37 @@
   <div class="container">
     <h1>Allied Waterproofing</h1>
     <p>Project Management Application</p>
-    <p>
-      <!--<a class="btn btn-primary btn-lg" [routerLink]="['/customers']">View Customers</a>-->
-    </p>
   </div>
 </div>
 
 <h2 class="page-header">Current Jobs</h2>
 <ng-container *ngIf="currentJobsLength !=0; else noCurrentJobs">
-  <ul class="list-group" *ngFor="let currentJob of currentJobs; let i = index" [routerLink]="['/jobs/'+currentJob.jobID]">
+  <!-- <h4>Click To View Details</h4> -->
+  <div class="panel panel-primary" *ngFor="let currentJob of currentJobs; let i = index">
+    <div class="panel-heading">
+      <h3 class="panel-title">Job # {{currentJob.jobID}}</h3>
+    </div>
+    <div class="panel-body">
+      <h4>Customer:</h4><p>{{currentJob.customerName}}</p>
+      <hr>
+      <h4>Budget:</h4>
+      <div class="progress progress-striped active">
+        <div id="costProgress" class="progress-bar progress-bar-info" role="progressbar" [attr.aria-valuenow]="jobCosts[i]" aria-valuemin="0" [attr.aria-valuemax]="bidCosts[i]" [ngStyle]="{'min-width': '2em', 'width': (jobCosts[i]/bidCosts[i])*100+ '%'}">
+          {{jobCosts[i]/bidCosts[i] | percent:'1.0-0'}}
+        </div>
+      </div>
+      <hr>
+      <h4>Revenue Collected:</h4>
+      <div class="progress progress-striped active">
+        <div id="revenueProgress" class="progress-bar progress-bar-info" role="progressbar" [attr.aria-valuenow]="currentJob.jobRevenue" aria-valuemin="0" [attr.aria-valuemax]="currentJob.bidPrice" [ngStyle]="{'min-width': '2em', 'width': (currentJob.jobRevenue/currentJob.bidPrice)*100+ '%'}">
+          {{currentJob.jobRevenue/currentJob.bidPrice | percent:'1.0-0'}}
+        </div>
+      </div>
+      <hr>
+      <button type="button" class="btn btn-primary btn-lg" [routerLink]="['/jobs/'+currentJob.jobID]">Open Job</button>
+    </div>
+  </div>
+  <!-- <ul class="list-group" *ngFor="let currentJob of currentJobs; let i = index" [routerLink]="['/jobs/'+currentJob.jobID]">
     <h3 class="page-header">Job # {{currentJob.jobID}}</h3>
     <h4>Click To View Details</h4>
     <li class="list-group-item"><b>Customer:</b> {{currentJob.customerName}}</li>
@@ -28,7 +50,7 @@
         </div>
       </div>
     </li>
-  </ul>
+  </ul> -->
 </ng-container>
 <ng-template #noCurrentJobs>
   <h2 class="page-header">No Current Jobs</h2>

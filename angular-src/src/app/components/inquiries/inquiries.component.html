@@ -17,7 +17,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let inquiry of inquiries;" [routerLink]="['/inquiries/'+inquiry.inquiryID]">
+        <tr *ngFor="let inquiry of inquiries;" id="{{inquiry.inquiryID}}" [routerLink]="['/inquiries/'+inquiry.inquiryID]">
           <td>{{inquiry.inquiryID}}</td>
           <td>{{inquiry.inquiryStatus}}</td>
           <td>{{inquiry.customerName}}</td>

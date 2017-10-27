@@ -26,16 +26,18 @@ export class CustomersComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.customerService.getAllCustomers().subscribe((customers) => {
+      this.customers = customers.customers;
+      this.setupDataTable();
+    });
+  }
+
+  setupDataTable(){
     this.dtOptions = {
       pagingType: 'full_numbers'
     };
-
-    this.customerService.getAllCustomers().subscribe((customers) => {
-      this.customers = customers.customers;
-
-      this.dtTrigger.next();
-      this.displayTable = true;
-    });
+    this.dtTrigger.next();
+    this.displayTable = true;
   }
 
   onCreate(){

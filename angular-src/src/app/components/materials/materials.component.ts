@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MaterialService } from '../../services/material.service';
+import { Subject } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-materials',
@@ -13,6 +14,10 @@ export class MaterialsComponent implements OnInit {
   tempID:any;
   length:any;
 
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
+  displayTable: Boolean = false;
+
   constructor(
     private materialService:MaterialService
   ) { }
@@ -21,7 +26,16 @@ export class MaterialsComponent implements OnInit {
     this.materialService.getAllMaterials().subscribe((materials) => {
       this.materials = materials.materials;
       this.length = this.materials.length;
+      this.setupDataTable();
     });
+  }
+
+  setupDataTable(){
+    this.dtOptions = {
+      pagingType: 'full_numbers'
+    };
+    this.dtTrigger.next();
+    this.displayTable = true;
   }
 
   onCreate(){

@@ -22,6 +22,7 @@ export class BidComponent implements OnInit {
   endDate:any;
   materials:any;
   selectedMaterials:SelectedMaterial[] = [];
+  status:any;
 
   constructor(
     private router:Router,
@@ -37,6 +38,7 @@ export class BidComponent implements OnInit {
 
     this.bidService.getBidById(this.id).subscribe((bid) => {
       this.bid = bid;
+      this.status = bid[0].bidStatus;
     });
 
     this.bidService.getBidMaterialsById(this.id).subscribe((bidMaterials) => {

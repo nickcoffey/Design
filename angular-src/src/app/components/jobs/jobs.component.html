@@ -17,7 +17,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let job of jobs;" [routerLink]="['/jobs/'+job.jobID]">
+        <tr *ngFor="let job of jobs;" id="{{job.jobID}}" [routerLink]="['/jobs/'+job.jobID]">
           <td>{{job.jobID}}</td>
           <td>{{job.jobStatus}}</td>
           <td>{{job.customerName}}</td>

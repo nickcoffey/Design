@@ -14,7 +14,7 @@ module.exports.getAllBids = function(callback){
 }
 
 module.exports.getBidById = function(id, callback){
-    const queryString = `SELECT * FROM Bid WHERE bidID=${id}`;
+    const queryString = `SELECT * FROM detailedBids WHERE bidID=${id}`;
     connection.query(queryString, (error, rows, fields) => {
         if(!error){
             callback(rows);
