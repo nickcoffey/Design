@@ -1,5 +1,5 @@
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-  <button class="btn btn-default" [routerLink]="['/customers']">Go Back</button>
+  <button class="btn btn-default" [routerLink]="['/customers']">Go To Customers</button>
 </div>
 
 <h2 class="page-header col-xs-12 col-sm-12 col-md-12 col-lg-12">{{customer[0].customerName}}</h2>
@@ -15,21 +15,26 @@
           <thead>
             <tr>
               <th>Address</th>
-              <th>Email</th>
-              <th>Phone</th>
+              <th>City</th>
+              <th>State</th>
+              <th>ZIP</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>{{customer[0].address}}</td>
-              <td>{{customer[0].email}}</td>
-              <td>{{customer[0].phone}}</td>
+              <td>{{customer[0].city}}</td>
+              <td>{{customer[0].state}}</td>
+              <td>{{customer[0].zip}}</td>
             </tr>
           </tbody>
         </table>
-        <button class="btn btn-primary" href="#update-modal" data-toggle="modal">Update Customer</button>
-        <button class="btn btn-info" href="#create-inquiry-modal" data-toggle="modal">Create Inquiry</button>
-        <button class="btn btn-danger" data-toggle="modal" href='#delete-modal'>Delete Customer</button>
+        <button class="btn btn-primary" href="#update-customer-modal" data-toggle="modal">
+          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Update Customer</button>
+        <button class="btn btn-info" href="#create-inquiry-modal" data-toggle="modal">
+          <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> Create Inquiry</button>
+        <button class="btn btn-danger" data-toggle="modal" href='#delete-customer-modal'>
+          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete Customer</button>
       </div>
     </div>
   </ng-container>
@@ -39,8 +44,59 @@
   </ng-template>
 </div>
 
-<!--                Delete Popup                -->
-<div class="modal fade" id="delete-modal">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <ng-container *ngIf="contacts; else noContacts">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Contact Details</h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Update</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let contact of contacts">
+              <td>{{contact.contactID}}</td>
+              <td>{{contact.contactTitle}}</td>
+              <td>{{contact.contactName}}</td>
+              <td>{{contact.contactPhone}}</td>
+              <td>{{contact.contactEmail}}</td>
+              <td>
+                <button class="btn btn-primary" type="button" (click)="onClickUpdateContact(contact.contactID)" data-toggle="modal" href='#update-contact-modal'>
+                  <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                </button>
+              </td>
+              <td>
+                <button class="btn btn-danger" type="button" (click)="onClickDeleteContact(contact.contactID)" data-toggle="modal" href='#delete-contact-modal'>
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="btn btn-info" type="button" data-toggle="modal" href='#create-contact-modal'>
+          <span class="glyphicon glyphicon-phone" aria-hidden="true"></span> Create Contact
+        </button>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template>
+    <h2 class="page-header">No Contacts</h2>
+    <p>If this is incorrect, try refreshing the page.</p>
+  </ng-template>
+</div>
+
+<!--                Delete Customer Popup                -->
+<div class="modal fade" id="delete-customer-modal">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -52,13 +108,13 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onDelete()">Yes</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onDeleteCustomer()">Yes</button>
       </div>
     </div>
   </div>
 </div>
-<!--                Update Popup                -->
-<div class="modal fade" id="update-modal">
+<!--                Update Customer Popup                -->
+<div class="modal fade" id="update-customer-modal">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -66,26 +122,36 @@
         <h4 class="modal-title">Update Customer</h4>
       </div>
       <div class="modal-body">
-        <form (submit)="onUpdate()">
-          <h2 class="page-header">Update Customer</h2>
+        <form (submit)="onUpdateCustomer()">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" [(ngModel)]="name" name="name" placeholder="Name" class="form-control" required>
+          </div>
           <div class="form-group">
             <label for="">Address</label>
             <input type="text" class="form-control" [(ngModel)]="address" name="address" placeholder="Address" />
           </div>
           <div class="form-group">
-            <label for="">Email</label>
-            <input type="text" class="form-control" [(ngModel)]="email" name="email" placeholder="Email" />
+            <label for="">City</label>
+            <input type="text" class="form-control" [(ngModel)]="city" name="city" placeholder="City" />
           </div>
           <div class="form-group">
-            <label for="">Phone</label>
-            <input type="text" class="form-control" [(ngModel)]="phone" name="phone" placeholder="Phone" />
+            <label for="">State</label>
+            <input type="text" class="form-control" [(ngModel)]="state" name="state" placeholder="State" />
           </div>
-          <button type="submit" class="btn btn-primary">Update</button>
-          <button type="reset" class="btn btn-danger">Clear</button>
+          <div class="form-group">
+            <label for="">ZIP</label>
+            <input type="text" class="form-control" [(ngModel)]="zip" name="zip" placeholder="ZIP" />
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
+          <button type="reset" class="btn btn-danger">
+            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-info" data-dismiss="modal">
+          <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
       </div>
     </div>
   </div>
@@ -104,12 +170,111 @@
             <label>Description</label>
             <textarea type="text" [(ngModel)]="description" name="description" placeholder="Description" class="form-control" required></textarea>
           </div>
-          <button type="submit" class="btn btn-primary">Create</button>
-          <button type="reset" class="btn btn-danger">Clear</button>
+          <button type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> Create</button>
+          <button type="reset" class="btn btn-danger">
+            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-info" data-dismiss="modal">
+          <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--                Delete Contact Popup                -->
+<div class="modal fade" id="delete-contact-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Warning</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this contact?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onDeleteContact()">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--                Update Contact Popup                -->
+<div class="modal fade" id="update-contact-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Update Contact</h4>
+      </div>
+      <div class="modal-body">
+        <form (submit)="onUpdateContact()">
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" class="form-control" [(ngModel)]="contactTitle" name="contactTitle" placeholder="Title" required/>
+          </div>
+          <div class="form-group">
+            <label for="">Name</label>
+            <input type="text" class="form-control" [(ngModel)]="contactName" name="contactName" placeholder="Name" required/>
+          </div>
+          <div class="form-group">
+            <label for="">Phone</label>
+            <input type="text" class="form-control" [(ngModel)]="contactPhone" name="contactPhone" placeholder="Phone" required/>
+          </div>
+          <div class="form-group">
+            <label for="">Email</label>
+            <input type="text" class="form-control" [(ngModel)]="contactEmail" name="contactEmail" placeholder="Email" required/>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
+          <button type="reset" class="btn btn-danger">
+            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">
+          <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--                Create Contact Popup                -->
+<div class="modal fade" id="create-contact-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Create Contact</h4>
+      </div>
+      <div class="modal-body">
+        <form (submit)="onCreateContact()">
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" class="form-control" [(ngModel)]="contactTitle" name="contactTitle" placeholder="Title" required/>
+          </div>
+          <div class="form-group">
+            <label for="">Name</label>
+            <input type="text" class="form-control" [(ngModel)]="contactName" name="contactName" placeholder="Name" required/>
+          </div>
+          <div class="form-group">
+            <label for="">Phone</label>
+            <input type="text" class="form-control" [(ngModel)]="contactPhone" name="contactPhone" placeholder="Phone" required/>
+          </div>
+          <div class="form-group">
+            <label for="">Email</label>
+            <input type="text" class="form-control" [(ngModel)]="contactEmail" name="contactEmail" placeholder="Email" required/>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Create</button>
+          <button type="reset" class="btn btn-danger">
+            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">
+          <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
       </div>
     </div>
   </div>

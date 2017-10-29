@@ -10,19 +10,20 @@ import { Subject } from 'rxjs/Rx';
 })
 export class CustomersComponent implements OnInit {
 
-  customers:any;
-  name:any;
-  email:any;
-  address:any;
-  phone:any;
+  customers: any;
+  name: any;
+  address: any;
+  city: any;
+  state: any;
+  zip: any;
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   displayTable: Boolean = false;
 
   constructor(
-    private customerService:CustomerService,
-    private router:Router
+    private customerService: CustomerService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -32,7 +33,7 @@ export class CustomersComponent implements OnInit {
     });
   }
 
-  setupDataTable(){
+  setupDataTable() {
     this.dtOptions = {
       pagingType: 'full_numbers'
     };
@@ -40,25 +41,31 @@ export class CustomersComponent implements OnInit {
     this.displayTable = true;
   }
 
-  onCreate(){
+  onCreate() {
     const newCustomer = {
       customerName: this.name,
-      email: this.email,
       address: this.address,
-      phone: this.phone
+      city: this.city,
+      state: this.state,
+      zip: this.zip
     }
 
     this.customerService.createCustomer(newCustomer).subscribe((data) => {
-      if(data.success){
+      if (data.success) {
         console.log(data.msg);
         this.ngOnInit();
-        this.name = null;
-        this.email = null;
-        this.address = null;
-        this.phone = null;
-      } else{
+        this.clearFields();
+      } else {
         console.log(data.msg);
       }
     });
+  }
+
+  clearFields() {
+    this.name = null;
+    this.address = null;
+    this.city = null;
+    this.state = null;
+    this.zip = null;
   }
 }

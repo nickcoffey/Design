@@ -1,5 +1,5 @@
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-  <button class="btn btn-default" [routerLink]="['/jobs']">Go Back</button>
+  <button class="btn btn-default" [routerLink]="['/jobs']">Go To Jobs</button>
 </div>
 <h2 class="page-header col-xs-12 col-sm-12 col-md-12 col-lg-12">Job #{{job[0].jobID}}</h2>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -11,20 +11,20 @@
       <table class="table table-striped table-hover">
         <thead>
           <tr>
+            <th>ID</th>
             <th>Name</th>
-            <th>Phone</th>
             <th>Address</th>
           </tr>
         </thead>
         <tbody>
           <tr>
+            <td>{{job[0].customerID}}</td>
             <td>{{job[0].customerName}}</td>
-            <td>{{job[0].customerPhone}}</td>
             <td>{{job[0].customerAddress}}</td>
           </tr>
         </tbody>
       </table>
-      <button type="button" class="btn btn-primary" [routerLink]="['/customers/'+job[0].customerID]">Open Customer</button>
+      <button type="button" class="btn btn-primary" [routerLink]="['/customers/'+job[0].customerID]"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Open Customer</button>
     </div>
   </div>
 </div>
@@ -67,7 +67,7 @@
               <th>Material</th>
               <th>Quantity</th>
               <th>Per Unit Cost</th>
-              <th></th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -78,15 +78,15 @@
               <td>
                 <button class="btn btn-danger" *ngIf="status == 'IN-PROGRESS'" type="button" (click)="onClickDeleteMaterial(jobMaterial.materialID)"
                   data-toggle="modal" href='#delete-material-modal'>
-                  <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                 </button>
               </td>
             </tr>
           </tbody>
         </table>
-        <button *ngIf="status == 'IN-PROGRESS'" class="btn btn-primary" data-toggle="modal" href='#finish-job-modal'>Finish Job</button>
-        <button *ngIf="status == 'IN-PROGRESS'" class="btn btn-info" data-toggle="modal" href='#update-job-modal'>Update Job</button>
-        <button class="btn btn-danger" data-toggle="modal" href='#delete-job-modal'>Delete Job</button>
+        <button *ngIf="status == 'IN-PROGRESS'" class="btn btn-primary" data-toggle="modal" href='#finish-job-modal'><span class="glyphicon glyphicon-check" aria-hidden="true"></span> Finish Job</button>
+        <button *ngIf="status == 'IN-PROGRESS'" class="btn btn-info" data-toggle="modal" href='#update-job-modal'><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Update Job</button>
+        <button class="btn btn-danger" data-toggle="modal" href='#delete-job-modal'><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete Job</button>
       </div>
     </div>
   </ng-container>
@@ -143,7 +143,7 @@
           </tr>
         </tbody>
       </table>
-      <button type="button" class="btn btn-primary" [routerLink]="['/bids/'+job[0].bidID]">Open Bid</button>
+      <button type="button" class="btn btn-primary" [routerLink]="['/bids/'+job[0].bidID]"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Open Bid</button>
     </div>
   </div>
 </div>
@@ -214,6 +214,9 @@
         <form (submit)="onUpdate()" style="padding-bottom: 20px;">
           <div class="form-group">
             <label>Add Revenue</label>
+            <!-- <span class="input-group-addon">
+              <input type="checkbox" aria-label="...">
+            </span> -->
             <input type="text" [(ngModel)]="jobRevenue" name="jobRevenue" placeholder="Revenue" class="form-control" required>
           </div>
           <div class="form-group">
@@ -222,7 +225,7 @@
           </div>
           <label>Add Materials</label>
           <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Add Materials
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Materials
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
@@ -264,7 +267,7 @@
           </table>
           <label>Upload Files</label>
           <div class="form-group">
-            <button type="button" class="btn btn-info" (click)="fileInput.click()">Browse Files</button>
+            <button type="button" class="btn btn-info" (click)="fileInput.click()"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Browse Files</button>
             <input name="file" type="file" style="display: none;" #fileInput ng2FileSelect [uploader]="uploader" />
             <!-- <button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
               <span class="glyphicon glyphicon-upload"></span> Upload all
@@ -288,11 +291,11 @@
               </tbody>
             </table>
           </div>
-          <button type="submit" class="btn btn-primary" (click)="uploader.uploadAll()">Update</button>
-          <button type="reset" class="btn btn-danger" (click)="onClear()">Clear</button>
+          <button type="submit" class="btn btn-primary" (click)="uploader.uploadAll()"><span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
+          <button type="reset" class="btn btn-danger" (click)="onClear()"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Clear</button>
         </form>
         <div class="modal-footer">
-          <button class="btn btn-info" data-dismiss="modal">Close</button>
+          <button class="btn btn-info" data-dismiss="modal"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
         </div>
       </div>
     </div>
