@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
+// import { Ng2FileInputModule } from 'ng2-file-input';
+import { FileSelectDirective}  from 'ng2-file-upload';
 //import { DataTableModule } from 'angular-4-data-table';
 import { DataTablesModule } from 'angular-datatables';
 //import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -32,8 +34,9 @@ import { JobService } from './services/job.service';
 import { MaterialService } from './services/material.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
+import { CookieService } from 'ngx-cookie-service';
 
-const appRoutes:Routes = [
+const appRoutes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'customers', component: CustomersComponent, canActivate: [AuthGuard] },
@@ -65,14 +68,27 @@ const appRoutes:Routes = [
     MaterialsComponent,
     BidComponent,
     InquiryComponent,
-    JobComponent
+    JobComponent,
+    FileSelectDirective
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     HttpModule,
     FormsModule,
-    DataTablesModule
+    DataTablesModule,
+    // Ng2FileInputModule.forRoot(
+    //   {
+    //     browseText: "Browse",
+    //     removeText: "Remove",
+    //     invalidFileText: "You have picked an invalid or disallowed file.",
+    //     invalidFileTimeout: 8000,
+    //     removable: true,
+    //     multiple: false,
+    //     showPreviews: true,
+    //     extensions: ['jpg'],
+    //   },
+    // ),
     //DataTablesModule
     //BrowserAnimationsModule,
     //FlexLayoutModule,
@@ -89,7 +105,8 @@ const appRoutes:Routes = [
     JobService,
     MaterialService,
     AuthService,
-    AuthGuard
+    AuthGuard,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

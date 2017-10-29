@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const bodyParser = require('body-parser');
+var bodyParser = require('body-parser');
 const cors = require('cors');
 const passport = require('passport');
 const mysql = require('mysql');
@@ -9,9 +9,9 @@ const config = require('./config/database');
 //  Connect to DB
 const connection = module.exports = mysql.createConnection(config.AWS);
 connection.connect((err) => {
-    if(err){
+    if (err) {
         console.error(`Database connection failed ${err.stack}`);
-    } else{
+    } else {
         console.log('Database connection successful');
     }
 
@@ -35,9 +35,15 @@ app.use(cors());
 // Set Static Folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Body Parser Middleware
-app.use(bodyParser.json());
+// Set Images Folder
+app.use(express.static('uploads'));
 
+// Body Parser Middleware
+app.use(bodyParser.json({
+    parameterLimit: 100000,
+    limit: '100mb',
+    extended: true
+}));
 
 // Passport Middleware
 app.use(passport.initialize());
@@ -59,10 +65,10 @@ app.get('/', (request, response) => {
 });
 
 
-// Any other route besides given ones will be sent here
-app.get('*', (request, response) => {
-    response.sendFile(path.join(__dirname, 'public/index.html'));
-});
+// // Any other route besides given ones will be sent here
+// app.get('*', (request, response) => {
+//     response.sendFile(path.join(__dirname, 'public/index.html'));
+// });
 
 
 // Start Server

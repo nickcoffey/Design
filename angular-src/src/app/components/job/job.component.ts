@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { JobService } from '../../services/job.service';
 import { MaterialService } from '../../services/material.service';
+import { AuthService } from '../../services/auth.service';
 import { BidService } from '../../services/bid.service';
+import { FileUploader } from 'ng2-file-upload'; 
+// declare var $;
 
 @Component({
   selector: 'app-job',
@@ -25,16 +28,22 @@ export class JobComponent implements OnInit {
   status:any;
   bidMaterials:any;
 
+  url:string;
+  uploader:FileUploader;
+  readyItems:any[] = [];
+
   constructor(
     private router:Router,
     private route:ActivatedRoute,
     private jobService:JobService,
     private materialService:MaterialService,
-    private bidService:BidService
+    private bidService:BidService,
+    private authService:AuthService
   ) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
+    this.setupFileUploader();
 
     this.jobService.getJobById(this.id).subscribe((job) => {
       this.job = job;
@@ -62,6 +71,26 @@ export class JobComponent implements OnInit {
     });
   }
 
+  setupFileUploader(){
+    this.url = `http://localhost:3000/jobs/${this.id}/upload`;
+    this.authService.loadToken();
+    let headers:any = [{name: 'Authorization', value: this.authService.authToken}, {name: 'Content-Type', value: 'application/json'}];
+    this.uploader = new FileUploader({url: this.url});
+    this.uploader.onAfterAddingFile = (file) => {
+      file.withCredentials = false;
+      this.readyItems.push(file);
+      // console.log(file);
+    }
+    this.uploader.onCompleteItem = (item:any, response:any, status:any, headers:any) => {
+      console.log("ImageUpload:uploaded:", response);
+      this.uploader.cancelItem(item);
+    }
+  }
+
+  onRemoveFile(){
+
+  }
+
   onAddMaterial(material, id){
     this.selectedMaterials.push(material);
     this.materials.splice(id, 1);
@@ -78,14 +107,6 @@ export class JobComponent implements OnInit {
   }
 
   onUpdate(){
-    // To help with date on single update API call
-    /*if(this.createdDate != null){
-      this.createdDate = `"${this.createdDate}"`;
-    }
-    if(this.endDate != null){
-      this.endDate = `"${this.endDate}"`;
-    }*/
-
     let updatedJob = {
       jobID: this.id,
       jobLabor: Number(this.jobLabor) + Number(this.job[0].jobLabor),

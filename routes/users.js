@@ -33,6 +33,7 @@ router.post('/register', passport.authenticate('jwt', {session: false}), (reques
 router.post('/authenticate', (request, response, next) => {
     const username = request.body.username;
     const password = request.body.password;
+    console.log(username);
 
     User.getUserByUsername(username, (user, error) => {
         //console.log(`User = ${JSON.stringify(user)}`);

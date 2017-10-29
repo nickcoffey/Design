@@ -83,29 +83,32 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angular_datatables__ = __webpack_require__("../../../../angular-datatables/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_navbar_navbar_component__ = __webpack_require__("../../../../../src/app/components/navbar/navbar.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_home_home_component__ = __webpack_require__("../../../../../src/app/components/home/home.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_customers_customers_component__ = __webpack_require__("../../../../../src/app/components/customers/customers.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_login_login_component__ = __webpack_require__("../../../../../src/app/components/login/login.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_register_register_component__ = __webpack_require__("../../../../../src/app/components/register/register.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_inquiries_inquiries_component__ = __webpack_require__("../../../../../src/app/components/inquiries/inquiries.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_bids_bids_component__ = __webpack_require__("../../../../../src/app/components/bids/bids.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_jobs_jobs_component__ = __webpack_require__("../../../../../src/app/components/jobs/jobs.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_customer_customer_component__ = __webpack_require__("../../../../../src/app/components/customer/customer.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_create_bid_create_bid_component__ = __webpack_require__("../../../../../src/app/components/create-bid/create-bid.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_materials_materials_component__ = __webpack_require__("../../../../../src/app/components/materials/materials.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_bid_bid_component__ = __webpack_require__("../../../../../src/app/components/bid/bid.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_inquiry_inquiry_component__ = __webpack_require__("../../../../../src/app/components/inquiry/inquiry.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_job_job_component__ = __webpack_require__("../../../../../src/app/components/job/job.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__services_customer_service__ = __webpack_require__("../../../../../src/app/services/customer.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__services_inquiry_service__ = __webpack_require__("../../../../../src/app/services/inquiry.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__services_bid_service__ = __webpack_require__("../../../../../src/app/services/bid.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__services_job_service__ = __webpack_require__("../../../../../src/app/services/job.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__services_material_service__ = __webpack_require__("../../../../../src/app/services/material.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__guards_auth_guard__ = __webpack_require__("../../../../../src/app/guards/auth.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ng2_file_upload__ = __webpack_require__("../../../../ng2-file-upload/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ng2_file_upload___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_ng2_file_upload__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angular_datatables__ = __webpack_require__("../../../../angular-datatables/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_navbar_navbar_component__ = __webpack_require__("../../../../../src/app/components/navbar/navbar.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_home_home_component__ = __webpack_require__("../../../../../src/app/components/home/home.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_customers_customers_component__ = __webpack_require__("../../../../../src/app/components/customers/customers.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_login_login_component__ = __webpack_require__("../../../../../src/app/components/login/login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_register_register_component__ = __webpack_require__("../../../../../src/app/components/register/register.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_inquiries_inquiries_component__ = __webpack_require__("../../../../../src/app/components/inquiries/inquiries.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_bids_bids_component__ = __webpack_require__("../../../../../src/app/components/bids/bids.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_jobs_jobs_component__ = __webpack_require__("../../../../../src/app/components/jobs/jobs.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_customer_customer_component__ = __webpack_require__("../../../../../src/app/components/customer/customer.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_create_bid_create_bid_component__ = __webpack_require__("../../../../../src/app/components/create-bid/create-bid.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_materials_materials_component__ = __webpack_require__("../../../../../src/app/components/materials/materials.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_bid_bid_component__ = __webpack_require__("../../../../../src/app/components/bid/bid.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_inquiry_inquiry_component__ = __webpack_require__("../../../../../src/app/components/inquiry/inquiry.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_job_job_component__ = __webpack_require__("../../../../../src/app/components/job/job.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__services_customer_service__ = __webpack_require__("../../../../../src/app/services/customer.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__services_inquiry_service__ = __webpack_require__("../../../../../src/app/services/inquiry.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__services_bid_service__ = __webpack_require__("../../../../../src/app/services/bid.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__services_job_service__ = __webpack_require__("../../../../../src/app/services/job.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__services_material_service__ = __webpack_require__("../../../../../src/app/services/material.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__guards_auth_guard__ = __webpack_require__("../../../../../src/app/guards/auth.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29_ngx_cookie_service__ = __webpack_require__("../../../../ngx-cookie-service/index.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -116,6 +119,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
+// import { Ng2FileInputModule } from 'ng2-file-input';
 
 //import { DataTableModule } from 'angular-4-data-table';
 
@@ -144,20 +149,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var appRoutes = [
-    { path: '', component: __WEBPACK_IMPORTED_MODULE_10__components_login_login_component__["a" /* LoginComponent */] },
-    { path: 'home', component: __WEBPACK_IMPORTED_MODULE_8__components_home_home_component__["a" /* HomeComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_27__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'customers', component: __WEBPACK_IMPORTED_MODULE_9__components_customers_customers_component__["a" /* CustomersComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_27__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'customers/:id', component: __WEBPACK_IMPORTED_MODULE_15__components_customer_customer_component__["a" /* CustomerComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_27__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'inquiries', component: __WEBPACK_IMPORTED_MODULE_12__components_inquiries_inquiries_component__["a" /* InquiriesComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_27__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'bids', component: __WEBPACK_IMPORTED_MODULE_13__components_bids_bids_component__["a" /* BidsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_27__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'jobs', component: __WEBPACK_IMPORTED_MODULE_14__components_jobs_jobs_component__["a" /* JobsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_27__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'register', component: __WEBPACK_IMPORTED_MODULE_11__components_register_register_component__["a" /* RegisterComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_27__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'create-bid/:id', component: __WEBPACK_IMPORTED_MODULE_16__components_create_bid_create_bid_component__["a" /* CreateBidComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_27__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'materials', component: __WEBPACK_IMPORTED_MODULE_17__components_materials_materials_component__["a" /* MaterialsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_27__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'bids/:id', component: __WEBPACK_IMPORTED_MODULE_18__components_bid_bid_component__["a" /* BidComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_27__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'inquiries/:id', component: __WEBPACK_IMPORTED_MODULE_19__components_inquiry_inquiry_component__["a" /* InquiryComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_27__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'jobs/:id', component: __WEBPACK_IMPORTED_MODULE_20__components_job_job_component__["a" /* JobComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_27__guards_auth_guard__["a" /* AuthGuard */]] }
+    { path: '', component: __WEBPACK_IMPORTED_MODULE_11__components_login_login_component__["a" /* LoginComponent */] },
+    { path: 'home', component: __WEBPACK_IMPORTED_MODULE_9__components_home_home_component__["a" /* HomeComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_28__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'customers', component: __WEBPACK_IMPORTED_MODULE_10__components_customers_customers_component__["a" /* CustomersComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_28__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'customers/:id', component: __WEBPACK_IMPORTED_MODULE_16__components_customer_customer_component__["a" /* CustomerComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_28__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'inquiries', component: __WEBPACK_IMPORTED_MODULE_13__components_inquiries_inquiries_component__["a" /* InquiriesComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_28__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'bids', component: __WEBPACK_IMPORTED_MODULE_14__components_bids_bids_component__["a" /* BidsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_28__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'jobs', component: __WEBPACK_IMPORTED_MODULE_15__components_jobs_jobs_component__["a" /* JobsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_28__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'register', component: __WEBPACK_IMPORTED_MODULE_12__components_register_register_component__["a" /* RegisterComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_28__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'create-bid/:id', component: __WEBPACK_IMPORTED_MODULE_17__components_create_bid_create_bid_component__["a" /* CreateBidComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_28__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'materials', component: __WEBPACK_IMPORTED_MODULE_18__components_materials_materials_component__["a" /* MaterialsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_28__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'bids/:id', component: __WEBPACK_IMPORTED_MODULE_19__components_bid_bid_component__["a" /* BidComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_28__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'inquiries/:id', component: __WEBPACK_IMPORTED_MODULE_20__components_inquiry_inquiry_component__["a" /* InquiryComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_28__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'jobs/:id', component: __WEBPACK_IMPORTED_MODULE_21__components_job_job_component__["a" /* JobComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_28__guards_auth_guard__["a" /* AuthGuard */]] }
 ];
 var AppModule = (function () {
     function AppModule() {
@@ -167,47 +173,41 @@ var AppModule = (function () {
 AppModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["NgModule"])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* AppComponent */],
-            __WEBPACK_IMPORTED_MODULE_7__components_navbar_navbar_component__["a" /* NavbarComponent */],
-            __WEBPACK_IMPORTED_MODULE_8__components_home_home_component__["a" /* HomeComponent */],
-            __WEBPACK_IMPORTED_MODULE_9__components_customers_customers_component__["a" /* CustomersComponent */],
-            __WEBPACK_IMPORTED_MODULE_10__components_login_login_component__["a" /* LoginComponent */],
-            __WEBPACK_IMPORTED_MODULE_11__components_register_register_component__["a" /* RegisterComponent */],
-            __WEBPACK_IMPORTED_MODULE_12__components_inquiries_inquiries_component__["a" /* InquiriesComponent */],
-            __WEBPACK_IMPORTED_MODULE_13__components_bids_bids_component__["a" /* BidsComponent */],
-            __WEBPACK_IMPORTED_MODULE_14__components_jobs_jobs_component__["a" /* JobsComponent */],
-            __WEBPACK_IMPORTED_MODULE_15__components_customer_customer_component__["a" /* CustomerComponent */],
-            __WEBPACK_IMPORTED_MODULE_16__components_create_bid_create_bid_component__["a" /* CreateBidComponent */],
-            __WEBPACK_IMPORTED_MODULE_17__components_materials_materials_component__["a" /* MaterialsComponent */],
-            __WEBPACK_IMPORTED_MODULE_18__components_bid_bid_component__["a" /* BidComponent */],
-            __WEBPACK_IMPORTED_MODULE_19__components_inquiry_inquiry_component__["a" /* InquiryComponent */],
-            __WEBPACK_IMPORTED_MODULE_20__components_job_job_component__["a" /* JobComponent */]
+            __WEBPACK_IMPORTED_MODULE_7__app_component__["a" /* AppComponent */],
+            __WEBPACK_IMPORTED_MODULE_8__components_navbar_navbar_component__["a" /* NavbarComponent */],
+            __WEBPACK_IMPORTED_MODULE_9__components_home_home_component__["a" /* HomeComponent */],
+            __WEBPACK_IMPORTED_MODULE_10__components_customers_customers_component__["a" /* CustomersComponent */],
+            __WEBPACK_IMPORTED_MODULE_11__components_login_login_component__["a" /* LoginComponent */],
+            __WEBPACK_IMPORTED_MODULE_12__components_register_register_component__["a" /* RegisterComponent */],
+            __WEBPACK_IMPORTED_MODULE_13__components_inquiries_inquiries_component__["a" /* InquiriesComponent */],
+            __WEBPACK_IMPORTED_MODULE_14__components_bids_bids_component__["a" /* BidsComponent */],
+            __WEBPACK_IMPORTED_MODULE_15__components_jobs_jobs_component__["a" /* JobsComponent */],
+            __WEBPACK_IMPORTED_MODULE_16__components_customer_customer_component__["a" /* CustomerComponent */],
+            __WEBPACK_IMPORTED_MODULE_17__components_create_bid_create_bid_component__["a" /* CreateBidComponent */],
+            __WEBPACK_IMPORTED_MODULE_18__components_materials_materials_component__["a" /* MaterialsComponent */],
+            __WEBPACK_IMPORTED_MODULE_19__components_bid_bid_component__["a" /* BidComponent */],
+            __WEBPACK_IMPORTED_MODULE_20__components_inquiry_inquiry_component__["a" /* InquiryComponent */],
+            __WEBPACK_IMPORTED_MODULE_21__components_job_job_component__["a" /* JobComponent */],
+            __WEBPACK_IMPORTED_MODULE_5_ng2_file_upload__["FileSelectDirective"]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
             __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* RouterModule */].forRoot(appRoutes),
             __WEBPACK_IMPORTED_MODULE_3__angular_http__["HttpModule"],
             __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormsModule */],
-            __WEBPACK_IMPORTED_MODULE_5_angular_datatables__["a" /* DataTablesModule */]
-            //DataTablesModule
-            //BrowserAnimationsModule,
-            //FlexLayoutModule,
-            /*MdSidenavModule,
-            MdToolbarModule,
-            MdIconModule,
-            MdButtonModule,
-            MdMenuModule*/
+            __WEBPACK_IMPORTED_MODULE_6_angular_datatables__["a" /* DataTablesModule */],
         ],
         providers: [
-            __WEBPACK_IMPORTED_MODULE_21__services_customer_service__["a" /* CustomerService */],
-            __WEBPACK_IMPORTED_MODULE_22__services_inquiry_service__["a" /* InquiryService */],
-            __WEBPACK_IMPORTED_MODULE_23__services_bid_service__["a" /* BidService */],
-            __WEBPACK_IMPORTED_MODULE_24__services_job_service__["a" /* JobService */],
-            __WEBPACK_IMPORTED_MODULE_25__services_material_service__["a" /* MaterialService */],
-            __WEBPACK_IMPORTED_MODULE_26__services_auth_service__["a" /* AuthService */],
-            __WEBPACK_IMPORTED_MODULE_27__guards_auth_guard__["a" /* AuthGuard */]
+            __WEBPACK_IMPORTED_MODULE_22__services_customer_service__["a" /* CustomerService */],
+            __WEBPACK_IMPORTED_MODULE_23__services_inquiry_service__["a" /* InquiryService */],
+            __WEBPACK_IMPORTED_MODULE_24__services_bid_service__["a" /* BidService */],
+            __WEBPACK_IMPORTED_MODULE_25__services_job_service__["a" /* JobService */],
+            __WEBPACK_IMPORTED_MODULE_26__services_material_service__["a" /* MaterialService */],
+            __WEBPACK_IMPORTED_MODULE_27__services_auth_service__["a" /* AuthService */],
+            __WEBPACK_IMPORTED_MODULE_28__guards_auth_guard__["a" /* AuthGuard */],
+            __WEBPACK_IMPORTED_MODULE_29_ngx_cookie_service__["a" /* CookieService */]
         ],
-        bootstrap: [__WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* AppComponent */]]
+        bootstrap: [__WEBPACK_IMPORTED_MODULE_7__app_component__["a" /* AppComponent */]]
     })
 ], AppModule);
 
@@ -818,7 +818,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/customers/customers.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <button class=\"btn btn-default\" [routerLink]=\"['/home']\">Go Home</button>\r\n</div>\r\n\r\n<h2 class=\"page-header col-xs-12 col-sm-12 col-md-12 col-lg-12\">Customers</h2>\r\n\r\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <ng-container *ngIf=\"customers; else noCustomers\">\r\n    <h4>Click To View Details</h4>\r\n    <table *ngIf=\"displayTable\" datatable [dtOptions]=\"dtOptions\" class=\"table table-striped table-hover\">\r\n      <thead>\r\n        <tr>\r\n          <th>ID</th>\r\n          <th>Name</th>\r\n          <th>Address</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let customer of customers;\" [routerLink]=\"['/customers/'+customer.customerID]\">\r\n          <td>{{customer.customerID}}</td>\r\n          <td>{{customer.customerName}}</td>\r\n          <td>{{customer.address}}</td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n    <button type=\"button\" class=\"btn btn-primary\" href=\"#create-modal\" data-toggle=\"modal\">Create New</button>\r\n  </ng-container>\r\n  <ng-template #noCustomers>\r\n    <h2 class=\"page-header\">No Customers</h2>\r\n    <p>If this is incorrect, try refreshing the page.</p>\r\n  </ng-template>\r\n</div>\r\n\r\n<!--                Create Customer Popup                -->\r\n<div class=\"modal fade\" id=\"create-modal\">\r\n  <div class=\"modal-dialog\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\r\n        <h4 class=\"modal-title\">Create A New Customer</h4>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <form (submit)=\"onCreate()\">\r\n          <div class=\"form-group\">\r\n            <label>Name</label>\r\n            <input type=\"text\" [(ngModel)]=\"name\" name=\"name\" placeholder=\"Name\" class=\"form-control\" required>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label>Email</label>\r\n            <input type=\"text\" [(ngModel)]=\"email\" name=\"email\" placeholder=\"Email\" class=\"form-control\" required>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label>Address</label>\r\n            <input type=\"text\" [(ngModel)]=\"address\" name=\"address\" placeholder=\"Address\" class=\"form-control\" required>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label>Phone</label>\r\n            <input type=\"text\" [(ngModel)]=\"phone\" name=\"phone\" placeholder=\"Phone\" class=\"form-control\" required>\r\n          </div>\r\n          <button type=\"submit\" class=\"btn btn-primary\">Create</button>\r\n          <button type=\"reset\" class=\"btn btn-danger\">Clear</button>\r\n        </form>\r\n      </div>\r\n      <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-info\" data-dismiss=\"modal\">Close</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>"
+module.exports = "<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <button class=\"btn btn-default\" [routerLink]=\"['/home']\">Go Home</button>\r\n</div>\r\n\r\n<h2 class=\"page-header col-xs-12 col-sm-12 col-md-12 col-lg-12\">Customers</h2>\r\n\r\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <ng-container *ngIf=\"customers; else noCustomers\">\r\n    <h4>Click To View Details</h4>\r\n    <!-- *ngIf=\"displayTable\" datatable [dtOptions]=\"dtOptions\" -->\r\n    <table class=\"table table-striped table-hover\">\r\n      <thead>\r\n        <tr>\r\n          <th>ID</th>\r\n          <th>Name</th>\r\n          <th>Address</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let customer of customers;\" [routerLink]=\"['/customers/'+customer.customerID]\">\r\n          <td>{{customer.customerID}}</td>\r\n          <td>{{customer.customerName}}</td>\r\n          <td>{{customer.address}}</td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n    <button type=\"button\" class=\"btn btn-primary\" href=\"#create-modal\" data-toggle=\"modal\">Create New</button>\r\n  </ng-container>\r\n  <ng-template #noCustomers>\r\n    <h2 class=\"page-header\">No Customers</h2>\r\n    <p>If this is incorrect, try refreshing the page.</p>\r\n  </ng-template>\r\n</div>\r\n\r\n<!--                Create Customer Popup                -->\r\n<div class=\"modal fade\" id=\"create-modal\">\r\n  <div class=\"modal-dialog\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\r\n        <h4 class=\"modal-title\">Create A New Customer</h4>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <form (submit)=\"onCreate()\">\r\n          <div class=\"form-group\">\r\n            <label>Name</label>\r\n            <input type=\"text\" [(ngModel)]=\"name\" name=\"name\" placeholder=\"Name\" class=\"form-control\" required>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label>Email</label>\r\n            <input type=\"text\" [(ngModel)]=\"email\" name=\"email\" placeholder=\"Email\" class=\"form-control\" required>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label>Address</label>\r\n            <input type=\"text\" [(ngModel)]=\"address\" name=\"address\" placeholder=\"Address\" class=\"form-control\" required>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label>Phone</label>\r\n            <input type=\"text\" [(ngModel)]=\"phone\" name=\"phone\" placeholder=\"Phone\" class=\"form-control\" required>\r\n          </div>\r\n          <button type=\"submit\" class=\"btn btn-primary\">Create</button>\r\n          <button type=\"reset\" class=\"btn btn-danger\">Clear</button>\r\n        </form>\r\n      </div>\r\n      <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-info\" data-dismiss=\"modal\">Close</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -857,7 +857,7 @@ var CustomersComponent = (function () {
         var _this = this;
         this.customerService.getAllCustomers().subscribe(function (customers) {
             _this.customers = customers.customers;
-            _this.setupDataTable();
+            // this.setupDataTable();
         });
     };
     CustomersComponent.prototype.setupDataTable = function () {
@@ -1294,7 +1294,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/job/job.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <button class=\"btn btn-default\" [routerLink]=\"['/jobs']\">Go Back</button>  \r\n</div>\r\n<h2 class=\"page-header col-xs-12 col-sm-12 col-md-12 col-lg-12\">Job #{{job[0].jobID}}</h2>\r\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <div class=\"panel panel-primary\">\r\n    <div class=\"panel-heading\">\r\n      <h3 class=\"panel-title\">Customer Details</h3>\r\n    </div>\r\n    <div class=\"panel-body\">\r\n      <table class=\"table table-striped table-hover\">\r\n        <thead>\r\n          <tr>\r\n            <th>Name</th>\r\n            <th>Phone</th>\r\n            <th>Address</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr>\r\n            <td>{{job[0].customerName}}</td>\r\n            <td>{{job[0].customerPhone}}</td>\r\n            <td>{{job[0].customerAddress}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n      <button type=\"button\" class=\"btn btn-primary\" [routerLink]=\"['/customers/'+job[0].customerID]\">Open Customer</button>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div class=\"col-xs-12 col-sm-12 col-md-6 col-lg-6\">\r\n  <ng-container *ngIf=\"job; else noJob\">\r\n    <div class=\"panel panel-primary\">\r\n      <div class=\"panel-heading\">\r\n        <h3 class=\"panel-title\">Job Details</h3>\r\n      </div>\r\n      <div class=\"panel-body\">\r\n        <table class=\"table table-striped table-hover\">\r\n          <thead>\r\n            <tr>\r\n              <th>Revenue</th>\r\n              <th>Created Date</th>\r\n              <th>Completion Date</th>\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr>\r\n              <td>{{job[0].jobRevenue | currency: 'USD':true}}</td>\r\n              <td>{{job[0].createdDate | date: 'MM/dd/yyyy'}}</td>\r\n              <td>{{job[0].endDate | date: 'MM/dd/yyyy'}}</td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n        <h4 class=\"page-header\">Actual Costs</h4>\r\n        <label>Labor Cost</label>\r\n        <table class=\"table table-striped table-hover\">\r\n          <tbody>\r\n            <tr>\r\n              <td>{{job[0].jobLabor | currency: 'USD':true}}</td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n        <label *ngIf=\"jobMaterials[0] != null;\">Materials Cost</label>\r\n        <table class=\"table table-striped table-hover\">\r\n          <thead *ngIf=\"jobMaterials[0] != null;\">\r\n            <tr>\r\n              <th>Material</th>\r\n              <th>Quantity</th>\r\n              <th>Per Unit Cost</th>\r\n              <th></th>\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr *ngFor=\"let jobMaterial of jobMaterials\">\r\n              <td>{{jobMaterial.materialName}}</td>\r\n              <td>{{jobMaterial.quantity}}</td>\r\n              <td>{{jobMaterial.perUnitCost | currency: 'USD':true}}</td>\r\n              <td><button *ngIf=\"status == 'IN-PROGRESS'\" type=\"button\" class=\"close\" (click)=\"onClickDeleteMaterial(jobMaterial.materialID)\" data-toggle=\"modal\" href='#delete-material-modal'>&times;</button></td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n        <button *ngIf=\"status == 'IN-PROGRESS'\" class=\"btn btn-primary\" data-toggle=\"modal\" href='#finish-job-modal'>Finish Job</button>\r\n        <button *ngIf=\"status == 'IN-PROGRESS'\" class=\"btn btn-info\" data-toggle=\"modal\" href='#update-job-modal'>Update Job</button>\r\n        <button class=\"btn btn-danger\" data-toggle=\"modal\" href='#delete-job-modal'>Delete Job</button>\r\n      </div>\r\n    </div>\r\n  </ng-container>\r\n  <ng-template #noJob>\r\n    <h2 class=\"page-header\">No Jobs</h2>\r\n    <p>If this is incorrect, try refreshing the page.</p>\r\n  </ng-template>\r\n</div>\r\n<div class=\"col-xs-12 col-sm-12 col-md-6 col-lg-6\">\r\n  <div class=\"panel panel-primary\">\r\n    <div class=\"panel-heading\">\r\n      <h3 class=\"panel-title\">Bid Details</h3>\r\n    </div>\r\n    <div class=\"panel-body\">\r\n      <table class=\"table table-striped table-hover\">\r\n        <thead>\r\n          <tr>\r\n            <th>Bid Price</th>\r\n            <th>Created Date</th>\r\n            <th>Accepted Date</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr>\r\n            <td>{{job[0].bidPrice | currency: 'USD':true}}</td>\r\n            <td>{{job[0].bidCreatedDate | date: 'MM/dd/yyyy'}}</td>\r\n            <td>{{job[0].bidEndDate | date: 'MM/dd/yyyy'}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n      <h4 class=\"page-header\">Estimated Costs</h4>\r\n      <label>Labor Cost</label>\r\n      <table class=\"table table-striped table-hover\">\r\n        <tbody>\r\n          <tr>\r\n            <td>{{job[0].bidLabor | currency: 'USD':true}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n      <label *ngIf=\"jobMaterials[0] != null;\">Materials Cost</label>\r\n      <table class=\"table table-striped table-hover\">\r\n        <thead *ngIf=\"jobMaterials[0] != null;\">\r\n          <tr>\r\n            <th>Material</th>\r\n            <th>Quantity</th>\r\n            <th>Per Unit Cost</th>\r\n            <th></th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let bidMaterial of bidMaterials\">\r\n            <td>{{bidMaterial.materialName}}</td>\r\n            <td>{{bidMaterial.quantity}}</td>\r\n            <td>{{bidMaterial.perUnitCost | currency: 'USD':true}}</td>\r\n            <td><button *ngIf=\"status == 'IN-PROGRESS'\" type=\"button\" class=\"close\" (click)=\"onClickDeleteMaterial(jobMaterial.materialID)\" data-toggle=\"modal\" href='#delete-material-modal'>&times;</button></td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n      <button type=\"button\" class=\"btn btn-primary\" [routerLink]=\"['/bids/'+job[0].bidID]\">Open Bid</button>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<!--                Delete Job Popup                -->\r\n<div class=\"modal fade\" id=\"delete-job-modal\">\r\n  <div class=\"modal-dialog\">\r\n      <div class=\"modal-content\">\r\n          <div class=\"modal-header\">\r\n              <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\r\n              <h4 class=\"modal-title\">Warning</h4>\r\n          </div>\r\n          <div class=\"modal-body\">\r\n              <p>Are you sure you want to delete this job?</p>\r\n          </div>\r\n          <div class=\"modal-footer\">\r\n              <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">No</button>\r\n              <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\" (click)=\"onDeleteJob()\">Yes</button>\r\n          </div>\r\n      </div>\r\n  </div>\r\n</div>\r\n<!--                Delete Material Popup                -->\r\n<div class=\"modal fade\" id=\"delete-material-modal\">\r\n  <div class=\"modal-dialog\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\r\n        <h4 class=\"modal-title\">Warning</h4>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <p>Are you sure you want to delete this material?</p>\r\n      </div>\r\n      <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">No</button>\r\n        <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\" (click)=\"onDeleteMaterial()\">Yes</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<!--                Finish Job Popup                -->\r\n<div class=\"modal fade\" id=\"finish-job-modal\">\r\n  <div class=\"modal-dialog\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\r\n        <h4 class=\"modal-title\">Warning</h4>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <p>Are you sure you want to finalize this job?</p>\r\n      </div>\r\n      <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">No</button>\r\n        <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\" (click)=\"onFinish()\">Yes</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<!--                Update Job Popup                -->\r\n<div class=\"modal fade\" id=\"update-job-modal\">\r\n  <div class=\"modal-dialog\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\r\n        <h4 class=\"modal-title\">Update Job</h4>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <form (submit)=\"onUpdate()\" style=\"padding-bottom: 20px;\">\r\n          <div class=\"form-group\">\r\n            <label>Add Revenue</label>\r\n            <input type=\"text\" [(ngModel)]=\"jobRevenue\" name=\"jobRevenue\" placeholder=\"Revenue\" class=\"form-control\" required>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label>Add Labor Cost</label>\r\n            <input type=\"text\" [(ngModel)]=\"jobLabor\" name=\"jobLabor\" placeholder=\"Labor Cost\" class=\"form-control\" required>\r\n          </div>\r\n          <!--<div class=\"form-group\">\r\n            <label>Created Date</label>\r\n            <input type=\"text\" [(ngModel)]=\"createdDate\" name=\"createdDate\" placeholder=\"YYYY-MM-DD\" class=\"form-control\" required>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label>Completion Date</label>\r\n            <input type=\"text\" [(ngModel)]=\"endDate\" name=\"endDate\" placeholder=\"YYYY-MM-DD\" class=\"form-control\" required>\r\n          </div>-->\r\n          <label>Add Materials</label>\r\n          <div class=\"dropdown\">\r\n            <button class=\"btn btn-primary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">Add Materials<span class=\"caret\"></span></button>\r\n            <ul class=\"dropdown-menu\">\r\n              <ng-container *ngIf=\"materials[0] != null; else noMaterials\">\r\n                <li *ngFor=\"let material of materials; let i = index;\"><a (click)=\"onAddMaterial(material, i)\">{{material.materialName}}</a></li>\r\n              </ng-container>\r\n              <ng-template #noMaterials>\r\n                <li><a>No more materials</a></li>\r\n              </ng-template>\r\n            </ul>\r\n          </div>\r\n          <table class=\"table table-striped table-hover\">\r\n            <thead *ngIf=\"selectedMaterials[0] != null;\">\r\n              <tr>\r\n                <th>Name</th>\r\n                <th>Quantity</th>\r\n                <th>Per Unit Cost</th>\r\n              </tr>\r\n            </thead>\r\n            <tbody>\r\n              <tr *ngFor=\"let selectedMaterial of selectedMaterials; let i = index;\">\r\n                <td>{{selectedMaterial.materialName}}</td>\r\n                <td><input type=\"text\" [(ngModel)]=\"selectedMaterial.quantity\" name=\"quantity\" placeholder=\"Quantity\" class=\"form-control\" required></td>\r\n                <td><input type=\"text\" [(ngModel)]=\"selectedMaterial.perUnitCost\" name=\"perUnitCost\" placeholder=\"Per Unit Cost\" class=\"form-control\" required></td>\r\n                <td><button type=\"button\" class=\"close\" (click)=\"onRemoveMaterial(selectedMaterial, i)\">&times;</button></td>\r\n              </tr>\r\n            </tbody>\r\n          </table>\r\n          <button type=\"submit\" class=\"btn btn-primary\">Update</button>\r\n          <button type=\"reset\" class=\"btn btn-danger\" (click)=\"onClear()\">Clear</button>\r\n        </form>\r\n        <div class=\"modal-footer\">\r\n          <button class=\"btn btn-info\" data-dismiss=\"modal\">Close</button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>"
+module.exports = "<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <button class=\"btn btn-default\" [routerLink]=\"['/jobs']\">Go Back</button>\r\n</div>\r\n<h2 class=\"page-header col-xs-12 col-sm-12 col-md-12 col-lg-12\">Job #{{job[0].jobID}}</h2>\r\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <div class=\"panel panel-primary\">\r\n    <div class=\"panel-heading\">\r\n      <h3 class=\"panel-title\">Customer Details</h3>\r\n    </div>\r\n    <div class=\"panel-body\">\r\n      <table class=\"table table-striped table-hover\">\r\n        <thead>\r\n          <tr>\r\n            <th>Name</th>\r\n            <th>Phone</th>\r\n            <th>Address</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr>\r\n            <td>{{job[0].customerName}}</td>\r\n            <td>{{job[0].customerPhone}}</td>\r\n            <td>{{job[0].customerAddress}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n      <button type=\"button\" class=\"btn btn-primary\" [routerLink]=\"['/customers/'+job[0].customerID]\">Open Customer</button>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div class=\"col-xs-12 col-sm-12 col-md-6 col-lg-6\">\r\n  <ng-container *ngIf=\"job; else noJob\">\r\n    <div class=\"panel panel-primary\">\r\n      <div class=\"panel-heading\">\r\n        <h3 class=\"panel-title\">Job Details</h3>\r\n      </div>\r\n      <div class=\"panel-body\">\r\n        <table class=\"table table-striped table-hover\">\r\n          <thead>\r\n            <tr>\r\n              <th>Revenue</th>\r\n              <th>Created Date</th>\r\n              <th>Completion Date</th>\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr>\r\n              <td>{{job[0].jobRevenue | currency: 'USD':true}}</td>\r\n              <td>{{job[0].createdDate | date: 'MM/dd/yyyy'}}</td>\r\n              <td>{{job[0].endDate | date: 'MM/dd/yyyy'}}</td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n        <h4 class=\"page-header\">Actual Costs</h4>\r\n        <label>Labor Cost</label>\r\n        <table class=\"table table-striped table-hover\">\r\n          <tbody>\r\n            <tr>\r\n              <td>{{job[0].jobLabor | currency: 'USD':true}}</td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n        <label *ngIf=\"jobMaterials[0] != null;\">Materials Cost</label>\r\n        <table class=\"table table-striped table-hover\">\r\n          <thead *ngIf=\"jobMaterials[0] != null;\">\r\n            <tr>\r\n              <th>Material</th>\r\n              <th>Quantity</th>\r\n              <th>Per Unit Cost</th>\r\n              <th></th>\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr *ngFor=\"let jobMaterial of jobMaterials\">\r\n              <td>{{jobMaterial.materialName}}</td>\r\n              <td>{{jobMaterial.quantity}}</td>\r\n              <td>{{jobMaterial.perUnitCost | currency: 'USD':true}}</td>\r\n              <td>\r\n                <button class=\"btn btn-danger\" *ngIf=\"status == 'IN-PROGRESS'\" type=\"button\" (click)=\"onClickDeleteMaterial(jobMaterial.materialID)\"\r\n                  data-toggle=\"modal\" href='#delete-material-modal'>\r\n                  <span class=\"glyphicon glyphicon-remove-circle\" aria-hidden=\"true\"></span>\r\n                </button>\r\n              </td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n        <button *ngIf=\"status == 'IN-PROGRESS'\" class=\"btn btn-primary\" data-toggle=\"modal\" href='#finish-job-modal'>Finish Job</button>\r\n        <button *ngIf=\"status == 'IN-PROGRESS'\" class=\"btn btn-info\" data-toggle=\"modal\" href='#update-job-modal'>Update Job</button>\r\n        <button class=\"btn btn-danger\" data-toggle=\"modal\" href='#delete-job-modal'>Delete Job</button>\r\n      </div>\r\n    </div>\r\n  </ng-container>\r\n  <ng-template #noJob>\r\n    <h2 class=\"page-header\">No Jobs</h2>\r\n    <p>If this is incorrect, try refreshing the page.</p>\r\n  </ng-template>\r\n</div>\r\n<div class=\"col-xs-12 col-sm-12 col-md-6 col-lg-6\">\r\n  <div class=\"panel panel-primary\">\r\n    <div class=\"panel-heading\">\r\n      <h3 class=\"panel-title\">Bid Details</h3>\r\n    </div>\r\n    <div class=\"panel-body\">\r\n      <table class=\"table table-striped table-hover\">\r\n        <thead>\r\n          <tr>\r\n            <th>Bid Price</th>\r\n            <th>Created Date</th>\r\n            <th>Accepted Date</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr>\r\n            <td>{{job[0].bidPrice | currency: 'USD':true}}</td>\r\n            <td>{{job[0].bidCreatedDate | date: 'MM/dd/yyyy'}}</td>\r\n            <td>{{job[0].bidEndDate | date: 'MM/dd/yyyy'}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n      <h4 class=\"page-header\">Estimated Costs</h4>\r\n      <label>Labor Cost</label>\r\n      <table class=\"table table-striped table-hover\">\r\n        <tbody>\r\n          <tr>\r\n            <td>{{job[0].bidLabor | currency: 'USD':true}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n      <label *ngIf=\"bidMaterials[0] != null;\">Materials Cost</label>\r\n      <table class=\"table table-striped table-hover\">\r\n        <thead *ngIf=\"bidMaterials[0] != null;\">\r\n          <tr>\r\n            <th>Material</th>\r\n            <th>Quantity</th>\r\n            <th>Per Unit Cost</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let bidMaterial of bidMaterials\">\r\n            <td>{{bidMaterial.materialName}}</td>\r\n            <td>{{bidMaterial.quantity}}</td>\r\n            <td>{{bidMaterial.perUnitCost | currency: 'USD':true}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n      <button type=\"button\" class=\"btn btn-primary\" [routerLink]=\"['/bids/'+job[0].bidID]\">Open Bid</button>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<!--                Delete Job Popup                -->\r\n<div class=\"modal fade\" id=\"delete-job-modal\">\r\n  <div class=\"modal-dialog\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\r\n        <h4 class=\"modal-title\">Warning</h4>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <p>Are you sure you want to delete this job?</p>\r\n      </div>\r\n      <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">No</button>\r\n        <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\" (click)=\"onDeleteJob()\">Yes</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<!--                Delete Material Popup                -->\r\n<div class=\"modal fade\" id=\"delete-material-modal\">\r\n  <div class=\"modal-dialog\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\r\n        <h4 class=\"modal-title\">Warning</h4>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <p>Are you sure you want to delete this material?</p>\r\n      </div>\r\n      <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">No</button>\r\n        <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\" (click)=\"onDeleteMaterial()\">Yes</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<!--                Finish Job Popup                -->\r\n<div class=\"modal fade\" id=\"finish-job-modal\">\r\n  <div class=\"modal-dialog\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\r\n        <h4 class=\"modal-title\">Warning</h4>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <p>Are you sure you want to finalize this job?</p>\r\n      </div>\r\n      <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">No</button>\r\n        <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\" (click)=\"onFinish()\">Yes</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<!--                Update Job Popup                -->\r\n<div class=\"modal fade\" id=\"update-job-modal\">\r\n  <div class=\"modal-dialog\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\r\n        <h4 class=\"modal-title\">Update Job</h4>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <form (submit)=\"onUpdate()\" style=\"padding-bottom: 20px;\">\r\n          <div class=\"form-group\">\r\n            <label>Add Revenue</label>\r\n            <input type=\"text\" [(ngModel)]=\"jobRevenue\" name=\"jobRevenue\" placeholder=\"Revenue\" class=\"form-control\" required>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label>Add Labor Cost</label>\r\n            <input type=\"text\" [(ngModel)]=\"jobLabor\" name=\"jobLabor\" placeholder=\"Labor Cost\" class=\"form-control\" required>\r\n          </div>\r\n          <label>Add Materials</label>\r\n          <div class=\"dropdown\">\r\n            <button class=\"btn btn-primary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">Add Materials\r\n              <span class=\"caret\"></span>\r\n            </button>\r\n            <ul class=\"dropdown-menu\">\r\n              <ng-container *ngIf=\"materials[0] != null; else noMaterials\">\r\n                <li *ngFor=\"let material of materials; let i = index;\">\r\n                  <a (click)=\"onAddMaterial(material, i)\">{{material.materialName}}</a>\r\n                </li>\r\n              </ng-container>\r\n              <ng-template #noMaterials>\r\n                <li>\r\n                  <a>No more materials</a>\r\n                </li>\r\n              </ng-template>\r\n            </ul>\r\n          </div>\r\n          <table class=\"table table-striped table-hover\">\r\n            <thead *ngIf=\"selectedMaterials[0] != null;\">\r\n              <tr>\r\n                <th>Name</th>\r\n                <th>Quantity</th>\r\n                <th>Per Unit Cost</th>\r\n              </tr>\r\n            </thead>\r\n            <tbody>\r\n              <tr *ngFor=\"let selectedMaterial of selectedMaterials; let i = index;\">\r\n                <td>{{selectedMaterial.materialName}}</td>\r\n                <td>\r\n                  <input type=\"text\" [(ngModel)]=\"selectedMaterial.quantity\" name=\"quantity\" placeholder=\"Quantity\" class=\"form-control\" required>\r\n                </td>\r\n                <td>\r\n                  <input type=\"text\" [(ngModel)]=\"selectedMaterial.perUnitCost\" name=\"perUnitCost\" placeholder=\"Per Unit Cost\" class=\"form-control\"\r\n                    required>\r\n                </td>\r\n                <td>\r\n                  <button type=\"button\" class=\"close\" (click)=\"onRemoveMaterial(selectedMaterial, i)\">&times;</button>\r\n                </td>\r\n              </tr>\r\n            </tbody>\r\n          </table>\r\n          <label>Upload Files</label>\r\n          <div class=\"form-group\">\r\n            <button type=\"button\" class=\"btn btn-info\" (click)=\"fileInput.click()\">Browse Files</button>\r\n            <input name=\"file\" type=\"file\" style=\"display: none;\" #fileInput ng2FileSelect [uploader]=\"uploader\" />\r\n            <!-- <button type=\"button\" class=\"btn btn-success btn-s\" (click)=\"uploader.uploadAll()\" [disabled]=\"!uploader.getNotUploadedItems().length\">\r\n              <span class=\"glyphicon glyphicon-upload\"></span> Upload all\r\n            </button> -->\r\n            <table *ngIf=\"readyItems.length != 0\" class=\"table table-striped table-hover\">\r\n              <thead>\r\n                <tr>\r\n                  <th>File</th>\r\n                  <th></th>\r\n                </tr>\r\n              </thead>\r\n              <tbody>\r\n                <tr *ngFor=\"let readyItem of readyItems\">\r\n                  <td>{{readyItem._file.name}}</td>\r\n                  <td>\r\n                    <button type=\"button\" class=\"btn btn-danger\">\r\n                      <span class=\"glyphicon glyphicon-remove-circle\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                  </td>\r\n                </tr>\r\n              </tbody>\r\n            </table>\r\n          </div>\r\n          <button type=\"submit\" class=\"btn btn-primary\" (click)=\"uploader.uploadAll()\">Update</button>\r\n          <button type=\"reset\" class=\"btn btn-danger\" (click)=\"onClear()\">Clear</button>\r\n        </form>\r\n        <div class=\"modal-footer\">\r\n          <button class=\"btn btn-info\" data-dismiss=\"modal\">Close</button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -1307,7 +1307,10 @@ module.exports = "<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_job_service__ = __webpack_require__("../../../../../src/app/services/job.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_material_service__ = __webpack_require__("../../../../../src/app/services/material.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_bid_service__ = __webpack_require__("../../../../../src/app/services/bid.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_bid_service__ = __webpack_require__("../../../../../src/app/services/bid.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng2_file_upload__ = __webpack_require__("../../../../ng2-file-upload/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng2_file_upload___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_ng2_file_upload__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1322,23 +1325,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
+// declare var $;
 var JobComponent = (function () {
-    function JobComponent(router, route, jobService, materialService, bidService) {
+    function JobComponent(router, route, jobService, materialService, bidService, authService) {
         this.router = router;
         this.route = route;
         this.jobService = jobService;
         this.materialService = materialService;
         this.bidService = bidService;
+        this.authService = authService;
         this.jobLabor = null;
         this.jobRevenue = null;
         this.jobStatus = null;
         this.createdDate = null;
         this.endDate = null;
         this.selectedMaterials = [];
+        this.readyItems = [];
     }
     JobComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.id = this.route.snapshot.params['id'];
+        this.setupFileUploader();
         this.jobService.getJobById(this.id).subscribe(function (job) {
             _this.job = job;
             _this.status = job[0].jobStatus;
@@ -1360,6 +1369,24 @@ var JobComponent = (function () {
             });
         });
     };
+    JobComponent.prototype.setupFileUploader = function () {
+        var _this = this;
+        this.url = "http://localhost:3000/jobs/" + this.id + "/upload";
+        this.authService.loadToken();
+        var headers = [{ name: 'Authorization', value: this.authService.authToken }, { name: 'Content-Type', value: 'application/json' }];
+        this.uploader = new __WEBPACK_IMPORTED_MODULE_6_ng2_file_upload__["FileUploader"]({ url: this.url });
+        this.uploader.onAfterAddingFile = function (file) {
+            file.withCredentials = false;
+            _this.readyItems.push(file);
+            // console.log(file);
+        };
+        this.uploader.onCompleteItem = function (item, response, status, headers) {
+            console.log("ImageUpload:uploaded:", response);
+            _this.uploader.cancelItem(item);
+        };
+    };
+    JobComponent.prototype.onRemoveFile = function () {
+    };
     JobComponent.prototype.onAddMaterial = function (material, id) {
         this.selectedMaterials.push(material);
         this.materials.splice(id, 1);
@@ -1373,13 +1400,6 @@ var JobComponent = (function () {
         this.selectedMaterials = [];
     };
     JobComponent.prototype.onUpdate = function () {
-        // To help with date on single update API call
-        /*if(this.createdDate != null){
-          this.createdDate = `"${this.createdDate}"`;
-        }
-        if(this.endDate != null){
-          this.endDate = `"${this.endDate}"`;
-        }*/
         var _this = this;
         var updatedJob = {
             jobID: this.id,
@@ -1478,10 +1498,10 @@ JobComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/components/job/job.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/job/job.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_job_service__["a" /* JobService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_job_service__["a" /* JobService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__services_material_service__["a" /* MaterialService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_material_service__["a" /* MaterialService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__services_bid_service__["a" /* BidService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_bid_service__["a" /* BidService */]) === "function" && _e || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_job_service__["a" /* JobService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_job_service__["a" /* JobService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__services_material_service__["a" /* MaterialService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_material_service__["a" /* MaterialService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__services_bid_service__["a" /* BidService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_bid_service__["a" /* BidService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_4__services_auth_service__["a" /* AuthService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_auth_service__["a" /* AuthService */]) === "function" && _f || Object])
 ], JobComponent);
 
-var _a, _b, _c, _d, _e;
+var _a, _b, _c, _d, _e, _f;
 //# sourceMappingURL=job.component.js.map
 
 /***/ }),
@@ -1615,7 +1635,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2 class=\"page-header\">Login</h2>\r\n<form (submit)=\"onLogin()\">\r\n  <div class=\"form-group\">\r\n    <label>Username</label>\r\n    <input type=\"text\" [(ngModel)]=\"username\" name=\"username\" placeholder=\"Username\" class=\"form-control\" required>\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <label>Password</label>\r\n    <input type=\"password\" [(ngModel)]=\"password\" name=\"password\" placeholder=\"Password\" class=\"form-control\" required>\r\n  </div>\r\n  <button type=\"submit\" class=\"btn btn-primary\">Login</button>\r\n  <button type=\"reset\" class=\"btn btn-danger\">Clear</button>\r\n</form>"
+module.exports = "<h2 class=\"page-header\">Login</h2>\n<form (submit)=\"onLogin()\">\n  <div class=\"form-group\">\n    <label>Username</label>\n    <input type=\"text\" [(ngModel)]=\"username\" name=\"username\" placeholder=\"Username\" class=\"form-control\" required>\n  </div>\n  <div class=\"form-group\">\n    <label>Password</label>\n    <input type=\"password\" [(ngModel)]=\"password\" name=\"password\" placeholder=\"Password\" class=\"form-control\" required>\n  </div>\n  <button type=\"submit\" class=\"btn btn-primary\">Login</button>\n  <button type=\"reset\" class=\"btn btn-danger\">Clear</button>\n</form>"
 
 /***/ }),
 
@@ -1736,7 +1756,7 @@ var MaterialsComponent = (function () {
         this.materialService.getAllMaterials().subscribe(function (materials) {
             _this.materials = materials.materials;
             _this.length = _this.materials.length;
-            _this.setupDataTable();
+            // this.setupDataTable();
         });
     };
     MaterialsComponent.prototype.setupDataTable = function () {
@@ -1888,7 +1908,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/register/register.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<button class=\"btn btn-default\" [routerLink]=\"['/home']\">Go Home</button>\r\n<h2 class=\"page-header\">Register A New User</h2>\r\n<form (submit)=\"onRegister()\">\r\n  <div class=\"form-group\">\r\n    <label>Name</label>\r\n    <input type=\"text\" [(ngModel)]=\"name\" name=\"name\" placeholder=\"Name\" class=\"form-control\" required>\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <label>Username</label>\r\n    <input type=\"text\" [(ngModel)]=\"username\" name=\"username\" placeholder=\"Username\" class=\"form-control\" required>\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <label>Password</label>\r\n    <input type=\"password\" [(ngModel)]=\"password\" name=\"password\" placeholder=\"Password\" class=\"form-control\" required>\r\n  </div>\r\n  <button type=\"submit\" class=\"btn btn-primary\">Register</button>\r\n  <button type=\"reset\" class=\"btn btn-danger\">Clear</button>\r\n</form>"
+module.exports = "<button class=\"btn btn-default\" [routerLink]=\"['/home']\">Go Home</button>\n<h2 class=\"page-header\">Register A New User</h2>\n<form (submit)=\"onRegister()\">\n  <div class=\"form-group\">\n    <label>Name</label>\n    <input type=\"text\" [(ngModel)]=\"name\" name=\"name\" placeholder=\"Name\" class=\"form-control\" required>\n  </div>\n  <div class=\"form-group\">\n    <label>Username</label>\n    <input type=\"text\" [(ngModel)]=\"username\" name=\"username\" placeholder=\"Username\" class=\"form-control\" required>\n  </div>\n  <div class=\"form-group\">\n    <label>Password</label>\n    <input type=\"password\" [(ngModel)]=\"password\" name=\"password\" placeholder=\"Password\" class=\"form-control\" required>\n  </div>\n  <button type=\"submit\" class=\"btn btn-primary\">Register</button>\n  <button type=\"reset\" class=\"btn btn-danger\">Clear</button>\n</form>"
 
 /***/ }),
 
@@ -2014,6 +2034,9 @@ var _a, _b;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_jwt__ = __webpack_require__("../../../../angular2-jwt/angular2-jwt.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_jwt___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angular2_jwt__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ngx_cookie_service__ = __webpack_require__("../../../../ngx-cookie-service/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_cookie_storage__ = __webpack_require__("../../../../cookie-storage/lib/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_cookie_storage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_cookie_storage__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2027,9 +2050,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
 var AuthService = (function () {
-    function AuthService(http) {
+    function AuthService(http, cookieService) {
         this.http = http;
+        this.cookieService = cookieService;
+        this.cookieStorage = new __WEBPACK_IMPORTED_MODULE_5_cookie_storage__["CookieStorage"]();
         this.localHttp = 'http://localhost:3000';
     }
     AuthService.prototype.registerUser = function (user) {
@@ -2047,6 +2074,8 @@ var AuthService = (function () {
     AuthService.prototype.storeUserData = function (token, user) {
         localStorage.setItem('id_token', token); //jwt looks for id_token by default
         localStorage.setItem('user', JSON.stringify(user)); // local storage can only store strings
+        // this.cookieStorage.setItem('id_token', token);
+        // this.cookieStorage.setItem('user', JSON.stringify(user));
         this.authToken = token;
         this.user = user;
     };
@@ -2057,19 +2086,21 @@ var AuthService = (function () {
         this.authToken = null;
         this.user = null;
         localStorage.clear();
+        // this.cookieStorage.clear();
     };
     AuthService.prototype.loadToken = function () {
         var token = localStorage.getItem('id_token');
+        // const token = this.cookieStorage.getItem('id_token');
         this.authToken = token;
     };
     return AuthService;
 }());
 AuthService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4_ngx_cookie_service__["a" /* CookieService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_ngx_cookie_service__["a" /* CookieService */]) === "function" && _b || Object])
 ], AuthService);
 
-var _a;
+var _a, _b;
 //# sourceMappingURL=auth.service.js.map
 
 /***/ }),

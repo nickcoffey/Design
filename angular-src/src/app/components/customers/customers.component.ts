@@ -28,7 +28,7 @@ export class CustomersComponent implements OnInit {
   ngOnInit() {
     this.customerService.getAllCustomers().subscribe((customers) => {
       this.customers = customers.customers;
-      this.setupDataTable();
+      // this.setupDataTable();
     });
   }
 

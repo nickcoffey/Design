@@ -26,7 +26,7 @@ export class MaterialsComponent implements OnInit {
     this.materialService.getAllMaterials().subscribe((materials) => {
       this.materials = materials.materials;
       this.length = this.materials.length;
-      this.setupDataTable();
+      // this.setupDataTable();
     });
   }
 
