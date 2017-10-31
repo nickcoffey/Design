@@ -8,17 +8,18 @@
     "start": "node app"
   },
   "dependencies": {
-    "multer": "*",
     "bcryptjs": "*",
     "body-parser": "*",
     "cors": "2.8.4",
     "express": "*",
     "jsonwebtoken": "*",
+    "mkdirp": "*",
+    "multer": "*",
     "mysql": "*",
     "passport": "*",
     "passport-jwt": "*",
-    "sqlstring": "^2.3.0",
-    "mkdirp": "*"
+    "serve-index": "^1.9.1",
+    "sqlstring": "^2.3.0"
   },
   "author": "Nick Coffey",
   "license": "ISC"

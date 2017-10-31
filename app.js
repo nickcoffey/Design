@@ -6,6 +6,8 @@ const passport = require('passport');
 const mysql = require('mysql');
 const config = require('./config/database');
 
+const serveIndex = require('serve-index');
+
 //  Connect to DB
 const connection = module.exports = mysql.createConnection(config.AWS);
 connection.connect((err) => {
@@ -18,6 +20,8 @@ connection.connect((err) => {
 });
 
 const app = express();
+
+app.use('/uploads', express.static('uploads/files'), serveIndex('uploads/files'));
 
 const users = require('./routes/users');
 const customers = require('./routes/customers');
@@ -36,7 +40,7 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Set Images Folder
-app.use(express.static('uploads'));
+//app.use(express.static('uploads'));
 
 // Body Parser Middleware
 app.use(bodyParser.json({
