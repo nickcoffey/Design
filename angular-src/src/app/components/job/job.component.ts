@@ -14,6 +14,13 @@ import { FileUploader } from 'ng2-file-upload';
 })
 export class JobComponent implements OnInit {
 
+  // fileTree = {
+  //   "name": "test",
+  //   "children": [
+  //     {"name": "http://localhost:3000/uploads/jobs/33/file-1509295300688.txt"}
+  //   ]
+  // }
+
   id:any;
   job:any;
   jobLabor:any = null;

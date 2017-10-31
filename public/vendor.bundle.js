@@ -3459,6 +3459,295 @@ if (true) {
 
 /***/ }),
 
+/***/ "../../../../ng2-file-tree/ng2-file-tree.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var tree_node_1 = __webpack_require__("../../../../ng2-file-tree/src/tree-node.js");
+exports.FileType = tree_node_1.FileType;
+var tree_node_2 = __webpack_require__("../../../../ng2-file-tree/src/tree-node.js");
+exports.TreeNode = tree_node_2.TreeNode;
+var index_1 = __webpack_require__("../../../../ng2-file-tree/src/index.js");
+exports.Ng2FileTreeModule = index_1.Ng2FileTreeModule;
+
+
+/***/ }),
+
+/***/ "../../../../ng2-file-tree/src/file-tree.component.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var core_1 = __webpack_require__("../../../core/@angular/core.es5.js");
+var core_2 = __webpack_require__("../../../core/@angular/core.es5.js");
+var core_3 = __webpack_require__("../../../core/@angular/core.es5.js");
+var core_4 = __webpack_require__("../../../core/@angular/core.es5.js");
+var core_5 = __webpack_require__("../../../core/@angular/core.es5.js");
+var tree_node_1 = __webpack_require__("../../../../ng2-file-tree/src/tree-node.js");
+var tree_node_2 = __webpack_require__("../../../../ng2-file-tree/src/tree-node.js");
+var DIRECTORY_TREE_TEMPLATE = "\n<ul class=\"file-tree\">\n  <node [node]=\"root\" (clicked)=\"fileTreeClicked($event)\"></node>\n</ul>\n";
+var DIRECTORY_TREE_STYLE = "\n.file-tree { padding: 0; }\n";
+var FileTreeComponent = (function () {
+    function FileTreeComponent(_eref) {
+        this._eref = _eref;
+        this.onChange = new core_2.EventEmitter();
+        this.keyboardWatch = false;
+    }
+    FileTreeComponent.prototype.ngOnInit = function () {
+        this.root = new tree_node_1.TreeNode({ name: '/', type: tree_node_2.FileType.dir });
+        this.currFocusNode = null;
+    };
+    FileTreeComponent.prototype.ngOnChanges = function (changes) {
+        if (typeof (changes['tree'].currentValue) !== 'undefined') {
+            this.root = this.tree;
+        }
+    };
+    FileTreeComponent.prototype.fileTreeClicked = function (nextNode) {
+        this.updateFocusNode(nextNode);
+        this.onChange.emit(nextNode);
+    };
+    FileTreeComponent.prototype.keydownHandler = function (event) {
+        if (!this.keyboardWatch)
+            return;
+        if (this.currFocusNode === null)
+            return;
+        switch (event.keyCode) {
+            case 13:
+                this.onChange.emit(this.currFocusNode);
+                break;
+            case 37:
+                if (this.currFocusNode.isDir()
+                    && this.currFocusNode.isExpanded) {
+                    this.currFocusNode.fold();
+                    return;
+                }
+                if (!this.currFocusNode.hasParent())
+                    return;
+                this.updateFocusNode(this.currFocusNode.getParentNode());
+                break;
+            case 38:
+                // Move to upper item
+                break;
+            case 39:
+                if (!this.currFocusNode.isDir())
+                    return;
+                if (!this.currFocusNode.isExpanded) {
+                    this.currFocusNode.expand();
+                }
+                else if (this.currFocusNode.children.length > 0) {
+                    this.updateFocusNode(this.currFocusNode.children[0]);
+                }
+                break;
+            case 40:
+                if (this.currFocusNode.isDir()
+                    && this.currFocusNode.isExpanded
+                    && this.currFocusNode.children.length > 0) {
+                    // first child
+                    this.updateFocusNode(this.currFocusNode.children[0]);
+                }
+                else {
+                }
+                break;
+        }
+    };
+    FileTreeComponent.prototype.updateFocusNode = function (next) {
+        if (this.currFocusNode) {
+            this.currFocusNode.blur();
+        }
+        this.currFocusNode = next;
+        this.currFocusNode.focus();
+    };
+    FileTreeComponent.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'file-tree',
+                    template: DIRECTORY_TREE_TEMPLATE,
+                    styles: [DIRECTORY_TREE_STYLE],
+                    host: {
+                        '(window:keydown)': 'keydownHandler($event)'
+                    }
+                },] },
+    ];
+    /** @nocollapse */
+    FileTreeComponent.ctorParameters = [
+        { type: core_3.ElementRef, },
+    ];
+    FileTreeComponent.propDecorators = {
+        'tree': [{ type: core_4.Input },],
+        'keyboardWatch': [{ type: core_4.Input },],
+        'onChange': [{ type: core_5.Output },],
+    };
+    return FileTreeComponent;
+}());
+exports.FileTreeComponent = FileTreeComponent;
+
+
+/***/ }),
+
+/***/ "../../../../ng2-file-tree/src/index.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var core_1 = __webpack_require__("../../../core/@angular/core.es5.js");
+var common_1 = __webpack_require__("../../../common/@angular/common.es5.js");
+var file_tree_component_1 = __webpack_require__("../../../../ng2-file-tree/src/file-tree.component.js");
+var node_component_1 = __webpack_require__("../../../../ng2-file-tree/src/node.component.js");
+var Ng2FileTreeModule = (function () {
+    function Ng2FileTreeModule() {
+    }
+    Ng2FileTreeModule.decorators = [
+        { type: core_1.NgModule, args: [{
+                    imports: [common_1.CommonModule],
+                    declarations: [file_tree_component_1.FileTreeComponent, node_component_1.NodeComponent],
+                    exports: [file_tree_component_1.FileTreeComponent, node_component_1.NodeComponent]
+                },] },
+    ];
+    /** @nocollapse */
+    Ng2FileTreeModule.ctorParameters = [];
+    return Ng2FileTreeModule;
+}());
+exports.Ng2FileTreeModule = Ng2FileTreeModule;
+
+
+/***/ }),
+
+/***/ "../../../../ng2-file-tree/src/node.component.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var core_1 = __webpack_require__("../../../core/@angular/core.es5.js");
+var core_2 = __webpack_require__("../../../core/@angular/core.es5.js");
+var core_3 = __webpack_require__("../../../core/@angular/core.es5.js");
+var core_4 = __webpack_require__("../../../core/@angular/core.es5.js");
+var NODE_COMPONENT_TEMPLATE = "\n<li *ngIf=\"isExpandable()\" class=\"all-item\">\n    <a (click)=\"clickItem(node)\"\n       class=\"folder-item\"\n       [ngClass]=\"{focus: node._focus}\">\n        <div style=\"white-space: nowrap\">\n            <span class=\"point\" (click)=\"expandFolder()\">\n                <i class=\"fa fa-fw fa-caret-right\" *ngIf=\"!isExpanded()\"></i>\n                <i class=\"fa fa-fw fa-caret-down\" *ngIf=\"isExpanded()\"></i>\n            </span>\n\n            <i class=\"fa fa-folder-o\" *ngIf=\"!isExpanded()\"></i>\n            <i class=\"fa fa-folder-open-o\" *ngIf=\"isExpanded()\"></i>\n            {{ node.name }}\n        </div>\n    </a>\n\n    <ul *ngIf=\"isExpanded()\" class=\"children-items\">\n        <node *ngFor=\"let n of node.children\" [node]=\"n\" (clicked)=\"propagate($event)\"></node>\n    </ul>\n</li>\n\n<li *ngIf=\"!isExpandable()\" class=\"all-item\">\n    <a (click)=\"clickItem(node)\"\n       class=\"file-item\"\n       [ngClass]=\"{focus: node._focus}\">\n       <div style=\"white-space: nowrap\">\n           <i class=\"fa fa-file-o\"></i> {{ node.name }}\n       </div>\n    </a>\n</li>\n";
+var DIRECTORY_TREE_STYLE = "\n.all-item {\n  list-style-type: none;\n  display:inline;\n}\n.folder-item { }\n.file-item { padding-left: 0px; }\n.children-items {\n  padding-left: 25px;\n}\n.focus { color: steelblue }\n";
+var NodeComponent = (function () {
+    function NodeComponent() {
+        this.clicked = new core_4.EventEmitter();
+    }
+    NodeComponent.prototype.isExpandable = function () {
+        var isDirectory = this.node.isDir();
+        return isDirectory;
+    };
+    NodeComponent.prototype.isExpanded = function () {
+        return this.node.isExpanded();
+    };
+    NodeComponent.prototype.expandFolder = function () {
+        if (this.node.isExpanded()) {
+            this.node.fold();
+        }
+        else {
+            this.node.expand();
+        }
+    };
+    NodeComponent.prototype.clickItem = function (node) {
+        this.clicked.emit(node);
+    };
+    NodeComponent.prototype.propagate = function (node) {
+        this.clicked.emit(node);
+    };
+    NodeComponent.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'node',
+                    template: NODE_COMPONENT_TEMPLATE,
+                    styles: [DIRECTORY_TREE_STYLE]
+                },] },
+    ];
+    /** @nocollapse */
+    NodeComponent.ctorParameters = [];
+    NodeComponent.propDecorators = {
+        'node': [{ type: core_2.Input },],
+        'index': [{ type: core_2.Input },],
+        'clicked': [{ type: core_3.Output },],
+    };
+    return NodeComponent;
+}());
+exports.NodeComponent = NodeComponent;
+
+
+/***/ }),
+
+/***/ "../../../../ng2-file-tree/src/tree-node.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+(function (FileType) {
+    FileType[FileType["file"] = 0] = "file";
+    FileType[FileType["dir"] = 1] = "dir";
+})(exports.FileType || (exports.FileType = {}));
+var FileType = exports.FileType;
+var TreeNode = (function () {
+    function TreeNode(params, parent) {
+        var _this = this;
+        if (parent === void 0) { parent = null; }
+        this.name = params.name;
+        this.type = params.type || FileType.file;
+        this.children = [];
+        // update private values
+        this.parentNode = parent;
+        this._isFocused = params.focus || false;
+        this._isExpanded = this.type === FileType.dir || this.children.length > 0;
+        if (parent !== null) {
+            var parentPath = this.parentNode.getFullPath();
+            if (parentPath.slice(-1) === '/') {
+                this.fullFilepath = "" + parentPath + this.name;
+            }
+            else {
+                this.fullFilepath = parentPath + "/" + this.name;
+            }
+        }
+        else {
+            this.fullFilepath = this.name;
+        }
+        if (typeof (params.children) !== 'undefined' && params.children !== null) {
+            params.children.forEach(function (fileNodeParams) { return _this.children.push(new TreeNode(fileNodeParams, _this)); });
+        }
+    }
+    TreeNode.prototype.getFullPath = function () {
+        return this.fullFilepath;
+    };
+    TreeNode.prototype.isDir = function () {
+        return this.type === FileType.dir ||
+            this.children.length > 0;
+    };
+    TreeNode.prototype.getParentNode = function () {
+        return this.parentNode;
+    };
+    TreeNode.prototype.isExpanded = function () {
+        return this._isExpanded;
+    };
+    TreeNode.prototype.expand = function () {
+        this._isExpanded = true;
+    };
+    TreeNode.prototype.fold = function () {
+        this._isExpanded = false;
+    };
+    TreeNode.prototype.hasParent = function () {
+        return this.getParentNode !== null;
+    };
+    TreeNode.prototype.focus = function () {
+        this._isFocused = true;
+    };
+    TreeNode.prototype.blur = function () {
+        this._isFocused = false;
+    };
+    TreeNode.prototype.stringify = function () {
+        return JSON.stringify(this, function (key, value) {
+            if (key.includes('_'))
+                return;
+            return value;
+        });
+    };
+    return TreeNode;
+}());
+exports.TreeNode = TreeNode;
+
+
+/***/ }),
+
 /***/ "../../../../ng2-file-upload/file-upload/file-drop.directive.js":
 /***/ (function(module, exports, __webpack_require__) {
 
