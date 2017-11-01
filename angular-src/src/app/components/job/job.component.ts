@@ -21,6 +21,9 @@ export class JobComponent implements OnInit {
   //   ]
   // }
 
+  files:any;
+  filesUrls:any[] = [];
+
   id:any;
   job:any;
   jobLabor:any = null;
@@ -76,6 +79,14 @@ export class JobComponent implements OnInit {
         }
       });
     });
+
+    this.jobService.getJobFilesByID(this.id).subscribe((files) => {
+      this.files = files.files;
+      // for(let i = 0; i < this.files.length; i++){
+      //   this.filesUrls.push(`http://localhost:3000/uploads/jobs/${this.id}/${this.files[i]}`);
+      // }
+    });
+    // console.log(this.filesUrls);
   }
 
   setupFileUploader(){

@@ -29,6 +29,14 @@ export class JobService {
     return this.http.get(`${this.localHttp}/jobs/${id}`, {headers: headers}).map(response => response.json());
   }
 
+  getJobFilesByID(id) {
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Authorization',this.authService.authToken);
+    headers.append('Content-Type','application/json');
+    return this.http.get(`${this.localHttp}/jobs/${id}/files`, {headers: headers}).map(response => response.json());
+  }
+
   getCurrentJobs(){
     this.authService.loadToken();
     let headers = new Headers();

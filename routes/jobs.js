@@ -228,6 +228,19 @@ router.post('/delete/:id', passport.authenticate('jwt', { session: false }), (re
     });
 });
 
+// Loop through job files
+const fs = require('fs');
+router.get('/:id/files', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+    const id = req.params.id;
+    const filesArray = [];
+    fs.readdir(`./uploads/files/jobs/${id}`, (err, files) => {
+        files.forEach((file, index) => {
+            filesArray.push(file);
+        });
+        res.json({files: filesArray});
+    });
+});
+
 /** API path that will upload the files */
 router.post('/:id/upload', function (req, res, next) {
     const id = req.params.id;

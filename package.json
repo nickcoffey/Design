@@ -19,7 +19,8 @@
     "passport": "*",
     "passport-jwt": "*",
     "serve-index": "^1.9.1",
-    "sqlstring": "^2.3.0"
+    "sqlstring": "^2.3.0",
+    "fs": "*"
   },
   "author": "Nick Coffey",
   "license": "ISC"
