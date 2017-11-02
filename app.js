@@ -21,8 +21,6 @@ connection.connect((err) => {
 
 const app = express();
 
-app.use('/uploads', express.static('uploads/files'), serveIndex('uploads/files'));
-
 const users = require('./routes/users');
 const customers = require('./routes/customers');
 const inquiries = require('./routes/inquiries');
@@ -41,6 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Set Images Folder
 //app.use(express.static('uploads'));
+app.use('/uploads', express.static('uploads/files'), serveIndex('uploads/files'));
 
 // Body Parser Middleware
 app.use(bodyParser.json({

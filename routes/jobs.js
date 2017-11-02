@@ -3,6 +3,7 @@ const router = express.Router();
 const job = require('../models/job');
 const config = require('../config/database');
 const passport = require('passport');
+const fs = require('fs');
 
 // Get all jobs
 router.get('/all', passport.authenticate('jwt', { session: false }), (request, response, next) => {
@@ -228,8 +229,26 @@ router.post('/delete/:id', passport.authenticate('jwt', { session: false }), (re
     });
 });
 
+// Delete job file
+router.post('/:id/files/delete', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+    const id = req.params.id;
+    const file = `./uploads/files/jobs/${id}/${req.body.file}`;
+    fs.unlink(file, (err) => {
+        if(err){
+            res.json({
+                success: false,
+                msg: err
+            });
+        } else {
+            res.json({
+                success: true,
+                msg: "File deleted"
+            });
+        }
+    });
+});
+
 // Loop through job files
-const fs = require('fs');
 router.get('/:id/files', passport.authenticate('jwt', { session: false }), (req, res, next) => {
     const id = req.params.id;
     const filesArray = [];
@@ -252,7 +271,8 @@ router.post('/:id/upload', function (req, res, next) {
         },
         filename: function (req, file, cb) {
             var datetimestamp = Date.now();
-            cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length - 1]);
+            //cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length - 1]);
+            cb(null, file.originalname);
         }
     });
     var upload = multer({ //multer settings

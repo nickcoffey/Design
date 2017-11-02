@@ -108,4 +108,12 @@ export class JobService {
     headers.append('Authorization', this.authService.authToken);
     return this.http.post(`${this.localHttp}/jobs/delete/job-material`, JSON.stringify(jobMaterial), {headers: headers}).map(response => response.json());
   }
+
+  deleteJobFile(id, file){
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    headers.append('Authorization', this.authService.authToken);
+    return this.http.post(`${this.localHttp}/jobs/${id}/files/delete`, JSON.stringify(file), {headers: headers}).map(response => response.json());
+  }
 }

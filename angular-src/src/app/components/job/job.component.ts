@@ -4,7 +4,7 @@ import { JobService } from '../../services/job.service';
 import { MaterialService } from '../../services/material.service';
 import { AuthService } from '../../services/auth.service';
 import { BidService } from '../../services/bid.service';
-import { FileUploader } from 'ng2-file-upload'; 
+import { FileUploader } from 'ng2-file-upload';
 // declare var $;
 
 @Component({
@@ -21,34 +21,35 @@ export class JobComponent implements OnInit {
   //   ]
   // }
 
-  files:any;
-  filesUrls:any[] = [];
+  files: any;
+  filesUrls: any[] = [];
+  fileName: any;
 
-  id:any;
-  job:any;
-  jobLabor:any = null;
-  jobRevenue:any = null;
-  jobStatus:any = null;
-  createdDate:any = null;
-  endDate:any = null;
-  jobMaterials:any;
-  materials:any;
-  selectedMaterials:SelectedMaterial[] = [];
-  materialID:any;
-  status:any;
-  bidMaterials:any;
+  id: any;
+  job: any;
+  jobLabor: any = null;
+  jobRevenue: any = null;
+  jobStatus: any = null;
+  createdDate: any = null;
+  endDate: any = null;
+  jobMaterials: any;
+  materials: any;
+  selectedMaterials: SelectedMaterial[] = [];
+  materialID: any;
+  status: any;
+  bidMaterials: any;
 
-  url:string;
-  uploader:FileUploader;
-  readyItems:any[] = [];
+  url: string;
+  uploader: FileUploader;
+  readyItems: any[] = [];
 
   constructor(
-    private router:Router,
-    private route:ActivatedRoute,
-    private jobService:JobService,
-    private materialService:MaterialService,
-    private bidService:BidService,
-    private authService:AuthService
+    private router: Router,
+    private route: ActivatedRoute,
+    private jobService: JobService,
+    private materialService: MaterialService,
+    private bidService: BidService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -70,9 +71,9 @@ export class JobComponent implements OnInit {
       this.materialService.getAllMaterials().subscribe((materials) => {
         this.materials = materials.materials;
 
-        for(let i = 0; i < this.materials.length; i++){
-          for(let k = 0; k < this.jobMaterials.length; k++){
-            if(this.materials[i].materialID == this.jobMaterials[k].materialID){
+        for (let i = 0; i < this.materials.length; i++) {
+          for (let k = 0; k < this.jobMaterials.length; k++) {
+            if (this.materials[i].materialID == this.jobMaterials[k].materialID) {
               this.materials.splice(i, 1);
             }
           }
@@ -89,42 +90,60 @@ export class JobComponent implements OnInit {
     // console.log(this.filesUrls);
   }
 
-  setupFileUploader(){
+  setupFileUploader() {
     this.url = `http://localhost:3000/jobs/${this.id}/upload`;
     this.authService.loadToken();
-    let headers:any = [{name: 'Authorization', value: this.authService.authToken}, {name: 'Content-Type', value: 'application/json'}];
-    this.uploader = new FileUploader({url: this.url});
+    let headers: any = [{ name: 'Authorization', value: this.authService.authToken }, { name: 'Content-Type', value: 'application/json' }];
+    this.uploader = new FileUploader({ url: this.url });
     this.uploader.onAfterAddingFile = (file) => {
       file.withCredentials = false;
       this.readyItems.push(file);
       // console.log(file);
     }
-    this.uploader.onCompleteItem = (item:any, response:any, status:any, headers:any) => {
+    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
       console.log("ImageUpload:uploaded:", response);
       this.uploader.cancelItem(item);
     }
   }
 
-  onRemoveFile(){
+  onRemoveFile() {
 
   }
 
-  onAddMaterial(material, id){
+  onClickDeleteFile(file) {
+    this.fileName = file;
+  }
+
+  onDeleteFile() {
+    let file = {
+      file: this.fileName
+    }
+    this.jobService.deleteJobFile(this.id, file).subscribe((data) => {
+      if (data.success) {
+        console.log(data.msg);
+        this.ngOnInit();
+      } else {
+        console.log(data.msg);
+      }
+    });
+  }
+
+  onAddMaterial(material, id) {
     this.selectedMaterials.push(material);
     this.materials.splice(id, 1);
   }
 
-  onRemoveMaterial(material, id){
+  onRemoveMaterial(material, id) {
     this.selectedMaterials.splice(id, 1);
     this.materials.push(material);
     //this.ngOnInit();
   }
 
-  onClear(){
+  onClear() {
     this.selectedMaterials = [];
   }
 
-  onUpdate(){
+  onUpdate() {
     let updatedJob = {
       jobID: this.id,
       jobLabor: Number(this.jobLabor) + Number(this.job[0].jobLabor),
@@ -138,18 +157,18 @@ export class JobComponent implements OnInit {
 
     this.selectedMaterials.forEach(selectedMaterial => {
       this.jobService.createJobMaterial(this.id, selectedMaterial).subscribe((data) => {
-        if(data.success){
+        if (data.success) {
           console.log(data.msg);
-        } else{
+        } else {
           console.log(data.msg);
         }
       });
     });
 
     this.jobService.updateJob(updatedJob).subscribe((data) => {
-      if(data.success){
+      if (data.success) {
         console.log(data.msg);
-      } else{
+      } else {
         console.log(data.msg);
       }
     });
@@ -158,11 +177,11 @@ export class JobComponent implements OnInit {
     this.ngOnInit();
   }
 
-  onDeleteJob(){
+  onDeleteJob() {
     this.jobService.deleteJob(this.id).subscribe((data) => {
-      if(data.success){
+      if (data.success) {
         console.log(data.msg);
-      } else{
+      } else {
         console.log(data.msg);
       }
     });
@@ -173,46 +192,46 @@ export class JobComponent implements OnInit {
     };
 
     this.bidService.updateBidStatus(updatedBid).subscribe((data) => {
-      if(data.success){
+      if (data.success) {
         console.log(data.msg);
         this.router.navigate(['/jobs']);
-      } else{
+      } else {
         console.log(data.msg);
       }
     });
   }
 
-  onClickDeleteMaterial(id){
+  onClickDeleteMaterial(id) {
     this.materialID = id;
   }
 
-  onDeleteMaterial(){
+  onDeleteMaterial() {
     let jobMaterial = {
       materialID: this.materialID,
       jobID: this.id
     };
 
     this.jobService.deleteJobMaterial(jobMaterial).subscribe((data) => {
-      if(data.success){
+      if (data.success) {
         console.log(data.msg);
         this.ngOnInit();
-      } else{
+      } else {
         console.log(data.msg);
       }
     });
   }
 
-  onFinish(){
+  onFinish() {
     let updatedJob = {
       jobID: this.id,
       jobStatus: "COMPLETED"
     };
 
     this.jobService.updateJobStatus(updatedJob).subscribe((data) => {
-      if(data.success){
+      if (data.success) {
         console.log(data.msg);
         this.router.navigate(['/jobs']);
-      } else{
+      } else {
         console.log(data.msg);
       }
     });
