@@ -26,7 +26,8 @@
           </tr>
         </tbody>
       </table>
-      <button type="button" class="btn btn-primary" [routerLink]="['/customers/'+bid[0].customerID]"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Open Customer</button>
+      <button type="button" class="btn btn-primary" [routerLink]="['/customers/'+bid[0].customerID]">
+        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Open Customer</button>
     </div>
   </div>
 </div>
@@ -103,9 +104,13 @@
             </tr>
           </tbody>
         </table>
-        <button *ngIf="status == 'PENDING'" class="btn btn-primary" data-toggle="modal" href='#create-job-modal'><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Create Job</button>
-        <button *ngIf="status == 'PENDING'" type="button" class="btn btn-info" data-toggle="modal" href='#update-bid-modal'><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Update Bid</button>
-        <button class="btn btn-danger" data-toggle="modal" href='#delete-bid-modal'><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete Bid</button>
+        <button *ngIf="status == 'PENDING'" class="btn btn-primary" data-toggle="modal" href='#create-job-modal'>
+          <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Create Job</button>
+        <!-- <button *ngIf="status == 'PENDING'" type="button" class="btn btn-info" data-toggle="modal" href='#update-bid-modal'> -->
+        <button type="button" class="btn btn-info" data-toggle="modal" href='#update-bid-modal'>
+          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Update Bid</button>
+        <button class="btn btn-danger" data-toggle="modal" href='#delete-bid-modal'>
+          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete Bid</button>
       </div>
     </div>
   </ng-container>
@@ -137,7 +142,8 @@
       </table>
       <h4 class="page-header">Description</h4>
       <p>{{bid[0].description}}</p>
-      <button type="button" class="btn btn-primary" [routerLink]="['/inquiries/'+bid[0].inquiryID]"><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> Open Inquiry</button>
+      <button type="button" class="btn btn-primary" [routerLink]="['/inquiries/'+bid[0].inquiryID]">
+        <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> Open Inquiry</button>
     </div>
   </div>
 </div>
@@ -255,7 +261,8 @@
           </div>
           <label>Add Materials</label>
           <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Materials
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Materials
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
@@ -290,17 +297,22 @@
                     required>
                 </td>
                 <td>
-                  <button type="button" class="close" (click)="onRemoveMaterial(selectedMaterial, i)">&times;</button>
+                  <button type="button" class="btn btn-danger" (click)="onRemoveMaterial(selectedMaterial, i)">
+                    <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                  </button>
                 </td>
               </tr>
             </tbody>
           </table>
-          <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
-          <button type="reset" class="btn btn-danger" (click)="onClear()"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
+          <button type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
+          <button type="reset" class="btn btn-danger" (click)="onClear()">
+            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-info" data-dismiss="modal"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
+        <button type="button" class="btn btn-info" data-dismiss="modal">
+          <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
       </div>
     </div>
   </div>

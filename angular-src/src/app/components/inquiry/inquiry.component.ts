@@ -19,6 +19,7 @@ export class InquiryComponent implements OnInit {
   materials:any;
   selectedMaterials:SelectedMaterial[] = [];
   description:any;
+  status:any;
 
   constructor(
     private router:Router,
@@ -33,6 +34,7 @@ export class InquiryComponent implements OnInit {
 
     this.inquiryService.getInquiryById(this.id).subscribe((inquiry) => {
       this.inquiry = inquiry;
+      this.status = inquiry[0].inquiryStatus;
     });
 
     this.materialService.getAllMaterials().subscribe((materials) => {
@@ -51,8 +53,11 @@ export class InquiryComponent implements OnInit {
   }
 
   onClear(){
+    this.selectedMaterials.forEach(selectedMaterial => {
+      this.materials.push(selectedMaterial);
+    });
     this.selectedMaterials = [];
-    this.ngOnInit();
+    //this.ngOnInit();
   }
 
   onCreate(){

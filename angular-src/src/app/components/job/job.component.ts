@@ -41,7 +41,7 @@ export class JobComponent implements OnInit {
 
   url: string;
   uploader: FileUploader;
-  readyItems: any[] = [];
+  //readyItems: any[] = [];
 
   constructor(
     private router: Router,
@@ -97,17 +97,12 @@ export class JobComponent implements OnInit {
     this.uploader = new FileUploader({ url: this.url });
     this.uploader.onAfterAddingFile = (file) => {
       file.withCredentials = false;
-      this.readyItems.push(file);
-      // console.log(file);
+      //this.readyItems.push(file);
+      //console.log(file);
     }
     this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
-      console.log("ImageUpload:uploaded:", response);
-      this.uploader.cancelItem(item);
+      console.log(response);
     }
-  }
-
-  onRemoveFile() {
-
   }
 
   onClickDeleteFile(file) {
@@ -140,6 +135,9 @@ export class JobComponent implements OnInit {
   }
 
   onClear() {
+    this.selectedMaterials.forEach(selectedMaterial => {
+      this.materials.push(selectedMaterial);
+    });
     this.selectedMaterials = [];
   }
 
@@ -153,7 +151,7 @@ export class JobComponent implements OnInit {
       endDate: this.endDate
     }
 
-    console.log(updatedJob);
+    //console.log(updatedJob);
 
     this.selectedMaterials.forEach(selectedMaterial => {
       this.jobService.createJobMaterial(this.id, selectedMaterial).subscribe((data) => {

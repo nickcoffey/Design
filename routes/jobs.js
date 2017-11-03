@@ -174,7 +174,7 @@ router.post('/update', passport.authenticate('jwt', { session: false }), (reques
     }
 
     job.updateJob(updatedJob, (message) => {
-        if (message.message == "") {
+        if (message.message.includes("Warnings: 0")) {
             response.json({
                 success: true,
                 msg: 'Job updated'
@@ -196,7 +196,7 @@ router.post('/update-status', passport.authenticate('jwt', { session: false }), 
     };
 
     job.updateJobStatus(updatedJob, (message) => {
-        if (message.message.includes("Rows matched: 1  Changed: 1  Warnings: 0")) {
+        if (message.message.includes("Warnings: 0")) {
             response.json({
                 success: true,
                 msg: 'Job status updated'
@@ -234,7 +234,7 @@ router.post('/:id/files/delete', passport.authenticate('jwt', { session: false }
     const id = req.params.id;
     const file = `./uploads/files/jobs/${id}/${req.body.file}`;
     fs.unlink(file, (err) => {
-        if(err){
+        if (err) {
             res.json({
                 success: false,
                 msg: err
@@ -256,7 +256,7 @@ router.get('/:id/files', passport.authenticate('jwt', { session: false }), (req,
         files.forEach((file, index) => {
             filesArray.push(file);
         });
-        res.json({files: filesArray});
+        res.json({ files: filesArray });
     });
 });
 
@@ -270,21 +270,35 @@ router.post('/:id/upload', function (req, res, next) {
             cb(null, `./uploads/files/jobs/${id}`);
         },
         filename: function (req, file, cb) {
-            var datetimestamp = Date.now();
-            //cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length - 1]);
-            cb(null, file.originalname);
+            fs.stat(`./uploads/files/jobs/${id}/${file.originalname}`, (error, stat) => {
+                if (error == null) {
+                    //fileExists = true;
+                    cb(null, `${file.originalname}(Copy)`);
+                } else if (error.code == 'ENOENT') {
+                    //fileExists = false;
+                    cb(null, `${file.originalname}`);
+                } else {
+                    //error
+                }
+            });
         }
     });
+
     var upload = multer({ //multer settings
         storage: storage
     }).single('file');
     upload(req, res, function (err) {
-        console.log(err);
         if (err) {
-            res.json({ error_code: 1, err_desc: err });
-            return;
+            res.json({ 
+                success: false, 
+                msg: err 
+            });
+        } else {
+            res.json({ 
+                success: true, 
+                msg: "File uploaded" 
+            });
         }
-        res.json({ error_code: 0, err_desc: null });
     });
 });
 
@@ -296,7 +310,7 @@ router.post('/:id/upload', function (req, res, next) {
 //     } while (date2 - date < 4000);
 // }
 
-function makeDirectory(id){
+function makeDirectory(id) {
     var mkdirp = require('mkdirp');
     mkdirp(`./uploads/files/jobs/${id}`, (err) => {
         console.log(err);

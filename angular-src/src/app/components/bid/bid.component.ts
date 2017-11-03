@@ -70,8 +70,11 @@ export class BidComponent implements OnInit {
   }
 
   onClear(){
+    this.selectedMaterials.forEach(selectedMaterial => {
+      this.materials.push(selectedMaterial);
+    });
     this.selectedMaterials = [];
-    this.ngOnInit();
+    //this.ngOnInit();
   }
 
   onCreate(){

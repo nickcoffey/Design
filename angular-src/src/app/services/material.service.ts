@@ -36,4 +36,12 @@ export class MaterialService {
     headers.append('Authorization', this.authService.authToken);
     return this.http.post(`${this.localHttp}/materials/delete/${id}`, JSON.stringify({}), {headers: headers}).map(response => response.json());
   }
+
+  updateMaterial(updatedMaterial){
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    headers.append('Authorization', this.authService.authToken);
+    return this.http.post(`${this.localHttp}/materials/update`, JSON.stringify(updatedMaterial), {headers: headers}).map(response => response.json());
+  }
 }
