@@ -91,7 +91,7 @@ export class JobComponent implements OnInit {
   }
 
   setupFileUploader() {
-    this.url = `http://localhost:3000/jobs/${this.id}/upload`;
+    this.url = `http://localhost:3000/api/jobs/${this.id}/upload`;
     this.authService.loadToken();
     let headers: any = [{ name: 'Authorization', value: this.authService.authToken }, { name: 'Content-Type', value: 'application/json' }];
     this.uploader = new FileUploader({ url: this.url });

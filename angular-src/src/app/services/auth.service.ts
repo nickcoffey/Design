@@ -11,7 +11,7 @@ export class AuthService {
   authToken:any;
   user:any;
   cookieStorage = new CookieStorage();
-  localHttp:String = 'http://localhost:3000';
+  localHttp:String = 'http://localhost:3000/api';
 
   constructor(
     private http:Http,

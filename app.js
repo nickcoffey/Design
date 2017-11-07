@@ -9,7 +9,8 @@ const config = require('./config/database');
 const serveIndex = require('serve-index');
 
 //  Connect to DB
-const connection = module.exports = mysql.createConnection(config.AWS);
+// const connection = module.exports = mysql.createConnection(config.AWS);
+const connection = module.exports = mysql.createConnection(config.LOCAL);
 connection.connect((err) => {
     if (err) {
         console.error(`Database connection failed ${err.stack}`);
@@ -39,7 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Set Images Folder
 //app.use(express.static('uploads'));
-app.use('/uploads', express.static('uploads/files'), serveIndex('uploads/files'));
+app.use('/api/uploads', express.static('uploads/files'), serveIndex('uploads/files'));
 
 // Body Parser Middleware
 app.use(bodyParser.json({
@@ -55,12 +56,12 @@ app.use(passport.session());
 require('./config/passport')(passport);
 
 
-app.use('/users', users);
-app.use('/customers', customers);
-app.use('/inquiries', inquiries);
-app.use('/bids', bids);
-app.use('/jobs', jobs);
-app.use('/materials', materials);
+app.use('/api/users', users);
+app.use('/api/customers', customers);
+app.use('/api/inquiries', inquiries);
+app.use('/api/bids', bids);
+app.use('/api/jobs', jobs);
+app.use('/api/materials', materials);
 
 // Index Route
 app.get('/', (request, response) => {
@@ -68,10 +69,10 @@ app.get('/', (request, response) => {
 });
 
 
-// // Any other route besides given ones will be sent here
-// app.get('*', (request, response) => {
-//     response.sendFile(path.join(__dirname, 'public/index.html'));
-// });
+// Any other route besides given ones will be sent here
+app.get('*', (request, response) => {
+    response.sendFile(path.join(__dirname, 'public/index.html'));
+});
 
 
 // Start Server

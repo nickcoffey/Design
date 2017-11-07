@@ -6,4 +6,12 @@ module.exports.AWS = {
     database: 'designDB'
 }
 
+module.exports.LOCAL = {
+    host: 'localhost',
+    user: 'root',
+    password: 'UMSL1217',
+    port: '3306',
+    database: 'designDB'
+}
+
 module.exports.secret = 'yoursecret';
