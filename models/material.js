@@ -14,7 +14,8 @@ module.exports.getAllMaterials = function (callback) {
 }
 
 module.exports.createMaterial = function (newMaterial, callback) {
-    const queryString = `INSERT INTO Material (materialName) VALUES ("${newMaterial.materialName}")`;
+    const queryString = sqlString.format(`INSERT INTO Material SET ?`, newMaterial);
+    // const queryString = `INSERT INTO Material (materialName) VALUES ("${newMaterial.materialName}")`;
     connection.query(queryString, (error, rows, fields) => {
         if (!error) {
             callback(rows);

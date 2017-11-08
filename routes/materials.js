@@ -18,7 +18,8 @@ router.get('/all', passport.authenticate('jwt', { session: false }), (request, r
 // Create material
 router.post('/new', passport.authenticate('jwt', { session: false }), (request, response, next) => {
     let newMaterial = {
-        materialName: request.body.materialName
+        materialName: request.body.materialName,
+        pricePerLinearFoot: request.body.pricePerLinearFoot
     };
 
     material.createMaterial(newMaterial, (message) => {
@@ -59,7 +60,8 @@ router.post('/delete/:id', passport.authenticate('jwt', { session: false }), (re
 router.post('/update', passport.authenticate('jwt', { session: false }), (request, response, next) => {
     let updatedMaterial = {
         materialID: request.body.materialID,
-        materialName: request.body.materialName
+        materialName: request.body.materialName,
+        pricePerLinearFoot: request.body.pricePerLinearFoot
     };
 
     if (updatedMaterial.materialID == null || updatedMaterial.materialID == undefined || updatedMaterial.materialID == "") {
@@ -67,6 +69,9 @@ router.post('/update', passport.authenticate('jwt', { session: false }), (reques
     }
     if (updatedMaterial.materialName == null || updatedMaterial.materialName == undefined || updatedMaterial.materialName == "") {
         delete updatedMaterial.materialName;
+    }
+    if (updatedMaterial.pricePerLinearFoot == null || updatedMaterial.pricePerLinearFoot == undefined || updatedMaterial.pricePerLinearFoot == "") {
+        delete updatedMaterial.pricePerLinearFoot;
     }
 
     material.updateMaterial(updatedMaterial, (message) => {

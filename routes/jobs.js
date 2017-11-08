@@ -80,8 +80,7 @@ router.get('/:id/job-materials/cost', passport.authenticate('jwt', { session: fa
 // Create job
 router.post('/new', passport.authenticate('jwt', { session: false }), (request, response, next) => {
     let newJob = {
-        bidID: request.body.bidID,
-        createdDate: request.body.createdDate
+        bidID: request.body.bidID
     };
 
     job.createJob(newJob, (message) => {
@@ -102,14 +101,16 @@ router.post('/new', passport.authenticate('jwt', { session: false }), (request, 
 
 // Create job material
 router.post('/:id/new/job-material', passport.authenticate('jwt', { session: false }), (request, response, next) => {
-    const id = request.params.id;
+    // const id = request.params.id;
     let newJobMaterial = {
+        jobID: request.params.id,
         materialID: request.body.materialID,
-        quantity: request.body.quantity,
-        perUnitCost: request.body.perUnitCost
+        materialName: request.body.materialName,
+        linearFeet: request.body.linearFeet,
+        pricePerLinearFoot: request.body.pricePerLinearFoot
     };
 
-    job.createJobMaterial(id, newJobMaterial, (message) => {
+    job.createJobMaterial(newJobMaterial, (message) => {
         if (message.message == "") {
             response.json({
                 success: true,
@@ -150,19 +151,11 @@ router.post('/delete/job-material', passport.authenticate('jwt', { session: fals
 router.post('/update', passport.authenticate('jwt', { session: false }), (request, response, next) => {
     let updatedJob = {
         jobID: request.body.jobID,
-        jobLabor: request.body.jobLabor,
-        jobRevenue: request.body.jobRevenue,
         jobStatus: request.body.jobStatus,
         createdDate: request.body.createdDate,
         endDate: request.body.endDate
     }
 
-    if (updatedJob.jobLabor == null || updatedJob.jobLabor == undefined || updatedJob.jobLabor == "") {
-        delete updatedJob.jobLabor;
-    }
-    if (updatedJob.jobRevenue == null || updatedJob.jobRevenue == undefined || updatedJob.jobRevenue == "") {
-        delete updatedJob.jobRevenue;
-    }
     if (updatedJob.jobStatus == null || updatedJob.jobStatus == undefined || updatedJob.jobStatus == "") {
         delete updatedJob.jobStatus;
     }

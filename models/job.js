@@ -57,8 +57,9 @@ module.exports.createJob = function(newJob, callback){
     });
 }
 
-module.exports.createJobMaterial = function(id, newJobMaterial, callback){
-    const queryString = `INSERT INTO JobMaterial (materialID, jobID, quantity, perUnitCost) VALUES ((SELECT materialID FROM Material WHERE materialID=${newJobMaterial.materialID}), ${id}, ${newJobMaterial.quantity}, ${newJobMaterial.perUnitCost})`;
+module.exports.createJobMaterial = function(newJobMaterial, callback){
+    const queryString = sqlString.format(`INSERT INTO JobMaterial SET ?`, newJobMaterial);
+    // const queryString = `INSERT INTO JobMaterial (materialID, jobID, quantity, perUnitCost) VALUES ((SELECT materialID FROM Material WHERE materialID=${newJobMaterial.materialID}), ${id}, ${newJobMaterial.quantity}, ${newJobMaterial.perUnitCost})`;
     connection.query(queryString, (error, rows, fields) => {
         if(!error){
             callback(rows);

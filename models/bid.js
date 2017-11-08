@@ -25,7 +25,8 @@ module.exports.getBidById = function(id, callback){
 }
 
 module.exports.getBidMaterialsById = function(id, callback){
-    const queryString = `SELECT * FROM Material JOIN BidMaterial ON Material.materialID = BidMaterial.materialID WHERE bidID=${id}`;
+    const queryString = sqlString.format(`SELECT * FROM BidMaterial WHERE bidID = ?`, id);
+    // const queryString = `SELECT * FROM Material JOIN BidMaterial ON Material.materialID = BidMaterial.materialID WHERE bidID=${id}`;
     connection.query(queryString, (error, rows, fields) => {
         if(!error){
             callback(rows);
@@ -57,19 +58,20 @@ module.exports.createBid = function(newBid, callback){
     });
 }
 
-module.exports.createBidMaterial = function(newBidMaterial, callback){
-    const queryString = `INSERT INTO BidMaterial (materialID, bidID, quantity, perUnitCost) VALUES ((SELECT materialID FROM Material WHERE materialID=${newBidMaterial.materialID}), (SELECT MAX(bidID) AS bidID FROM Bid), ${newBidMaterial.quantity}, ${newBidMaterial.perUnitCost})`;
-    connection.query(queryString, (error, rows, fields) => {
-        if(!error){
-            callback(rows);
-        } else{
-            return error;
-        }
-    });
-}
+// module.exports.createBidMaterial = function(newBidMaterial, callback){
+//     const queryString = `INSERT INTO BidMaterial (materialID, bidID, quantity, perUnitCost) VALUES ((SELECT materialID FROM Material WHERE materialID=${newBidMaterial.materialID}), (SELECT MAX(bidID) AS bidID FROM Bid), ${newBidMaterial.quantity}, ${newBidMaterial.perUnitCost})`;
+//     connection.query(queryString, (error, rows, fields) => {
+//         if(!error){
+//             callback(rows);
+//         } else{
+//             return error;
+//         }
+//     });
+// }
 
-module.exports.createBidMaterialById = function(bidID, newBidMaterial, callback){
-    const queryString = `INSERT INTO BidMaterial (materialID, bidID, quantity, perUnitCost) VALUES ((SELECT materialID FROM Material WHERE materialID=${newBidMaterial.materialID}), ${bidID}, ${newBidMaterial.quantity}, ${newBidMaterial.perUnitCost})`;
+module.exports.createBidMaterialById = function(newBidMaterial, callback){
+    const queryString = sqlString.format(`INSERT INTO BidMaterial SET ?`, newBidMaterial);
+    // const queryString = `INSERT INTO BidMaterial (materialID, bidID, quantity, perUnitCost) VALUES ((SELECT materialID FROM Material WHERE materialID=${newBidMaterial.materialID}), ${bidID}, ${newBidMaterial.quantity}, ${newBidMaterial.perUnitCost})`;
     console.log(queryString);
     connection.query(queryString, (error, rows, fields) => {
         if(!error){

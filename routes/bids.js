@@ -94,39 +94,41 @@ router.post('/new', passport.authenticate('jwt', {session: false}), (request, re
     });
 });
 
-// Create bid material
-router.post('/new/bid-material', passport.authenticate('jwt', {session: false}), (request, response, next) => {
-    let newBidMaterial = {
-        materialID: request.body.materialID,
-        quantity: request.body.quantity,
-        perUnitCost: request.body.perUnitCost
-    };
+// // Create bid material
+// router.post('/new/bid-material', passport.authenticate('jwt', {session: false}), (request, response, next) => {
+//     let newBidMaterial = {
+//         materialID: request.body.materialID,
+//         quantity: request.body.quantity,
+//         perUnitCost: request.body.perUnitCost
+//     };
     
-    bid.createBidMaterial(newBidMaterial, (message) => {
-        if(message.message == ""){
-            response.json({
-                success: true,
-                msg: 'Bid material created'
-            });
-        } else{
-            response.json({
-                success: false,
-                msg: message.message
-            });
-        }
-    });
-});
+//     bid.createBidMaterial(newBidMaterial, (message) => {
+//         if(message.message == ""){
+//             response.json({
+//                 success: true,
+//                 msg: 'Bid material created'
+//             });
+//         } else{
+//             response.json({
+//                 success: false,
+//                 msg: message.message
+//             });
+//         }
+//     });
+// });
 
 // Create bid material by ID
 router.post('/:id/new/bid-material', passport.authenticate('jwt', {session: false}), (request, response, next) => {
-    const bidID = request.params.id;
+    // const bidID = request.params.id;
     let newBidMaterial = {
+        bidID: request.params.id,
         materialID: request.body.materialID,
-        quantity: request.body.quantity,
-        perUnitCost: request.body.perUnitCost
+        materialName: request.body.materialName,
+        linearFeet: request.body.linearFeet,
+        pricePerLinearFoot: request.body.pricePerLinearFoot
     };
     
-    bid.createBidMaterialById(bidID, newBidMaterial, (message) => {
+    bid.createBidMaterialById(newBidMaterial, (message) => {
         if(message.message == ""){
             response.json({
                 success: true,
