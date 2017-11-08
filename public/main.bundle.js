@@ -2219,7 +2219,8 @@ var AuthService = (function () {
         this.http = http;
         this.cookieService = cookieService;
         this.cookieStorage = new __WEBPACK_IMPORTED_MODULE_5_cookie_storage__["CookieStorage"]();
-        this.localHttp = 'http://localhost:3000/api';
+        // localHttp:String = 'http://localhost:3000/api";
+        this.localHttp = 'api';
     }
     AuthService.prototype.registerUser = function (user) {
         this.loadToken();
@@ -2294,7 +2295,8 @@ var BidService = (function () {
     function BidService(http, authService) {
         this.http = http;
         this.authService = authService;
-        this.localHttp = 'http://localhost:3000/api';
+        // localHttp:String = 'http://localhost:3000/api';
+        this.localHttp = 'api';
     }
     BidService.prototype.getAllBids = function () {
         this.authService.loadToken();
@@ -2412,70 +2414,71 @@ var CustomerService = (function () {
     function CustomerService(http, authService) {
         this.http = http;
         this.authService = authService;
-        this.localHttp = 'http://localhost:3000/api';
+        // localHttp:String = 'http://localhost:3000/api/';
+        this.localHttp = 'api';
     }
     CustomerService.prototype.getAllCustomers = function () {
         this.authService.loadToken();
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Authorization', this.authService.authToken);
         headers.append('Content-Type', 'application/json');
-        return this.http.get(this.localHttp + "/customers/all", { headers: headers }).map(function (response) { return response.json(); });
+        return this.http.get(this.localHttp + "customers/all", { headers: headers }).map(function (response) { return response.json(); });
     };
     CustomerService.prototype.getAllContacts = function (customerID) {
         this.authService.loadToken();
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Authorization', this.authService.authToken);
         headers.append('Content-Type', 'application/json');
-        return this.http.get(this.localHttp + "/customers/" + customerID + "/contacts", { headers: headers }).map(function (response) { return response.json(); });
+        return this.http.get(this.localHttp + "customers/" + customerID + "/contacts", { headers: headers }).map(function (response) { return response.json(); });
     };
     CustomerService.prototype.getCustomerById = function (id) {
         this.authService.loadToken();
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', this.authService.authToken);
-        return this.http.get(this.localHttp + "/customers/" + id, { headers: headers }).map(function (response) { return response.json(); });
+        return this.http.get(this.localHttp + "customers/" + id, { headers: headers }).map(function (response) { return response.json(); });
     };
     CustomerService.prototype.deleteCustomer = function (id) {
         this.authService.loadToken();
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', this.authService.authToken);
-        return this.http.post(this.localHttp + "/customers/delete/" + id, JSON.stringify({}), { headers: headers }).map(function (response) { return response.json(); });
+        return this.http.post(this.localHttp + "customers/delete/" + id, JSON.stringify({}), { headers: headers }).map(function (response) { return response.json(); });
     };
     CustomerService.prototype.deleteContact = function (contactID) {
         this.authService.loadToken();
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', this.authService.authToken);
-        return this.http.post(this.localHttp + "/customers/delete/contact/" + contactID, JSON.stringify({}), { headers: headers }).map(function (response) { return response.json(); });
+        return this.http.post(this.localHttp + "customers/delete/contact/" + contactID, JSON.stringify({}), { headers: headers }).map(function (response) { return response.json(); });
     };
     CustomerService.prototype.createCustomer = function (newCustomer) {
         this.authService.loadToken();
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', this.authService.authToken);
-        return this.http.post(this.localHttp + "/customers/new", JSON.stringify(newCustomer), { headers: headers }).map(function (response) { return response.json(); });
+        return this.http.post(this.localHttp + "customers/new", JSON.stringify(newCustomer), { headers: headers }).map(function (response) { return response.json(); });
     };
     CustomerService.prototype.createContact = function (newContact) {
         this.authService.loadToken();
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', this.authService.authToken);
-        return this.http.post(this.localHttp + "/customers/" + newContact.customerID + "/new/contact", JSON.stringify(newContact), { headers: headers }).map(function (response) { return response.json(); });
+        return this.http.post(this.localHttp + "customers/" + newContact.customerID + "/new/contact", JSON.stringify(newContact), { headers: headers }).map(function (response) { return response.json(); });
     };
     CustomerService.prototype.updateCustomer = function (updatedCustomer) {
         this.authService.loadToken();
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', this.authService.authToken);
-        return this.http.post(this.localHttp + "/customers/update", JSON.stringify(updatedCustomer), { headers: headers }).map(function (response) { return response.json(); });
+        return this.http.post(this.localHttp + "customers/update", JSON.stringify(updatedCustomer), { headers: headers }).map(function (response) { return response.json(); });
     };
     CustomerService.prototype.updateContact = function (updatedContact) {
         this.authService.loadToken();
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', this.authService.authToken);
-        return this.http.post(this.localHttp + "/customers/update/contact", JSON.stringify(updatedContact), { headers: headers }).map(function (response) { return response.json(); });
+        return this.http.post(this.localHttp + "customers/update/contact", JSON.stringify(updatedContact), { headers: headers }).map(function (response) { return response.json(); });
     };
     return CustomerService;
 }());
@@ -2516,7 +2519,8 @@ var InquiryService = (function () {
     function InquiryService(http, authService) {
         this.http = http;
         this.authService = authService;
-        this.localHttp = 'http://localhost:3000/api';
+        // localHttp:String = 'http://localhost:3000/api';
+        this.localHttp = 'api';
     }
     InquiryService.prototype.getAllInquiries = function () {
         this.authService.loadToken();
@@ -2606,7 +2610,8 @@ var JobService = (function () {
     function JobService(http, authService) {
         this.http = http;
         this.authService = authService;
-        this.localHttp = 'http://localhost:3000/api';
+        // localHttp:String = 'http://localhost:3000/api';
+        this.localHttp = 'api';
     }
     JobService.prototype.getAllJobs = function () {
         this.authService.loadToken();
@@ -2738,7 +2743,8 @@ var MaterialService = (function () {
     function MaterialService(http, authService) {
         this.http = http;
         this.authService = authService;
-        this.localHttp = 'http://localhost:3000/api';
+        // localHttp:String = 'http://localhost:3000/api';
+        this.localHttp = 'api';
     }
     MaterialService.prototype.getAllMaterials = function () {
         this.authService.loadToken();

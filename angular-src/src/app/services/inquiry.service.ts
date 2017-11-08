@@ -7,7 +7,7 @@ import { AuthService } from './auth.service';
 export class InquiryService {
 
   // localHttp:String = 'http://localhost:3000/api';
-  localHttp:String = '';
+  localHttp:String = 'api';
   
   constructor(
     private http:Http,
