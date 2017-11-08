@@ -6,8 +6,8 @@ import { AuthService } from './auth.service';
 @Injectable()
 export class MaterialService {
 
-  localHttp:String = 'http://localhost:3000/api';
-
+  // localHttp:String = 'http://localhost:3000/api';
+  localHttp:String = '';
   constructor(
     private http:Http,
     private authService:AuthService

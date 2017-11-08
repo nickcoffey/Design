@@ -9,8 +9,8 @@ const config = require('./config/database');
 const serveIndex = require('serve-index');
 
 //  Connect to DB
-// const connection = module.exports = mysql.createConnection(config.AWS);
-const connection = module.exports = mysql.createConnection(config.LOCAL);
+const connection = module.exports = mysql.createConnection(config.AWS);
+// const connection = module.exports = mysql.createConnection(config.LOCAL);
 connection.connect((err) => {
     if (err) {
         console.error(`Database connection failed ${err.stack}`);
@@ -30,7 +30,8 @@ const jobs = require('./routes/jobs');
 const materials = require('./routes/materials');
 
 // Port Number
-const port = 3000;
+const port = process.env.PORT || 8080;
+// const port = 3000;
 
 // CORS Middleware
 app.use(cors());

@@ -6,8 +6,9 @@ import { AuthService } from './auth.service';
 @Injectable()
 export class CustomerService {
 
-  localHttp:String = 'http://localhost:3000/api';
-
+  // localHttp:String = 'http://localhost:3000/api';
+  localHttp:String = '';
+  
   constructor(
     private http:Http,
     private authService:AuthService
