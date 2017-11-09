@@ -11,6 +11,7 @@
         <tr>
           <th>ID</th>
           <th>Name</th>
+          <th>Price Per Linear Foot</th>
           <th>Update</th>
           <th>Delete</th>
         </tr>
@@ -19,6 +20,7 @@
         <tr *ngFor="let material of materials">
           <td>{{material.materialID}}</td>
           <td>{{material.materialName}}</td>
+          <td>{{material.pricePerLinearFoot | currency: 'USD':true}}</td>
           <td>
             <button class="btn btn-primary" type="button" (click)="onClickUpdate(material.materialID)" data-toggle="modal" href='#update-modal'>
               <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
@@ -55,6 +57,10 @@
           <div class="form-group">
             <label>Name</label>
             <input type="text" [(ngModel)]="name" name="name" placeholder="Name" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Price Per Linear Foot</label>
+            <input type="text" [(ngModel)]="pricePerLinearFoot" name="pricePerLinearFoot" placeholder="Price Per Linear Foot" class="form-control" required>
           </div>
           <button type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
@@ -100,6 +106,10 @@
           <div class="form-group">
             <label>Name</label>
             <input type="text" [(ngModel)]="name" name="name" placeholder="Name" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Price Per Linear Foot</label>
+            <input type="text" [(ngModel)]="pricePerLinearFoot" name="pricePerLinearFoot" placeholder="Price Per Linear Foot" class="form-control" required>
           </div>
           <button type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Create</button>

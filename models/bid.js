@@ -48,7 +48,9 @@ module.exports.getCurrentBidMaterialsCost = function(id, callback){
 }
 
 module.exports.createBid = function(newBid, callback){
-    const queryString = `INSERT INTO Bid (inquiryID, bidStatus, bidLabor, bidPrice, createdDate) VALUES ((SELECT inquiryID FROM Inquiry WHERE inquiryID=${newBid.inquiryID}), "PENDING", ${newBid.bidLabor}, ${newBid.bidPrice}, NOW())`;
+    const queryString = sqlString.format(`INSERT INTO Bid SET ?, bidStatus="PENDING", createdDate=NOW()`,newBid);
+    // const queryString = `INSERT INTO Bid (inquiryID, bidStatus, bidLabor, bidPrice, createdDate) VALUES (${newBid.inquiryID}, "PENDING", ${newBid.bidLabor}, ${newBid.bidPrice}, NOW())`;
+    // console.log(queryString);
     connection.query(queryString, (error, rows, fields) => {
         if(!error){
             callback(rows);
@@ -58,16 +60,18 @@ module.exports.createBid = function(newBid, callback){
     });
 }
 
-// module.exports.createBidMaterial = function(newBidMaterial, callback){
-//     const queryString = `INSERT INTO BidMaterial (materialID, bidID, quantity, perUnitCost) VALUES ((SELECT materialID FROM Material WHERE materialID=${newBidMaterial.materialID}), (SELECT MAX(bidID) AS bidID FROM Bid), ${newBidMaterial.quantity}, ${newBidMaterial.perUnitCost})`;
-//     connection.query(queryString, (error, rows, fields) => {
-//         if(!error){
-//             callback(rows);
-//         } else{
-//             return error;
-//         }
-//     });
-// }
+module.exports.createBidMaterial = function(newBidMaterial, callback){
+    const queryString = sqlString.format(`INSERT INTO BidMaterial SET ?, bidID=(SELECT MAX(bidID) FROM Bid)`, newBidMaterial);
+    // const queryString = `INSERT INTO BidMaterial (materialID, bidID, materialName, linearFeet, pricePerLinearFoot) VALUES (${newBidMaterial.materialID}, (SELECT MAX(bidID) AS bidID FROM Bid), ${newBidMaterial.materialName}, ${newBidMaterial.linearFeet}, ${newBidMaterial.pricePerLinearFoot})`;
+    // console.log(queryString);
+    connection.query(queryString, (error, rows, fields) => {
+        if(!error){
+            callback(rows);
+        } else{
+            return error;
+        }
+    });
+}
 
 module.exports.createBidMaterialById = function(newBidMaterial, callback){
     const queryString = sqlString.format(`INSERT INTO BidMaterial SET ?`, newBidMaterial);

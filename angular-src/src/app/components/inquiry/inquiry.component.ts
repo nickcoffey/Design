@@ -11,22 +11,29 @@ import { BidService } from '../../services/bid.service';
 })
 export class InquiryComponent implements OnInit {
 
-  id:any;
-  inquiry:any;
-  bidPrice:any;
-  createdDate:any;
-  bidLabor:any;
-  materials:any;
-  selectedMaterials:SelectedMaterial[] = [];
-  description:any;
-  status:any;
+  id: any;
+  inquiry: any;
+  bidPrice: number;
+  linearFeet: number = 0;
+  createdDate: any;
+  bidLabor: number = 0;
+  materials: any;
+  material: any;
+  materialID: number;
+  totalMaterialPrice: number = 0;
+  margin:number = 0;
+  // totalCost:number = 0;
+  // selectedMaterials:SelectedMaterial[] = [];
+  selectedMaterials1: SelectedMaterial[] = []
+  description: any;
+  status: any;
 
   constructor(
-    private router:Router,
-    private route:ActivatedRoute,
-    private inquiryService:InquiryService,
-    private materialService:MaterialService,
-    private bidService:BidService
+    private router: Router,
+    private route: ActivatedRoute,
+    private inquiryService: InquiryService,
+    private materialService: MaterialService,
+    private bidService: BidService
   ) { }
 
   ngOnInit() {
@@ -42,30 +49,66 @@ export class InquiryComponent implements OnInit {
     });
   }
 
-  onAddMaterial(material, id){
-    this.selectedMaterials.push(material);
-    this.materials.splice(id, 1);
+  // onAddMaterial(material, id){
+  //   this.selectedMaterials.push(material);
+  //   this.materials.splice(id, 1);
+  // }
+
+  onSelectMaterial(material, id) {
+    // console.log(material);
+    this.material = material;
+    this.materialID = id;
   }
 
-  onRemoveMaterial(material, id){
-    this.selectedMaterials.splice(id, 1);
+  onRemoveMaterial(material, id) {
+    this.totalMaterialPrice -= (material.pricePerLinearFoot * material.linearFeet);
+    this.selectedMaterials1.splice(id, 1);
     this.materials.push(material);
   }
 
-  onClear(){
-    this.selectedMaterials.forEach(selectedMaterial => {
+  onAddMaterial() {
+    let selectedMaterial = {
+      materialID: this.material.materialID,
+      materialName: this.material.materialName,
+      pricePerLinearFoot: this.material.pricePerLinearFoot,
+      linearFeet: this.linearFeet
+    };
+    this.totalMaterialPrice += (selectedMaterial.pricePerLinearFoot * this.linearFeet);
+    this.selectedMaterials1.push(selectedMaterial);
+    this.materials.splice(this.materialID, 1);
+    this.material = null;
+    this.linearFeet = 0;
+  }
+
+  onClear() {
+    this.selectedMaterials1.forEach(selectedMaterial => {
       this.materials.push(selectedMaterial);
     });
-    this.selectedMaterials = [];
+    this.selectedMaterials1 = [];
+    this.totalMaterialPrice = 0;
+    this.bidLabor = 0;
+    this.margin = 0;
     //this.ngOnInit();
   }
 
-  onCreate(){
+  // onRemoveMaterial(material, id){
+  //   this.selectedMaterials.splice(id, 1);
+  //   this.materials.push(material);
+  // }
+
+  // onClear(){
+  //   this.selectedMaterials.forEach(selectedMaterial => {
+  //     this.materials.push(selectedMaterial);
+  //   });
+  //   this.selectedMaterials = [];
+  //   //this.ngOnInit();
+  // }
+
+  onCreate() {
     const newBid = {
       inquiryID: this.id,
       bidLabor: this.bidLabor,
-      bidPrice: this.bidPrice,
-      createdDate: this.createdDate
+      bidPrice: (1 + this.margin)*(this.totalMaterialPrice + this.bidLabor)
     };
     const updatedInquiry = {
       inquiryID: this.id,
@@ -74,42 +117,54 @@ export class InquiryComponent implements OnInit {
     };
 
     this.bidService.createBid(newBid).subscribe((data) => {
-      if(data.success){
+      if (data.success) {
         console.log(data.msg);
-      } else{
+      } else {
         console.log(data.msg);
       }
     });
     this.inquiryService.updateInquiryStatus(updatedInquiry).subscribe((data) => {
-      if(data.success){
+      if (data.success) {
         console.log(data.msg);
-      } else{
+      } else {
         console.log(data.msg);
       }
     });
-    this.selectedMaterials.forEach(selectedMaterial => {
+    // this.selectedMaterials.forEach(selectedMaterial => {
+    //   console.log(selectedMaterial);
+    //   this.bidService.createBidMaterial(selectedMaterial).subscribe((data) => {
+    //     if(data.success){
+    //       console.log(data.msg);
+    //     } else{
+    //       console.log(data.msg);
+    //     }
+    //   });
+    // });
+    this.selectedMaterials1.forEach(selectedMaterial => {
+      console.log(selectedMaterial);
       this.bidService.createBidMaterial(selectedMaterial).subscribe((data) => {
-        if(data.success){
+        if (data.success) {
           console.log(data.msg);
-        } else{
+        } else {
           console.log(data.msg);
         }
       });
     });
 
-    this.router.navigate([`/bids`]);
+    this.onClear();
+    // this.router.navigate([`/bids`]);
   }
 
-  onUpdate(){
+  onUpdate() {
     let updatedInquiry = {
       inquiryID: this.id,
       description: this.description
     }
 
     this.inquiryService.updateInquiry(updatedInquiry).subscribe((data) => {
-      if(data.success){
+      if (data.success) {
         console.log(data.msg);
-      } else{
+      } else {
         console.log(data.msg);
       }
     });
@@ -117,12 +172,12 @@ export class InquiryComponent implements OnInit {
     this.ngOnInit();
   }
 
-  onDelete(){
+  onDelete() {
     this.inquiryService.deleteInquiry(this.id).subscribe((data) => {
-      if(data.success){
+      if (data.success) {
         console.log(data.msg);
         this.router.navigate(['/inquiries']);
-      } else{
+      } else {
         console.log(data.msg);
       }
     });
@@ -132,6 +187,6 @@ export class InquiryComponent implements OnInit {
 interface SelectedMaterial {
   materialID: Number,
   materialName: String,
-  quantity: Number,
-  perUnitCost: Number
+  linearFeet: Number,
+  pricePerLinearFoot: Number
 }

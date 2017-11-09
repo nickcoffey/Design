@@ -70,18 +70,18 @@
           <thead *ngIf="bidMaterials[0] != null;">
             <tr>
               <th>Material</th>
-              <th>Quantity</th>
-              <th>Per Unit Cost</th>
-              <th></th>
+              <th>Linear Feet</th>
+              <th>Price Per Linear Foot</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let bidMaterial of bidMaterials">
               <td>{{bidMaterial.materialName}}</td>
-              <td>{{bidMaterial.quantity}}</td>
-              <td>{{bidMaterial.perUnitCost | currency: 'USD':true}}</td>
+              <td>{{bidMaterial.linearFeet}}</td>
+              <td>{{bidMaterial.pricePerLinearFoot | currency: 'USD':true}}</td>
               <td>
-                <button type="button" class="close" data-toggle="modal" href='#delete-material-modal'>&times;</button>
+                <button class="btn btn-danger" data-toggle="modal" href='#delete-material-modal'><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></button>
               </td>
               <!--                Delete Bid Popup                -->
               <div class="modal fade" id="delete-material-modal">

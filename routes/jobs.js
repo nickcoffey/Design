@@ -5,6 +5,8 @@ const config = require('../config/database');
 const passport = require('passport');
 const fs = require('fs');
 
+/********************************************************* Job *************************************************************************/
+
 // Get all jobs
 router.get('/all', passport.authenticate('jwt', { session: false }), (request, response, next) => {
     job.getAllJobs((jobs) => {
@@ -53,29 +55,7 @@ router.get('/:id', passport.authenticate('jwt', { session: false }), (request, r
     });
 });
 
-// Get job materials by id
-router.get('/:id/job-materials', passport.authenticate('jwt', { session: false }), (request, response, next) => {
-    const id = request.params.id;
-    job.getJobMaterialsById(id, (jobMaterials) => {
-        if (!jobMaterials) {
-            return err;
-        } else {
-            return response.json(jobMaterials);
-        }
-    });
-});
 
-// Get job materials cost
-router.get('/:id/job-materials/cost', passport.authenticate('jwt', { session: false }), (request, response, next) => {
-    const id = request.params.id;
-    job.getCurrentJobMaterialsCost(id, (cost) => {
-        if (!cost) {
-            return err;
-        } else {
-            return response.json(cost);
-        }
-    });
-});
 
 // Create job
 router.post('/new', passport.authenticate('jwt', { session: false }), (request, response, next) => {
@@ -90,54 +70,6 @@ router.post('/new', passport.authenticate('jwt', { session: false }), (request, 
                 msg: 'Job created'
             });
             makeDirectory(message.insertId);
-        } else {
-            response.json({
-                success: false,
-                msg: message.message
-            });
-        }
-    });
-});
-
-// Create job material
-router.post('/:id/new/job-material', passport.authenticate('jwt', { session: false }), (request, response, next) => {
-    // const id = request.params.id;
-    let newJobMaterial = {
-        jobID: request.params.id,
-        materialID: request.body.materialID,
-        materialName: request.body.materialName,
-        linearFeet: request.body.linearFeet,
-        pricePerLinearFoot: request.body.pricePerLinearFoot
-    };
-
-    job.createJobMaterial(newJobMaterial, (message) => {
-        if (message.message == "") {
-            response.json({
-                success: true,
-                msg: 'Job material created'
-            });
-        } else {
-            response.json({
-                success: false,
-                msg: message.message
-            });
-        }
-    });
-});
-
-// Delete job material
-router.post('/delete/job-material', passport.authenticate('jwt', { session: false }), (request, response, next) => {
-    let jobMaterial = {
-        materialID: request.body.materialID,
-        jobID: request.body.jobID
-    };
-
-    job.deleteJobMaterial(jobMaterial, (message) => {
-        if (message.message == "") {
-            response.json({
-                success: true,
-                msg: 'Job material deleted'
-            });
         } else {
             response.json({
                 success: false,
@@ -310,5 +242,246 @@ function makeDirectory(id) {
     });
     // wait(); // wait 2 seconds
 }
+
+/********************************************************* Job Materials *************************************************************************/
+
+// Get job materials by id
+router.get('/:id/job-materials', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    const id = request.params.id;
+    job.getJobMaterialsById(id, (jobMaterials) => {
+        if (!jobMaterials) {
+            return err;
+        } else {
+            return response.json(jobMaterials);
+        }
+    });
+});
+
+// Get job materials cost
+router.get('/:id/job-materials/cost', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    const id = request.params.id;
+    job.getCurrentJobMaterialsCost(id, (cost) => {
+        if (!cost) {
+            return err;
+        } else {
+            return response.json(cost);
+        }
+    });
+});
+
+// Delete job material
+router.post('/delete/job-material', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    let jobMaterial = {
+        materialID: request.body.materialID,
+        jobID: request.body.jobID
+    };
+
+    job.deleteJobMaterial(jobMaterial, (message) => {
+        if (message.message == "") {
+            response.json({
+                success: true,
+                msg: 'Job material deleted'
+            });
+        } else {
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
+// Create job material
+router.post('/:id/new/job-material', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    // const id = request.params.id;
+    let newJobMaterial = {
+        jobID: request.params.id,
+        materialID: request.body.materialID,
+        materialName: request.body.materialName,
+        linearFeet: request.body.linearFeet,
+        pricePerLinearFoot: request.body.pricePerLinearFoot
+    };
+
+    job.createJobMaterial(newJobMaterial, (message) => {
+        if (message.message == "") {
+            response.json({
+                success: true,
+                msg: 'Job material created'
+            });
+        } else {
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
+/********************************************************* Change Order *************************************************************************/
+
+// Create change order
+router.post('/:id/new/change-order', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    // const id = request.params.id;
+    let newChangeOrder = {
+        jobID: request.params.id,
+        changeAmount: request.body.changeAmount
+    };
+
+    job.createChangeOrder(newChangeOrder, (message) => {
+        if (message.message == "") {
+            response.json({
+                success: true,
+                msg: 'Change order created'
+            });
+        } else {
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
+// Delete change order
+router.post('/delete/change-order/:id', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    let changeID = request.params.id;
+
+    job.deleteChangeOrder(changeID, (message) => {
+        if (message.message == "") {
+            response.json({
+                success: true,
+                msg: 'Change order deleted'
+            });
+        } else {
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
+// Get change orders by id
+router.get('/:id/change-orders', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    const id = request.params.id;
+    job.getChangeOrdersById(id, (changeOrders) => {
+        if (!changeOrders) {
+            return err;
+        } else {
+            return response.json(changeOrders);
+        }
+    });
+});
+
+/********************************************************* Job Revenue *************************************************************************/
+
+// Create job revenue
+router.post('/:id/new/job-revenue', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    let newJobRevenue = {
+        jobID: request.params.id,
+        revenueAmount: request.body.revenueAmount
+    };
+
+    job.createJobRevenue(newJobRevenue, (message) => {
+        if (message.message == "") {
+            response.json({
+                success: true,
+                msg: 'Job revenue created'
+            });
+        } else {
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
+// Delete job revenue
+router.post('/delete/job-revenue/:id', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    let revenueID = request.params.id;
+
+    job.deleteJobRevenue(revenueID, (message) => {
+        if (message.message == "") {
+            response.json({
+                success: true,
+                msg: 'Job revenue deleted'
+            });
+        } else {
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
+// Get job revenues by id
+router.get('/:id/job-revenues', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    const id = request.params.id;
+    job.getJobRevenuesById(id, (jobRevenues) => {
+        if (!jobRevenues) {
+            return err;
+        } else {
+            return response.json(jobRevenues);
+        }
+    });
+});
+
+/********************************************************* Job Labor *************************************************************************/
+
+// Create job labor
+router.post('/:id/new/job-labor', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    let newJobLabor = {
+        jobID: request.params.id,
+        laborHours: request.body.laborHours,
+        laborPrice: request.body.laborPrice
+    };
+
+    job.createJobLabor(newJobLabor, (message) => {
+        if (message.message == "") {
+            response.json({
+                success: true,
+                msg: 'Job labor created'
+            });
+        } else {
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
+// Delete job labor
+router.post('/delete/job-labor/:id', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    let laborID = request.params.id;
+
+    job.deleteJobLabor(laborID, (message) => {
+        if (message.message == "") {
+            response.json({
+                success: true,
+                msg: 'Job labor deleted'
+            });
+        } else {
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
+// Get job labors by id
+router.get('/:id/job-labors', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    const id = request.params.id;
+    job.getJobLaborsById(id, (jobLabors) => {
+        if (!jobLabors) {
+            return err;
+        } else {
+            return response.json(jobLabors);
+        }
+    });
+});
 
 module.exports = router;

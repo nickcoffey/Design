@@ -54,7 +54,7 @@ export class CustomerComponent implements OnInit {
     this.inquiryService.createInquiry(newInquiry).subscribe((data) => {
       if (data.success) {
         console.log(data.msg);
-        this.router.navigate(['/inquiries']);
+        //this.router.navigate(['/inquiries']);
       } else {
         console.log(data.msg);
       }
