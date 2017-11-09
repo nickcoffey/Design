@@ -6,8 +6,8 @@ import { AuthService } from './auth.service';
 @Injectable()
 export class JobService {
 
-  localHttp:String = 'http://localhost:3000/api';
-  // localHttp:String = 'api';
+  // localHttp:String = 'http://localhost:3000/api';
+  localHttp:String = 'api';
   
   constructor(
     private http:Http,
