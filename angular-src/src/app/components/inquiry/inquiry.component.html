@@ -199,7 +199,7 @@
                       <input type="text" [(ngModel)]="linearFeet" name="linearFeet" placeholder="Linear Feet" class="form-control" required>
                     </td>
                     <td>
-                      <button type="button" class="btn btn-success" (click)="onAddMaterial(selectedMaterial, i)">
+                      <button (click)="onAddMaterial(selectedMaterial, i)" type="button" class="btn btn-success">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                       </button>
                     </td>
@@ -219,7 +219,7 @@
                     <td>{{selectedMaterial.materialName}}</td>
                     <td>{{selectedMaterial.linearFeet*selectedMaterial.pricePerLinearFoot | currency: 'USD':true}}</td>
                     <td>
-                      <button type="button" class="btn btn-danger" (click)="onRemoveMaterial(selectedMaterial, i)">
+                      <button (click)="onRemoveMaterial(selectedMaterial, i)" type="button" class="btn btn-danger">
                         <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
                       </button>
                     </td>

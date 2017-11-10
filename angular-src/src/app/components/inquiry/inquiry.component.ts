@@ -55,7 +55,7 @@ export class InquiryComponent implements OnInit {
   // }
 
   onSelectMaterial(material, id) {
-    // console.log(material);
+    console.log(material);
     this.material = material;
     this.materialID = id;
   }
