@@ -24,7 +24,7 @@ export class InquiryComponent implements OnInit {
   margin:number = 0;
   // totalCost:number = 0;
   // selectedMaterials:SelectedMaterial[] = [];
-  selectedMaterials1: SelectedMaterial[] = []
+  selectedMaterials1: SelectedMaterial[] = [];
   description: any;
   status: any;
 
@@ -55,7 +55,7 @@ export class InquiryComponent implements OnInit {
   // }
 
   onSelectMaterial(material, id) {
-    console.log(material);
+    // console.log(material);
     this.material = material;
     this.materialID = id;
   }

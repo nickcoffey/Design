@@ -20,8 +20,13 @@ export class BidComponent implements OnInit {
   bidStatus:any;
   createdDate:any;
   endDate:any;
+  material:any;
+  materialID:number;
+  linearFeet: number = 0;
+  totalMaterialPrice: number = 0;
   materials:any;
-  selectedMaterials:SelectedMaterial[] = [];
+  // selectedMaterials:SelectedMaterial[] = [];
+  selectedMaterials1:SelectedMaterial[] = [];
   status:any;
 
   constructor(
@@ -58,22 +63,44 @@ export class BidComponent implements OnInit {
     });
   }
 
-  onAddMaterial(material, id){
-    this.selectedMaterials.push(material);
-    this.materials.splice(id, 1);
+  // onAddMaterial(material, id){
+  //   this.selectedMaterials.push(material);
+  //   this.materials.splice(id, 1);
+  // }
+
+  onSelectMaterial(material, id) {
+    // console.log(material);
+    this.material = material;
+    this.materialID = id;
   }
 
-  onRemoveMaterial(material, id){
-    this.selectedMaterials.splice(id, 1);
+  onAddMaterial() {
+    let selectedMaterial = {
+      materialID: this.material.materialID,
+      materialName: this.material.materialName,
+      pricePerLinearFoot: this.material.pricePerLinearFoot,
+      linearFeet: this.linearFeet
+    };
+    this.totalMaterialPrice += (selectedMaterial.pricePerLinearFoot * this.linearFeet);
+    this.selectedMaterials1.push(selectedMaterial);
+    this.materials.splice(this.materialID, 1);
+    this.material = null;
+    this.linearFeet = 0;
+  }
+
+  onRemoveMaterial(material, id) {
+    this.totalMaterialPrice -= (material.pricePerLinearFoot * material.linearFeet);
+    this.selectedMaterials1.splice(id, 1);
     this.materials.push(material);
-    //this.ngOnInit();
   }
 
   onClear(){
-    this.selectedMaterials.forEach(selectedMaterial => {
+    this.selectedMaterials1.forEach(selectedMaterial => {
       this.materials.push(selectedMaterial);
     });
-    this.selectedMaterials = [];
+    this.selectedMaterials1 = [];
+    this.bidLabor = 0;
+    this.bidPrice = 0;
     //this.ngOnInit();
   }
 
@@ -160,7 +187,7 @@ export class BidComponent implements OnInit {
       endDate: this.endDate
     }
 
-    this.selectedMaterials.forEach(selectedMaterial => {
+    this.selectedMaterials1.forEach(selectedMaterial => {
       this.bidService.createBidMaterialById(this.id, selectedMaterial).subscribe((data) => {
         if(data.success){
           console.log(data.msg);
@@ -186,6 +213,6 @@ export class BidComponent implements OnInit {
 interface SelectedMaterial {
   materialID: Number,
   materialName: String,
-  quantity: Number,
-  perUnitCost: Number
+  linearFeet: Number,
+  pricePerLinearFoot: Number
 }

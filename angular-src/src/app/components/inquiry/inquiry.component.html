@@ -124,17 +124,15 @@
       </div>
       <div class="modal-body">
         <form (submit)="onCreate()">
-          <div class="panel panel-info">
+          <div class="panel panel-primary">
             <div class="panel-heading">
-              <h3 class="panel-title">Enter Labor Cost</h3>
+              <h3 class="panel-title">Enter Costs</h3>
             </div>
             <div class="panel-body">
+              <h4>Labor Cost</h4>
               <div class="form-group">
                 <input type="number" [(ngModel)]="bidLabor" name="bidLabor" placeholder="Labor Cost" class="form-control" required>
               </div>
-            </div>
-            <div class="panel-heading">
-              <h3 class="panel-title">Enter Materials Cost</h3>
             </div>
             <div class="panel-body">
               <!-- <div class="dropdown">
@@ -179,6 +177,7 @@
                   </tr>
                 </tbody>
               </table> -->
+              <h4>Material Cost</h4>
               <table class="table table-bordered" *ngIf="materials[0] != null">
                 <thead>
                   <tr class="active">
@@ -206,7 +205,7 @@
                   </tr>
                 </tbody>
               </table>
-              <table class="table table-bordered" *ngIf="selectedMaterials1[0] != null;">
+              <table class="table table-bordered" *ngIf="selectedMaterials1.length != 0;">
                 <thead>
                   <tr class="active">
                     <th>Name</th>
@@ -233,9 +232,8 @@
                   </tr>
                 </tfoot>
               </table>
-            </div>
-            <div class="panel-heading">
-              <h3 class="panel-title">Total Cost: {{totalMaterialPrice + bidLabor | currency: 'USD':true}}</h3>
+              <hr>
+              <h4>Total Cost: {{totalMaterialPrice + bidLabor | currency: 'USD':true}}</h4>
             </div>
           </div>
           <!-- <table class="table table-bordered table-hover">
@@ -252,11 +250,10 @@
             </div>
             <div class="panel-body">
               <div class="form-group">
-                <input type="number" [(ngModel)]="margin" name="margin" placeholder="Margin" class="form-control" required>
+                <input type="number" [(ngModel)]="margin" name="margin" placeholder="Margin" class="form-control" required />
               </div>
-            </div>
-            <div class="panel-heading">
-              <h3 class="panel-title">Recommended Bid: {{(1 + margin)*(totalMaterialPrice + bidLabor) | currency: 'USD':true}}</h3>
+              <hr>
+              <h4>Recommended Bid: {{(1 + margin)*(totalMaterialPrice + bidLabor) | currency: 'USD':true}}</h4>
             </div>
           </div>
           <button type="submit" class="btn btn-primary">
