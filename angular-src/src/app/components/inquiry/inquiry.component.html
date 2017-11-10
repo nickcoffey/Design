@@ -189,16 +189,23 @@
                 <tbody>
                   <tr>
                     <td>
-                      <select class="form-control">
+                      <!-- <select class="form-control">
                         <option></option>
                         <option *ngFor="let material of materials; let i = index;" (click)="onSelectMaterial(material, i)">{{material.materialName}}</option>
+                      </select> -->
+                      <select (change)="onChangeMaterial($event.target.value)" class="form-control">
+                        <option></option>
+                        <option [value]="i" *ngFor="let material of materials; let i = index;">{{material.materialName}}</option>
                       </select>
                     </td>
                     <td>
                       <input type="text" [(ngModel)]="linearFeet" name="linearFeet" placeholder="Linear Feet" class="form-control" required>
                     </td>
                     <td>
-                      <button (click)="onAddMaterial(selectedMaterial, i)" type="button" class="btn btn-success">
+                      <!-- <button (click)="onAddMaterial(selectedMaterial, i)" type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                      </button> -->
+                      <button (click)="onAddMaterial()" type="button" class="btn btn-success">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                       </button>
                     </td>

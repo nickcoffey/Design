@@ -28,6 +28,7 @@ export class BidComponent implements OnInit {
   // selectedMaterials:SelectedMaterial[] = [];
   selectedMaterials1:SelectedMaterial[] = [];
   status:any;
+  bidMaterialID: number;
 
   constructor(
     private router:Router,
@@ -74,11 +75,30 @@ export class BidComponent implements OnInit {
     this.materialID = id;
   }
 
+  onChangeMaterial(id) {
+    // console.log(id);
+    this.materialID = id;
+  }
+
+  // onAddMaterial() {
+  //   let selectedMaterial = {
+  //     materialID: this.material.materialID,
+  //     materialName: this.material.materialName,
+  //     pricePerLinearFoot: this.material.pricePerLinearFoot,
+  //     linearFeet: this.linearFeet
+  //   };
+  //   this.totalMaterialPrice += (selectedMaterial.pricePerLinearFoot * this.linearFeet);
+  //   this.selectedMaterials1.push(selectedMaterial);
+  //   this.materials.splice(this.materialID, 1);
+  //   this.material = null;
+  //   this.linearFeet = 0;
+  // }
+
   onAddMaterial() {
     let selectedMaterial = {
-      materialID: this.material.materialID,
-      materialName: this.material.materialName,
-      pricePerLinearFoot: this.material.pricePerLinearFoot,
+      materialID: this.materials[this.materialID].materialID,
+      materialName: this.materials[this.materialID].materialName,
+      pricePerLinearFoot: this.materials[this.materialID].pricePerLinearFoot,
       linearFeet: this.linearFeet
     };
     this.totalMaterialPrice += (selectedMaterial.pricePerLinearFoot * this.linearFeet);
@@ -159,10 +179,14 @@ export class BidComponent implements OnInit {
     });
   }
 
-  onDeleteBidMaterial(materialID, bidID){
+  onClickDeleteBidMaterial(materialID){
+    this.bidMaterialID = materialID;
+  }
+
+  onDeleteBidMaterial(){
     let bidMaterial = {
-      materialID: materialID,
-      bidID: bidID
+      materialID: this.bidMaterialID,
+      bidID: this.id
     }
 
     console.log(bidMaterial);

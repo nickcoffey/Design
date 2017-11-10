@@ -21,7 +21,7 @@ export class InquiryComponent implements OnInit {
   material: any;
   materialID: number;
   totalMaterialPrice: number = 0;
-  margin:number = 0;
+  margin: number = 0;
   // totalCost:number = 0;
   // selectedMaterials:SelectedMaterial[] = [];
   selectedMaterials1: SelectedMaterial[] = [];
@@ -66,11 +66,25 @@ export class InquiryComponent implements OnInit {
     this.materials.push(material);
   }
 
+  // onAddMaterial() {
+  //   let selectedMaterial = {
+  //     materialID: this.material.materialID,
+  //     materialName: this.material.materialName,
+  //     pricePerLinearFoot: this.material.pricePerLinearFoot,
+  //     linearFeet: this.linearFeet
+  //   };
+  //   this.totalMaterialPrice += (selectedMaterial.pricePerLinearFoot * this.linearFeet);
+  //   this.selectedMaterials1.push(selectedMaterial);
+  //   this.materials.splice(this.materialID, 1);
+  //   this.material = null;
+  //   this.linearFeet = 0;
+  // }
+
   onAddMaterial() {
     let selectedMaterial = {
-      materialID: this.material.materialID,
-      materialName: this.material.materialName,
-      pricePerLinearFoot: this.material.pricePerLinearFoot,
+      materialID: this.materials[this.materialID].materialID,
+      materialName: this.materials[this.materialID].materialName,
+      pricePerLinearFoot: this.materials[this.materialID].pricePerLinearFoot,
       linearFeet: this.linearFeet
     };
     this.totalMaterialPrice += (selectedMaterial.pricePerLinearFoot * this.linearFeet);
@@ -78,6 +92,11 @@ export class InquiryComponent implements OnInit {
     this.materials.splice(this.materialID, 1);
     this.material = null;
     this.linearFeet = 0;
+  }
+  
+  onChangeMaterial(id) {
+    // console.log(id);
+    this.materialID = id;
   }
 
   onClear() {
@@ -108,7 +127,7 @@ export class InquiryComponent implements OnInit {
     const newBid = {
       inquiryID: this.id,
       bidLabor: this.bidLabor,
-      bidPrice: (1 + this.margin)*(this.totalMaterialPrice + this.bidLabor)
+      bidPrice: (1 + this.margin) * (this.totalMaterialPrice + this.bidLabor)
     };
     const updatedInquiry = {
       inquiryID: this.id,
@@ -185,8 +204,8 @@ export class InquiryComponent implements OnInit {
 }
 
 interface SelectedMaterial {
-  materialID: Number,
+  materialID: number,
   materialName: String,
-  linearFeet: Number,
-  pricePerLinearFoot: Number
+  linearFeet: number,
+  pricePerLinearFoot: number
 }
