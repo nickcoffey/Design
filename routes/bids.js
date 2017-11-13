@@ -99,7 +99,8 @@ router.post('/new/bid-material', passport.authenticate('jwt', {session: false}),
         materialID: request.body.materialID,
         materialName: request.body.materialName,
         linearFeet: request.body.linearFeet,
-        pricePerLinearFoot: request.body.pricePerLinearFoot
+        pricePerUnit: request.body.pricePerUnit,
+        linearFeetCoverage: request.body.linearFeetCoverage
     };
     
     bid.createBidMaterial(newBidMaterial, (message) => {
@@ -125,7 +126,8 @@ router.post('/:id/new/bid-material', passport.authenticate('jwt', {session: fals
         materialID: request.body.materialID,
         materialName: request.body.materialName,
         linearFeet: request.body.linearFeet,
-        pricePerLinearFoot: request.body.pricePerLinearFoot
+        pricePerUnit: request.body.pricePerUnit,
+        linearFeetCoverage: request.body.linearFeetCoverage
     };
     
     bid.createBidMaterialById(newBidMaterial, (message) => {

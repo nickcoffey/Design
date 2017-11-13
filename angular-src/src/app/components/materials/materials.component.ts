@@ -11,7 +11,8 @@ export class MaterialsComponent implements OnInit {
 
   materials: any;
   name: any;
-  pricePerLinearFoot: any;
+  pricePerUnit: number;
+  linearFeetCoverage: number;
   tempID: any;
   length: any;
 
@@ -47,7 +48,8 @@ export class MaterialsComponent implements OnInit {
     let updateMaterial = {
       materialID: this.tempID,
       materialName: this.name,
-      pricePerLinearFoot: this.pricePerLinearFoot
+      pricePerUnit: this.pricePerUnit,
+      linearFeetCoverage: this.linearFeetCoverage
     }
     this.materialService.updateMaterial(updateMaterial).subscribe(
       (data) => {
@@ -63,7 +65,8 @@ export class MaterialsComponent implements OnInit {
   onCreate() {
     let newMaterial = {
       materialName: this.name,
-      pricePerLinearFoot: this.pricePerLinearFoot
+      pricePerUnit: this.pricePerUnit,
+      linearFeetCoverage: this.linearFeetCoverage
     }
 
     this.materialService.createMaterial(newMaterial).subscribe((data) => {

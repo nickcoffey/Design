@@ -84,10 +84,11 @@ export class InquiryComponent implements OnInit {
     let selectedMaterial = {
       materialID: this.materials[this.materialID].materialID,
       materialName: this.materials[this.materialID].materialName,
-      pricePerLinearFoot: this.materials[this.materialID].pricePerLinearFoot,
+      pricePerUnit: this.materials[this.materialID].pricePerUnit,
+      linearFeetCoverage: this.materials[this.materialID].linearFeetCoverage,
       linearFeet: this.linearFeet
     };
-    this.totalMaterialPrice += (selectedMaterial.pricePerLinearFoot * this.linearFeet);
+    this.totalMaterialPrice += (selectedMaterial.pricePerUnit / selectedMaterial.linearFeetCoverage * this.linearFeet);
     this.selectedMaterials1.push(selectedMaterial);
     this.materials.splice(this.materialID, 1);
     this.material = null;
@@ -207,5 +208,6 @@ interface SelectedMaterial {
   materialID: number,
   materialName: String,
   linearFeet: number,
-  pricePerLinearFoot: number
+  pricePerUnit: number,
+  linearFeetCoverage: number
 }

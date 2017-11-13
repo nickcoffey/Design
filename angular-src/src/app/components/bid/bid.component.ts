@@ -98,10 +98,11 @@ export class BidComponent implements OnInit {
     let selectedMaterial = {
       materialID: this.materials[this.materialID].materialID,
       materialName: this.materials[this.materialID].materialName,
-      pricePerLinearFoot: this.materials[this.materialID].pricePerLinearFoot,
+      pricePerUnit: this.materials[this.materialID].pricePerUnit,
+      linearFeetCoverage: this.materials[this.materialID].linearFeetCoverage,
       linearFeet: this.linearFeet
     };
-    this.totalMaterialPrice += (selectedMaterial.pricePerLinearFoot * this.linearFeet);
+    this.totalMaterialPrice += (selectedMaterial.pricePerUnit / selectedMaterial.linearFeetCoverage * this.linearFeet);
     this.selectedMaterials1.push(selectedMaterial);
     this.materials.splice(this.materialID, 1);
     this.material = null;
@@ -235,8 +236,9 @@ export class BidComponent implements OnInit {
 }
 
 interface SelectedMaterial {
-  materialID: Number,
+  materialID: number,
   materialName: String,
-  linearFeet: Number,
-  pricePerLinearFoot: Number
+  linearFeet: number,
+  pricePerUnit: number,
+  linearFeetCoverage: number
 }

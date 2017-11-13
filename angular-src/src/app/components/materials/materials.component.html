@@ -11,7 +11,8 @@
         <tr>
           <th>ID</th>
           <th>Name</th>
-          <th>Price Per Linear Foot</th>
+          <th>Price Per Unit</th>
+          <th>Coverage In Linear Feet</th>
           <th>Update</th>
           <th>Delete</th>
         </tr>
@@ -20,7 +21,8 @@
         <tr *ngFor="let material of materials">
           <td>{{material.materialID}}</td>
           <td>{{material.materialName}}</td>
-          <td>{{material.pricePerLinearFoot | currency: 'USD':true}}</td>
+          <td>{{material.pricePerUnit | currency: 'USD':true}}</td>
+          <td>{{material.linearFeetCoverage}} ft</td>
           <td>
             <button class="btn btn-primary" type="button" (click)="onClickUpdate(material.materialID)" data-toggle="modal" href='#update-modal'>
               <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
@@ -59,8 +61,12 @@
             <input type="text" [(ngModel)]="name" name="name" placeholder="Name" class="form-control" required>
           </div>
           <div class="form-group">
-            <label>Price Per Linear Foot</label>
-            <input type="text" [(ngModel)]="pricePerLinearFoot" name="pricePerLinearFoot" placeholder="Price Per Linear Foot" class="form-control" required>
+            <label>Price Per Unit</label>
+            <input type="number" [(ngModel)]="pricePerUnit" name="pricePerUnit" placeholder="Price Per Unit" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Coverage In Linear Feet</label>
+            <input type="number" [(ngModel)]="linearFeetCoverage" name="linearFeetCoverage" placeholder="Coverage In Linear Feet" class="form-control" required>
           </div>
           <button type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
@@ -108,8 +114,12 @@
             <input type="text" [(ngModel)]="name" name="name" placeholder="Name" class="form-control" required>
           </div>
           <div class="form-group">
-            <label>Price Per Linear Foot</label>
-            <input type="text" [(ngModel)]="pricePerLinearFoot" name="pricePerLinearFoot" placeholder="Price Per Linear Foot" class="form-control" required>
+            <label>Price Per Unit</label>
+            <input type="number" [(ngModel)]="pricePerUnit" name="pricePerUnit" placeholder="Price Per Unit" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Coverage In Linear Feet</label>
+            <input type="number" [(ngModel)]="linearFeetCoverage" name="linearFeetCoverage" placeholder="Coverage In Linear Feet" class="form-control" required>
           </div>
           <button type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Create</button>

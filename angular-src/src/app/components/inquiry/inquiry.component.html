@@ -199,7 +199,7 @@
                       </select>
                     </td>
                     <td>
-                      <input type="text" [(ngModel)]="linearFeet" name="linearFeet" placeholder="Linear Feet" class="form-control" required>
+                      <input type="number" [(ngModel)]="linearFeet" name="linearFeet" placeholder="Linear Feet" class="form-control" required>
                     </td>
                     <td>
                       <!-- <button (click)="onAddMaterial(selectedMaterial, i)" type="button" class="btn btn-success">
@@ -223,7 +223,7 @@
                 <tbody>
                   <tr *ngFor="let selectedMaterial of selectedMaterials1; let i = index">
                     <td>{{selectedMaterial.materialName}}</td>
-                    <td>{{selectedMaterial.linearFeet*selectedMaterial.pricePerLinearFoot | currency: 'USD':true}}</td>
+                    <td>{{selectedMaterial.linearFeet*selectedMaterial.pricePerUnit/selectedMaterial.linearFeetCoverage | currency: 'USD':true}}</td>
                     <td>
                       <button (click)="onRemoveMaterial(selectedMaterial, i)" type="button" class="btn btn-danger">
                         <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
