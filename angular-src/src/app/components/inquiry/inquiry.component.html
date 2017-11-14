@@ -4,25 +4,35 @@
 
 <h2 class="page-header col-xs-12 col-sm-12 col-md-12 col-lg-12">Inquiry #{{inquiry[0].inquiryID}}</h2>
 
-<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
   <ng-container *ngIf="inquiry; else noInquiry">
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h3 class="panel-title">Inquiry Details</h3>
       </div>
       <div class="panel-body">
-        <table class="table table-striped table-hover">
+        <table class="table table-bordered">
           <thead>
-            <tr>
+            <tr class="active">
               <th>Received Date</th>
               <th>Accepted/Declined Date</th>
-              <th>Description</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>{{inquiry[0].receivedDate | date: 'MM/dd/yyyy'}}</td>
               <td>{{inquiry[0].endDate | date: 'MM/dd/yyyy'}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table table-bordered">
+          <thead>
+            <tr class="active">
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
               <td>{{inquiry[0].description}}</td>
             </tr>
           </tbody>
@@ -42,15 +52,15 @@
   </ng-template>
 </div>
 
-<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h3 class="panel-title">Customer Details</h3>
     </div>
     <div class="panel-body">
-      <table class="table table-striped table-hover">
+      <table class="table table-bordered">
         <thead>
-          <tr>
+          <tr class="active">
             <th>ID</th>
             <th>Name</th>
             <th>Address</th>
@@ -223,7 +233,8 @@
                 <tbody>
                   <tr *ngFor="let selectedMaterial of selectedMaterials1; let i = index">
                     <td>{{selectedMaterial.materialName}}</td>
-                    <td>{{selectedMaterial.linearFeet*selectedMaterial.pricePerUnit/selectedMaterial.linearFeetCoverage | currency: 'USD':true}}</td>
+                    <td>{{selectedMaterial.linearFeet*selectedMaterial.pricePerUnit/selectedMaterial.linearFeetCoverage | currency:
+                      'USD':true}}</td>
                     <td>
                       <button (click)="onRemoveMaterial(selectedMaterial, i)" type="button" class="btn btn-danger">
                         <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>

@@ -3,92 +3,123 @@
 </div>
 <h2 class="page-header col-xs-12 col-sm-12 col-md-12 col-lg-12">Job #{{job[0].jobID}}</h2>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h3 class="panel-title">Customer Details</h3>
-    </div>
-    <div class="panel-body">
-      <table class="table table-striped table-hover">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Address</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{{job[0].customerID}}</td>
-            <td>{{job[0].customerName}}</td>
-            <td>{{job[0].customerAddress}}</td>
-          </tr>
-        </tbody>
-      </table>
-      <button type="button" class="btn btn-primary" [routerLink]="['/customers/'+job[0].customerID]">
-        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Open Customer</button>
-    </div>
-  </div>
-</div>
-<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
   <ng-container *ngIf="job; else noJob">
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h3 class="panel-title">Job Details</h3>
       </div>
       <div class="panel-body">
-        <table class="table table-striped table-hover">
+        <table class="table table-bordered">
           <thead>
-            <tr>
-              <th>Revenue</th>
+            <tr class="active">
               <th>Created Date</th>
               <th>Completion Date</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>{{job[0].jobRevenue | currency: 'USD':true}}</td>
               <td>{{job[0].createdDate | date: 'MM/dd/yyyy'}}</td>
               <td>{{job[0].endDate | date: 'MM/dd/yyyy'}}</td>
             </tr>
           </tbody>
         </table>
+        <h4 class="page-header">Change Orders</h4>
+        <table class="table table-bordered">
+          <thead>
+            <tr class="active">
+              <th>Amount</th>
+              <th>Date</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let changeOrder of changeOrders">
+              <td>{{changeOrder.changeAmount | currency: 'USD':true}}</td>
+              <td>{{changeOrder.changeDate | date: 'MM/dd/yyyy'}}</td>
+              <td>
+                <button class="btn btn-danger" data-toggle="modal" (click)="onClickDeleteChangeOrder(changeOrder.changeID)" href='#delete-change-modal'>
+                  <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h4 class="page-header">Revenue Collected</h4>
+        <table class="table table-bordered">
+          <thead>
+            <tr class="active">
+              <th>Amount</th>
+              <th>Date</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let revenue of revenues">
+              <td>{{revenue.revenueAmount | currency: 'USD':true}}</td>
+              <td>{{revenue.revenueDate | date: 'MM/dd/yyyy'}}</td>
+              <td>
+                <button class="btn btn-danger" data-toggle="modal" (click)="onClickDeleteRevenue(revenue.revenueID)" href='#delete-revenue-modal'>
+                  <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
         <h4 class="page-header">Actual Costs</h4>
         <label>Labor Cost</label>
-        <table class="table table-striped table-hover">
+        <table class="table table-bordered">
+          <thead>
+            <tr class="active">
+              <th>Hours</th>
+              <th>Price</th>
+              <th>Date</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
           <tbody>
             <tr>
-              <td>{{job[0].jobLabor | currency: 'USD':true}}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>
+                <button class="btn btn-danger" data-toggle="modal">
+                  <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>
         <label *ngIf="jobMaterials[0] != null;">Materials Cost</label>
-        <table class="table table-striped table-hover">
+        <table class="table table-bordered">
           <thead *ngIf="jobMaterials[0] != null;">
-            <tr>
+            <tr class="active">
               <th>Material</th>
-              <th>Quantity</th>
-              <th>Per Unit Cost</th>
+              <th>Linear Feet</th>
+              <th>Price Per Unit</th>
+              <th>Coverage In Linear Feet</th>
+              <th>Total</th>
               <th>Delete</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let jobMaterial of jobMaterials">
               <td>{{jobMaterial.materialName}}</td>
-              <td>{{jobMaterial.quantity}}</td>
-              <td>{{jobMaterial.perUnitCost | currency: 'USD':true}}</td>
+              <td>{{jobMaterial.linearFeet}}</td>
+              <td>{{jobMaterial.pricePerUnit | currency: 'USD':true}}</td>
+              <td>{{jobMaterial.linearFeetCoverage}} ft</td>
+              <td>{{jobMaterial.pricePerUnit / jobMaterial.linearFeetCoverage * jobMaterial.linearFeet | currency: 'USD':true}}</td>
               <td>
-                <button class="btn btn-danger" *ngIf="status == 'IN-PROGRESS'" type="button" (click)="onClickDeleteMaterial(jobMaterial.materialID)"
-                  data-toggle="modal" href='#delete-material-modal'>
-                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                <button class="btn btn-danger" data-toggle="modal" (click)="onClickDeleteJobMaterial(jobMaterial.materialID)" href='#delete-material-modal'>
+                  <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
                 </button>
               </td>
             </tr>
           </tbody>
         </table>
         <label *ngIf="files.length != 0">Job Files</label>
-        <table *ngIf="files.length != 0" class="table table-striped table-hover">
+        <table *ngIf="files.length != 0" class="table table-bordered">
           <thead>
-            <tr>
+            <tr class="active">
               <th>Name</th>
               <th>Delete</th>
             </tr>
@@ -121,15 +152,15 @@
     <p>If this is incorrect, try refreshing the page.</p>
   </ng-template>
 </div>
-<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h3 class="panel-title">Bid Details</h3>
     </div>
     <div class="panel-body">
-      <table class="table table-striped table-hover">
+      <table class="table table-bordered">
         <thead>
-          <tr>
+          <tr class="active">
             <th>Initial Bid Price</th>
             <th>Created Date</th>
             <th>Accepted Date</th>
@@ -145,7 +176,7 @@
       </table>
       <h4 class="page-header">Estimated Costs</h4>
       <label>Labor Cost</label>
-      <table class="table table-striped table-hover">
+      <table class="table table-bordered">
         <tbody>
           <tr>
             <td>{{job[0].bidLabor | currency: 'USD':true}}</td>
@@ -153,24 +184,56 @@
         </tbody>
       </table>
       <label *ngIf="bidMaterials[0] != null;">Materials Cost</label>
-      <table class="table table-striped table-hover">
+      <table class="table table-bordered">
         <thead *ngIf="bidMaterials[0] != null;">
-          <tr>
+          <tr class="active">
             <th>Material</th>
-            <th>Quantity</th>
-            <th>Per Unit Cost</th>
+            <th>Linear Feet</th>
+            <th>Price Per Unit</th>
+            <th>Coverage In Linear Feet</th>
+            <th>Total</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let bidMaterial of bidMaterials">
             <td>{{bidMaterial.materialName}}</td>
-            <td>{{bidMaterial.quantity}}</td>
-            <td>{{bidMaterial.perUnitCost | currency: 'USD':true}}</td>
+            <td>{{bidMaterial.linearFeet}}</td>
+            <td>{{bidMaterial.pricePerUnit | currency: 'USD':true}}</td>
+            <td>{{bidMaterial.linearFeetCoverage}} ft</td>
+            <td>{{bidMaterial.pricePerUnit / bidMaterial.linearFeetCoverage * bidMaterial.linearFeet | currency: 'USD':true}}</td>
           </tr>
         </tbody>
       </table>
       <button type="button" class="btn btn-primary" [routerLink]="['/bids/'+job[0].bidID]">
         <span class="glyphicon glyphicon-file" aria-hidden="true"></span> Open Bid</button>
+    </div>
+  </div>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Customer Details</h3>
+    </div>
+    <div class="panel-body">
+      <table class="table table-bordered">
+        <thead>
+          <tr class="active">
+            <th>ID</th>
+            <th>Name</th>
+            <th>Address</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{job[0].customerID}}</td>
+            <td>{{job[0].customerName}}</td>
+            <td>{{job[0].customerAddress}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <button type="button" class="btn btn-primary" [routerLink]="['/customers/'+job[0].customerID]">
+        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Open Customer</button>
     </div>
   </div>
 </div>
@@ -211,6 +274,42 @@
     </div>
   </div>
 </div>
+<!--                Delete Change Popup                -->
+<div class="modal fade" id="delete-change-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Warning</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this change order?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onDeleteChangeOrder()">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--                Delete Revenue Popup                -->
+<div class="modal fade" id="delete-revenue-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Warning</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this revenue?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onDeleteRevenue()">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
 <!--                Finish Job Popup                -->
 <div class="modal fade" id="finish-job-modal">
   <div class="modal-dialog">
@@ -240,17 +339,24 @@
       <div class="modal-body">
         <form (submit)="onUpdate()" style="padding-bottom: 20px;">
           <div class="form-group">
-            <label>Add Revenue</label>
+            <h4>Add Revenue</h4>
             <!-- <span class="input-group-addon">
               <input type="checkbox" aria-label="...">
             </span> -->
-            <input type="text" [(ngModel)]="jobRevenue" name="jobRevenue" placeholder="Revenue" class="form-control" required>
+            <input type="text" [(ngModel)]="revenueAmount" name="revenueAmount" placeholder="Revenue" class="form-control" required>
           </div>
           <div class="form-group">
-            <label>Add Labor Cost</label>
-            <input type="text" [(ngModel)]="jobLabor" name="jobLabor" placeholder="Labor Cost" class="form-control" required>
+            <h4>Add Change Order</h4>
+            <input type="text" [(ngModel)]="changeAmount" name="changeAmount" placeholder="Amount" class="form-control" required>
           </div>
-          <label>Add Materials</label>
+          <div class="form-group">
+            <h4>Add Labor</h4>
+            <label>Hours: </label>
+            <input type="text" [(ngModel)]="laborHours" name="laborHours" placeholder="Hours" class="form-control" required>
+            <label>Price: </label>
+            <input type="text" [(ngModel)]="laborPrice" name="laborPrice" placeholder="Price" class="form-control" required>
+          </div>
+          <!-- <label>Add Materials</label>
           <div class="dropdown">
             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
               <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Materials
@@ -268,8 +374,8 @@
                 </li>
               </ng-template>
             </ul>
-          </div>
-          <table class="table table-striped table-hover">
+          </div> -->
+          <!-- <table class="table table-striped table-hover">
             <thead *ngIf="selectedMaterials[0] != null;">
               <tr>
                 <th>Name</th>
@@ -292,9 +398,73 @@
                 </td>
               </tr>
             </tbody>
-          </table>
-          <label>Upload Files</label>
+          </table> -->
           <div class="form-group">
+            <h4>Add Materials</h4>
+            <table class="table table-bordered" *ngIf="materials[0] != null">
+              <thead>
+                <tr class="active">
+                  <th>Name</th>
+                  <th>Linear Feet</th>
+                  <th>Add</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <!-- <select class="form-control">
+                        <option></option>
+                        <option *ngFor="let material of materials; let i = index;" (click)="onSelectMaterial(material, i)">{{material.materialName}}</option>
+                      </select> -->
+                    <select (change)="onChangeMaterial($event.target.value)" class="form-control">
+                      <option></option>
+                      <option [value]="i" *ngFor="let material of materials; let i = index;">{{material.materialName}}</option>
+                    </select>
+                  </td>
+                  <td>
+                    <input type="text" [(ngModel)]="linearFeet" name="linearFeet" placeholder="Linear Feet" class="form-control" required>
+                  </td>
+                  <td>
+                    <!-- <button (click)="onAddMaterial(selectedMaterial, i)" type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                      </button> -->
+                    <button (click)="onAddMaterial()" type="button" class="btn btn-success">
+                      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table class="table table-bordered" *ngIf="selectedMaterials1.length != 0;">
+              <thead>
+                <tr class="active">
+                  <th>Name</th>
+                  <th>Estimated Cost</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let selectedMaterial of selectedMaterials1; let i = index">
+                  <td>{{selectedMaterial.materialName}}</td>
+                  <td>{{selectedMaterial.linearFeet*selectedMaterial.pricePerUnit/selectedMaterial.linearFeetCoverage | currency:'USD':true}}</td>
+                  <td>
+                    <button (click)="onRemoveMaterial(selectedMaterial, i)" type="button" class="btn btn-danger">
+                      <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr class="active">
+                  <th>Total Material Cost</th>
+                  <th>{{totalMaterialPrice | currency: 'USD':true}}</th>
+                  <th></th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+          <div class="form-group">
+            <h4>Upload Files</h4>
             <button type="button" class="btn btn-info" (click)="fileInput.click()">
               <span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Browse Files</button>
             <input name="file" type="file" style="display: none;" #fileInput ng2FileSelect [uploader]="uploader" />

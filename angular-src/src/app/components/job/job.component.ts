@@ -28,16 +28,27 @@ export class JobComponent implements OnInit {
   id: any;
   job: any;
   jobLabor: any = null;
-  jobRevenue: any = null;
+  revenueAmount: any = null;
+  changeAmount: any = null;
+  laborHours: any = null;
+  laborPrice: any = null;
   jobStatus: any = null;
   createdDate: any = null;
   endDate: any = null;
   jobMaterials: any;
   materials: any;
-  selectedMaterials: SelectedMaterial[] = [];
+  // selectedMaterials: SelectedMaterial[] = [];
+  selectedMaterials1: SelectedMaterial[] = [];
+  material: any;
+  linearFeet: number = 0;
+  totalMaterialPrice: number = 0;
   materialID: any;
+  changeID: any;
+  revenueID: any;
   status: any;
   bidMaterials: any;
+  changeOrders: any;
+  revenues: any;
 
   url: string;
   uploader: FileUploader;
@@ -62,6 +73,14 @@ export class JobComponent implements OnInit {
 
       this.bidService.getBidMaterialsById(job[0].bidID).subscribe((bidMaterials) => {
         this.bidMaterials = bidMaterials;
+      });
+
+      this.jobService.getChangeOrdersById(this.id).subscribe((changeOrders) => {
+        this.changeOrders = changeOrders;
+      });
+      
+      this.jobService.getRevenuesById(this.id).subscribe((revenues) => {
+        this.revenues = revenues;
       });
     });
 
@@ -123,37 +142,80 @@ export class JobComponent implements OnInit {
     });
   }
 
-  onAddMaterial(material, id) {
-    this.selectedMaterials.push(material);
-    this.materials.splice(id, 1);
+  // onAddMaterial(material, id) {
+  //   this.selectedMaterials.push(material);
+  //   this.materials.splice(id, 1);
+  // }
+
+  // onRemoveMaterial(material, id) {
+  //   this.selectedMaterials.splice(id, 1);
+  //   this.materials.push(material);
+  //   //this.ngOnInit();
+  // }
+
+  // onClear() {
+  //   this.selectedMaterials.forEach(selectedMaterial => {
+  //     this.materials.push(selectedMaterial);
+  //   });
+  //   this.selectedMaterials = [];
+  // }
+
+  onSelectMaterial(material, id) {
+    // console.log(material);
+    this.material = material;
+    this.materialID = id;
+  }
+
+  onChangeMaterial(id) {
+    // console.log(id);
+    this.materialID = id;
+  }
+
+  onAddMaterial() {
+    let selectedMaterial = {
+      materialID: this.materials[this.materialID].materialID,
+      materialName: this.materials[this.materialID].materialName,
+      pricePerUnit: this.materials[this.materialID].pricePerUnit,
+      linearFeetCoverage: this.materials[this.materialID].linearFeetCoverage,
+      linearFeet: this.linearFeet
+    };
+    this.totalMaterialPrice += (selectedMaterial.pricePerUnit / selectedMaterial.linearFeetCoverage * this.linearFeet);
+    this.selectedMaterials1.push(selectedMaterial);
+    this.materials.splice(this.materialID, 1);
+    this.material = null;
+    this.linearFeet = 0;
   }
 
   onRemoveMaterial(material, id) {
-    this.selectedMaterials.splice(id, 1);
+    this.totalMaterialPrice -= (material.pricePerLinearFoot * material.linearFeet);
+    this.selectedMaterials1.splice(id, 1);
     this.materials.push(material);
-    //this.ngOnInit();
   }
 
   onClear() {
-    this.selectedMaterials.forEach(selectedMaterial => {
+    this.selectedMaterials1.forEach(selectedMaterial => {
       this.materials.push(selectedMaterial);
     });
-    this.selectedMaterials = [];
+    this.selectedMaterials1 = [];
+    //this.ngOnInit();
   }
 
   onUpdate() {
     let updatedJob = {
       jobID: this.id,
-      jobLabor: Number(this.jobLabor) + Number(this.job[0].jobLabor),
-      jobRevenue: Number(this.jobRevenue) + Number(this.job[0].jobRevenue),
       jobStatus: this.jobStatus,
       createdDate: this.createdDate,
       endDate: this.endDate
-    }
+    };
+    let changeOrder = {
+      changeAmount: this.changeAmount
+    };
+    let newRevenue = {
+      jobID: this.id,
+      revenueAmount: this.revenueAmount
+    };
 
-    //console.log(updatedJob);
-
-    this.selectedMaterials.forEach(selectedMaterial => {
+    this.selectedMaterials1.forEach(selectedMaterial => {
       this.jobService.createJobMaterial(this.id, selectedMaterial).subscribe((data) => {
         if (data.success) {
           console.log(data.msg);
@@ -161,6 +223,22 @@ export class JobComponent implements OnInit {
           console.log(data.msg);
         }
       });
+    });
+
+    this.jobService.createChangeOrder(this.id, changeOrder).subscribe((data) => {
+      if (data.success) {
+        console.log(data.msg);
+      } else {
+        console.log(data.msg);
+      }
+    });
+
+    this.jobService.createRevenue(newRevenue).subscribe((data) => {
+      if (data.success) {
+        console.log(data.msg);
+      } else {
+        console.log(data.msg);
+      }
     });
 
     this.jobService.updateJob(updatedJob).subscribe((data) => {
@@ -199,17 +277,49 @@ export class JobComponent implements OnInit {
     });
   }
 
-  onClickDeleteMaterial(id) {
-    this.materialID = id;
+  onClickDeleteJobMaterial(materialID) {
+    this.materialID = materialID;
   }
 
   onDeleteMaterial() {
-    let jobMaterial = {
-      materialID: this.materialID,
-      jobID: this.id
-    };
+    let materialID = this.materialID;
+    let jobID = this.id;
 
-    this.jobService.deleteJobMaterial(jobMaterial).subscribe((data) => {
+    this.jobService.deleteJobMaterial(materialID, jobID).subscribe((data) => {
+      if (data.success) {
+        console.log(data.msg);
+        this.ngOnInit();
+      } else {
+        console.log(data.msg);
+      }
+    });
+  }
+
+  onClickDeleteChangeOrder(changeID) {
+    this.changeID = changeID;
+  }
+
+  onDeleteChangeOrder() {
+    let changeID = this.changeID;
+
+    this.jobService.deleteChangeOrder(changeID).subscribe((data) => {
+      if (data.success) {
+        console.log(data.msg);
+        this.ngOnInit();
+      } else {
+        console.log(data.msg);
+      }
+    });
+  }
+
+  onClickDeleteRevenue(revenueID) {
+    this.revenueID = revenueID;
+  }
+
+  onDeleteRevenue() {
+    let revenueID = this.revenueID;
+
+    this.jobService.deleteRevenue(revenueID).subscribe((data) => {
       if (data.success) {
         console.log(data.msg);
         this.ngOnInit();
@@ -237,8 +347,9 @@ export class JobComponent implements OnInit {
 }
 
 interface SelectedMaterial {
-  materialID: Number,
+  materialID: number,
   materialName: String,
-  quantity: Number,
-  perUnitCost: Number
+  linearFeet: number,
+  pricePerUnit: number,
+  linearFeetCoverage: number
 }

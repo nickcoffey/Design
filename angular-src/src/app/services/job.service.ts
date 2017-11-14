@@ -102,12 +102,12 @@ export class JobService {
     return this.http.post(`${this.localHttp}/jobs/${id}/new/job-material`, JSON.stringify(newJobMaterial), {headers: headers}).map(response => response.json());
   }
 
-  deleteJobMaterial(jobMaterial){
+  deleteJobMaterial(materialID, jobID){
     this.authService.loadToken();
     let headers = new Headers();
     headers.append('Content-Type','application/json');
     headers.append('Authorization', this.authService.authToken);
-    return this.http.post(`${this.localHttp}/jobs/delete/job-material`, JSON.stringify(jobMaterial), {headers: headers}).map(response => response.json());
+    return this.http.post(`${this.localHttp}/jobs/${jobID}/delete/job-material/${materialID}`, JSON.stringify({}), {headers: headers}).map(response => response.json());
   }
 
   deleteJobFile(id, file){
@@ -116,5 +116,53 @@ export class JobService {
     headers.append('Content-Type','application/json');
     headers.append('Authorization', this.authService.authToken);
     return this.http.post(`${this.localHttp}/jobs/${id}/files/delete`, JSON.stringify(file), {headers: headers}).map(response => response.json());
+  }
+
+  createChangeOrder(id, newChangeOrder){
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    headers.append('Authorization',this.authService.authToken);
+    return this.http.post(`${this.localHttp}/jobs/new/change-order/${id}`, JSON.stringify(newChangeOrder), {headers: headers}).map(response => response.json());
+  }
+
+  getChangeOrdersById(jobId){
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Authorization', this.authService.authToken);
+    headers.append('Content-Type','application/json');
+    return this.http.get(`${this.localHttp}/jobs/${jobId}/change-orders`, {headers: headers}).map(response => response.json());
+  }
+
+  deleteChangeOrder(changeID){
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    headers.append('Authorization', this.authService.authToken);
+    return this.http.post(`${this.localHttp}/jobs/delete/change-order/${changeID}`, JSON.stringify({}), {headers: headers}).map(response => response.json());
+  }
+
+  createRevenue(newRevenue){
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    headers.append('Authorization',this.authService.authToken);
+    return this.http.post(`${this.localHttp}/jobs/create/job-revenue`, JSON.stringify(newRevenue), {headers: headers}).map(response => response.json());
+  }
+
+  getRevenuesById(jobId){
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Authorization', this.authService.authToken);
+    headers.append('Content-Type','application/json');
+    return this.http.get(`${this.localHttp}/jobs/${jobId}/job-revenues`, {headers: headers}).map(response => response.json());
+  }
+
+  deleteRevenue(revenueID){
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    headers.append('Authorization', this.authService.authToken);
+    return this.http.post(`${this.localHttp}/jobs/remove/revenue/id/${revenueID}`, JSON.stringify({}), {headers: headers}).map(response => response.json());
   }
 }

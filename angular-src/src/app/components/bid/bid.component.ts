@@ -190,8 +190,6 @@ export class BidComponent implements OnInit {
       bidID: this.id
     }
 
-    console.log(bidMaterial);
-
     this.bidService.deleteBidMaterial(bidMaterial).subscribe((data) => {
       if(data.success){
         console.log(data.msg);

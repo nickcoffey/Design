@@ -5,43 +5,15 @@
 <h2 class="page-header col-xs-12 col-sm-12 col-md-12 col-lg-12">Bid #{{bid[0].bidID}}</h2>
 
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h3 class="panel-title">Customer Details</h3>
-    </div>
-    <div class="panel-body">
-      <table class="table table-striped table-hover">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Address</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{{bid[0].customerID}}</td>
-            <td>{{bid[0].customerName}}</td>
-            <td>{{bid[0].customerAddress}}</td>
-          </tr>
-        </tbody>
-      </table>
-      <button type="button" class="btn btn-primary" [routerLink]="['/customers/'+bid[0].customerID]">
-        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Open Customer</button>
-    </div>
-  </div>
-</div>
-
-<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
   <ng-container *ngIf="bid; else noBid">
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h3 class="panel-title">Bid Details</h3>
       </div>
       <div class="panel-body">
-        <table class="table table-striped table-hover">
+        <table class="table table-bordered">
           <thead>
-            <tr>
+            <tr class="active">
               <th>Price</th>
               <th>Created Date</th>
               <th>Accepted/Declined Date</th>
@@ -57,7 +29,7 @@
         </table>
         <h4 class="page-header">Costs</h4>
         <label>Labor Cost</label>
-        <table class="table table-striped table-hover">
+        <table class="table table-bordered">
           <tbody>
             <tr>
               <td>{{bid[0].bidLabor | currency: 'USD':true}}</td>
@@ -66,9 +38,9 @@
         </table>
         <hr>
         <label *ngIf="bidMaterials[0] != null;">Materials Cost</label>
-        <table class="table table-striped table-hover">
+        <table class="table table-bordered">
           <thead *ngIf="bidMaterials[0] != null;">
-            <tr>
+            <tr class="active">
               <th>Material</th>
               <th>Linear Feet</th>
               <th>Price Per Unit</th>
@@ -108,15 +80,15 @@
   </ng-template>
 </div>
 
-<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h3 class="panel-title">Inquiry Details</h3>
     </div>
     <div class="panel-body">
-      <table class="table table-striped table-hover">
+      <table class="table table-bordered">
         <thead>
-          <tr>
+          <tr class="active">
             <th>Received Date</th>
             <th>Accepted Date</th>
           </tr>
@@ -128,10 +100,48 @@
           </tr>
         </tbody>
       </table>
-      <h4 class="page-header">Description</h4>
-      <p>{{bid[0].description}}</p>
+      <table class="table table-bordered">
+        <thead>
+          <tr class="active">
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{bid[0].description}}</td>
+          </tr>
+        </tbody>
+      </table>
       <button type="button" class="btn btn-primary" [routerLink]="['/inquiries/'+bid[0].inquiryID]">
         <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> Open Inquiry</button>
+    </div>
+  </div>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Customer Details</h3>
+    </div>
+    <div class="panel-body">
+      <table class="table table-bordered">
+        <thead>
+          <tr class="active">
+            <th>ID</th>
+            <th>Name</th>
+            <th>Address</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{bid[0].customerID}}</td>
+            <td>{{bid[0].customerName}}</td>
+            <td>{{bid[0].customerAddress}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <button type="button" class="btn btn-primary" [routerLink]="['/customers/'+bid[0].customerID]">
+        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Open Customer</button>
     </div>
   </div>
 </div>
@@ -357,7 +367,9 @@
             <tbody>
               <tr *ngFor="let selectedMaterial of selectedMaterials1; let i = index">
                 <td>{{selectedMaterial.materialName}}</td>
-                <td>{{selectedMaterial.linearFeet*selectedMaterial.pricePerUnit/selectedMaterial.linearFeetCoverage | currency: 'USD':true}}</td>
+                <td>{{selectedMaterial.linearFeet*selectedMaterial.pricePerUnit/selectedMaterial.linearFeetCoverage | currency:
+                  'USD':true}}
+                </td>
                 <td>
                   <button (click)="onRemoveMaterial(selectedMaterial, i)" type="button" class="btn btn-danger">
                     <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>

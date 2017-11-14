@@ -6,9 +6,9 @@
   <ng-container *ngIf="length != 0; else noMaterials">
     <h2 class="page-header">Materials</h2>
     <!-- *ngIf="displayTable" datatable [dtOptions]="dtOptions" -->
-    <table class="table table-striped table-hover">
+    <table class="table table-bordered">
       <thead>
-        <tr>
+        <tr class="active">
           <th>ID</th>
           <th>Name</th>
           <th>Price Per Unit</th>
@@ -37,13 +37,13 @@
         </tr>
       </tbody>
     </table>
-    <button type="button" class="btn btn-primary" data-toggle="modal" href='#create-modal'>
-      <span class="glyphicon glyphicon-tint" aria-hidden="true"></span> Create New</button>
   </ng-container>
   <ng-template #noMaterials>
     <h2 class="page-header">No Materials</h2>
     <p>If this is incorrect, try refreshing the page.</p>
   </ng-template>
+  <button type="button" class="btn btn-primary" data-toggle="modal" href='#create-modal'>
+    <span class="glyphicon glyphicon-tint" aria-hidden="true"></span> Create New</button>
 </div>
 
 <!--                Update Popup                -->
@@ -66,7 +66,8 @@
           </div>
           <div class="form-group">
             <label>Coverage In Linear Feet</label>
-            <input type="number" [(ngModel)]="linearFeetCoverage" name="linearFeetCoverage" placeholder="Coverage In Linear Feet" class="form-control" required>
+            <input type="number" [(ngModel)]="linearFeetCoverage" name="linearFeetCoverage" placeholder="Coverage In Linear Feet" class="form-control"
+              required>
           </div>
           <button type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
@@ -119,7 +120,8 @@
           </div>
           <div class="form-group">
             <label>Coverage In Linear Feet</label>
-            <input type="number" [(ngModel)]="linearFeetCoverage" name="linearFeetCoverage" placeholder="Coverage In Linear Feet" class="form-control" required>
+            <input type="number" [(ngModel)]="linearFeetCoverage" name="linearFeetCoverage" placeholder="Coverage In Linear Feet" class="form-control"
+              required>
           </div>
           <button type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Create</button>

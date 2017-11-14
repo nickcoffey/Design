@@ -214,14 +214,14 @@ router.post('/:id/upload', function (req, res, next) {
     }).single('file');
     upload(req, res, function (err) {
         if (err) {
-            res.json({ 
-                success: false, 
-                msg: err 
+            res.json({
+                success: false,
+                msg: err
             });
         } else {
-            res.json({ 
-                success: true, 
-                msg: "File uploaded" 
+            res.json({
+                success: true,
+                msg: "File uploaded"
             });
         }
     });
@@ -270,10 +270,10 @@ router.get('/:id/job-materials/cost', passport.authenticate('jwt', { session: fa
 });
 
 // Delete job material
-router.post('/delete/job-material', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+router.post('/:jobID/delete/job-material/:materialID', passport.authenticate('jwt', { session: false }), (request, response, next) => {
     let jobMaterial = {
-        materialID: request.body.materialID,
-        jobID: request.body.jobID
+        materialID: request.params.materialID,
+        jobID: request.params.jobID
     };
 
     job.deleteJobMaterial(jobMaterial, (message) => {
@@ -299,7 +299,8 @@ router.post('/:id/new/job-material', passport.authenticate('jwt', { session: fal
         materialID: request.body.materialID,
         materialName: request.body.materialName,
         linearFeet: request.body.linearFeet,
-        pricePerLinearFoot: request.body.pricePerLinearFoot
+        pricePerUnit: request.body.pricePerUnit,
+        linearFeetCoverage: request.body.linearFeetCoverage
     };
 
     job.createJobMaterial(newJobMaterial, (message) => {
@@ -320,26 +321,33 @@ router.post('/:id/new/job-material', passport.authenticate('jwt', { session: fal
 /********************************************************* Change Order *************************************************************************/
 
 // Create change order
-router.post('/:id/new/change-order', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+router.post('/new/change-order/:id', passport.authenticate('jwt', { session: false }), (request, response, next) => {
     // const id = request.params.id;
     let newChangeOrder = {
         jobID: request.params.id,
         changeAmount: request.body.changeAmount
     };
 
-    job.createChangeOrder(newChangeOrder, (message) => {
-        if (message.message == "") {
-            response.json({
-                success: true,
-                msg: 'Change order created'
-            });
-        } else {
-            response.json({
-                success: false,
-                msg: message.message
-            });
-        }
-    });
+    if (newChangeOrder.changeAmount == null || newChangeOrder.changeAmount == undefined || newChangeOrder.changeAmount == "") {
+        response.json({
+            success: true,
+            msg: 'Change order empty'
+        });
+    } else {
+        job.createChangeOrder(newChangeOrder, (message) => {
+            if (message.message == "") {
+                response.json({
+                    success: true,
+                    msg: 'Change order created'
+                });
+            } else {
+                response.json({
+                    success: false,
+                    msg: message.message
+                });
+            }
+        });
+    }
 });
 
 // Delete change order
@@ -376,29 +384,36 @@ router.get('/:id/change-orders', passport.authenticate('jwt', { session: false }
 /********************************************************* Job Revenue *************************************************************************/
 
 // Create job revenue
-router.post('/:id/new/job-revenue', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+router.post('/create/job-revenue', passport.authenticate('jwt', { session: false }), (request, response, next) => {
     let newJobRevenue = {
-        jobID: request.params.id,
+        jobID: request.body.jobID,
         revenueAmount: request.body.revenueAmount
     };
 
-    job.createJobRevenue(newJobRevenue, (message) => {
-        if (message.message == "") {
-            response.json({
-                success: true,
-                msg: 'Job revenue created'
-            });
-        } else {
-            response.json({
-                success: false,
-                msg: message.message
-            });
-        }
-    });
+    if (newJobRevenue.revenueAmount == null || newJobRevenue.revenueAmount == undefined || newJobRevenue.revenueAmount == "") {
+        response.json({
+            success: true,
+            msg: 'Job revenue empty'
+        });
+    } else {
+        job.createJobRevenue(newJobRevenue, (message) => {
+            if (message.message == "") {
+                response.json({
+                    success: true,
+                    msg: 'Job revenue created'
+                });
+            } else {
+                response.json({
+                    success: false,
+                    msg: message.message
+                });
+            }
+        });
+    }
 });
 
 // Delete job revenue
-router.post('/delete/job-revenue/:id', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+router.post('/remove/revenue/id/:id', passport.authenticate('jwt', { session: false }), (request, response, next) => {
     let revenueID = request.params.id;
 
     job.deleteJobRevenue(revenueID, (message) => {
@@ -431,7 +446,7 @@ router.get('/:id/job-revenues', passport.authenticate('jwt', { session: false })
 /********************************************************* Job Labor *************************************************************************/
 
 // Create job labor
-router.post('/:id/new/job-labor', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+router.post('/:id/create/job-labor', passport.authenticate('jwt', { session: false }), (request, response, next) => {
     let newJobLabor = {
         jobID: request.params.id,
         laborHours: request.body.laborHours,
