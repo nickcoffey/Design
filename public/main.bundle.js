@@ -1608,12 +1608,12 @@ var JobComponent = (function () {
                 }
             });
         });
-        this.jobService.getJobFilesByID(this.id).subscribe(function (files) {
-            _this.files = files.files;
-            // for(let i = 0; i < this.files.length; i++){
-            //   this.filesUrls.push(`http://localhost:3000/uploads/jobs/${this.id}/${this.files[i]}`);
-            // }
-        });
+        /*this.jobService.getJobFilesByID(this.id).subscribe((files) => {
+          this.files = files.files;
+          // for(let i = 0; i < this.files.length; i++){
+          //   this.filesUrls.push(`http://localhost:3000/uploads/jobs/${this.id}/${this.files[i]}`);
+          // }
+        });*/
         // console.log(this.filesUrls);
     };
     JobComponent.prototype.setupFileUploader = function () {
