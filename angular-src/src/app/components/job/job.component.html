@@ -117,7 +117,7 @@
           </tbody>
         </table>
         <label *ngIf="files.length != 0">Job Files</label>
-        <table *ngIf="files.length != 0" class="table table-bordered">
+        <!-- <table *ngIf="files.length != 0" class="table table-bordered">
           <thead>
             <tr class="active">
               <th>Name</th>
@@ -136,7 +136,7 @@
               </td>
             </tr>
           </tbody>
-        </table>
+        </table> -->
         <button *ngIf="status == 'IN-PROGRESS'" class="btn btn-primary" data-toggle="modal" href='#finish-job-modal'>
           <span class="glyphicon glyphicon-check" aria-hidden="true"></span> Finish Job</button>
         <!-- <button *ngIf="status == 'IN-PROGRESS'" class="btn btn-info" data-toggle="modal" href='#update-job-modal'> -->
@@ -463,14 +463,11 @@
               </tfoot>
             </table>
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group"> -->
             <h4>Upload Files</h4>
-            <button type="button" class="btn btn-info" (click)="fileInput.click()">
+            <!-- <button type="button" class="btn btn-info" (click)="fileInput.click()">
               <span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Browse Files</button>
             <input name="file" type="file" style="display: none;" #fileInput ng2FileSelect [uploader]="uploader" />
-            <!-- <button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
-              <span class="glyphicon glyphicon-upload"></span> Upload all
-            </button> -->
             <table *ngIf="uploader.queue.length" class="table table-striped table-hover">
               <thead>
                 <tr>
@@ -489,7 +486,7 @@
                 </tr>
               </tbody>
             </table>
-          </div>
+          </div> -->
           <button type="submit" class="btn btn-primary" (click)="uploader.uploadAll()">
             <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
           <button type="reset" class="btn btn-danger" (click)="onClear(); uploader.clearQueue()">
