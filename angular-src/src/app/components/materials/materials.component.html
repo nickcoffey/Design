@@ -9,17 +9,17 @@
     <table class="table table-bordered">
       <thead>
         <tr class="active">
-          <th>ID</th>
+          <th class="hidden-xs hidden-sm">ID</th>
           <th>Name</th>
           <th>Price Per Unit</th>
           <th>Coverage In Linear Feet</th>
           <th>Update</th>
-          <th>Delete</th>
+          <th class="hidden-xs hidden-sm">Delete</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let material of materials">
-          <td>{{material.materialID}}</td>
+          <td class="hidden-xs hidden-sm">{{material.materialID}}</td>
           <td>{{material.materialName}}</td>
           <td>{{material.pricePerUnit | currency: 'USD':true}}</td>
           <td>{{material.linearFeetCoverage}} ft</td>
@@ -28,7 +28,7 @@
               <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
             </button>
           </td>
-          <td>
+          <td class="hidden-xs hidden-sm">
             <button type="button" class="btn btn-danger" (click)="onDeleteClick(material.materialID)" data-toggle="modal" href='#delete-modal'>
               <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
             </button>

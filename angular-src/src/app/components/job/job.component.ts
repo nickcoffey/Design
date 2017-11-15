@@ -49,6 +49,8 @@ export class JobComponent implements OnInit {
   bidMaterials: any;
   changeOrders: any;
   revenues: any;
+  labors: any;
+  laborID: any;
 
   url: string;
   uploader: FileUploader;
@@ -81,6 +83,10 @@ export class JobComponent implements OnInit {
       
       this.jobService.getRevenuesById(this.id).subscribe((revenues) => {
         this.revenues = revenues;
+      });
+
+      this.jobService.getLaborsById(this.id).subscribe((labors) => {
+        this.labors = labors;
       });
     });
 
@@ -214,6 +220,10 @@ export class JobComponent implements OnInit {
       jobID: this.id,
       revenueAmount: this.revenueAmount
     };
+    let newLabor = {
+      laborHours: this.laborHours,
+      laborPrice: this.laborHours
+    }
 
     this.selectedMaterials1.forEach(selectedMaterial => {
       this.jobService.createJobMaterial(this.id, selectedMaterial).subscribe((data) => {
@@ -234,6 +244,14 @@ export class JobComponent implements OnInit {
     });
 
     this.jobService.createRevenue(newRevenue).subscribe((data) => {
+      if (data.success) {
+        console.log(data.msg);
+      } else {
+        console.log(data.msg);
+      }
+    });
+
+    this.jobService.createLabor(this.id, newLabor).subscribe((data) => {
       if (data.success) {
         console.log(data.msg);
       } else {
@@ -320,6 +338,23 @@ export class JobComponent implements OnInit {
     let revenueID = this.revenueID;
 
     this.jobService.deleteRevenue(revenueID).subscribe((data) => {
+      if (data.success) {
+        console.log(data.msg);
+        this.ngOnInit();
+      } else {
+        console.log(data.msg);
+      }
+    });
+  }
+
+  onClickDeleteLabor(laborID) {
+    this.laborID = laborID;
+  }
+
+  onDeleteLabor() {
+    let laborID = this.laborID;
+
+    this.jobService.deleteLabor(laborID).subscribe((data) => {
       if (data.success) {
         console.log(data.msg);
         this.ngOnInit();

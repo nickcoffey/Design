@@ -16,14 +16,14 @@
             <tr class="active">
               <th>Price</th>
               <th>Created Date</th>
-              <th>Accepted/Declined Date</th>
+              <th class="hidden-xs hidden-sm">Accepted/Declined Date</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>{{bid[0].bidPrice | currency: 'USD':true}}</td>
               <td>{{bid[0].createdDate | date: 'MM/dd/yyyy'}}</td>
-              <td>{{bid[0].endDate | date: 'MM/dd/yyyy'}}</td>
+              <td class="hidden-xs hidden-sm">{{bid[0].endDate | date: 'MM/dd/yyyy'}}</td>
             </tr>
           </tbody>
         </table>
@@ -43,20 +43,20 @@
             <tr class="active">
               <th>Material</th>
               <th>Linear Feet</th>
-              <th>Price Per Unit</th>
-              <th>Coverage In Linear Feet</th>
+              <th class="hidden-xs hidden-sm">Price Per Unit</th>
+              <th class="hidden-xs hidden-sm">Coverage In Linear Feet</th>
               <th>Total</th>
-              <th>Delete</th>
+              <th class="hidden-xs hidden-sm">Delete</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let bidMaterial of bidMaterials">
               <td>{{bidMaterial.materialName}}</td>
               <td>{{bidMaterial.linearFeet}}</td>
-              <td>{{bidMaterial.pricePerUnit | currency: 'USD':true}}</td>
-              <td>{{bidMaterial.linearFeetCoverage}} ft</td>
+              <td class="hidden-xs hidden-sm">{{bidMaterial.pricePerUnit | currency: 'USD':true}}</td>
+              <td class="hidden-xs hidden-sm">{{bidMaterial.linearFeetCoverage}} ft</td>
               <td>{{bidMaterial.pricePerUnit / bidMaterial.linearFeetCoverage * bidMaterial.linearFeet | currency: 'USD':true}}</td>
-              <td>
+              <td class="hidden-xs hidden-sm">
                 <button class="btn btn-danger" data-toggle="modal" (click)="onClickDeleteBidMaterial(bidMaterial.materialID)" href='#delete-material-modal'>
                   <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
                 </button>

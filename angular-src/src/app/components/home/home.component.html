@@ -6,9 +6,36 @@
 </div>
 
 <h2 class="page-header">Current Jobs</h2>
-<ng-container *ngIf="currentJobsLength !=0; else noCurrentJobs">
-  <!-- <h4>Click To View Details</h4> -->
-  <div class="panel panel-primary" *ngFor="let currentJob of currentJobs; let i = index">
+<!-- <ng-container *ngIf="jobs.length !=0; else noJobs"> -->
+  <div class="panel panel-primary" *ngFor="let job of jobs; let i = index">
+    <div class="panel-heading">
+      <h3 class="panel-title">Job # {{job.jobID}}</h3>
+    </div>
+    <div class="panel-body">
+      <h4>Customer:</h4>
+      <p>{{job.customerName}}</p>
+      <hr>
+      <h4>Budget:</h4>
+      <div class="progress progress-striped active">
+        <div id="costProgress" class="progress-bar progress-bar-info" role="progressbar" [attr.aria-valuenow]="job.actualCosts" aria-valuemin="0"
+          [attr.aria-valuemax]="job.expectedCosts" [ngStyle]="{'min-width': '2em', 'width': (job.actualCosts/job.expectedCosts)*100+ '%'}">
+          {{job.actualCosts/job.expectedCosts | percent:'1.0-0'}}
+        </div>
+      </div>
+      <hr>
+      <h4>Revenue Collected:</h4>
+      <div class="progress progress-striped active">
+        <div id="revenueProgress" class="progress-bar progress-bar-info" role="progressbar" [attr.aria-valuenow]="job.actualRevenue"
+          aria-valuemin="0" [attr.aria-valuemax]="job.expectedRevenue" [ngStyle]="{'min-width': '2em', 'width': (job.actualRevenue/job.expectedRevenue)*100+ '%'}">
+          {{job.actualRevenue/job.expectedRevenue | percent:'1.0-0'}}
+        </div>
+      </div>
+      <hr>
+      <button type="button" class="btn btn-primary btn-lg" [routerLink]="['/jobs/'+job.jobID]">
+        <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Open Job</button>
+    </div>
+    <!-- <h4>Click To View Details</h4> -->
+    <!-- <div class="panel panel-primary" *ngFor="let currentJob of currentJobs; let i = index">
     <div class="panel-heading">
       <h3 class="panel-title">Job # {{currentJob.jobID}}</h3>
     </div>
@@ -31,8 +58,8 @@
       <hr>
       <button type="button" class="btn btn-primary btn-lg" [routerLink]="['/jobs/'+currentJob.jobID]"><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Open Job</button>
     </div>
-  </div>
-  <!-- <ul class="list-group" *ngFor="let currentJob of currentJobs; let i = index" [routerLink]="['/jobs/'+currentJob.jobID]">
+  </div> -->
+    <!-- <ul class="list-group" *ngFor="let currentJob of currentJobs; let i = index" [routerLink]="['/jobs/'+currentJob.jobID]">
     <h3 class="page-header">Job # {{currentJob.jobID}}</h3>
     <h4>Click To View Details</h4>
     <li class="list-group-item"><b>Customer:</b> {{currentJob.customerName}}</li>
@@ -51,8 +78,8 @@
       </div>
     </li>
   </ul> -->
-</ng-container>
-<ng-template #noCurrentJobs>
+<!-- </ng-container>
+<ng-template #noJobs>
   <h2 class="page-header">No Current Jobs</h2>
   <p>If this is incorrect, try refreshing the page.</p>
-</ng-template>
+</ng-template> -->

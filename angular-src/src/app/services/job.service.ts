@@ -46,6 +46,14 @@ export class JobService {
     return this.http.get(`${this.localHttp}/jobs/all/current`, {headers: headers}).map(response => response.json());
   }
 
+  getCurrentJobsCosts(){
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Authorization', this.authService.authToken);
+    headers.append('Content-Type','application/json');
+    return this.http.get(`${this.localHttp}/jobs/all/current/costs`, {headers: headers}).map(response => response.json());
+  }
+
   getJobMaterialsById(jobId){
     this.authService.loadToken();
     let headers = new Headers();
@@ -164,5 +172,29 @@ export class JobService {
     headers.append('Content-Type','application/json');
     headers.append('Authorization', this.authService.authToken);
     return this.http.post(`${this.localHttp}/jobs/remove/revenue/id/${revenueID}`, JSON.stringify({}), {headers: headers}).map(response => response.json());
+  }
+
+  createLabor(jobID, newLabor){
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    headers.append('Authorization',this.authService.authToken);
+    return this.http.post(`${this.localHttp}/jobs/${jobID}/create/job-labor`, JSON.stringify(newLabor), {headers: headers}).map(response => response.json());
+  }
+
+  getLaborsById(jobId){
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Authorization', this.authService.authToken);
+    headers.append('Content-Type','application/json');
+    return this.http.get(`${this.localHttp}/jobs/${jobId}/job-labors`, {headers: headers}).map(response => response.json());
+  }
+
+  deleteLabor(laborID){
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    headers.append('Authorization', this.authService.authToken);
+    return this.http.post(`${this.localHttp}/jobs/delete/job-labor/${laborID}`, JSON.stringify({}), {headers: headers}).map(response => response.json());
   }
 }

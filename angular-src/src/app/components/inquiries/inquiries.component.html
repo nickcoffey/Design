@@ -9,20 +9,20 @@
     <table *ngIf="displayTable" datatable [dtOptions]="dtOptions" class="table table-bordered table-hover">
       <thead>
         <tr class="active">
-          <th>ID</th>
-          <th>Status</th>
+          <th class="hidden-xs hidden-sm">ID</th>
           <th>Customer</th>
+          <th>Status</th>
           <th>Received Date</th>
-          <th>Accepted/Declined Date</th>
+          <th class="hidden-xs hidden-sm">Accepted/Declined Date</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let inquiry of inquiries;" id="{{inquiry.inquiryID}}" [routerLink]="['/inquiries/'+inquiry.inquiryID]">
-          <td>{{inquiry.inquiryID}}</td>
-          <td>{{inquiry.inquiryStatus}}</td>
+          <td class="hidden-xs hidden-sm">{{inquiry.inquiryID}}</td>
           <td>{{inquiry.customerName}}</td>
+          <td>{{inquiry.inquiryStatus}}</td>
           <td>{{inquiry.receivedDate | date: 'MM/dd/yyyy'}}</td>
-          <td>{{inquiry.endDate | date: 'MM/dd/yyyy'}}</td>
+          <td class="hidden-xs hidden-sm">{{inquiry.endDate | date: 'MM/dd/yyyy'}}</td>
         </tr>
       </tbody>
     </table>

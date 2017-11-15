@@ -39,22 +39,22 @@
     <table *ngIf="displayTable" datatable [dtOptions]="dtOptions" class="table table-bordered">
       <thead>
         <tr class="active">
-          <th>ID</th>
+          <th class="hidden-xs hidden-sm">ID</th>
+          <th>Customer</th>
           <th>Status</th>
           <!-- <th>Price</th> -->
-          <th>Customer</th>
           <th>Created Date</th>
-          <th>Accepted/Declined Date</th>
+          <th class="hidden-xs hidden-sm">Accepted/Declined Date</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let bid of bids;" id="{{bid.bidID}}" [routerLink]="['/bids/'+bid.bidID]">
-          <td>{{bid.bidID}}</td>
+          <td class="hidden-xs hidden-sm">{{bid.bidID}}</td>
+          <td>{{bid.customerName}}</td>
           <td>{{bid.bidStatus}}</td>
           <!-- <td>{{bid.bidPrice | currency: 'USD':true}}</td> -->
-          <td>{{bid.customerName}}</td>
           <td>{{bid.createdDate | date: 'MM/dd/yyyy'}}</td>
-          <td>{{bid.endDate | date: 'MM/dd/yyyy'}}</td>
+          <td class="hidden-xs hidden-sm">{{bid.endDate | date: 'MM/dd/yyyy'}}</td>
         </tr>
       </tbody>
     </table>

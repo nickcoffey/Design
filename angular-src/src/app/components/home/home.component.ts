@@ -9,6 +9,7 @@ import { BidService } from '../../services/bid.service';
 })
 export class HomeComponent implements OnInit {
 
+  jobs: any;
   currentJobs:any;
   currentJobsLength:any;
   jobCosts:any[] = [];
@@ -20,18 +21,21 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.jobService.getCurrentJobs().subscribe((jobs) => {
-      this.currentJobs = jobs.jobs;
-      this.currentJobsLength = jobs.jobs.length;
+    // this.jobService.getCurrentJobs().subscribe((jobs) => {
+    //   this.currentJobs = jobs.jobs;
+    //   this.currentJobsLength = jobs.jobs.length;
 
-      jobs.jobs.forEach((currentJob) => {
-        this.jobService.getCurrentJobMaterialsCost(currentJob.jobID).subscribe(cost => {
-          this.jobCosts.push(cost[0].jobMaterialCost + currentJob.jobLabor);
-        });
-        this.bidService.getCurrentBidMaterialsCost(currentJob.jobID).subscribe(cost => {
-          this.bidCosts.push(cost[0].bidMaterialCost + currentJob.bidLabor);
-        });
-      });
+    //   jobs.jobs.forEach((currentJob) => {
+    //     this.jobService.getCurrentJobMaterialsCost(currentJob.jobID).subscribe(cost => {
+    //       this.jobCosts.push(cost[0].jobMaterialCost + currentJob.jobLabor);
+    //     });
+    //     this.bidService.getCurrentBidMaterialsCost(currentJob.jobID).subscribe(cost => {
+    //       this.bidCosts.push(cost[0].bidMaterialCost + currentJob.bidLabor);
+    //     });
+    //   });
+    // });
+    this.jobService.getCurrentJobsCosts().subscribe((jobs) => {
+      this.jobs = jobs.jobs;
     });
   }
 

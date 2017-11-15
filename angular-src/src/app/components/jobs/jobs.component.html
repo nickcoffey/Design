@@ -9,20 +9,20 @@
     <table *ngIf="displayTable" datatable [dtOptions]="dtOptions" class="table table-bordered">
       <thead>
         <tr class="active">
-          <th>ID</th>
-          <th>Status</th>
+          <th class="hidden-xs hidden-sm">ID</th>
           <th>Customer</th>
+          <th>Status</th>
           <th>Created Date</th>
-          <th>Completion Date</th>
+          <th class="hidden-xs hidden-sm">Completion Date</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let job of jobs;" id="{{job.jobID}}" [routerLink]="['/jobs/'+job.jobID]">
-          <td>{{job.jobID}}</td>
-          <td>{{job.jobStatus}}</td>
+          <td class="hidden-xs hidden-sm">{{job.jobID}}</td>
           <td>{{job.customerName}}</td>
+          <td>{{job.jobStatus}}</td>
           <td>{{job.createdDate | date: 'MM/dd/yyyy'}}</td>
-          <td>{{job.endDate | date: 'MM/dd/yyyy'}}</td>
+          <td class="hidden-xs hidden-sm">{{job.endDate | date: 'MM/dd/yyyy'}}</td>
         </tr>
       </tbody>
     </table>

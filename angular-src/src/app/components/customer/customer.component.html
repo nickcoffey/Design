@@ -54,28 +54,26 @@
         <table class="table table-bordered">
           <thead>
             <tr class="active">
-              <th>ID</th>
-              <th>Title</th>
+              <th class="hidden-xs hidden-sm">Title</th>
               <th>Name</th>
               <th>Phone</th>
-              <th>Email</th>
+              <th class="hidden-xs hidden-sm">Email</th>
               <th>Update</th>
-              <th>Delete</th>
+              <th class="hidden-xs hidden-sm">Delete</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let contact of contacts">
-              <td>{{contact.contactID}}</td>
-              <td>{{contact.contactTitle}}</td>
+              <td class="hidden-xs hidden-sm">{{contact.contactTitle}}</td>
               <td>{{contact.contactName}}</td>
               <td>{{contact.contactPhone}}</td>
-              <td>{{contact.contactEmail}}</td>
+              <td class="hidden-xs hidden-sm">{{contact.contactEmail}}</td>
               <td>
                 <button class="btn btn-primary" type="button" (click)="onClickUpdateContact(contact.contactID)" data-toggle="modal" href='#update-contact-modal'>
                   <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                 </button>
               </td>
-              <td>
+              <td class="hidden-xs hidden-sm">
                 <button class="btn btn-danger" type="button" (click)="onClickDeleteContact(contact.contactID)" data-toggle="modal" href='#delete-contact-modal'>
                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                 </button>

@@ -43,6 +43,17 @@ router.get('/all/current', passport.authenticate('jwt', { session: false }), (re
     });
 });
 
+// Get current job costs
+router.get('/all/current/costs', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    job.getCurrentJobCosts((jobs) => {
+        if (!jobs) {
+            return err;
+        } else {
+            return response.json({ jobs: jobs });
+        }
+    });
+});
+
 // Get job by id
 router.get('/:id', passport.authenticate('jwt', { session: false }), (request, response, next) => {
     const id = request.params.id;
@@ -453,19 +464,31 @@ router.post('/:id/create/job-labor', passport.authenticate('jwt', { session: fal
         laborPrice: request.body.laborPrice
     };
 
-    job.createJobLabor(newJobLabor, (message) => {
-        if (message.message == "") {
-            response.json({
-                success: true,
-                msg: 'Job labor created'
-            });
-        } else {
-            response.json({
-                success: false,
-                msg: message.message
-            });
-        }
-    });
+    if (newJobLabor.laborHours == null || newJobLabor.laborHours == undefined || newJobLabor.laborHours == "") {
+        response.json({
+            success: true,
+            msg: 'Labor hours empty'
+        });
+    } else if (newJobLabor.laborPrice == null || newJobLabor.laborPrice == undefined || newJobLabor.laborPrice == "") {
+        response.json({
+            success: true,
+            msg: 'Labor price empty'
+        });
+    } else {
+        job.createJobLabor(newJobLabor, (message) => {
+            if (message.message == "") {
+                response.json({
+                    success: true,
+                    msg: 'Job labor created'
+                });
+            } else {
+                response.json({
+                    success: false,
+                    msg: message.message
+                });
+            }
+        });
+    }
 });
 
 // Delete job labor
