@@ -140,9 +140,64 @@
             </div>
             <div class="panel-body">
               <h4>Labor Cost</h4>
-              <div class="form-group">
+              <table class="table table-bordered" *ngIf="labors[0] != null">
+                <thead>
+                  <tr class="active">
+                    <th>Role</th>
+                    <th>Hours</th>
+                    <th>Add</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <select (change)="onChangeLabor($event.target.value)" class="form-control">
+                        <option></option>
+                        <option [value]="i" *ngFor="let labor of labors; let i = index;">{{labor.roleName}}</option>
+                      </select>
+                    </td>
+                    <td>
+                      <input type="number" [(ngModel)]="laborHours" name="laborHours" placeholder="Labor Hours" class="form-control" aria-describedby="hours-addon" required>
+                    </td>
+                    <td>
+                      <button (click)="onAddLabor()" type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <table class="table table-bordered" *ngIf="selectedLabors.length != 0;">
+                <thead>
+                  <tr class="active">
+                    <th>Role</th>
+                    <th>Estimated Cost</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let selectedLabor of selectedLabors; let i = index">
+                    <td>{{selectedLabor.roleName}}</td>
+                    <td>{{selectedLabor.laborHours*selectedLabor.roleWage | currency:'USD':true}}
+                    </td>
+                    <td>
+                      <button (click)="onRemoveLabor(selectedLabor, i)" type="button" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr class="active">
+                    <th>Total Labor Cost</th>
+                    <th>{{totalLaborPrice | currency: 'USD':true}}</th>
+                    <th></th>
+                  </tr>
+                </tfoot>
+              </table>
+              <!-- <div class="form-group">
                 <input type="number" [(ngModel)]="bidLabor" name="bidLabor" placeholder="Labor Cost" class="form-control" required>
-              </div>
+              </div> -->
             </div>
             <div class="panel-body">
               <!-- <div class="dropdown">
@@ -234,7 +289,8 @@
                   <tr *ngFor="let selectedMaterial of selectedMaterials1; let i = index">
                     <td>{{selectedMaterial.materialName}}</td>
                     <td>{{selectedMaterial.linearFeet*selectedMaterial.pricePerUnit/selectedMaterial.linearFeetCoverage | currency:
-                      'USD':true}}</td>
+                      'USD':true}}
+                    </td>
                     <td>
                       <button (click)="onRemoveMaterial(selectedMaterial, i)" type="button" class="btn btn-danger">
                         <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
@@ -251,7 +307,7 @@
                 </tfoot>
               </table>
               <hr>
-              <h4>Total Cost: {{totalMaterialPrice + bidLabor | currency: 'USD':true}}</h4>
+              <h4>Total Cost: {{totalLaborPrice + totalMaterialPrice + bidLabor | currency: 'USD':true}}</h4>
             </div>
           </div>
           <!-- <table class="table table-bordered table-hover">
@@ -271,17 +327,17 @@
                 <input type="number" [(ngModel)]="margin" name="margin" placeholder="Margin" class="form-control" required />
               </div>
               <hr>
-              <h4>Recommended Bid: {{(1 + margin)*(totalMaterialPrice + bidLabor) | currency: 'USD':true}}</h4>
+              <h4>Recommended Bid: {{(1 + margin)*(totalMaterialPrice + totalLaborPrice + bidLabor) | currency: 'USD':true}}</h4>
             </div>
           </div>
           <button type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-file" aria-hidden="true"></span> Create</button>
-          <button type="reset" class="btn btn-danger" (click)="onClear()">
+          <button type="reset" class="btn btn-warning" (click)="onClear()">
             <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-info" data-dismiss="modal">
+        <button (click)="onClear()" type="button" class="btn btn-info" data-dismiss="modal">
           <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
       </div>
     </div>

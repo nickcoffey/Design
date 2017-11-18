@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MaterialService } from '../../services/material.service';
 import { Subject } from 'rxjs/Rx';
+declare var $;
 
 @Component({
   selector: 'app-materials',
@@ -40,8 +41,18 @@ export class MaterialsComponent implements OnInit {
     this.displayTable = true;
   }
 
-  onClickUpdate(materialID) {
+  onClear(){
+    this.tempID = null;
+    this.name = null;
+    this.pricePerUnit = null;
+    this.linearFeetCoverage = null;
+  }
+
+  onClickUpdate(materialID, name, pricePerUnit, linearFeetCoverage) {
     this.tempID = materialID;
+    this.name = name;
+    this.pricePerUnit = pricePerUnit;
+    this.linearFeetCoverage = linearFeetCoverage;
   }
 
   onUpdate() {
@@ -55,7 +66,9 @@ export class MaterialsComponent implements OnInit {
       (data) => {
         if (data.success) {
           console.log(data.msg);
+          this.onClear();          
           this.ngOnInit();
+          $('#update-modal').modal('hide');
         } else {
           console.log(data.msg);
         }
@@ -72,7 +85,9 @@ export class MaterialsComponent implements OnInit {
     this.materialService.createMaterial(newMaterial).subscribe((data) => {
       if (data.success) {
         console.log(data.msg);
+        this.onClear();
         this.ngOnInit();
+        $('#create-modal').modal('hide');
       } else {
         console.log(data.msg);
       }
@@ -87,7 +102,9 @@ export class MaterialsComponent implements OnInit {
     this.materialService.deleteMaterial(this.tempID).subscribe((data) => {
       if (data.success) {
         console.log(data.msg);
+        this.onClear();        
         this.ngOnInit();
+        $('#update-modal').modal('hide');
       } else {
         console.log(data.msg);
       }

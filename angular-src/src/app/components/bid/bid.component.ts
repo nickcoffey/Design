@@ -4,6 +4,7 @@ import { BidService } from '../../services/bid.service';
 import { MaterialService } from '../../services/material.service';
 import { JobService } from '../../services/job.service';
 import { InquiryService } from '../../services/inquiry.service';
+import { LaborService } from '../../services/labor.service';
 
 @Component({
   selector: 'app-bid',
@@ -12,31 +13,34 @@ import { InquiryService } from '../../services/inquiry.service';
 })
 export class BidComponent implements OnInit {
 
-  id:any;
-  bid:any;
-  bidMaterials:any;
-  bidPrice:any;
-  bidLabor:any;
-  bidStatus:any;
-  createdDate:any;
-  endDate:any;
-  material:any;
-  materialID:number;
+  id: any;
+  bid: any;
+  bidMaterials: any;
+  bidPrice: any;
+  bidLabor: any;
+  bidStatus: any;
+  createdDate: any;
+  endDate: any;
+  material: any;
+  materialID: number;
   linearFeet: number = 0;
   totalMaterialPrice: number = 0;
-  materials:any;
+  materials: any;
   // selectedMaterials:SelectedMaterial[] = [];
-  selectedMaterials1:SelectedMaterial[] = [];
-  status:any;
+  selectedMaterials1: SelectedMaterial[] = [];
+  status: any;
   bidMaterialID: number;
+  labors: any;
+  bidLabors: any;
 
   constructor(
-    private router:Router,
-    private route:ActivatedRoute,
-    private bidService:BidService,
-    private materialService:MaterialService,
-    private jobService:JobService,
-    private inquiryService:InquiryService
+    private router: Router,
+    private route: ActivatedRoute,
+    private bidService: BidService,
+    private materialService: MaterialService,
+    private jobService: JobService,
+    private inquiryService: InquiryService,
+    private laborService: LaborService
   ) { }
 
   ngOnInit() {
@@ -53,10 +57,26 @@ export class BidComponent implements OnInit {
       this.materialService.getAllMaterials().subscribe((materials) => {
         this.materials = materials.materials;
 
-        for(let i = 0; i < this.materials.length; i++){
-          for(let k = 0; k < this.bidMaterials.length; k++){
-            if(this.materials[i].materialID == this.bidMaterials[k].materialID){
+        for (let i = 0; i < this.materials.length; i++) {
+          for (let k = 0; k < this.bidMaterials.length; k++) {
+            if (this.materials[i].materialID == this.bidMaterials[k].materialID) {
               this.materials.splice(i, 1);
+            }
+          }
+        }
+      });
+    });
+
+    this.bidService.getBidLaborsById(this.id).subscribe((bidLabors) => {
+      this.bidLabors = bidLabors;
+
+      this.laborService.getAllLabors().subscribe((labors) => {
+        this.labors = labors.labors;
+
+        for (let i = 0; i < this.labors.length; i++) {
+          for (let k = 0; k < this.bidLabors.length; k++) {
+            if (this.labors[i].roleID == this.bidLabors[k].roleID) {
+              this.labors.splice(i, 1);
             }
           }
         }
@@ -115,7 +135,7 @@ export class BidComponent implements OnInit {
     this.materials.push(material);
   }
 
-  onClear(){
+  onClear() {
     this.selectedMaterials1.forEach(selectedMaterial => {
       this.materials.push(selectedMaterial);
     });
@@ -125,7 +145,7 @@ export class BidComponent implements OnInit {
     //this.ngOnInit();
   }
 
-  onCreate(){
+  onCreate() {
     const newJob = {
       bidID: this.id,
       createdDate: this.createdDate
@@ -136,18 +156,18 @@ export class BidComponent implements OnInit {
     };
 
     this.jobService.createJob(newJob).subscribe((data) => {
-      if(data.success){
+      if (data.success) {
         console.log(data.msg);
         this.ngOnInit();
-      } else{
+      } else {
         console.log(data.msg);
       }
     });
     this.bidService.updateBidStatus(updatedBid).subscribe((data) => {
-      if(data.success){
+      if (data.success) {
         console.log(data.msg);
         this.ngOnInit();
-      } else{
+      } else {
         console.log(data.msg);
       }
     });
@@ -155,11 +175,11 @@ export class BidComponent implements OnInit {
     this.router.navigate(['/jobs']);
   }
 
-  onDelete(){
+  onDelete() {
     this.bidService.deleteBid(this.id).subscribe((data) => {
-      if(data.success){
+      if (data.success) {
         console.log(data.msg);
-      } else{
+      } else {
         console.log(data.msg);
       }
     });
@@ -171,36 +191,36 @@ export class BidComponent implements OnInit {
     };
 
     this.inquiryService.updateInquiryStatus(updatedInquiry).subscribe((data) => {
-      if(data.success){
+      if (data.success) {
         console.log(data.msg);
         this.router.navigate(['/bids']);
-      } else{
+      } else {
         console.log(data.msg);
       }
     });
   }
 
-  onClickDeleteBidMaterial(materialID){
+  onClickDeleteBidMaterial(materialID) {
     this.bidMaterialID = materialID;
   }
 
-  onDeleteBidMaterial(){
+  onDeleteBidMaterial() {
     let bidMaterial = {
       materialID: this.bidMaterialID,
       bidID: this.id
     }
 
     this.bidService.deleteBidMaterial(bidMaterial).subscribe((data) => {
-      if(data.success){
+      if (data.success) {
         console.log(data.msg);
         this.ngOnInit();
-      } else{
+      } else {
         console.log(data.msg);
       }
     });
   }
 
-  onUpdate(){
+  onUpdate() {
     let updatedBid = {
       bidID: this.id,
       bidPrice: this.bidPrice,
@@ -212,18 +232,18 @@ export class BidComponent implements OnInit {
 
     this.selectedMaterials1.forEach(selectedMaterial => {
       this.bidService.createBidMaterialById(this.id, selectedMaterial).subscribe((data) => {
-        if(data.success){
+        if (data.success) {
           console.log(data.msg);
-        } else{
+        } else {
           console.log(data.msg);
         }
       });
     });
 
     this.bidService.updateBid(updatedBid).subscribe((data) => {
-      if(data.success){
+      if (data.success) {
         console.log(data.msg);
-      } else{
+      } else {
         console.log(data.msg);
       }
     });

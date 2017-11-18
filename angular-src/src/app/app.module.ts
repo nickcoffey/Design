@@ -27,12 +27,14 @@ import { MaterialsComponent } from './components/materials/materials.component';
 import { BidComponent } from './components/bid/bid.component';
 import { InquiryComponent } from './components/inquiry/inquiry.component';
 import { JobComponent } from './components/job/job.component';
+import { LaborComponent } from './components/labor/labor.component';
 
 import { CustomerService } from './services/customer.service';
 import { InquiryService } from './services/inquiry.service';
 import { BidService } from './services/bid.service';
 import { JobService } from './services/job.service';
 import { MaterialService } from './services/material.service';
+import { LaborService } from './services/labor.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
 import { CookieService } from 'ngx-cookie-service';
@@ -50,7 +52,8 @@ const appRoutes: Routes = [
   { path: 'materials', component: MaterialsComponent, canActivate: [AuthGuard] },
   { path: 'bids/:id', component: BidComponent, canActivate: [AuthGuard] },
   { path: 'inquiries/:id', component: InquiryComponent, canActivate: [AuthGuard] },
-  { path: 'jobs/:id', component: JobComponent, canActivate: [AuthGuard] }
+  { path: 'jobs/:id', component: JobComponent, canActivate: [AuthGuard] },
+  { path: 'labor', component: LaborComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
@@ -70,7 +73,8 @@ const appRoutes: Routes = [
     BidComponent,
     InquiryComponent,
     JobComponent,
-    FileSelectDirective
+    FileSelectDirective,
+    LaborComponent
   ],
   imports: [
     BrowserModule,
@@ -106,6 +110,7 @@ const appRoutes: Routes = [
     BidService,
     JobService,
     MaterialService,
+    LaborService,
     AuthService,
     AuthGuard,
     CookieService

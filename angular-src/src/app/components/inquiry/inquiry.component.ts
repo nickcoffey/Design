@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { InquiryService } from '../../services/inquiry.service';
 import { MaterialService } from '../../services/material.service';
+import { LaborService } from '../../services/labor.service';
 import { BidService } from '../../services/bid.service';
+import { constants } from 'fs';
+declare var $;
 
 @Component({
   selector: 'app-inquiry',
@@ -27,12 +30,19 @@ export class InquiryComponent implements OnInit {
   selectedMaterials1: SelectedMaterial[] = [];
   description: any;
   status: any;
+  labors: any;
+  labor: any;
+  selectedLabors: SelectedLabor[] = [];
+  laborHours: number;
+  laborID: number;
+  totalLaborPrice: number = 0;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private inquiryService: InquiryService,
     private materialService: MaterialService,
+    private laborService: LaborService,
     private bidService: BidService
   ) { }
 
@@ -47,6 +57,10 @@ export class InquiryComponent implements OnInit {
     this.materialService.getAllMaterials().subscribe((materials) => {
       this.materials = materials.materials;
     });
+
+    this.laborService.getAllLabors().subscribe((labors) => {
+      this.labors = labors.labors;
+    });
   }
 
   // onAddMaterial(material, id){
@@ -54,11 +68,11 @@ export class InquiryComponent implements OnInit {
   //   this.materials.splice(id, 1);
   // }
 
-  onSelectMaterial(material, id) {
-    // console.log(material);
-    this.material = material;
-    this.materialID = id;
-  }
+  // onSelectMaterial(material, id) {
+  //   // console.log(material);
+  //   this.material = material;
+  //   this.materialID = id;
+  // }
 
   onRemoveMaterial(material, id) {
     this.totalMaterialPrice -= (material.pricePerLinearFoot * material.linearFeet);
@@ -80,6 +94,31 @@ export class InquiryComponent implements OnInit {
   //   this.linearFeet = 0;
   // }
 
+  onAddLabor() {
+    let selectedLabor = {
+      roleID: this.labors[this.laborID].roleID,
+      roleName: this.labors[this.laborID].roleName,
+      roleWage: this.labors[this.laborID].roleWage,
+      laborHours: this.laborHours
+    };
+    this.totalLaborPrice += (selectedLabor.roleWage * this.laborHours);
+    this.selectedLabors.push(selectedLabor);
+    this.labors.splice(this.laborID, 1);
+    this.labor = null;
+    this.laborHours = 0;
+  }
+
+  onRemoveLabor(labor, id) {
+    this.totalLaborPrice -= (labor.laborHours * labor.roleWage);
+    this.selectedLabors.splice(id, 1);
+    this.labors.push(labor);
+  }
+
+  onChangeLabor(id) {
+    this.laborID = id;
+    // console.log(this.laborID);
+  }
+
   onAddMaterial() {
     let selectedMaterial = {
       materialID: this.materials[this.materialID].materialID,
@@ -94,7 +133,7 @@ export class InquiryComponent implements OnInit {
     this.material = null;
     this.linearFeet = 0;
   }
-  
+
   onChangeMaterial(id) {
     // console.log(id);
     this.materialID = id;
@@ -104,6 +143,11 @@ export class InquiryComponent implements OnInit {
     this.selectedMaterials1.forEach(selectedMaterial => {
       this.materials.push(selectedMaterial);
     });
+    this.selectedLabors.forEach((selectedLabor) => {
+      this.labors.push(selectedLabor);
+    });
+    this.selectedLabors = [];
+    this.totalLaborPrice = 0;
     this.selectedMaterials1 = [];
     this.totalMaterialPrice = 0;
     this.bidLabor = 0;
@@ -127,8 +171,8 @@ export class InquiryComponent implements OnInit {
   onCreate() {
     const newBid = {
       inquiryID: this.id,
-      bidLabor: this.bidLabor,
-      bidPrice: (1 + this.margin) * (this.totalMaterialPrice + this.bidLabor)
+      // bidLabor: this.bidLabor,
+      bidPrice: (1 + this.margin) * (this.totalMaterialPrice + this.totalLaborPrice + this.bidLabor)
     };
     const updatedInquiry = {
       inquiryID: this.id,
@@ -171,6 +215,17 @@ export class InquiryComponent implements OnInit {
       });
     });
 
+    this.selectedLabors.forEach((selectedLabor) => {
+      this.bidService.createBidLabor(selectedLabor).subscribe((data) => {
+        if (data.success) {
+          console.log(data.msg);
+        } else {
+          console.log(data.msg);
+        }
+      });
+    });
+
+    $('#create-bid-modal').modal('hide');
     this.onClear();
     // this.router.navigate([`/bids`]);
   }
@@ -210,4 +265,10 @@ interface SelectedMaterial {
   linearFeet: number,
   pricePerUnit: number,
   linearFeetCoverage: number
+}
+interface SelectedLabor {
+  roleID: number,
+  roleName: String,
+  roleWage: number,
+  laborHours: number
 }

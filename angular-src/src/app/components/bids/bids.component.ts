@@ -32,7 +32,7 @@ export class BidsComponent implements OnInit, AfterContentInit {
     this.bidService.getAllBids().subscribe((bids) => {
       this.bids = bids.bids;
       this.bidsLength = bids.bids.length;
-      this.filterBids(bids);
+      // this.filterBids(bids);
       this.setupDataTable();
     });
   }

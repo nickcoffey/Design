@@ -38,7 +38,8 @@
             <li><a *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" [routerLink]="['/jobs']"><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Jobs</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" [routerLink]="['/materials']"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Edit Materials</a></li>
+            <li><a *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" [routerLink]="['/materials']"><span class="glyphicon glyphicon-tint" aria-hidden="true"></span> Materials</a></li>
+            <li><a *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" [routerLink]="['/labor']"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Labor</a></li>
             <!-- <li><a *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" [routerLink]="['/register']">Register User</a></li> -->
             <li><a *ngIf="authService.loggedIn()" data-toggle="modal" href='#logout-modal'><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout</a></li>
         </ul>

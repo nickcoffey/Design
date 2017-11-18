@@ -28,15 +28,26 @@
           </tbody>
         </table>
         <h4 class="page-header">Costs</h4>
-        <label>Labor Cost</label>
+        <label *ngIf="bidLabors[0] != null;">Labor Cost</label>
         <table class="table table-bordered">
+          <thead *ngIf="bidLabors[0] != null;">
+            <tr class="active">
+              <th>Role</th>
+              <th>Wage</th>
+              <th>Hours</th>
+              <th>Total</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr>
-              <td>{{bid[0].bidLabor | currency: 'USD':true}}</td>
+            <tr *ngFor="let bidLabor of bidLabors">
+              <td>{{bidLabor.roleName}}</td>
+              <td>{{bidLabor.roleWage}}</td>
+              <td>{{bidLabor.laborHours | currency: 'USD':true}}</td>
+              <td>{{bidLabor.roleWage*bidLabor.laborHours | currency: 'USD':true}}</td>
             </tr>
           </tbody>
         </table>
-        <hr>
+        <hr *ngIf="bidLabors[0] != null;">
         <label *ngIf="bidMaterials[0] != null;">Materials Cost</label>
         <table class="table table-bordered">
           <thead *ngIf="bidMaterials[0] != null;">
