@@ -2820,12 +2820,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var AuthService = (function () {
-    // localHttp:String = 'api';
     function AuthService(http, cookieService) {
         this.http = http;
         this.cookieService = cookieService;
         this.cookieStorage = new __WEBPACK_IMPORTED_MODULE_5_cookie_storage__["CookieStorage"]();
-        this.localHttp = 'http://localhost:3000/api';
+        // localHttp:String = 'http://localhost:3000/api';
+        this.localHttp = 'api';
     }
     AuthService.prototype.registerUser = function (user) {
         this.loadToken();
@@ -2897,11 +2897,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var BidService = (function () {
-    // localHttp:String = 'api';
     function BidService(http, authService) {
         this.http = http;
         this.authService = authService;
-        this.localHttp = 'http://localhost:3000/api';
+        // localHttp: String = 'http://localhost:3000/api';
+        this.localHttp = 'api';
     }
     /************************************************************** Bid ***************************************************************************************/
     BidService.prototype.getAllBids = function () {
@@ -3068,11 +3068,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var CustomerService = (function () {
-    // localHttp:String = 'api';
     function CustomerService(http, authService) {
         this.http = http;
         this.authService = authService;
-        this.localHttp = 'http://localhost:3000/api';
+        // localHttp:String = 'http://localhost:3000/api';
+        this.localHttp = 'api';
     }
     CustomerService.prototype.getAllCustomers = function () {
         this.authService.loadToken();
@@ -3173,11 +3173,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var InquiryService = (function () {
-    // localHttp:String = 'api';
     function InquiryService(http, authService) {
         this.http = http;
         this.authService = authService;
-        this.localHttp = 'http://localhost:3000/api';
+        // localHttp:String = 'http://localhost:3000/api';
+        this.localHttp = 'api';
     }
     InquiryService.prototype.getAllInquiries = function () {
         this.authService.loadToken();
@@ -3264,11 +3264,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var JobService = (function () {
-    // localHttp:String = 'api';
     function JobService(http, authService) {
         this.http = http;
         this.authService = authService;
-        this.localHttp = 'http://localhost:3000/api';
+        // localHttp:String = 'http://localhost:3000/api';
+        this.localHttp = 'api';
     }
     JobService.prototype.getAllJobs = function () {
         this.authService.loadToken();
@@ -3467,11 +3467,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var LaborService = (function () {
-    // localHttp:String = 'api';
     function LaborService(http, authService) {
         this.http = http;
         this.authService = authService;
-        this.localHttp = 'http://localhost:3000/api';
+        // localHttp: String = 'http://localhost:3000/api';
+        this.localHttp = 'api';
     }
     LaborService.prototype.getAllLabors = function () {
         this.authService.loadToken();
@@ -3537,11 +3537,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var MaterialService = (function () {
-    // localHttp:String = 'api';
     function MaterialService(http, authService) {
         this.http = http;
         this.authService = authService;
-        this.localHttp = 'http://localhost:3000/api';
+        // localHttp:String = 'http://localhost:3000/api';
+        this.localHttp = 'api';
     }
     MaterialService.prototype.getAllMaterials = function () {
         this.authService.loadToken();

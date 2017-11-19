@@ -31,8 +31,8 @@ const materials = require('./routes/materials');
 const labors = require('./routes/labors');
 
 // Port Number
-// const port = process.env.PORT || 8080;
-const port = 3000;
+const port = process.env.PORT || 8080;
+// const port = 3000;
 
 // CORS Middleware
 app.use(cors());
