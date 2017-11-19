@@ -233,7 +233,7 @@ router.post('/:id/new/bid-material', passport.authenticate('jwt', { session: fal
 });
 
 // Delete bid material
-router.post('/delete/bid-material', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+router.post('/remove/material', passport.authenticate('jwt', { session: false }), (request, response, next) => {
     let bidMaterial = {
         materialID: request.body.materialID,
         bidID: request.body.bidID
@@ -244,6 +244,46 @@ router.post('/delete/bid-material', passport.authenticate('jwt', { session: fals
             response.json({
                 success: true,
                 msg: 'Bid material deleted'
+            });
+        } else {
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
+// Update bid material
+router.post('/change/material', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    let updatedBidMaterial = {
+        bidID: request.body.bidID,
+        materialID: request.body.materialID,
+        linearFeet: request.body.linearFeet,
+        pricePerUnit: request.body.pricePerUnit,
+        linearFeetCoverage: request.body.linearFeetCoverage
+    };
+    if (updatedBidMaterial.bidID == null || updatedBidMaterial.bidID == undefined || updatedBidMaterial.bidID == "") {
+        delete updatedBidMaterial.bidID;
+    }
+    if (updatedBidMaterial.materialID == null || updatedBidMaterial.materialID == undefined || updatedBidMaterial.materialID == "") {
+        delete updatedBidMaterial.materialID;
+    }
+    if (updatedBidMaterial.linearFeet == null || updatedBidMaterial.linearFeet == undefined || updatedBidMaterial.linearFeet == "") {
+        delete updatedBidMaterial.linearFeet;
+    }
+    if (updatedBidMaterial.pricePerUnit == null || updatedBidMaterial.pricePerUnit == undefined || updatedBidMaterial.pricePerUnit == "") {
+        delete updatedBidMaterial.pricePerUnit;
+    }
+    if (updatedBidMaterial.linearFeetCoverage == null || updatedBidMaterial.linearFeetCoverage == undefined || updatedBidMaterial.linearFeetCoverage == "") {
+        delete updatedBidMaterial.linearFeetCoverage;
+    }
+
+    bid.updateBidMaterial(updatedBidMaterial, (message) => {
+        if (message.warningCount == 0) {
+            response.json({
+                success: true,
+                msg: 'Bid material updated'
             });
         } else {
             response.json({
@@ -339,6 +379,35 @@ router.get('/:id/bid-labors', passport.authenticate('jwt', { session: false }), 
             return err;
         } else {
             return response.json(bidLabors);
+        }
+    });
+});
+
+// Update Bid Labor
+router.post('/update/bid-labor', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    let updatedBidLabor = {
+        laborID: request.body.laborID,
+        roleWage: request.body.roleWage,
+        laborHours: request.body.laborHours
+    };
+    if (updatedBidLabor.roleWage == null || updatedBidLabor.roleWage == undefined || updatedBidLabor.roleWage == "") {
+        delete updatedBidLabor.roleWage;
+    }
+    if (updatedBidLabor.laborHours == null || updatedBidLabor.laborHours == undefined || updatedBidLabor.laborHours == "") {
+        delete updatedBidLabor.laborHours;
+    }
+
+    bid.updateBidLabor(updatedBidLabor, (message) => {
+        if (message.warningCount == 0) {
+            response.json({
+                success: true,
+                msg: 'Bid labor updated'
+            });
+        } else {
+            response.json({
+                success: false,
+                msg: message.message
+            });
         }
     });
 });

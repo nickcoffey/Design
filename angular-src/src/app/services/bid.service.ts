@@ -6,8 +6,8 @@ import { AuthService } from './auth.service';
 @Injectable()
 export class BidService {
 
-  // localHttp: String = 'http://localhost:3000/api';
-  localHttp:String = 'api';
+  localHttp: String = 'http://localhost:3000/api';
+  // localHttp:String = 'api';
 
   constructor(
     private http: Http,
@@ -103,7 +103,15 @@ export class BidService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', this.authService.authToken);
-    return this.http.post(`${this.localHttp}/bids/delete/bid-material`, JSON.stringify(bidMaterial), { headers: headers }).map(response => response.json());
+    return this.http.post(`${this.localHttp}/bids/remove/material`, JSON.stringify(bidMaterial), { headers: headers }).map(response => response.json());
+  }
+
+  updateBidMaterial(updatedBidMaterial) {
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', this.authService.authToken);
+    return this.http.post(`${this.localHttp}/bids/change/material`, JSON.stringify(updatedBidMaterial), { headers: headers }).map(response => response.json());
   }
 
   /************************************************************** Bid Labors ***************************************************************************************/
@@ -140,11 +148,19 @@ export class BidService {
     return this.http.post(`${this.localHttp}/bids/${id}/new/bid-labor`, JSON.stringify(bidLabor), { headers: headers }).map(response => response.json());
   }
 
-  deleteBidLabor(bidLabor) {
+  deleteBidLabor(laborID) {
     this.authService.loadToken();
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', this.authService.authToken);
-    return this.http.post(`${this.localHttp}/bids/delete/bid-labor`, JSON.stringify(bidLabor), { headers: headers }).map(response => response.json());
+    return this.http.post(`${this.localHttp}/bids/delete/bid-labor/${laborID}`, JSON.stringify({}), { headers: headers }).map(response => response.json());
+  }
+
+  updateBidLabor(updatedBidLabor) {
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', this.authService.authToken);
+    return this.http.post(`${this.localHttp}/bids/update/bid-labor`, JSON.stringify(updatedBidLabor), { headers: headers }).map(response => response.json());
   }
 }

@@ -73,54 +73,6 @@ module.exports.createBid = function (newBid, callback) {
     });
 }
 
-/********************************************************* Bid Labor *************************************************************************/
-
-module.exports.createBidLabor = function (newBidLabor, callback) {
-    const queryString = sqlString.format(`INSERT INTO BidLabor SET ?, bidID=(SELECT MAX(bidID) FROM Bid)`, newBidLabor);
-    connection.query(queryString, (error, rows, fields) => {
-        if (!error) {
-            callback(rows);
-        } else {
-            return error;
-        }
-    });
-}
-
-module.exports.createBidLaborById = function (newBidLabor, callback) {
-    const queryString = sqlString.format(`INSERT INTO BidLabor SET ?`, newBidLabor);
-    // const queryString = `INSERT INTO BidMaterial (materialID, bidID, quantity, perUnitCost) VALUES ((SELECT materialID FROM Material WHERE materialID=${newBidMaterial.materialID}), ${bidID}, ${newBidMaterial.quantity}, ${newBidMaterial.perUnitCost})`;
-    console.log(queryString);
-    connection.query(queryString, (error, rows, fields) => {
-        if (!error) {
-            callback(rows);
-        } else {
-            return error;
-        }
-    });
-}
-
-module.exports.deleteBidLabor = function (id, callback) {
-    const queryString = `DELETE FROM BidLabor WHERE laborID=${id}`;
-    connection.query(queryString, (error, rows, fields) => {
-        if (!error) {
-            callback(rows);
-        } else {
-            return error;
-        }
-    });
-}
-
-module.exports.getBidLaborsById = function (id, callback) {
-    const queryString = `SELECT * FROM BidLabor WHERE bidID=${id}`;
-    connection.query(queryString, (error, rows, fields) => {
-        if (!error) {
-            callback(rows);
-        } else {
-            return error;
-        }
-    });
-}
-
 /********************************************************* Bid Material *************************************************************************/
 
 module.exports.getBidMaterialsById = function (id, callback) {
@@ -174,6 +126,76 @@ module.exports.createBidMaterialById = function (newBidMaterial, callback) {
 
 module.exports.deleteBidMaterial = function (bidMaterial, callback) {
     const queryString = `DELETE FROM BidMaterial WHERE (materialID=${bidMaterial.materialID} AND bidID=${bidMaterial.bidID})`;
+    connection.query(queryString, (error, rows, fields) => {
+        if (!error) {
+            callback(rows);
+        } else {
+            return error;
+        }
+    });
+}
+
+module.exports.updateBidMaterial = function (updatedBidMaterial, callback) {
+    const queryString = sqlString.format(`UPDATE BidMaterial SET ? WHERE bidID = ? AND materialID = ?`, [updatedBidMaterial, updatedBidMaterial.bidID, updatedBidMaterial.materialID]);
+    connection.query(queryString, (error, rows, fields) => {
+        if (!error) {
+            callback(rows);
+        } else {
+            return error;
+        }
+    });
+}
+
+/********************************************************* Bid Labor *************************************************************************/
+
+module.exports.createBidLabor = function (newBidLabor, callback) {
+    const queryString = sqlString.format(`INSERT INTO BidLabor SET ?, bidID=(SELECT MAX(bidID) FROM Bid)`, newBidLabor);
+    connection.query(queryString, (error, rows, fields) => {
+        if (!error) {
+            callback(rows);
+        } else {
+            return error;
+        }
+    });
+}
+
+module.exports.createBidLaborById = function (newBidLabor, callback) {
+    const queryString = sqlString.format(`INSERT INTO BidLabor SET ?`, newBidLabor);
+    // const queryString = `INSERT INTO BidMaterial (materialID, bidID, quantity, perUnitCost) VALUES ((SELECT materialID FROM Material WHERE materialID=${newBidMaterial.materialID}), ${bidID}, ${newBidMaterial.quantity}, ${newBidMaterial.perUnitCost})`;
+    console.log(queryString);
+    connection.query(queryString, (error, rows, fields) => {
+        if (!error) {
+            callback(rows);
+        } else {
+            return error;
+        }
+    });
+}
+
+module.exports.deleteBidLabor = function (id, callback) {
+    const queryString = `DELETE FROM BidLabor WHERE laborID=${id}`;
+    connection.query(queryString, (error, rows, fields) => {
+        if (!error) {
+            callback(rows);
+        } else {
+            return error;
+        }
+    });
+}
+
+module.exports.getBidLaborsById = function (id, callback) {
+    const queryString = `SELECT * FROM BidLabor WHERE bidID=${id}`;
+    connection.query(queryString, (error, rows, fields) => {
+        if (!error) {
+            callback(rows);
+        } else {
+            return error;
+        }
+    });
+}
+
+module.exports.updateBidLabor = function (updatedBidLabor, callback) {
+    const queryString = sqlString.format(`UPDATE BidLabor SET ? WHERE laborID = ?`, [updatedBidLabor, updatedBidLabor.laborID]);
     connection.query(queryString, (error, rows, fields) => {
         if (!error) {
             callback(rows);

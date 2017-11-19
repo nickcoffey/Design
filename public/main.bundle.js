@@ -267,7 +267,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/bid/bid.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <button class=\"btn btn-default\" [routerLink]=\"['/bids']\">Go To Bids</button>\r\n</div>\r\n\r\n<h2 class=\"page-header col-xs-12 col-sm-12 col-md-12 col-lg-12\">Bid #{{bid[0].bidID}}</h2>\r\n\r\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <ng-container *ngIf=\"bid; else noBid\">\r\n    <div class=\"panel panel-primary\">\r\n      <div class=\"panel-heading\">\r\n        <h3 class=\"panel-title\">Bid Details</h3>\r\n      </div>\r\n      <div class=\"panel-body\">\r\n        <table class=\"table table-bordered\">\r\n          <thead>\r\n            <tr class=\"active\">\r\n              <th>Price</th>\r\n              <th>Created Date</th>\r\n              <th class=\"hidden-xs hidden-sm\">Accepted/Declined Date</th>\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr>\r\n              <td>{{bid[0].bidPrice | currency: 'USD':true}}</td>\r\n              <td>{{bid[0].createdDate | date: 'MM/dd/yyyy'}}</td>\r\n              <td class=\"hidden-xs hidden-sm\">{{bid[0].endDate | date: 'MM/dd/yyyy'}}</td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n        <h4 class=\"page-header\">Costs</h4>\r\n        <label *ngIf=\"bidLabors[0] != null;\">Labor Cost</label>\r\n        <table class=\"table table-bordered\">\r\n          <thead *ngIf=\"bidLabors[0] != null;\">\r\n            <tr class=\"active\">\r\n              <th>Role</th>\r\n              <th>Wage</th>\r\n              <th>Hours</th>\r\n              <th>Total</th>\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr *ngFor=\"let bidLabor of bidLabors\">\r\n              <td>{{bidLabor.roleName}}</td>\r\n              <td>{{bidLabor.roleWage}}</td>\r\n              <td>{{bidLabor.laborHours | currency: 'USD':true}}</td>\r\n              <td>{{bidLabor.roleWage*bidLabor.laborHours | currency: 'USD':true}}</td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n        <hr *ngIf=\"bidLabors[0] != null;\">\r\n        <label *ngIf=\"bidMaterials[0] != null;\">Materials Cost</label>\r\n        <table class=\"table table-bordered\">\r\n          <thead *ngIf=\"bidMaterials[0] != null;\">\r\n            <tr class=\"active\">\r\n              <th>Material</th>\r\n              <th>Linear Feet</th>\r\n              <th class=\"hidden-xs hidden-sm\">Price Per Unit</th>\r\n              <th class=\"hidden-xs hidden-sm\">Coverage In Linear Feet</th>\r\n              <th>Total</th>\r\n              <th class=\"hidden-xs hidden-sm\">Delete</th>\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr *ngFor=\"let bidMaterial of bidMaterials\">\r\n              <td>{{bidMaterial.materialName}}</td>\r\n              <td>{{bidMaterial.linearFeet}}</td>\r\n              <td class=\"hidden-xs hidden-sm\">{{bidMaterial.pricePerUnit | currency: 'USD':true}}</td>\r\n              <td class=\"hidden-xs hidden-sm\">{{bidMaterial.linearFeetCoverage}} ft</td>\r\n              <td>{{bidMaterial.pricePerUnit / bidMaterial.linearFeetCoverage * bidMaterial.linearFeet | currency: 'USD':true}}</td>\r\n              <td class=\"hidden-xs hidden-sm\">\r\n                <button class=\"btn btn-danger\" data-toggle=\"modal\" (click)=\"onClickDeleteBidMaterial(bidMaterial.materialID)\" href='#delete-material-modal'>\r\n                  <span class=\"glyphicon glyphicon-remove-circle\" aria-hidden=\"true\"></span>\r\n                </button>\r\n              </td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n        <button *ngIf=\"status == 'PENDING'\" class=\"btn btn-primary\" data-toggle=\"modal\" href='#create-job-modal'>\r\n          <span class=\"glyphicon glyphicon-briefcase\" aria-hidden=\"true\"></span> Create Job</button>\r\n        <!-- <button *ngIf=\"status == 'PENDING'\" type=\"button\" class=\"btn btn-info\" data-toggle=\"modal\" href='#update-bid-modal'> -->\r\n        <button type=\"button\" class=\"btn btn-info\" data-toggle=\"modal\" href='#update-bid-modal'>\r\n          <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span> Update Bid</button>\r\n        <button class=\"btn btn-danger\" data-toggle=\"modal\" href='#delete-bid-modal'>\r\n          <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span> Delete Bid</button>\r\n      </div>\r\n    </div>\r\n  </ng-container>\r\n  <ng-template #noBid>\r\n    <h2 class=\"page-header\">No Bids</h2>\r\n    <p>If this is incorrect, try refreshing the page.</p>\r\n  </ng-template>\r\n</div>\r\n\r\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <div class=\"panel panel-primary\">\r\n    <div class=\"panel-heading\">\r\n      <h3 class=\"panel-title\">Inquiry Details</h3>\r\n    </div>\r\n    <div class=\"panel-body\">\r\n      <table class=\"table table-bordered\">\r\n        <thead>\r\n          <tr class=\"active\">\r\n            <th>Received Date</th>\r\n            <th>Accepted Date</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr>\r\n            <td>{{bid[0].inquiryReceivedDate | date: 'MM/dd/yyyy'}}</td>\r\n            <td>{{bid[0].inquiryEndDate | date: 'MM/dd/yyyy'}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n      <table class=\"table table-bordered\">\r\n        <thead>\r\n          <tr class=\"active\">\r\n            <th>Description</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr>\r\n            <td>{{bid[0].description}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n      <button type=\"button\" class=\"btn btn-primary\" [routerLink]=\"['/inquiries/'+bid[0].inquiryID]\">\r\n        <span class=\"glyphicon glyphicon-inbox\" aria-hidden=\"true\"></span> Open Inquiry</button>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <div class=\"panel panel-primary\">\r\n    <div class=\"panel-heading\">\r\n      <h3 class=\"panel-title\">Customer Details</h3>\r\n    </div>\r\n    <div class=\"panel-body\">\r\n      <table class=\"table table-bordered\">\r\n        <thead>\r\n          <tr class=\"active\">\r\n            <th>ID</th>\r\n            <th>Name</th>\r\n            <th>Address</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr>\r\n            <td>{{bid[0].customerID}}</td>\r\n            <td>{{bid[0].customerName}}</td>\r\n            <td>{{bid[0].customerAddress}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n      <button type=\"button\" class=\"btn btn-primary\" [routerLink]=\"['/customers/'+bid[0].customerID]\">\r\n        <span class=\"glyphicon glyphicon-user\" aria-hidden=\"true\"></span> Open Customer</button>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<!--                Delete Material Popup                -->\r\n<div class=\"modal fade\" id=\"delete-material-modal\">\r\n  <div class=\"modal-dialog\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\r\n        <h4 class=\"modal-title\">Warning</h4>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <p>Are you sure you want to delete this material from the current bid?</p>\r\n      </div>\r\n      <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">No</button>\r\n        <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\" (click)=\"onDeleteBidMaterial()\">Yes</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<!-- <div class=\"col-xs-12 col-sm-12 col-md-6 col-lg-6\">\r\n  <h2 class=\"page-header\">Update Bid</h2>\r\n  <form (submit)=\"onUpdate()\">\r\n    <div class=\"form-group\">\r\n      <label>Change Bid Price</label>\r\n      <input type=\"text\" [(ngModel)]=\"bidPrice\" name=\"bidPrice\" placeholder=\"Bid Price\" class=\"form-control\" required>\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label>Change Labor Cost</label>\r\n      <input type=\"text\" [(ngModel)]=\"bidLabor\" name=\"laborCost\" placeholder=\"Labor Cost\" class=\"form-control\" required>\r\n    </div>\r\n    <label>Add Materials</label>\r\n    <div class=\"dropdown\">\r\n      <button class=\"btn btn-primary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">Materials<span class=\"caret\"></span></button>\r\n      <ul class=\"dropdown-menu\">\r\n        <ng-container *ngIf=\"materials[0] != null; else noMaterials\">\r\n          <li *ngFor=\"let material of materials; let i = index\"><a (click)=\"onAddMaterial(material, i)\">{{material.materialName}}</a></li>\r\n        </ng-container>\r\n        <ng-template #noMaterials>\r\n          <li><a>No more materials</a></li>\r\n        </ng-template>\r\n      </ul>\r\n    </div>\r\n    <table class=\"table table-striped table-hover\">\r\n      <thead *ngIf=\"selectedMaterials[0] != null;\">\r\n        <tr>\r\n          <th>Name</th>\r\n          <th>Quantity</th>\r\n          <th>Per Unit Cost</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let selectedMaterial of selectedMaterials; let i = index;\">\r\n          <td>{{selectedMaterial.materialName}}</td>\r\n          <td><input type=\"text\" [(ngModel)]=\"selectedMaterial.quantity\" name=\"quantity\" placeholder=\"Quantity\" class=\"form-control\" required></td>\r\n          <td><input type=\"text\" [(ngModel)]=\"selectedMaterial.perUnitCost\" name=\"perUnitCost\" placeholder=\"Per Unit Cost\" class=\"form-control\" required></td>\r\n          <td><button type=\"button\" class=\"close\" (click)=\"onRemoveMaterial(selectedMaterial, i)\">&times;</button></td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n    <button type=\"submit\" class=\"btn btn-primary\">Update</button>\r\n    <button type=\"reset\" class=\"btn btn-danger\" (click)=\"onClear()\">Clear</button>\r\n  </form>  \r\n</div> -->\r\n\r\n<!--<div class=\"col-xs-12 col-sm-12 col-md-6 col-lg-6\">\r\n  <h2 class=\"page-header\">Create A New Job</h2>\r\n  <form (submit)=\"onCreate()\">\r\n    <div class=\"form-group\">\r\n      <label>Created Date</label>\r\n      <input type=\"text\" [(ngModel)]=\"createdDate\" name=\"createdDate\" placeholder=\"YYYY-MM-DD\" class=\"form-control\" required>\r\n    </div>\r\n    <button type=\"submit\" class=\"btn btn-primary\">Create</button>\r\n    <button type=\"reset\" class=\"btn btn-danger\">Clear</button>\r\n  </form>  \r\n</div>-->\r\n\r\n<!--                Delete Bid Popup                -->\r\n<div class=\"modal fade\" id=\"delete-bid-modal\">\r\n  <div class=\"modal-dialog\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\r\n        <h4 class=\"modal-title\">Warning</h4>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <p>Are you sure you want to delete this bid?</p>\r\n      </div>\r\n      <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">No</button>\r\n        <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\" (click)=\"onDelete()\">Yes</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<!--                Create Job Popup                -->\r\n<div class=\"modal fade\" id=\"create-job-modal\">\r\n  <div class=\"modal-dialog\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\r\n        <h4 class=\"modal-title\">Warning</h4>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <p>Are you sure you want to create a job?</p>\r\n      </div>\r\n      <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">No</button>\r\n        <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\" (click)=\"onCreate()\">Yes</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<!--                Update Bid Popup                -->\r\n<div class=\"modal fade\" id=\"update-bid-modal\">\r\n  <div class=\"modal-dialog\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\r\n        <h4 class=\"modal-title\">Update Bid</h4>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <form (submit)=\"onUpdate()\">\r\n          <div class=\"form-group\">\r\n            <h4>Change Bid Price</h4>\r\n            <input type=\"text\" [(ngModel)]=\"bidPrice\" name=\"bidPrice\" placeholder=\"Bid Price\" class=\"form-control\" required>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <h4>Change Labor Cost</h4>\r\n            <input type=\"text\" [(ngModel)]=\"bidLabor\" name=\"laborCost\" placeholder=\"Labor Cost\" class=\"form-control\" required>\r\n          </div>\r\n          <!-- <label>Add Materials</label> -->\r\n          <!-- <div class=\"dropdown\">\r\n            <button class=\"btn btn-primary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">\r\n              <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span> Materials\r\n              <span class=\"caret\"></span>\r\n            </button>\r\n            <ul class=\"dropdown-menu\">\r\n              <ng-container *ngIf=\"materials[0] != null; else noMaterials\">\r\n                <li *ngFor=\"let material of materials; let i = index\">\r\n                  <a (click)=\"onAddMaterial(material, i)\">{{material.materialName}}</a>\r\n                </li>\r\n              </ng-container>\r\n              <ng-template #noMaterials>\r\n                <li>\r\n                  <a>No more materials</a>\r\n                </li>\r\n              </ng-template>\r\n            </ul>\r\n          </div> -->\r\n          <!-- <table class=\"table table-striped table-hover\">\r\n            <thead *ngIf=\"selectedMaterials[0] != null;\">\r\n              <tr>\r\n                <th>Name</th>\r\n                <th>Quantity</th>\r\n                <th>Per Unit Cost</th>\r\n              </tr>\r\n            </thead>\r\n            <tbody>\r\n              <tr *ngFor=\"let selectedMaterial of selectedMaterials; let i = index;\">\r\n                <td>{{selectedMaterial.materialName}}</td>\r\n                <td>\r\n                  <input type=\"text\" [(ngModel)]=\"selectedMaterial.quantity\" name=\"quantity\" placeholder=\"Quantity\" class=\"form-control\" required>\r\n                </td>\r\n                <td>\r\n                  <input type=\"text\" [(ngModel)]=\"selectedMaterial.perUnitCost\" name=\"perUnitCost\" placeholder=\"Per Unit Cost\" class=\"form-control\"\r\n                    required>\r\n                </td>\r\n                <td>\r\n                  <button type=\"button\" class=\"btn btn-danger\" (click)=\"onRemoveMaterial(selectedMaterial, i)\">\r\n                    <span class=\"glyphicon glyphicon-remove-circle\" aria-hidden=\"true\"></span>\r\n                  </button>\r\n                </td>\r\n              </tr>\r\n            </tbody>\r\n          </table> -->\r\n          <h4>Add Materials</h4>\r\n          <table class=\"table table-bordered\" *ngIf=\"materials[0] != null\">\r\n            <thead>\r\n              <tr class=\"active\">\r\n                <th>Name</th>\r\n                <th>Linear Feet</th>\r\n                <th>Add</th>\r\n              </tr>\r\n            </thead>\r\n            <tbody>\r\n              <tr>\r\n                <td>\r\n                  <!-- <select class=\"form-control\">\r\n                    <option></option>\r\n                    <option *ngFor=\"let material of materials; let i = index;\" (click)=\"onSelectMaterial(material, i)\">{{material.materialName}}</option>\r\n                  </select> -->\r\n                  <select (change)=\"onChangeMaterial($event.target.value)\" class=\"form-control\">\r\n                    <option></option>\r\n                    <option [value]=\"i\" *ngFor=\"let material of materials; let i = index;\">{{material.materialName}}</option>\r\n                  </select>\r\n                </td>\r\n                <td>\r\n                  <input type=\"text\" [(ngModel)]=\"linearFeet\" name=\"linearFeet\" placeholder=\"Linear Feet\" class=\"form-control\" required>\r\n                </td>\r\n                <td>\r\n                  <!-- <button (click)=\"onAddMaterial(selectedMaterial, i)\" type=\"button\" class=\"btn btn-success\">\r\n                    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\r\n                  </button> -->\r\n                  <button (click)=\"onAddMaterial()\" type=\"button\" class=\"btn btn-success\">\r\n                    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\r\n                  </button>\r\n                </td>\r\n              </tr>\r\n            </tbody>\r\n          </table>\r\n          <table class=\"table table-bordered\" *ngIf=\"selectedMaterials1.length != 0;\">\r\n            <thead>\r\n              <tr class=\"active\">\r\n                <th>Name</th>\r\n                <th>Estimated Cost</th>\r\n                <th>Delete</th>\r\n              </tr>\r\n            </thead>\r\n            <tbody>\r\n              <tr *ngFor=\"let selectedMaterial of selectedMaterials1; let i = index\">\r\n                <td>{{selectedMaterial.materialName}}</td>\r\n                <td>{{selectedMaterial.linearFeet*selectedMaterial.pricePerUnit/selectedMaterial.linearFeetCoverage | currency:\r\n                  'USD':true}}\r\n                </td>\r\n                <td>\r\n                  <button (click)=\"onRemoveMaterial(selectedMaterial, i)\" type=\"button\" class=\"btn btn-danger\">\r\n                    <span class=\"glyphicon glyphicon-remove-circle\" aria-hidden=\"true\"></span>\r\n                  </button>\r\n                </td>\r\n              </tr>\r\n            </tbody>\r\n            <tfoot>\r\n              <tr class=\"active\">\r\n                <th>Total Material Cost</th>\r\n                <th>{{totalMaterialPrice | currency: 'USD':true}}</th>\r\n                <th></th>\r\n              </tr>\r\n            </tfoot>\r\n          </table>\r\n          <button type=\"submit\" class=\"btn btn-primary\">\r\n            <span class=\"glyphicon glyphicon-floppy-saved\" aria-hidden=\"true\"></span> Update</button>\r\n          <button type=\"reset\" class=\"btn btn-danger\" (click)=\"onClear()\">\r\n            <span class=\"glyphicon glyphicon-refresh\" aria-hidden=\"true\"></span> Clear</button>\r\n        </form>\r\n      </div>\r\n      <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-info\" data-dismiss=\"modal\">\r\n          <span class=\"glyphicon glyphicon-remove-circle\" aria-hidden=\"true\"></span> Close</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>"
+module.exports = "<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <button class=\"btn btn-default\" [routerLink]=\"['/bids']\">Go To Bids</button>\r\n</div>\r\n\r\n<h2 class=\"page-header col-xs-12 col-sm-12 col-md-12 col-lg-12\">Bid #{{bid[0].bidID}}</h2>\r\n\r\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <ng-container *ngIf=\"bid; else noBid\">\r\n    <div class=\"panel panel-primary\">\r\n      <div class=\"panel-heading\">\r\n        <h3 class=\"panel-title\">Bid Details</h3>\r\n      </div>\r\n      <div class=\"panel-body\" style=\"word-break:break-all\">\r\n        <h4 class=\"page-header\" style=\"margin-top:0;\">General</h4>\r\n        <table class=\"table table-bordered\">\r\n          <thead>\r\n            <tr class=\"active\">\r\n              <th>Price</th>\r\n              <th>Created Date</th>\r\n              <th *ngIf=\"bid[0].bidStatus == 'ACCEPTED'\">Accepted Date</th>\r\n              <th *ngIf=\"bid[0].bidStatus == 'DECLINED'\">Declined Date</th>\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr>\r\n              <td>{{bid[0].bidPrice | currency: 'USD':true}}</td>\r\n              <td>{{bid[0].createdDate | date: 'MM/dd/yyyy'}}</td>\r\n              <td *ngIf=\"bid[0].bidStatus == 'ACCEPTED'\">{{bid[0].endDate | date: 'MM/dd/yyyy'}}</td>\r\n              <td *ngIf=\"bid[0].bidStatus == 'DECLINED'\">{{bid[0].endDate | date: 'MM/dd/yyyy'}}</td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n        <button (click)=\"onClickUpdateBid()\" type=\"button\" class=\"btn btn-info\" data-toggle=\"modal\" href='#update-bid-modal'>\r\n          <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span> Update Price</button>\r\n        <h4 class=\"page-header\" *ngIf=\"bidLabors[0] != null;\">Labor Costs</h4>\r\n        <label *ngIf=\"bidLabors[0] != null;\">Click To Update Or Delete</label>\r\n        <table class=\"table table-bordered table-hover\">\r\n          <thead *ngIf=\"bidLabors[0] != null;\">\r\n            <tr class=\"active\">\r\n              <th>Role</th>\r\n              <th class=\"hidden-xs hidden-sm\">Wage</th>\r\n              <th>Hours</th>\r\n              <th>Total</th>\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr *ngFor=\"let bidLabor of bidLabors; let i = index\" (click)=\"onClickUpdateBidLabor(i)\" data-toggle=\"modal\" href='#update-labor-modal'>\r\n              <td>{{bidLabor.roleName}}</td>\r\n              <td class=\"hidden-xs hidden-sm\">{{bidLabor.roleWage | currency: 'USD':true}}</td>\r\n              <td>{{bidLabor.laborHours}}</td>\r\n              <td>{{bidLabor.roleWage*bidLabor.laborHours | currency: 'USD':true}}</td>\r\n            </tr>\r\n          </tbody>\r\n          <tfoot>\r\n            <tr class=\"active\" *ngIf=\"totalLaborPriceTable != 0\">\r\n              <th>Grand Total</th>\r\n              <th class=\"hidden-xs hidden-sm\"></th>\r\n              <th></th>\r\n              <th>{{totalLaborPriceTable | currency: 'USD':true}}</th>\r\n            </tr>\r\n          </tfoot>\r\n        </table>\r\n        <button *ngIf=\"labors[0] != null\" (click)=\"onClearBidLabor()\" class=\"btn btn-info\" data-toggle=\"modal\" href='#create-labor-modal'>\r\n          <span class=\"glyphicon glyphicon-wrench\" aria-hidden=\"true\"></span> Add Labor</button>\r\n        <h4 class=\"page-header\" *ngIf=\"bidMaterials[0] != null;\">Material Cost</h4>\r\n        <label *ngIf=\"bidMaterials[0] != null;\">Click To Update Or Delete</label>\r\n        <table class=\"table table-bordered table-hover\">\r\n          <thead *ngIf=\"bidMaterials[0] != null;\">\r\n            <tr class=\"active\">\r\n              <th>Material</th>\r\n              <th>Linear Feet</th>\r\n              <th class=\"hidden-xs hidden-sm\">Price Per Unit</th>\r\n              <th class=\"hidden-xs hidden-sm\">Coverage In Linear Feet</th>\r\n              <th>Total</th>\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr *ngFor=\"let bidMaterial of bidMaterials; let i = index\" data-toggle=\"modal\" href='#update-material-modal' (click)=\"onClickUpdateBidMaterial(bidMaterial.materialID, i)\">\r\n              <td>{{bidMaterial.materialName}}</td>\r\n              <td>{{bidMaterial.linearFeet}}</td>\r\n              <td class=\"hidden-xs hidden-sm\">{{bidMaterial.pricePerUnit | currency: 'USD':true}}</td>\r\n              <td class=\"hidden-xs hidden-sm\">{{bidMaterial.linearFeetCoverage}} ft</td>\r\n              <td>{{bidMaterial.pricePerUnit / bidMaterial.linearFeetCoverage * bidMaterial.linearFeet | currency: 'USD':true}}</td>\r\n            </tr>\r\n          </tbody>\r\n          <tfoot>\r\n            <tr class=\"active\" *ngIf=\"totalMaterialPriceTable != 0\">\r\n              <th>Grand Total</th>\r\n              <th></th>\r\n              <th class=\"hidden-xs hidden-sm\"></th>\r\n              <th class=\"hidden-xs hidden-sm\"></th>\r\n              <th>{{totalMaterialPriceTable | currency: 'USD':true}}</th>\r\n            </tr>\r\n          </tfoot>\r\n        </table>\r\n        <button *ngIf=\"materials[0] != null\" (click)=\"onClearBidMaterial()\" class=\"btn btn-info\" data-toggle=\"modal\" href='#create-material-modal'>\r\n          <span class=\"glyphicon glyphicon-tint\" aria-hidden=\"true\"></span> Add Materials</button>\r\n        <hr *ngIf=\"bidMaterials[0] != null;\">\r\n        <button *ngIf=\"status == 'PENDING'\" class=\"btn btn-primary\" data-toggle=\"modal\" href='#create-job-modal'>\r\n          <span class=\"glyphicon glyphicon-briefcase\" aria-hidden=\"true\"></span> Create Job</button>\r\n        <!-- <button *ngIf=\"status == 'PENDING'\" type=\"button\" class=\"btn btn-info\" data-toggle=\"modal\" href='#update-bid-modal'> -->\r\n        <button class=\"btn btn-danger\" data-toggle=\"modal\" href='#delete-bid-modal'>\r\n          <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span> Delete Bid</button>\r\n      </div>\r\n    </div>\r\n  </ng-container>\r\n  <ng-template #noBid>\r\n    <h2 class=\"page-header\">No Bids</h2>\r\n    <p>If this is incorrect, try refreshing the page.</p>\r\n  </ng-template>\r\n</div>\r\n\r\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <div class=\"panel panel-primary\">\r\n    <div class=\"panel-heading\">\r\n      <h3 class=\"panel-title\">Inquiry Details</h3>\r\n    </div>\r\n    <div class=\"panel-body\" style=\"word-break:break-all\">\r\n      <table class=\"table table-bordered\">\r\n        <thead>\r\n          <tr class=\"active\">\r\n            <th>Received Date</th>\r\n            <th>Accepted Date</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr>\r\n            <td>{{bid[0].inquiryReceivedDate | date: 'MM/dd/yyyy'}}</td>\r\n            <td>{{bid[0].inquiryEndDate | date: 'MM/dd/yyyy'}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n      <table class=\"table table-bordered\">\r\n        <thead>\r\n          <tr class=\"active\">\r\n            <th>Description</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr>\r\n            <td>{{bid[0].description}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n      <button type=\"button\" class=\"btn btn-primary\" [routerLink]=\"['/inquiries/'+bid[0].inquiryID]\">\r\n        <span class=\"glyphicon glyphicon-inbox\" aria-hidden=\"true\"></span> Open Inquiry</button>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <div class=\"panel panel-primary\">\r\n    <div class=\"panel-heading\">\r\n      <h3 class=\"panel-title\">Customer Details</h3>\r\n    </div>\r\n    <div class=\"panel-body\">\r\n      <table class=\"table table-bordered\">\r\n        <thead>\r\n          <tr class=\"active\">\r\n            <th>Name</th>\r\n            <th>Address</th>\r\n            <th>City</th>\r\n            <th class=\"hidden-xs hidden-sm\">State</th>\r\n            <th class=\"hidden-xs hidden-sm\">ZIP</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr>\r\n            <td>{{bid[0].customerName}}</td>\r\n            <td>{{bid[0].customerAddress}}</td>\r\n            <td>{{bid[0].customerCity}}</td>\r\n            <td class=\"hidden-xs hidden-sm\">{{bid[0].customerState}}</td>\r\n            <td class=\"hidden-xs hidden-sm\">{{bid[0].customerZIP}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n      <button type=\"button\" class=\"btn btn-primary\" [routerLink]=\"['/customers/'+bid[0].customerID]\">\r\n        <span class=\"glyphicon glyphicon-user\" aria-hidden=\"true\"></span> Open Customer</button>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<!--                                          Bid Popups                                              -->\r\n<!--                Delete Bid Popup                -->\r\n<div class=\"modal fade\" id=\"delete-bid-modal\">\r\n  <div class=\"modal-dialog\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\r\n        <h4 class=\"modal-title\">Warning</h4>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <p>Are you sure you want to delete this bid?</p>\r\n      </div>\r\n      <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">No</button>\r\n        <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\" (click)=\"onDelete()\">Yes</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<!--                Create Job Popup                -->\r\n<div class=\"modal fade\" id=\"create-job-modal\">\r\n  <div class=\"modal-dialog\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\r\n        <h4 class=\"modal-title\">Warning</h4>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <p>Are you sure you want to create a job?</p>\r\n      </div>\r\n      <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">No</button>\r\n        <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\" (click)=\"onCreate()\">Yes</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<!--                Update Bid Popup                -->\r\n<div class=\"modal fade\" id=\"update-bid-modal\">\r\n  <div class=\"modal-dialog\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\r\n        <h4 class=\"modal-title\">Change Bid Price</h4>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <form (submit)=\"onUpdate()\">\r\n          <div class=\"form-group\">\r\n            <input type=\"text\" [(ngModel)]=\"bidPrice\" name=\"bidPrice\" placeholder=\"Bid Price\" class=\"form-control\" required>\r\n          </div>\r\n          <button type=\"submit\" class=\"btn btn-primary\">\r\n            <span class=\"glyphicon glyphicon-floppy-saved\" aria-hidden=\"true\"></span> Update</button>\r\n          <button type=\"reset\" class=\"btn btn-warning\" (click)=\"onClear()\">\r\n            <span class=\"glyphicon glyphicon-refresh\" aria-hidden=\"true\"></span> Clear</button>\r\n        </form>\r\n      </div>\r\n      <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-info\" data-dismiss=\"modal\">\r\n          <span class=\"glyphicon glyphicon-remove-circle\" aria-hidden=\"true\"></span> Close</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<!--                                     Bid Material Popups                                           -->\r\n<!--                Update Material Popup                -->\r\n<div class=\"modal fade\" id=\"update-material-modal\">\r\n  <div class=\"modal-dialog\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\r\n        <h4 class=\"modal-title\">Update {{materialName}}</h4>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <form (submit)=\"onUpdateBidMaterial()\">\r\n          <div class=\"form-group\">\r\n            <label>Linear Feet</label>\r\n            <input type=\"number\" [(ngModel)]=\"linearFeet\" name=\"linearFeet\" placeholder=\"Linear Feet\" class=\"form-control\" required>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label>Price Per Unit</label>\r\n            <input type=\"number\" [(ngModel)]=\"pricePerUnit\" name=\"pricePerUnit\" placeholder=\"Price Per Unit\" class=\"form-control\" required>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label>Coverage In Linear Feet</label>\r\n            <input type=\"number\" [(ngModel)]=\"linearFeetCoverage\" name=\"linearFeetCoverage\" placeholder=\"Coverage In Linear Feet\" class=\"form-control\"\r\n              required>\r\n          </div>\r\n          <button type=\"submit\" class=\"btn btn-primary\">\r\n            <span class=\"glyphicon glyphicon-floppy-saved\" aria-hidden=\"true\"></span> Update</button>\r\n          <button type=\"reset\" class=\"btn btn-warning\">\r\n            <span class=\"glyphicon glyphicon-refresh\" aria-hidden=\"true\"></span> Clear</button>\r\n          <button type=\"button\" class=\"btn btn-danger\" data-toggle=\"modal\" href='#delete-material-modal'>\r\n            <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span> Delete</button>\r\n        </form>\r\n      </div>\r\n      <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-info\" data-dismiss=\"modal\">\r\n          <span class=\"glyphicon glyphicon-remove-circle\" aria-hidden=\"true\"></span> Close</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<!--                Create Material Popup                -->\r\n<div class=\"modal fade\" id=\"create-material-modal\">\r\n  <div class=\"modal-dialog\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\r\n        <h4 class=\"modal-title\">Add Materials</h4>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <form (submit)=\"onCreateMaterial()\">\r\n          <table class=\"table table-bordered\" *ngIf=\"materials[0] != null\">\r\n            <thead>\r\n              <tr class=\"active\">\r\n                <th>Name</th>\r\n                <th>Linear Feet</th>\r\n                <th>Add</th>\r\n              </tr>\r\n            </thead>\r\n            <tbody>\r\n              <tr>\r\n                <td>\r\n                  <select (change)=\"onChangeMaterial($event.target.value)\" class=\"form-control\">\r\n                    <option></option>\r\n                    <option [value]=\"i\" *ngFor=\"let material of materials; let i = index;\">{{material.materialName}}</option>\r\n                  </select>\r\n                </td>\r\n                <td>\r\n                  <input type=\"text\" [(ngModel)]=\"linearFeet\" name=\"linearFeet\" placeholder=\"Linear Feet\" class=\"form-control\" required>\r\n                </td>\r\n                <td>\r\n                  <button (click)=\"onAddMaterial()\" type=\"button\" class=\"btn btn-success\">\r\n                    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\r\n                  </button>\r\n                </td>\r\n              </tr>\r\n            </tbody>\r\n          </table>\r\n          <table class=\"table table-bordered\" *ngIf=\"selectedMaterials1.length != 0;\">\r\n            <thead>\r\n              <tr class=\"active\">\r\n                <th>Name</th>\r\n                <th>Estimated Cost</th>\r\n                <th>Delete</th>\r\n              </tr>\r\n            </thead>\r\n            <tbody>\r\n              <tr *ngFor=\"let selectedMaterial of selectedMaterials1; let i = index\">\r\n                <td>{{selectedMaterial.materialName}}</td>\r\n                <td>{{selectedMaterial.linearFeet*(selectedMaterial.pricePerUnit/selectedMaterial.linearFeetCoverage) | currency:\r\n                  'USD':true}}\r\n                </td>\r\n                <td>\r\n                  <button (click)=\"onRemoveMaterial(selectedMaterial, i)\" type=\"button\" class=\"btn btn-danger\">\r\n                    <span class=\"glyphicon glyphicon-remove-circle\" aria-hidden=\"true\"></span>\r\n                  </button>\r\n                </td>\r\n              </tr>\r\n            </tbody>\r\n            <tfoot>\r\n              <tr class=\"active\">\r\n                <th>Total Material Cost</th>\r\n                <th>{{totalMaterialPrice | currency: 'USD':true}}</th>\r\n                <th></th>\r\n              </tr>\r\n            </tfoot>\r\n          </table>\r\n          <button type=\"submit\" class=\"btn btn-primary\">\r\n            <span class=\"glyphicon glyphicon-tint\" aria-hidden=\"true\"></span> Add</button>\r\n          <button type=\"reset\" class=\"btn btn-warning\" (click)=\"onClearBidMaterial()\">\r\n            <span class=\"glyphicon glyphicon-refresh\" aria-hidden=\"true\"></span> Clear</button>\r\n        </form>\r\n      </div>\r\n      <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-info\" data-dismiss=\"modal\">\r\n          <span class=\"glyphicon glyphicon-remove-circle\" aria-hidden=\"true\"></span> Close</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<!--                Delete Material Popup                -->\r\n<div class=\"modal fade\" id=\"delete-material-modal\">\r\n  <div class=\"modal-dialog\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\r\n        <h4 class=\"modal-title\">Warning</h4>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <p>Are you sure you want to delete\r\n          <b>{{materialName | lowercase}}</b> from the current bid?</p>\r\n      </div>\r\n      <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">No</button>\r\n        <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\" (click)=\"onDeleteBidMaterial()\">Yes</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<!--                                     Bid Labor Popups                                           -->\r\n<!--                Update labor Popup                -->\r\n<div class=\"modal fade\" id=\"update-labor-modal\">\r\n  <div class=\"modal-dialog\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\r\n        <h4 class=\"modal-title\">Update {{roleName}}</h4>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <form (submit)=\"onUpdateBidLabor()\">\r\n          <div class=\"form-group\">\r\n            <label>Wage</label>\r\n            <input type=\"text\" [(ngModel)]=\"wage\" name=\"wage\" placeholder=\"Wage\" class=\"form-control\" required>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label>Hours</label>\r\n            <input type=\"text\" [(ngModel)]=\"hours\" name=\"hours\" placeholder=\"Hours\" class=\"form-control\" required>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <button type=\"submit\" class=\"btn btn-primary\">\r\n              <span class=\"glyphicon glyphicon-floppy-saved\" aria-hidden=\"true\"></span> Update</button>\r\n            <button type=\"reset\" class=\"btn btn-warning\">\r\n              <span class=\"glyphicon glyphicon-refresh\" aria-hidden=\"true\"></span> Clear</button>\r\n            <button type=\"button\" class=\"btn btn-danger\" data-toggle=\"modal\" href='#delete-labor-modal'>\r\n              <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span> Delete</button>\r\n          </div>\r\n        </form>\r\n      </div>\r\n      <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-info\" data-dismiss=\"modal\">\r\n          <span class=\"glyphicon glyphicon-remove-circle\" aria-hidden=\"true\"></span> Close</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<!--                Create labor Popup                -->\r\n<div class=\"modal fade\" id=\"create-labor-modal\">\r\n  <div class=\"modal-dialog\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\r\n        <h4 class=\"modal-title\">Add Labor</h4>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <form (submit)=\"onCreateBidLabor()\">\r\n          <table class=\"table table-bordered\" *ngIf=\"labors[0] != null\">\r\n            <thead>\r\n              <tr class=\"active\">\r\n                <th>Role</th>\r\n                <th>Hours</th>\r\n                <th>Add</th>\r\n              </tr>\r\n            </thead>\r\n            <tbody>\r\n              <tr>\r\n                <td>\r\n                  <select (change)=\"onChangeLabor($event.target.value)\" class=\"form-control\">\r\n                    <option></option>\r\n                    <option [value]=\"i\" *ngFor=\"let labor of labors; let i = index;\">{{labor.roleName}}</option>\r\n                  </select>\r\n                </td>\r\n                <td>\r\n                  <input type=\"number\" [(ngModel)]=\"hours\" name=\"hours\" placeholder=\"Hours\" class=\"form-control\" aria-describedby=\"hours-addon\"\r\n                    required>\r\n                </td>\r\n                <td>\r\n                  <button (click)=\"onAddLabor()\" type=\"button\" class=\"btn btn-success\">\r\n                    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\r\n                  </button>\r\n                </td>\r\n              </tr>\r\n            </tbody>\r\n          </table>\r\n          <table class=\"table table-bordered\" *ngIf=\"selectedLabors.length != 0;\">\r\n            <thead>\r\n              <tr class=\"active\">\r\n                <th>Role</th>\r\n                <th>Estimated Cost</th>\r\n                <th>Delete</th>\r\n              </tr>\r\n            </thead>\r\n            <tbody>\r\n              <tr *ngFor=\"let selectedLabor of selectedLabors; let i = index\">\r\n                <td>{{selectedLabor.roleName}}</td>\r\n                <td>{{selectedLabor.laborHours*selectedLabor.roleWage | currency:'USD':true}}\r\n                </td>\r\n                <td>\r\n                  <button (click)=\"onRemoveLabor(selectedLabor, i)\" type=\"button\" class=\"btn btn-danger\">\r\n                    <span class=\"glyphicon glyphicon-remove-circle\" aria-hidden=\"true\"></span>\r\n                  </button>\r\n                </td>\r\n              </tr>\r\n            </tbody>\r\n            <tfoot>\r\n              <tr class=\"active\">\r\n                <th>Total Labor Cost</th>\r\n                <th>{{totalLaborPrice | currency: 'USD':true}}</th>\r\n                <th></th>\r\n              </tr>\r\n            </tfoot>\r\n          </table>\r\n          <button type=\"submit\" class=\"btn btn-primary\">\r\n            <span class=\"glyphicon glyphicon-wrench\" aria-hidden=\"true\"></span> Add</button>\r\n          <button type=\"reset\" class=\"btn btn-warning\" (click)=\"onClearBidLabor()\">\r\n            <span class=\"glyphicon glyphicon-refresh\" aria-hidden=\"true\"></span> Clear</button>\r\n        </form>\r\n      </div>\r\n      <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-info\" data-dismiss=\"modal\">\r\n          <span class=\"glyphicon glyphicon-remove-circle\" aria-hidden=\"true\"></span> Close</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<!--                Delete Labor Popup                -->\r\n<div class=\"modal fade\" id=\"delete-labor-modal\">\r\n  <div class=\"modal-dialog\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\r\n        <h4 class=\"modal-title\">Warning</h4>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <p>Are you sure you want to delete\r\n          <b>{{roleName | lowercase}}</b> labor from the current bid?</p>\r\n      </div>\r\n      <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">No</button>\r\n        <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\" (click)=\"onDeleteBidLabor()\">Yes</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n<!--                                               UNUSED MARK-UP                                                                     -->\r\n<!-- <label>Add Materials</label> -->\r\n<!-- <div class=\"dropdown\">\r\n            <button class=\"btn btn-primary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">\r\n              <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span> Materials\r\n              <span class=\"caret\"></span>\r\n            </button>\r\n            <ul class=\"dropdown-menu\">\r\n              <ng-container *ngIf=\"materials[0] != null; else noMaterials\">\r\n                <li *ngFor=\"let material of materials; let i = index\">\r\n                  <a (click)=\"onAddMaterial(material, i)\">{{material.materialName}}</a>\r\n                </li>\r\n              </ng-container>\r\n              <ng-template #noMaterials>\r\n                <li>\r\n                  <a>No more materials</a>\r\n                </li>\r\n              </ng-template>\r\n            </ul>\r\n          </div> -->\r\n<!-- <table class=\"table table-striped table-hover\">\r\n            <thead *ngIf=\"selectedMaterials[0] != null;\">\r\n              <tr>\r\n                <th>Name</th>\r\n                <th>Quantity</th>\r\n                <th>Per Unit Cost</th>\r\n              </tr>\r\n            </thead>\r\n            <tbody>\r\n              <tr *ngFor=\"let selectedMaterial of selectedMaterials; let i = index;\">\r\n                <td>{{selectedMaterial.materialName}}</td>\r\n                <td>\r\n                  <input type=\"text\" [(ngModel)]=\"selectedMaterial.quantity\" name=\"quantity\" placeholder=\"Quantity\" class=\"form-control\" required>\r\n                </td>\r\n                <td>\r\n                  <input type=\"text\" [(ngModel)]=\"selectedMaterial.perUnitCost\" name=\"perUnitCost\" placeholder=\"Per Unit Cost\" class=\"form-control\"\r\n                    required>\r\n                </td>\r\n                <td>\r\n                  <button type=\"button\" class=\"btn btn-danger\" (click)=\"onRemoveMaterial(selectedMaterial, i)\">\r\n                    <span class=\"glyphicon glyphicon-remove-circle\" aria-hidden=\"true\"></span>\r\n                  </button>\r\n                </td>\r\n              </tr>\r\n            </tbody>\r\n          </table> -->\r\n<!-- <div class=\"col-xs-12 col-sm-12 col-md-6 col-lg-6\">\r\n  <h2 class=\"page-header\">Update Bid</h2>\r\n  <form (submit)=\"onUpdate()\">\r\n    <div class=\"form-group\">\r\n      <label>Change Bid Price</label>\r\n      <input type=\"text\" [(ngModel)]=\"bidPrice\" name=\"bidPrice\" placeholder=\"Bid Price\" class=\"form-control\" required>\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label>Change Labor Cost</label>\r\n      <input type=\"text\" [(ngModel)]=\"bidLabor\" name=\"laborCost\" placeholder=\"Labor Cost\" class=\"form-control\" required>\r\n    </div>\r\n    <label>Add Materials</label>\r\n    <div class=\"dropdown\">\r\n      <button class=\"btn btn-primary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">Materials<span class=\"caret\"></span></button>\r\n      <ul class=\"dropdown-menu\">\r\n        <ng-container *ngIf=\"materials[0] != null; else noMaterials\">\r\n          <li *ngFor=\"let material of materials; let i = index\"><a (click)=\"onAddMaterial(material, i)\">{{material.materialName}}</a></li>\r\n        </ng-container>\r\n        <ng-template #noMaterials>\r\n          <li><a>No more materials</a></li>\r\n        </ng-template>\r\n      </ul>\r\n    </div>\r\n    <table class=\"table table-striped table-hover\">\r\n      <thead *ngIf=\"selectedMaterials[0] != null;\">\r\n        <tr>\r\n          <th>Name</th>\r\n          <th>Quantity</th>\r\n          <th>Per Unit Cost</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let selectedMaterial of selectedMaterials; let i = index;\">\r\n          <td>{{selectedMaterial.materialName}}</td>\r\n          <td><input type=\"text\" [(ngModel)]=\"selectedMaterial.quantity\" name=\"quantity\" placeholder=\"Quantity\" class=\"form-control\" required></td>\r\n          <td><input type=\"text\" [(ngModel)]=\"selectedMaterial.perUnitCost\" name=\"perUnitCost\" placeholder=\"Per Unit Cost\" class=\"form-control\" required></td>\r\n          <td><button type=\"button\" class=\"close\" (click)=\"onRemoveMaterial(selectedMaterial, i)\">&times;</button></td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n    <button type=\"submit\" class=\"btn btn-primary\">Update</button>\r\n    <button type=\"reset\" class=\"btn btn-danger\" (click)=\"onClear()\">Clear</button>\r\n  </form>  \r\n</div> -->\r\n\r\n<!--<div class=\"col-xs-12 col-sm-12 col-md-6 col-lg-6\">\r\n  <h2 class=\"page-header\">Create A New Job</h2>\r\n  <form (submit)=\"onCreate()\">\r\n    <div class=\"form-group\">\r\n      <label>Created Date</label>\r\n      <input type=\"text\" [(ngModel)]=\"createdDate\" name=\"createdDate\" placeholder=\"YYYY-MM-DD\" class=\"form-control\" required>\r\n    </div>\r\n    <button type=\"submit\" class=\"btn btn-primary\">Create</button>\r\n    <button type=\"reset\" class=\"btn btn-danger\">Clear</button>\r\n  </form>  \r\n</div>-->"
 
 /***/ }),
 
@@ -309,98 +309,30 @@ var BidComponent = (function () {
         this.inquiryService = inquiryService;
         this.laborService = laborService;
         this.linearFeet = 0;
+        this.pricePerUnit = 0;
+        this.linearFeetCoverage = 0;
         this.totalMaterialPrice = 0;
-        // selectedMaterials:SelectedMaterial[] = [];
+        this.totalMaterialPriceTable = 0;
         this.selectedMaterials1 = [];
+        this.selectedLabors = [];
+        this.totalLaborPriceTable = 0;
     }
     BidComponent.prototype.ngOnInit = function () {
-        var _this = this;
         this.id = this.route.snapshot.params['id'];
+        this.getBid();
+        this.getBidMaterials();
+        this.getBidLabors();
+    };
+    /**************************************************** Bid **********************************************************************/
+    BidComponent.prototype.getBid = function () {
+        var _this = this;
         this.bidService.getBidById(this.id).subscribe(function (bid) {
             _this.bid = bid;
             _this.status = bid[0].bidStatus;
         });
-        this.bidService.getBidMaterialsById(this.id).subscribe(function (bidMaterials) {
-            _this.bidMaterials = bidMaterials;
-            _this.materialService.getAllMaterials().subscribe(function (materials) {
-                _this.materials = materials.materials;
-                for (var i = 0; i < _this.materials.length; i++) {
-                    for (var k = 0; k < _this.bidMaterials.length; k++) {
-                        if (_this.materials[i].materialID == _this.bidMaterials[k].materialID) {
-                            _this.materials.splice(i, 1);
-                        }
-                    }
-                }
-            });
-        });
-        this.bidService.getBidLaborsById(this.id).subscribe(function (bidLabors) {
-            _this.bidLabors = bidLabors;
-            _this.laborService.getAllLabors().subscribe(function (labors) {
-                _this.labors = labors.labors;
-                for (var i = 0; i < _this.labors.length; i++) {
-                    for (var k = 0; k < _this.bidLabors.length; k++) {
-                        if (_this.labors[i].roleID == _this.bidLabors[k].roleID) {
-                            _this.labors.splice(i, 1);
-                        }
-                    }
-                }
-            });
-        });
-    };
-    // onAddMaterial(material, id){
-    //   this.selectedMaterials.push(material);
-    //   this.materials.splice(id, 1);
-    // }
-    BidComponent.prototype.onSelectMaterial = function (material, id) {
-        // console.log(material);
-        this.material = material;
-        this.materialID = id;
-    };
-    BidComponent.prototype.onChangeMaterial = function (id) {
-        // console.log(id);
-        this.materialID = id;
-    };
-    // onAddMaterial() {
-    //   let selectedMaterial = {
-    //     materialID: this.material.materialID,
-    //     materialName: this.material.materialName,
-    //     pricePerLinearFoot: this.material.pricePerLinearFoot,
-    //     linearFeet: this.linearFeet
-    //   };
-    //   this.totalMaterialPrice += (selectedMaterial.pricePerLinearFoot * this.linearFeet);
-    //   this.selectedMaterials1.push(selectedMaterial);
-    //   this.materials.splice(this.materialID, 1);
-    //   this.material = null;
-    //   this.linearFeet = 0;
-    // }
-    BidComponent.prototype.onAddMaterial = function () {
-        var selectedMaterial = {
-            materialID: this.materials[this.materialID].materialID,
-            materialName: this.materials[this.materialID].materialName,
-            pricePerUnit: this.materials[this.materialID].pricePerUnit,
-            linearFeetCoverage: this.materials[this.materialID].linearFeetCoverage,
-            linearFeet: this.linearFeet
-        };
-        this.totalMaterialPrice += (selectedMaterial.pricePerUnit / selectedMaterial.linearFeetCoverage * this.linearFeet);
-        this.selectedMaterials1.push(selectedMaterial);
-        this.materials.splice(this.materialID, 1);
-        this.material = null;
-        this.linearFeet = 0;
-    };
-    BidComponent.prototype.onRemoveMaterial = function (material, id) {
-        this.totalMaterialPrice -= (material.pricePerLinearFoot * material.linearFeet);
-        this.selectedMaterials1.splice(id, 1);
-        this.materials.push(material);
     };
     BidComponent.prototype.onClear = function () {
-        var _this = this;
-        this.selectedMaterials1.forEach(function (selectedMaterial) {
-            _this.materials.push(selectedMaterial);
-        });
-        this.selectedMaterials1 = [];
-        this.bidLabor = 0;
         this.bidPrice = 0;
-        //this.ngOnInit();
     };
     BidComponent.prototype.onCreate = function () {
         var _this = this;
@@ -457,45 +389,17 @@ var BidComponent = (function () {
             }
         });
     };
-    BidComponent.prototype.onClickDeleteBidMaterial = function (materialID) {
-        this.bidMaterialID = materialID;
-    };
-    BidComponent.prototype.onDeleteBidMaterial = function () {
-        var _this = this;
-        var bidMaterial = {
-            materialID: this.bidMaterialID,
-            bidID: this.id
-        };
-        this.bidService.deleteBidMaterial(bidMaterial).subscribe(function (data) {
-            if (data.success) {
-                console.log(data.msg);
-                _this.ngOnInit();
-            }
-            else {
-                console.log(data.msg);
-            }
-        });
+    BidComponent.prototype.onClickUpdateBid = function () {
+        this.bidPrice = this.bid[0].bidPrice;
     };
     BidComponent.prototype.onUpdate = function () {
-        var _this = this;
         var updatedBid = {
             bidID: this.id,
             bidPrice: this.bidPrice,
-            bidLabor: this.bidLabor,
             bidStatus: this.bidStatus,
             createdDate: this.createdDate,
             endDate: this.endDate
         };
-        this.selectedMaterials1.forEach(function (selectedMaterial) {
-            _this.bidService.createBidMaterialById(_this.id, selectedMaterial).subscribe(function (data) {
-                if (data.success) {
-                    console.log(data.msg);
-                }
-                else {
-                    console.log(data.msg);
-                }
-            });
-        });
         this.bidService.updateBid(updatedBid).subscribe(function (data) {
             if (data.success) {
                 console.log(data.msg);
@@ -506,6 +410,230 @@ var BidComponent = (function () {
         });
         this.onClear();
         this.ngOnInit();
+    };
+    /**************************************************** Bid Materials **********************************************************************/
+    BidComponent.prototype.getBidMaterials = function () {
+        var _this = this;
+        this.totalMaterialPriceTable = 0;
+        this.bidService.getBidMaterialsById(this.id).subscribe(function (bidMaterials) {
+            _this.bidMaterials = bidMaterials;
+            _this.materialService.getAllMaterials().subscribe(function (materials) {
+                _this.materials = materials.materials;
+                for (var i = 0; i < _this.materials.length; i++) {
+                    for (var k = 0; k < _this.bidMaterials.length; k++) {
+                        if (_this.materials[i].materialID == _this.bidMaterials[k].materialID) {
+                            _this.materials.splice(i, 1);
+                            _this.totalMaterialPriceTable += ((_this.bidMaterials[k].pricePerUnit / _this.bidMaterials[k].linearFeetCoverage) * _this.bidMaterials[k].linearFeet);
+                        }
+                    }
+                }
+            });
+        });
+    };
+    /********** CREATE START **********/
+    BidComponent.prototype.onCreateMaterial = function () {
+        var _this = this;
+        this.selectedMaterials1.forEach(function (selectedMaterial) {
+            _this.bidService.createBidMaterialById(_this.id, selectedMaterial).subscribe(function (data) {
+                if (data.success) {
+                    console.log(data.msg);
+                }
+                else {
+                    console.log(data.msg);
+                }
+            });
+        });
+        $('#create-material-modal').modal('hide');
+        this.getBidMaterials();
+    };
+    BidComponent.prototype.onSelectMaterial = function (material, id) {
+        this.material = material;
+        this.materialID = id;
+    };
+    BidComponent.prototype.onChangeMaterial = function (id) {
+        this.materialID = id;
+    };
+    BidComponent.prototype.onAddMaterial = function () {
+        var selectedMaterial = {
+            materialID: this.materials[this.materialID].materialID,
+            materialName: this.materials[this.materialID].materialName,
+            pricePerUnit: this.materials[this.materialID].pricePerUnit,
+            linearFeetCoverage: this.materials[this.materialID].linearFeetCoverage,
+            linearFeet: this.linearFeet
+        };
+        this.totalMaterialPrice += (selectedMaterial.pricePerUnit / selectedMaterial.linearFeetCoverage * this.linearFeet);
+        this.selectedMaterials1.push(selectedMaterial);
+        this.materials.splice(this.materialID, 1);
+        this.material = null;
+        this.linearFeet = 0;
+    };
+    BidComponent.prototype.onRemoveMaterial = function (material, id) {
+        this.totalMaterialPrice -= ((material.pricePerUnit / material.linearFeetCoverage) * material.linearFeet);
+        this.selectedMaterials1.splice(id, 1);
+        this.materials.push(material);
+    };
+    /********** CREATE END **********/
+    BidComponent.prototype.onUpdateBidMaterial = function () {
+        var _this = this;
+        var updatedBidMaterial = {
+            bidID: this.id,
+            materialID: this.bidMaterialID,
+            linearFeet: this.linearFeet,
+            pricePerUnit: this.pricePerUnit,
+            linearFeetCoverage: this.linearFeetCoverage
+        };
+        this.bidService.updateBidMaterial(updatedBidMaterial).subscribe(function (data) {
+            if (data.success) {
+                console.log(data.msg);
+                _this.getBidMaterials();
+                $('#update-material-modal').modal('hide');
+            }
+            else {
+                console.log(data.msg);
+            }
+        });
+    };
+    BidComponent.prototype.onClearBidMaterial = function () {
+        var _this = this;
+        this.selectedMaterials1.forEach(function (selectedMaterial) {
+            _this.materials.push(selectedMaterial);
+        });
+        this.selectedMaterials1 = [];
+        this.linearFeet = null;
+        this.pricePerUnit = null;
+        this.linearFeetCoverage = null;
+    };
+    BidComponent.prototype.onClickUpdateBidMaterial = function (materialID, materialIndex) {
+        this.bidMaterialID = materialID;
+        this.materialIndex = materialIndex;
+        this.linearFeet = this.bidMaterials[materialIndex].linearFeet;
+        this.pricePerUnit = this.bidMaterials[materialIndex].pricePerUnit;
+        this.linearFeetCoverage = this.bidMaterials[materialIndex].linearFeetCoverage;
+        this.materialName = this.bidMaterials[materialIndex].materialName;
+    };
+    BidComponent.prototype.onDeleteBidMaterial = function () {
+        var _this = this;
+        var bidMaterial = {
+            materialID: this.bidMaterialID,
+            bidID: this.id
+        };
+        console.log(bidMaterial);
+        this.bidService.deleteBidMaterial(bidMaterial).subscribe(function (data) {
+            if (data.success) {
+                console.log(data.msg);
+                _this.getBidMaterials();
+                $('#update-material-modal').modal('hide');
+            }
+            else {
+                console.log(data.msg);
+            }
+        });
+    };
+    /**************************************************** Bid Labor **********************************************************************/
+    BidComponent.prototype.getBidLabors = function () {
+        var _this = this;
+        this.totalLaborPriceTable = 0;
+        this.bidService.getBidLaborsById(this.id).subscribe(function (bidLabors) {
+            _this.bidLabors = bidLabors;
+            _this.laborService.getAllLabors().subscribe(function (labors) {
+                _this.labors = labors.labors;
+                for (var i = 0; i < _this.labors.length; i++) {
+                    for (var k = 0; k < _this.bidLabors.length; k++) {
+                        if (_this.labors[i].roleID == _this.bidLabors[k].roleID) {
+                            _this.labors.splice(i, 1);
+                            _this.totalLaborPriceTable += (bidLabors[k].roleWage * bidLabors[k].laborHours);
+                        }
+                    }
+                }
+            });
+        });
+    };
+    /********** CREATE START **********/
+    BidComponent.prototype.onCreateBidLabor = function () {
+        var _this = this;
+        this.selectedLabors.forEach(function (selectedLabor) {
+            _this.bidService.createBidLabor(selectedLabor).subscribe(function (data) {
+                if (data.success) {
+                    console.log(data.msg);
+                }
+                else {
+                    console.log(data.msg);
+                }
+            });
+        });
+        $('#create-labor-modal').modal('hide');
+        this.getBidLabors();
+    };
+    BidComponent.prototype.onAddLabor = function () {
+        var selectedLabor = {
+            roleID: this.labors[this.laborID].roleID,
+            roleName: this.labors[this.laborID].roleName,
+            roleWage: this.labors[this.laborID].roleWage,
+            laborHours: this.hours
+        };
+        this.totalLaborPrice += (selectedLabor.roleWage * this.hours);
+        this.selectedLabors.push(selectedLabor);
+        this.labors.splice(this.laborID, 1);
+        this.hours = 0;
+    };
+    BidComponent.prototype.onRemoveLabor = function (labor, id) {
+        this.totalLaborPrice -= (labor.laborHours * labor.roleWage);
+        this.selectedLabors.splice(id, 1);
+        this.labors.push(labor);
+    };
+    BidComponent.prototype.onChangeLabor = function (id) {
+        this.laborID = id;
+    };
+    /********** CREATE END **********/
+    BidComponent.prototype.onClickUpdateBidLabor = function (laborIndex) {
+        this.laborIndex = laborIndex;
+        this.wage = this.bidLabors[laborIndex].roleWage;
+        this.hours = this.bidLabors[laborIndex].laborHours;
+        this.roleName = this.bidLabors[laborIndex].roleName;
+    };
+    BidComponent.prototype.onUpdateBidLabor = function () {
+        var _this = this;
+        var updatedBidLabor = {
+            laborID: this.bidLabors[this.laborIndex].laborID,
+            roleWage: this.wage,
+            laborHours: this.hours
+        };
+        this.bidService.updateBidLabor(updatedBidLabor).subscribe(function (data) {
+            if (data.success) {
+                console.log(data.msg);
+                _this.onClearBidLabor();
+                _this.getBidLabors();
+                $('#update-labor-modal').modal('hide');
+            }
+            else {
+                console.log(data.msg);
+            }
+        });
+    };
+    BidComponent.prototype.onDeleteBidLabor = function () {
+        var _this = this;
+        this.bidService.deleteBidLabor(this.bidLabors[this.laborIndex].laborID).subscribe(function (data) {
+            if (data.success) {
+                console.log(data.msg);
+                _this.getBidLabors();
+                $('#update-labor-modal').modal('hide');
+            }
+            else {
+                console.log(data.msg);
+            }
+        });
+    };
+    BidComponent.prototype.onClearBidLabor = function () {
+        var _this = this;
+        this.laborIndex = null;
+        this.wage = null;
+        this.hours = null;
+        this.roleName = null;
+        this.selectedLabors.forEach(function (selectedLabor) {
+            _this.labors.push(selectedLabor);
+        });
+        this.selectedLabors = [];
+        this.totalLaborPrice = 0;
     };
     return BidComponent;
 }());
@@ -519,6 +647,24 @@ BidComponent = __decorate([
 ], BidComponent);
 
 var _a, _b, _c, _d, _e, _f, _g;
+/*********************************************************** Unused code **************************************************************/
+// onAddMaterial() {
+//   let selectedMaterial = {
+//     materialID: this.material.materialID,
+//     materialName: this.material.materialName,
+//     pricePerLinearFoot: this.material.pricePerLinearFoot,
+//     linearFeet: this.linearFeet
+//   };
+//   this.totalMaterialPrice += (selectedMaterial.pricePerLinearFoot * this.linearFeet);
+//   this.selectedMaterials1.push(selectedMaterial);
+//   this.materials.splice(this.materialID, 1);
+//   this.material = null;
+//   this.linearFeet = 0;
+// }
+// onAddMaterial(material, id){
+//   this.selectedMaterials.push(material);
+//   this.materials.splice(id, 1);
+// } 
 //# sourceMappingURL=bid.component.js.map
 
 /***/ }),
@@ -2674,12 +2820,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var AuthService = (function () {
+    // localHttp:String = 'api';
     function AuthService(http, cookieService) {
         this.http = http;
         this.cookieService = cookieService;
         this.cookieStorage = new __WEBPACK_IMPORTED_MODULE_5_cookie_storage__["CookieStorage"]();
-        // localHttp:String = 'http://localhost:3000/api';
-        this.localHttp = 'api';
+        this.localHttp = 'http://localhost:3000/api';
     }
     AuthService.prototype.registerUser = function (user) {
         this.loadToken();
@@ -2751,11 +2897,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var BidService = (function () {
+    // localHttp:String = 'api';
     function BidService(http, authService) {
         this.http = http;
         this.authService = authService;
-        // localHttp: String = 'http://localhost:3000/api';
-        this.localHttp = 'api';
+        this.localHttp = 'http://localhost:3000/api';
     }
     /************************************************************** Bid ***************************************************************************************/
     BidService.prototype.getAllBids = function () {
@@ -2834,7 +2980,14 @@ var BidService = (function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', this.authService.authToken);
-        return this.http.post(this.localHttp + "/bids/delete/bid-material", JSON.stringify(bidMaterial), { headers: headers }).map(function (response) { return response.json(); });
+        return this.http.post(this.localHttp + "/bids/remove/material", JSON.stringify(bidMaterial), { headers: headers }).map(function (response) { return response.json(); });
+    };
+    BidService.prototype.updateBidMaterial = function (updatedBidMaterial) {
+        this.authService.loadToken();
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', this.authService.authToken);
+        return this.http.post(this.localHttp + "/bids/change/material", JSON.stringify(updatedBidMaterial), { headers: headers }).map(function (response) { return response.json(); });
     };
     /************************************************************** Bid Labors ***************************************************************************************/
     BidService.prototype.getBidLaborsById = function (bidId) {
@@ -2865,12 +3018,19 @@ var BidService = (function () {
         headers.append('Authorization', this.authService.authToken);
         return this.http.post(this.localHttp + "/bids/" + id + "/new/bid-labor", JSON.stringify(bidLabor), { headers: headers }).map(function (response) { return response.json(); });
     };
-    BidService.prototype.deleteBidLabor = function (bidLabor) {
+    BidService.prototype.deleteBidLabor = function (laborID) {
         this.authService.loadToken();
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', this.authService.authToken);
-        return this.http.post(this.localHttp + "/bids/delete/bid-labor", JSON.stringify(bidLabor), { headers: headers }).map(function (response) { return response.json(); });
+        return this.http.post(this.localHttp + "/bids/delete/bid-labor/" + laborID, JSON.stringify({}), { headers: headers }).map(function (response) { return response.json(); });
+    };
+    BidService.prototype.updateBidLabor = function (updatedBidLabor) {
+        this.authService.loadToken();
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', this.authService.authToken);
+        return this.http.post(this.localHttp + "/bids/update/bid-labor", JSON.stringify(updatedBidLabor), { headers: headers }).map(function (response) { return response.json(); });
     };
     return BidService;
 }());
@@ -2908,11 +3068,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var CustomerService = (function () {
+    // localHttp:String = 'api';
     function CustomerService(http, authService) {
         this.http = http;
         this.authService = authService;
-        // localHttp:String = 'http://localhost:3000/api';
-        this.localHttp = 'api';
+        this.localHttp = 'http://localhost:3000/api';
     }
     CustomerService.prototype.getAllCustomers = function () {
         this.authService.loadToken();
@@ -3013,11 +3173,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var InquiryService = (function () {
+    // localHttp:String = 'api';
     function InquiryService(http, authService) {
         this.http = http;
         this.authService = authService;
-        // localHttp:String = 'http://localhost:3000/api';
-        this.localHttp = 'api';
+        this.localHttp = 'http://localhost:3000/api';
     }
     InquiryService.prototype.getAllInquiries = function () {
         this.authService.loadToken();
@@ -3104,11 +3264,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var JobService = (function () {
+    // localHttp:String = 'api';
     function JobService(http, authService) {
         this.http = http;
         this.authService = authService;
-        // localHttp:String = 'http://localhost:3000/api';
-        this.localHttp = 'api';
+        this.localHttp = 'http://localhost:3000/api';
     }
     JobService.prototype.getAllJobs = function () {
         this.authService.loadToken();
@@ -3307,11 +3467,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var LaborService = (function () {
+    // localHttp:String = 'api';
     function LaborService(http, authService) {
         this.http = http;
         this.authService = authService;
-        // localHttp: String = 'http://localhost:3000/api';
-        this.localHttp = 'api';
+        this.localHttp = 'http://localhost:3000/api';
     }
     LaborService.prototype.getAllLabors = function () {
         this.authService.loadToken();
@@ -3377,11 +3537,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var MaterialService = (function () {
+    // localHttp:String = 'api';
     function MaterialService(http, authService) {
         this.http = http;
         this.authService = authService;
-        // localHttp:String = 'http://localhost:3000/api';
-        this.localHttp = 'api';
+        this.localHttp = 'http://localhost:3000/api';
     }
     MaterialService.prototype.getAllMaterials = function () {
         this.authService.loadToken();
