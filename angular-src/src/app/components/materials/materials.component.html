@@ -11,7 +11,6 @@
     <table class="table table-bordered table-hover">
       <thead>
         <tr class="active">
-          <th class="hidden-xs hidden-sm">ID</th>
           <th>Name</th>
           <th>Price Per Unit</th>
           <th>Coverage In Linear Feet</th>
@@ -20,7 +19,6 @@
       <tbody>
         <tr *ngFor="let material of materials" (click)="onClickUpdate(material.materialID, material.materialName, material.pricePerUnit, material.linearFeetCoverage)"
           data-toggle="modal" href='#update-modal'>
-          <td class="hidden-xs hidden-sm">{{material.materialID}}</td>
           <td>{{material.materialName}}</td>
           <td>{{material.pricePerUnit | currency: 'USD':true}}</td>
           <td>{{material.linearFeetCoverage}} ft</td>
@@ -45,23 +43,39 @@
         <h4 class="modal-title">Update Material</h4>
       </div>
       <div class="modal-body">
-        <form (submit)="onUpdate()">
+        <form #f2="ngForm" (submit)="onUpdate()">
           <div class="form-group">
             <label>Name</label>
-            <input type="text" [(ngModel)]="name" name="name" placeholder="Name" class="form-control" required>
+            <input required maxlength="50" #materialName2="ngModel" type="text" [(ngModel)]="name" name="name" placeholder="Name" class="form-control">
+            <div *ngIf="materialName2.invalid" style="color:#ff0000">
+              <div *ngIf="materialName2.errors.required">
+                *Name is required
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <label>Price Per Unit</label>
-            <input type="number" [(ngModel)]="pricePerUnit" name="pricePerUnit" placeholder="Price Per Unit" class="form-control" required>
+            <input required onKeyPress="if(this.value.length==10) return false;" #perUnit2="ngModel" type="number" [(ngModel)]="pricePerUnit"
+              name="pricePerUnit" placeholder="Price Per Unit" class="form-control">
+            <div *ngIf="perUnit2.invalid" style="color:#ff0000">
+              <div *ngIf="perUnit2.errors.required">
+                *Per unit price is required
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <label>Coverage In Linear Feet</label>
-            <input type="number" [(ngModel)]="linearFeetCoverage" name="linearFeetCoverage" placeholder="Coverage In Linear Feet" class="form-control"
-              required>
+            <input required onKeyPress="if(this.value.length==10) return false;" #coverage2="ngModel" type="number" [(ngModel)]="linearFeetCoverage"
+              name="linearFeetCoverage" placeholder="Coverage In Linear Feet" class="form-control">
+            <div *ngIf="coverage2.invalid" style="color:#ff0000">
+              <div *ngIf="coverage2.errors.required">
+                *Linear feet coverage is required
+              </div>
+            </div>
           </div>
-          <button type="submit" class="btn btn-primary">
+          <button [disabled]="f2.invalid" type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
-          <button type="reset" class="btn btn-warning">
+          <button type="button" (click)="onClear()" class="btn btn-warning">
             <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
           <button type="button" class="btn btn-danger" data-toggle="modal" href='#delete-modal'>
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete
@@ -102,23 +116,39 @@
         <h4 class="modal-title">Create A New Material</h4>
       </div>
       <div class="modal-body">
-        <form (submit)="onCreate()">
+        <form #f="ngForm" (submit)="onCreate()">
           <div class="form-group">
             <label>Name</label>
-            <input type="text" [(ngModel)]="name" name="name" placeholder="Name" class="form-control" required>
+            <input required maxlength="50" #materialName="ngModel" type="text" [(ngModel)]="name" name="name" placeholder="Name" class="form-control">
+            <div *ngIf="materialName.invalid" style="color:#ff0000">
+              <div *ngIf="materialName.errors.required">
+                *Name is required
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <label>Price Per Unit</label>
-            <input type="number" [(ngModel)]="pricePerUnit" name="pricePerUnit" placeholder="Price Per Unit" class="form-control" required>
+            <input required onKeyPress="if(this.value.length==10) return false;" #perUnit="ngModel" type="number" [(ngModel)]="pricePerUnit"
+              name="pricePerUnit" placeholder="Price Per Unit" class="form-control">
+            <div *ngIf="perUnit.invalid" style="color:#ff0000">
+              <div *ngIf="perUnit.errors.required">
+                *Per unit price is required
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <label>Coverage In Linear Feet</label>
-            <input type="number" [(ngModel)]="linearFeetCoverage" name="linearFeetCoverage" placeholder="Coverage In Linear Feet" class="form-control"
-              required>
+            <input required onKeyPress="if(this.value.length==10) return false;" #coverage="ngModel" type="number" [(ngModel)]="linearFeetCoverage"
+              name="linearFeetCoverage" placeholder="Coverage In Linear Feet" class="form-control">
+            <div *ngIf="coverage.invalid" style="color:#ff0000">
+              <div *ngIf="coverage.errors.required">
+                *Linear feet coverage is required
+              </div>
+            </div>
           </div>
-          <button type="submit" class="btn btn-primary">
-            <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Create</button>
-          <button type="reset" class="btn btn-warning">
+          <button [disabled]="f.invalid" type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-tint" aria-hidden="true"></span> Create</button>
+          <button type="button" (click)="onClear()" class="btn btn-warning">
             <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
         </form>
       </div>

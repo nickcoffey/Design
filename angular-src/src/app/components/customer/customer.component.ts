@@ -12,21 +12,21 @@ declare var $;
 export class CustomerComponent implements OnInit {
 
   /** CUSTOMER **/
-  id: any;
+  id: number = null;
   customer: any;
-  description: any;
+  description: string = '';
   receivedDate: any;
-  name: any;
-  address: any;
-  city: any;
-  state: any;
-  zip: any;
+  name: string = '';
+  address: string = '';
+  city: string = '';
+  state: string = '';
+  zip: number = null;
 
   /** CONTACT **/
-  contactTitle: any;
-  contactName: any;
-  contactPhone: any;
-  contactEmail: any;
+  contactTitle: string = '';
+  contactName: string = '';
+  contactPhone: number = null;
+  contactEmail: string = '';
   contacts: any;
   contactID: any;
 
@@ -35,7 +35,8 @@ export class CustomerComponent implements OnInit {
     private inquiryService: InquiryService,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) { 
+  }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
@@ -110,11 +111,15 @@ export class CustomerComponent implements OnInit {
   }
 
   clearCustomerFields() {
-    this.name = null;
-    this.address = null;
-    this.city = null;
-    this.state = null;
+    this.name = '';
+    this.address = '';
+    this.city = '';
+    this.state = '';
     this.zip = null;
+  }
+
+  clearDescription() {
+    this.description = '';
   }
 
   /*************************************************** CONTACT FUNCTIONS ***********************************************************/
@@ -189,9 +194,9 @@ export class CustomerComponent implements OnInit {
   }
 
   clearContactFields() {
-    this.contactTitle = null;
-    this.contactName = null;
+    this.contactTitle = '';
+    this.contactName = '';
     this.contactPhone = null;
-    this.contactEmail = null;
+    this.contactEmail = '';
   }
 }

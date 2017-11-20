@@ -12,6 +12,7 @@
     "body-parser": "*",
     "cors": "2.8.4",
     "express": "*",
+    "fs": "*",
     "jsonwebtoken": "*",
     "mkdirp": "*",
     "multer": "*",
@@ -19,8 +20,7 @@
     "passport": "*",
     "passport-jwt": "*",
     "serve-index": "^1.9.1",
-    "sqlstring": "^2.3.0",
-    "fs": "*"
+    "sqlstring": "^2.3.0"
   },
   "author": "Nick Coffey",
   "license": "ISC"

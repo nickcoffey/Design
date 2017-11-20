@@ -11,23 +11,27 @@ declare var $;
 export class LaborComponent implements OnInit {
 
   labors: any;
-  roleName: any;
-  roleWage: number;
-  roleID: any;
+  roleName: string = '';
+  roleWage: number = null;
+  roleID: number = null;
 
   constructor(
     private laborService: LaborService
   ) { }
 
   ngOnInit() {
+    this.getLabor();
+  }
+
+  getLabor() {
     this.laborService.getAllLabors().subscribe((labors) => {
       this.labors = labors.labors;
     });
   }
 
-  onClear(){
+  onClear() {
     this.roleID = null;
-    this.roleName = null;
+    this.roleName = '';
     this.roleWage = null;
   }
 
@@ -41,7 +45,7 @@ export class LaborComponent implements OnInit {
       if (data.success) {
         console.log(data.msg);
         this.onClear();
-        this.ngOnInit();
+        this.getLabor();
         $('#create-modal').modal('hide');
       } else {
         console.log(data.msg);
@@ -66,7 +70,7 @@ export class LaborComponent implements OnInit {
         if (data.success) {
           console.log(data.msg);
           this.onClear();
-          this.ngOnInit();
+          this.getLabor();
           $('#update-modal').modal('hide');
         } else {
           console.log(data.msg);
@@ -79,7 +83,7 @@ export class LaborComponent implements OnInit {
       if (data.success) {
         console.log(data.msg);
         this.onClear();
-        this.ngOnInit();
+        this.getLabor();
         $('#update-modal').modal('hide');
       } else {
         console.log(data.msg);

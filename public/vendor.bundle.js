@@ -4734,6 +4734,268 @@ exports.FileUploadModule = file_upload_module_1.FileUploadModule;
 
 /***/ }),
 
+/***/ "../../../../ng2-inputmask/src/input-mask.directive.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return InputMaskDirective; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var placeholders = {
+    'A': '^[a-zA-ZA-zА-яЁё]',
+    '0': '\\d'
+};
+var keys = {
+    'BACKSPACE': 8,
+    'LEFT': 37,
+    'RIGHT': 39,
+    'DEL': 46,
+};
+var InputMaskDirective = (function () {
+    /**
+     *
+     * @param element
+     * @param model
+     */
+    function InputMaskDirective(element) {
+        this.element = element;
+        this.ngModelChange = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        this.state = {
+            value: this.getValue()
+        };
+    }
+    /**
+     *
+     */
+    InputMaskDirective.prototype.onChange = function () {
+        this.applyMask(this.getClearValue(this.getValue()));
+    };
+    /**
+     *
+     * @param event
+     */
+    InputMaskDirective.prototype.onKeyPress = function (event) {
+        var key = this.getKey(event);
+        if (key === keys.BACKSPACE || key === keys.LEFT || key === keys.RIGHT)
+            return;
+        var cursorPosition = this.getCursorPosition();
+        var regexp = this.createRegExp(cursorPosition);
+        if (regexp != null && !regexp.test(event.key) || this.getValue().length >= this.mask.length) {
+            event.preventDefault();
+        }
+    };
+    /**
+     *
+     * @param event
+     */
+    InputMaskDirective.prototype.onKeyDown = function (event) {
+        var key = this.getKey(event);
+        if ((key === keys.BACKSPACE || key === keys.DEL) && this.getClearValue(this.getValue()).length === 1) {
+            this.setValue('');
+            this.state.value = '';
+            this.ngModelChange.emit('');
+        }
+    };
+    /**
+     *
+     */
+    InputMaskDirective.prototype.ngOnInit = function () {
+        this.applyMask(this.getClearValue(this.getValue()));
+    };
+    /**
+     *
+     * @param event
+     * @returns {number}
+     */
+    InputMaskDirective.prototype.getKey = function (event) {
+        return event.keyCode || event.charCode;
+    };
+    /**
+     *
+     * @param value
+     */
+    InputMaskDirective.prototype.applyMask = function (value) {
+        var newValue = '';
+        var maskPosition = 0;
+        if (this.getClearValue(value).length > this.getClearValue(this.mask).length) {
+            this.setValue(this.state.value);
+            return;
+        }
+        for (var i = 0; i < value.length; i++) {
+            var current = value[i];
+            var regexp = this.createRegExp(maskPosition);
+            if (regexp != null) {
+                if (!regexp.test(current)) {
+                    this.setValue(this.state.value);
+                    break;
+                }
+                newValue += current;
+            }
+            else if (this.mask[maskPosition] === current) {
+                newValue += current;
+            }
+            else {
+                newValue += this.mask[maskPosition];
+                i--;
+            }
+            maskPosition++;
+        }
+        var nextMaskElement = this.mask[maskPosition];
+        if (value.length && nextMaskElement != null && /^[-\/\\^$#&@№:<>_\^!*+?.()|\[\]{}]/.test(nextMaskElement)) {
+            newValue += nextMaskElement;
+        }
+        var oldValue = this.state.value;
+        var cursorPosition = this.getCursorPosition();
+        this.setValue(newValue);
+        this.state.value = newValue;
+        if (oldValue.length >= cursorPosition) {
+            this.setCursorPosition(cursorPosition);
+        }
+    };
+    /**
+     *
+     * @param position
+     * @returns {any}
+     */
+    InputMaskDirective.prototype.createRegExp = function (position) {
+        if (this.mask[position] == null) {
+            return null;
+        }
+        var currentSymbol = this.mask[position].toUpperCase();
+        var keys = Object.keys(placeholders);
+        var searchPosition = keys.indexOf(currentSymbol);
+        if (searchPosition >= 0) {
+            return new RegExp(placeholders[keys[searchPosition]], 'gi');
+        }
+        return null;
+    };
+    /**
+     *
+     * @returns {any}
+     */
+    InputMaskDirective.prototype.getValue = function () {
+        return this.element.nativeElement.value;
+    };
+    /**
+     *
+     * @param value
+     * @returns {string}
+     */
+    InputMaskDirective.prototype.getClearValue = function (value) {
+        return value.trim().replace(/[-\/\\^$#&@№:<>_\^!*+?.()|\[\]{}]/gi, '');
+    };
+    /**
+     *
+     * @param value
+     */
+    InputMaskDirective.prototype.setValue = function (value) {
+        this.element.nativeElement.value = value;
+    };
+    /**
+     *
+     * @returns {number}
+     */
+    InputMaskDirective.prototype.getCursorPosition = function () {
+        return this.element.nativeElement.selectionStart;
+    };
+    /**
+     *
+     * @param start
+     * @param end
+     */
+    InputMaskDirective.prototype.setCursorPosition = function (start, end) {
+        if (end === void 0) { end = start; }
+        this.element.nativeElement.setSelectionRange(start, end);
+    };
+    return InputMaskDirective;
+}());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+    __metadata("design:type", Object)
+], InputMaskDirective.prototype, "mask", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
+    __metadata("design:type", Object)
+], InputMaskDirective.prototype, "ngModelChange", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["HostListener"])('input'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], InputMaskDirective.prototype, "onChange", null);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["HostListener"])('keypress', ['$event']),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], InputMaskDirective.prototype, "onKeyPress", null);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["HostListener"])('keydown', ['$event']),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], InputMaskDirective.prototype, "onKeyDown", null);
+InputMaskDirective = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"])({
+        selector: '[mask]'
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _a || Object])
+], InputMaskDirective);
+
+var _a;
+//# sourceMappingURL=input-mask.directive.js.map
+
+/***/ }),
+
+/***/ "../../../../ng2-inputmask/src/input-mask.module.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return InputMaskModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__input_mask_directive__ = __webpack_require__("../../../../ng2-inputmask/src/input-mask.directive.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var InputMaskModule = (function () {
+    function InputMaskModule() {
+    }
+    return InputMaskModule;
+}());
+InputMaskModule = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
+        imports: [
+            __WEBPACK_IMPORTED_MODULE_1__angular_forms__["a" /* FormsModule */]
+        ],
+        declarations: [
+            __WEBPACK_IMPORTED_MODULE_2__input_mask_directive__["a" /* InputMaskDirective */]
+        ],
+        exports: [
+            __WEBPACK_IMPORTED_MODULE_2__input_mask_directive__["a" /* InputMaskDirective */]
+        ]
+    })
+], InputMaskModule);
+
+//# sourceMappingURL=input-mask.module.js.map
+
+/***/ }),
+
 /***/ "../../../../ngx-cookie-service/cookie-service/cookie.service.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -72593,7 +72855,7 @@ function transition$$1(stateChangeExpr, steps) {
 /* unused harmony export Validators */
 /* unused harmony export VERSION */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FormsModule; });
-/* unused harmony export ReactiveFormsModule */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return ReactiveFormsModule; });
 /* unused harmony export ɵba */
 /* unused harmony export ɵz */
 /* unused harmony export ɵx */

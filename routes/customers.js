@@ -155,7 +155,7 @@ router.post('/delete/contact/:id', passport.authenticate('jwt', {session: false}
     const id = request.params.id;
 
     customer.deleteContact(id, (message) => {
-        if(message.message == ""){
+        if(message.warningCount == 0){
             response.json({
                 success: true,
                 msg: 'Contact Deleted'
@@ -193,7 +193,7 @@ router.post('/update/contact', passport.authenticate('jwt', { session: false }),
     }
 
     customer.updateContact(updatedContact, (message) => {
-        if (message.message.includes("Rows matched: 1  Changed: 1  Warnings: 0")) {
+        if (message.warningCount == 0) {
             response.json({
                 success: true,
                 msg: 'Contact updated'

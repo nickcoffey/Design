@@ -2,12 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpModule } from '@angular/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { Ng2FileInputModule } from 'ng2-file-input';
 import { FileSelectDirective}  from 'ng2-file-upload';
 //import { DataTableModule } from 'angular-4-data-table';
 import { DataTablesModule } from 'angular-datatables';
- import { Ng2FileTreeModule } from 'ng2-file-tree/ng2-file-tree';
+import { Ng2FileTreeModule } from 'ng2-file-tree/ng2-file-tree';
+import { InputMaskModule } from 'ng2-inputmask';
 //import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //import { MdSidenavModule, MdToolbarModule, MdIconModule, MdButtonModule, MdMenuModule } from '@angular/material';
 //import { FlexLayoutModule } from '@angular/flex-layout';
@@ -81,8 +82,10 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     HttpModule,
     FormsModule,
+    ReactiveFormsModule,
     DataTablesModule,
-    Ng2FileTreeModule
+    Ng2FileTreeModule,
+    InputMaskModule
     // Ng2FileInputModule.forRoot(
     //   {
     //     browseText: "Browse",

@@ -11,11 +11,11 @@ declare var $;
 export class MaterialsComponent implements OnInit {
 
   materials: any;
-  name: any;
-  pricePerUnit: number;
-  linearFeetCoverage: number;
-  tempID: any;
-  length: any;
+  name: string = '';
+  pricePerUnit: number = null;
+  linearFeetCoverage: number = null;
+  tempID: number = null;
+  length: number = null;
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
@@ -26,10 +26,14 @@ export class MaterialsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getMaterials();
+    // this.setupDataTable();
+  }
+
+  getMaterials() {
     this.materialService.getAllMaterials().subscribe((materials) => {
       this.materials = materials.materials;
       this.length = this.materials.length;
-      // this.setupDataTable();
     });
   }
 
@@ -41,9 +45,9 @@ export class MaterialsComponent implements OnInit {
     this.displayTable = true;
   }
 
-  onClear(){
+  onClear() {
     this.tempID = null;
-    this.name = null;
+    this.name = '';
     this.pricePerUnit = null;
     this.linearFeetCoverage = null;
   }
@@ -66,8 +70,8 @@ export class MaterialsComponent implements OnInit {
       (data) => {
         if (data.success) {
           console.log(data.msg);
-          this.onClear();          
-          this.ngOnInit();
+          this.onClear();
+          this.getMaterials();
           $('#update-modal').modal('hide');
         } else {
           console.log(data.msg);
@@ -86,7 +90,7 @@ export class MaterialsComponent implements OnInit {
       if (data.success) {
         console.log(data.msg);
         this.onClear();
-        this.ngOnInit();
+        this.getMaterials();
         $('#create-modal').modal('hide');
       } else {
         console.log(data.msg);
@@ -102,8 +106,8 @@ export class MaterialsComponent implements OnInit {
     this.materialService.deleteMaterial(this.tempID).subscribe((data) => {
       if (data.success) {
         console.log(data.msg);
-        this.onClear();        
-        this.ngOnInit();
+        this.onClear();
+        this.getMaterials();
         $('#update-modal').modal('hide');
       } else {
         console.log(data.msg);

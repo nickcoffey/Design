@@ -36,18 +36,28 @@
         <h4 class="modal-title">Create A New Role</h4>
       </div>
       <div class="modal-body">
-        <form (submit)="onCreate()">
+        <form #f="ngForm" (submit)="onCreate()">
           <div class="form-group">
             <label>Role Name</label>
-            <input type="text" [(ngModel)]="roleName" name="roleName" placeholder="Role Name" class="form-control" required>
+            <input required maxlength="50" #name="ngModel" type="text" [(ngModel)]="roleName" name="roleName" placeholder="Role Name" class="form-control" required>
+            <div *ngIf="name.invalid" style="color:#ff0000">
+              <div *ngIf="name.errors.required">
+                *Name is required
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <label>Role Wage Per Hour</label>
-            <input type="number" [(ngModel)]="roleWage" name="roleWage" placeholder="Role Wage Per Hour" class="form-control" required>
+            <input required onKeyPress="if(this.value.length==10) return false;" #wage="ngModel" type="number" [(ngModel)]="roleWage" name="roleWage" placeholder="Role Wage Per Hour" class="form-control" required>
+            <div *ngIf="wage.invalid" style="color:#ff0000">
+              <div *ngIf="wage.errors.required">
+                *Wage is required
+              </div>
+            </div>
           </div>
-          <button type="submit" class="btn btn-primary">
-            <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Create</button>
-          <button type="reset" class="btn btn-warning">
+          <button [disabled]="f.invalid" type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Create</button>
+          <button type="button" (click)="onClear()" class="btn btn-warning">
             <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
         </form>
       </div>
@@ -67,18 +77,28 @@
         <h4 class="modal-title">Update Role</h4>
       </div>
       <div class="modal-body">
-        <form (submit)="onUpdate()">
+        <form #f2="ngForm" (submit)="onUpdate()">
           <div class="form-group">
             <label>Role Name</label>
-            <input type="text" [(ngModel)]="roleName" name="roleName" placeholder="Role Name" class="form-control" required>
+            <input required maxlength="50" #name2="ngModel" type="text" [(ngModel)]="roleName" name="roleName" placeholder="Role Name" class="form-control" required>
+            <div *ngIf="name2.invalid" style="color:#ff0000">
+              <div *ngIf="name2.errors.required">
+                *Name is required
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <label>Role Wage Per Hour</label>
-            <input type="number" [(ngModel)]="roleWage" name="roleWage" placeholder="Role Wage Per Hour" class="form-control" required>
+            <input required onKeyPress="if(this.value.length==10) return false;" #wage2="ngModel" type="number" [(ngModel)]="roleWage" name="roleWage" placeholder="Role Wage Per Hour" class="form-control" required>
+            <div *ngIf="wage2.invalid" style="color:#ff0000">
+              <div *ngIf="wage2.errors.required">
+                *Wage is required
+              </div>
+            </div>
           </div>
-          <button type="submit" class="btn btn-primary">
+          <button [disabled]="f2.invalid" type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
-          <button type="reset" class="btn btn-warning">
+          <button type="button" (click)="onClear()" class="btn btn-warning">
             <span class="glyphicon glyphicon-refresh" (click)="onClear()" aria-hidden="true"></span> Clear</button>
           <button type="button" class="btn btn-danger" data-toggle="modal" href='#delete-modal'>
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete
