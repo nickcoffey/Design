@@ -329,6 +329,40 @@ router.post('/:id/new/job-material', passport.authenticate('jwt', { session: fal
     });
 });
 
+// Update job material
+router.post('/modify/job-material', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    let updatedJobMaterial = {
+        jobID: request.body.jobID,
+        materialID: request.body.materialID,
+        linearFeet: request.body.linearFeet,
+        pricePerUnit: request.body.pricePerUnit,
+        linearFeetCoverage: request.body.linearFeetCoverage
+    };
+    if (updatedJobMaterial.linearFeet == null || updatedJobMaterial.linearFeet == undefined || updatedJobMaterial.linearFeet == "") {
+        delete updatedJobMaterial.linearFeet;
+    }
+    if (updatedJobMaterial.pricePerUnit == null || updatedJobMaterial.pricePerUnit == undefined || updatedJobMaterial.pricePerUnit == "") {
+        delete updatedJobMaterial.pricePerUnit;
+    }
+    if (updatedJobMaterial.linearFeetCoverage == null || updatedJobMaterial.linearFeetCoverage == undefined || updatedJobMaterial.linearFeetCoverage == "") {
+        delete updatedJobMaterial.linearFeetCoverage;
+    }
+
+    job.updateJobMaterial(updatedJobMaterial, (message) => {
+        if (message.warningCount == 0) {
+            response.json({
+                success: true,
+                msg: 'Job material updated'
+            });
+        } else {
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
 /********************************************************* Change Order *************************************************************************/
 
 // Create change order
@@ -392,6 +426,28 @@ router.get('/:id/change-orders', passport.authenticate('jwt', { session: false }
     });
 });
 
+// Update change order
+router.post('/update/change-order', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    let updatedChangeOrder = {
+        changeID: request.body.changeID,
+        changeAmount: request.body.changeAmount
+    };
+
+    job.updateChangeOrder(updatedChangeOrder, (message) => {
+        if (message.warningCount == 0) {
+            response.json({
+                success: true,
+                msg: 'Change order updated'
+            });
+        } else {
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
 /********************************************************* Job Revenue *************************************************************************/
 
 // Create job revenue
@@ -408,10 +464,39 @@ router.post('/create/job-revenue', passport.authenticate('jwt', { session: false
         });
     } else {
         job.createJobRevenue(newJobRevenue, (message) => {
-            if (message.message == "") {
+            if (message.warningCount == 0) {
                 response.json({
                     success: true,
                     msg: 'Job revenue created'
+                });
+            } else {
+                response.json({
+                    success: false,
+                    msg: message.message
+                });
+            }
+        });
+    }
+});
+
+// Update job revenue
+router.post('/change/job-revenue', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    let updatedJobRevenue = {
+        revenueID: request.body.revenueID,
+        revenueAmount: request.body.revenueAmount
+    };
+
+    if (updatedJobRevenue.revenueAmount == null || updatedJobRevenue.revenueAmount == undefined || updatedJobRevenue.revenueAmount == "") {
+        response.json({
+            success: true,
+            msg: 'Job revenue empty'
+        });
+    } else {
+        job.updateJobRevenue(updatedJobRevenue, (message) => {
+            if (message.warningCount == 0) {
+                response.json({
+                    success: true,
+                    msg: 'Job revenue updated'
                 });
             } else {
                 response.json({
@@ -460,35 +545,60 @@ router.get('/:id/job-revenues', passport.authenticate('jwt', { session: false })
 router.post('/:id/create/job-labor', passport.authenticate('jwt', { session: false }), (request, response, next) => {
     let newJobLabor = {
         jobID: request.params.id,
-        laborHours: request.body.laborHours,
-        laborPrice: request.body.laborPrice
+        roleID: request.body.roleID,
+        roleName: request.body.roleName,
+        roleWage: request.body.roleWage,
+        laborHours: request.body.laborHours
     };
-
     if (newJobLabor.laborHours == null || newJobLabor.laborHours == undefined || newJobLabor.laborHours == "") {
-        response.json({
-            success: true,
-            msg: 'Labor hours empty'
-        });
-    } else if (newJobLabor.laborPrice == null || newJobLabor.laborPrice == undefined || newJobLabor.laborPrice == "") {
-        response.json({
-            success: true,
-            msg: 'Labor price empty'
-        });
-    } else {
-        job.createJobLabor(newJobLabor, (message) => {
-            if (message.message == "") {
-                response.json({
-                    success: true,
-                    msg: 'Job labor created'
-                });
-            } else {
-                response.json({
-                    success: false,
-                    msg: message.message
-                });
-            }
-        });
+        delete newJobLabor.laborHours;
     }
+    if (newJobLabor.roleWage == null || newJobLabor.roleWage == undefined || newJobLabor.roleWage == "") {
+        delete newJobLabor.roleWage;
+    }
+
+    job.createJobLabor(newJobLabor, (message) => {
+        if (message.warningCount == 0) {
+            response.json({
+                success: true,
+                msg: 'Job labor created'
+            });
+        } else {
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
+// Update job labor
+router.post('/update/job-labor', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    let updatedJobLabor = {
+        laborID: request.body.laborID,
+        roleWage: request.body.roleWage,
+        laborHours: request.body.laborHours
+    };
+    if (updatedJobLabor.laborHours == null || updatedJobLabor.laborHours == undefined || updatedJobLabor.laborHours == "") {
+        delete updatedJobLabor.laborHours;
+    }
+    if (updatedJobLabor.roleWage == null || updatedJobLabor.roleWage == undefined || updatedJobLabor.roleWage == "") {
+        delete updatedJobLabor.roleWage;
+    }
+    console.log(updatedJobLabor);
+    job.updateJobLabor(updatedJobLabor, (message) => {
+        if (message.warningCount == 0) {
+            response.json({
+                success: true,
+                msg: 'Job labor updated'
+            });
+        } else {
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
 });
 
 // Delete job labor

@@ -22,7 +22,8 @@
           <td>{{inquiry.customerName}}</td>
           <td>{{inquiry.inquiryStatus}}</td>
           <td>{{inquiry.receivedDate | date: 'MM/dd/yyyy'}}</td>
-          <td class="hidden-xs hidden-sm">{{inquiry.endDate | date: 'MM/dd/yyyy'}}</td>
+          <td *ngIf="inquiry.inquiryStatus != 'PENDING'" class="hidden-xs hidden-sm">{{inquiry.endDate | date: 'MM/dd/yyyy'}}</td>
+          <td *ngIf="inquiry.inquiryStatus == 'PENDING'" class="hidden-xs hidden-sm">N/A</td>
         </tr>
       </tbody>
     </table>

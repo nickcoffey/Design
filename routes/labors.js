@@ -6,7 +6,6 @@ const passport = require('passport');
 
 // Get all labors
 router.get('/all', passport.authenticate('jwt', { session: false }), (request, response, next) => {
-    console.log("test");
     labor.getAllLabors((labors) => {
         if (!labors) {
             return err;

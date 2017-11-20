@@ -10,18 +10,20 @@
       <div class="panel-heading">
         <h3 class="panel-title">Inquiry Details</h3>
       </div>
-      <div class="panel-body">
+      <div class="panel-body" style="word-break:break-all">
         <table class="table table-bordered">
           <thead>
             <tr class="active">
               <th>Received Date</th>
-              <th>Accepted/Declined Date</th>
+              <th *ngIf="inquiry[0].inquiryStatus == 'ACCEPTED'">Accepted Date</th>
+              <th *ngIf="inquiry[0].inquiryStatus == 'DECLINED'">Declined Date</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>{{inquiry[0].receivedDate | date: 'MM/dd/yyyy'}}</td>
-              <td>{{inquiry[0].endDate | date: 'MM/dd/yyyy'}}</td>
+              <td *ngIf="inquiry[0].inquiryStatus == 'ACCEPTED'">{{inquiry[0].endDate | date: 'MM/dd/yyyy'}}</td>
+              <td *ngIf="inquiry[0].inquiryStatus == 'DECLINED'">{{inquiry[0].endDate | date: 'MM/dd/yyyy'}}</td>
             </tr>
           </tbody>
         </table>
@@ -37,12 +39,13 @@
             </tr>
           </tbody>
         </table>
-        <button *ngIf="status == 'PENDING'" class="btn btn-primary" data-toggle="modal" href='#create-bid-modal'>
-          <span class="glyphicon glyphicon-file" aria-hidden="true"></span> Create Bid</button>
-        <button class="btn btn-info" data-toggle="modal" href="#update-modal">
-          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Update Inquiry</button>
+        <button (click)="onClickUpdate()" class="btn btn-info" data-toggle="modal" href="#update-modal">
+          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Update Description</button>
         <button class="btn btn-danger" data-toggle="modal" href='#delete-modal'>
           <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete Inquiry</button>
+        <hr>
+        <button *ngIf="status == 'PENDING'" class="btn btn-primary" data-toggle="modal" href='#create-bid-modal'>
+          <span class="glyphicon glyphicon-file" aria-hidden="true"></span> Create Bid</button>
       </div>
     </div>
   </ng-container>
@@ -57,20 +60,24 @@
     <div class="panel-heading">
       <h3 class="panel-title">Customer Details</h3>
     </div>
-    <div class="panel-body">
+    <div class="panel-body" style="word-break:break-all">
       <table class="table table-bordered">
         <thead>
           <tr class="active">
-            <th>ID</th>
             <th>Name</th>
             <th>Address</th>
+            <th>City</th>
+            <th class="hidden-xs hidden-sm">State</th>
+            <th class="hidden-xs hidden-sm">ZIP</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>{{inquiry[0].customerID}}</td>
             <td>{{inquiry[0].customerName}}</td>
             <td>{{inquiry[0].customerAddress}}</td>
+            <td>{{inquiry[0].customerCity}}</td>
+            <td class="hidden-xs hidden-sm">{{inquiry[0].customerState}}</td>
+            <td class="hidden-xs hidden-sm">{{inquiry[0].customerZIP}}</td>
           </tr>
         </tbody>
       </table>
@@ -113,7 +120,7 @@
           </div>
           <button type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
-          <button type="reset" class="btn btn-danger">
+          <button type="reset" class="btn btn-warning">
             <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
         </form>
       </div>
@@ -157,7 +164,8 @@
                       </select>
                     </td>
                     <td>
-                      <input type="number" [(ngModel)]="laborHours" name="laborHours" placeholder="Labor Hours" class="form-control" aria-describedby="hours-addon" required>
+                      <input type="number" [(ngModel)]="laborHours" name="laborHours" placeholder="Labor Hours" class="form-control" aria-describedby="hours-addon"
+                        required>
                     </td>
                     <td>
                       <button (click)="onAddLabor()" type="button" class="btn btn-success">
@@ -195,53 +203,8 @@
                   </tr>
                 </tfoot>
               </table>
-              <!-- <div class="form-group">
-                <input type="number" [(ngModel)]="bidLabor" name="bidLabor" placeholder="Labor Cost" class="form-control" required>
-              </div> -->
             </div>
             <div class="panel-body">
-              <!-- <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Materials
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                  <ng-container *ngIf="materials[0] != null; else noMaterials">
-                    <li *ngFor="let material of materials; let i = index;">
-                      <a (click)="onAddMaterial(material, i)">{{material.materialName}}</a>
-                    </li>
-                  </ng-container>
-                  <ng-template #noMaterials>
-                    <li>
-                      <a>No more materials</a>
-                    </li>
-                  </ng-template>
-                </ul>
-              </div> -->
-              <!-- <table class="table table-striped table-hover">
-                <thead *ngIf="selectedMaterials[0] != null;">
-                  <tr>
-                    <th>Name</th>
-                    <th>Linear Feet</th>
-                    <th>Price</th>
-                    <th>Remove</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let selectedMaterial of selectedMaterials; let i = index">
-                    <td>{{selectedMaterial.materialName}}</td>
-                    <td>
-                      <input type="text" [(ngModel)]="selectedMaterial.linearFeet" name="linearFeet" placeholder="Linear Feet" class="form-control" required>
-                    </td>
-                    <td>{{selectedMaterial.linearFeet*selectedMaterial.pricePerLinearFoot || 0}}</td>
-                    <td>
-                      <button type="button" class="btn btn-danger" (click)="onRemoveMaterial(selectedMaterial, i)">
-                        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table> -->
               <h4>Material Cost</h4>
               <table class="table table-bordered" *ngIf="materials[0] != null">
                 <thead>
@@ -254,10 +217,6 @@
                 <tbody>
                   <tr>
                     <td>
-                      <!-- <select class="form-control">
-                        <option></option>
-                        <option *ngFor="let material of materials; let i = index;" (click)="onSelectMaterial(material, i)">{{material.materialName}}</option>
-                      </select> -->
                       <select (change)="onChangeMaterial($event.target.value)" class="form-control">
                         <option></option>
                         <option [value]="i" *ngFor="let material of materials; let i = index;">{{material.materialName}}</option>
@@ -267,9 +226,6 @@
                       <input type="number" [(ngModel)]="linearFeet" name="linearFeet" placeholder="Linear Feet" class="form-control" required>
                     </td>
                     <td>
-                      <!-- <button (click)="onAddMaterial(selectedMaterial, i)" type="button" class="btn btn-success">
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                      </button> -->
                       <button (click)="onAddMaterial()" type="button" class="btn btn-success">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                       </button>
@@ -310,14 +266,6 @@
               <h4>Total Cost: {{totalLaborPrice + totalMaterialPrice + bidLabor | currency: 'USD':true}}</h4>
             </div>
           </div>
-          <!-- <table class="table table-bordered table-hover">
-            <tfoot>
-              <tr class="info">
-                <th>Total Cost</th>
-                <th>{{totalMaterialPrice + bidLabor | currency: 'USD':true}}</th>
-              </tr>
-            </tfoot>
-          </table> -->
           <div class="panel panel-primary">
             <div class="panel-heading">
               <h3 class="panel-title">Enter Desired Margin</h3>
@@ -343,3 +291,70 @@
     </div>
   </div>
 </div>
+
+
+<!--                                                    UNUSED MARKUP                                                         -->
+<!-- <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Materials
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                  <ng-container *ngIf="materials[0] != null; else noMaterials">
+                    <li *ngFor="let material of materials; let i = index;">
+                      <a (click)="onAddMaterial(material, i)">{{material.materialName}}</a>
+                    </li>
+                  </ng-container>
+                  <ng-template #noMaterials>
+                    <li>
+                      <a>No more materials</a>
+                    </li>
+                  </ng-template>
+                </ul>
+              </div> -->
+<!-- <table class="table table-striped table-hover">
+                <thead *ngIf="selectedMaterials[0] != null;">
+                  <tr>
+                    <th>Name</th>
+                    <th>Linear Feet</th>
+                    <th>Price</th>
+                    <th>Remove</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let selectedMaterial of selectedMaterials; let i = index">
+                    <td>{{selectedMaterial.materialName}}</td>
+                    <td>
+                      <input type="text" [(ngModel)]="selectedMaterial.linearFeet" name="linearFeet" placeholder="Linear Feet" class="form-control" required>
+                    </td>
+                    <td>{{selectedMaterial.linearFeet*selectedMaterial.pricePerLinearFoot || 0}}</td>
+                    <td>
+                      <button type="button" class="btn btn-danger" (click)="onRemoveMaterial(selectedMaterial, i)">
+                        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table> -->
+
+<!-- <table class="table table-bordered table-hover">
+            <tfoot>
+              <tr class="info">
+                <th>Total Cost</th>
+                <th>{{totalMaterialPrice + bidLabor | currency: 'USD':true}}</th>
+              </tr>
+            </tfoot>
+          </table> -->
+
+<!-- <div class="form-group">
+                <input type="number" [(ngModel)]="bidLabor" name="bidLabor" placeholder="Labor Cost" class="form-control" required>
+              </div> -->
+
+<!-- <button (click)="onAddMaterial(selectedMaterial, i)" type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                      </button> -->
+
+<!-- <select class="form-control">
+                        <option></option>
+                        <option *ngFor="let material of materials; let i = index;" (click)="onSelectMaterial(material, i)">{{material.materialName}}</option>
+                      </select> -->

@@ -3,7 +3,6 @@ const config = require('../config/database');
 const sqlString = require('sqlstring');
 
 /********************************************************* Job *************************************************************************/
-
 module.exports.getAllJobs = function (callback) {
     const queryString = 'SELECT * FROM detailedJobs';
     connection.query(queryString, (err, rows, fields) => {
@@ -94,7 +93,6 @@ module.exports.deleteJob = function (id, callback) {
 }
 
 /********************************************************* Job Materials *************************************************************************/
-
 module.exports.createJobMaterial = function (newJobMaterial, callback) {
     const queryString = sqlString.format(`INSERT INTO JobMaterial SET ?`, newJobMaterial);
     // const queryString = `INSERT INTO JobMaterial (materialID, jobID, quantity, perUnitCost) VALUES ((SELECT materialID FROM Material WHERE materialID=${newJobMaterial.materialID}), ${id}, ${newJobMaterial.quantity}, ${newJobMaterial.perUnitCost})`;
@@ -140,8 +138,18 @@ module.exports.getCurrentJobMaterialsCost = function (id, callback) {
     });
 }
 
-/********************************************************* Change Order *************************************************************************/
+module.exports.updateJobMaterial = function (updatedJobMaterial, callback) {
+    const queryString = sqlString.format(`UPDATE JobMaterial SET ? WHERE materialID = ? AND jobID = ?`, [updatedJobMaterial, updatedJobMaterial.materialID, updatedJobMaterial.jobID]);
+    connection.query(queryString, (error, rows, fields) => {
+        if (!error) {
+            callback(rows);
+        } else {
+            return error;
+        }
+    });
+}
 
+/********************************************************* Change Order *************************************************************************/
 module.exports.createChangeOrder = function (newChangeOrder, callback) {
     const queryString = sqlString.format(`INSERT INTO ChangeOrder SET ?, changeDate = NOW()`, newChangeOrder);
     connection.query(queryString, (error, rows, fields) => {
@@ -175,10 +183,31 @@ module.exports.getChangeOrdersById = function (id, callback) {
     });
 }
 
-/********************************************************* Job Revenue *************************************************************************/
+module.exports.updateChangeOrder = function (updatedChangeOrder, callback) {
+    const queryString = sqlString.format(`UPDATE ChangeOrder SET ? WHERE changeID = ?`, [updatedChangeOrder, updatedChangeOrder.changeID]);
+    connection.query(queryString, (error, rows, fields) => {
+        if (!error) {
+            callback(rows);
+        } else {
+            return error;
+        }
+    });
+}
 
+/********************************************************* Job Revenue *************************************************************************/
 module.exports.createJobRevenue = function (newJobRevenue, callback) {
     const queryString = sqlString.format(`INSERT INTO JobRevenue SET ?, revenueDate = NOW()`, newJobRevenue);
+    connection.query(queryString, (error, rows, fields) => {
+        if (!error) {
+            callback(rows);
+        } else {
+            return error;
+        }
+    });
+}
+
+module.exports.updateJobRevenue = function (updatedJobRevenue, callback) {
+    const queryString = sqlString.format(`UPDATE JobRevenue SET ? WHERE revenueID = ?`, [updatedJobRevenue, updatedJobRevenue.revenueID]);
     connection.query(queryString, (error, rows, fields) => {
         if (!error) {
             callback(rows);
@@ -211,9 +240,19 @@ module.exports.getJobRevenuesById = function (id, callback) {
 }
 
 /********************************************************* Job Labor *************************************************************************/
-
 module.exports.createJobLabor = function (newJobLabor, callback) {
     const queryString = sqlString.format(`INSERT INTO JobLabor SET ?, laborDate = NOW()`, newJobLabor);
+    connection.query(queryString, (error, rows, fields) => {
+        if (!error) {
+            callback(rows);
+        } else {
+            return error;
+        }
+    });
+}
+
+module.exports.updateJobLabor = function (updatedJobLabor, callback) {
+    const queryString = sqlString.format(`UPDATE JobLabor SET ? WHERE laborID = ?`, [updatedJobLabor, updatedJobLabor.laborID]);
     connection.query(queryString, (error, rows, fields) => {
         if (!error) {
             callback(rows);

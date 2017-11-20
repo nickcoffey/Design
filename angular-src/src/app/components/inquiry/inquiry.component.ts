@@ -230,6 +230,10 @@ export class InquiryComponent implements OnInit {
     // this.router.navigate([`/bids`]);
   }
 
+  onClickUpdate(){
+    this.description = this.inquiry[0].description;
+  }
+
   onUpdate() {
     let updatedInquiry = {
       inquiryID: this.id,

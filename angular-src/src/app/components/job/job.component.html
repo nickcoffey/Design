@@ -9,88 +9,110 @@
         <h3 class="panel-title">Job Details</h3>
       </div>
       <div class="panel-body">
+        <h4 class="page-header" style="margin-top: 0">General</h4>
         <table class="table table-bordered">
           <thead>
             <tr class="active">
+              <th>Expected Revenue</th>
               <th>Created Date</th>
-              <th>Completion Date</th>
+              <th *ngIf="job[0].jobStatus == 'COMPLETED'">Completion Date</th>
             </tr>
           </thead>
           <tbody>
             <tr>
+              <td>{{job[0].bidPrice + totalChangeTable | currency: 'USD':true}}</td>
               <td>{{job[0].createdDate | date: 'MM/dd/yyyy'}}</td>
-              <td>{{job[0].endDate | date: 'MM/dd/yyyy'}}</td>
+              <td *ngIf="job[0].jobStatus == 'COMPLETED'">{{job[0].endDate | date: 'MM/dd/yyyy'}}</td>
             </tr>
           </tbody>
         </table>
         <h4 class="page-header">Change Orders</h4>
-        <table class="table table-bordered">
+        <label>Click To Update Or Delete</label>
+        <table class="table table-bordered table-hover">
           <thead>
             <tr class="active">
               <th>Amount</th>
               <th>Date</th>
-              <th class="hidden-xs hidden-sm">Delete</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let changeOrder of changeOrders">
+            <tr *ngFor="let changeOrder of changeOrders; let i = index" data-toggle="modal" (click)="onClickUpdateChangeOrder(changeOrder.changeID, i)"
+              href='#update-change-modal'>
               <td>{{changeOrder.changeAmount | currency: 'USD':true}}</td>
               <td>{{changeOrder.changeDate | date: 'MM/dd/yyyy'}}</td>
-              <td class="hidden-xs hidden-sm">
-                <button class="btn btn-danger" data-toggle="modal" (click)="onClickDeleteChangeOrder(changeOrder.changeID)" href='#delete-change-modal'>
-                  <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-                </button>
-              </td>
             </tr>
           </tbody>
+          <tfoot>
+            <tr class="active">
+              <th>{{totalChangeTable | currency: 'USD':true}}</th>
+              <th></th>
+            </tr>
+          </tfoot>
         </table>
+        <button (click)="onClearChangeOrder()" class="btn btn-info" data-toggle="modal" href='#create-change-modal'>
+          <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Create Change Order</button>
         <h4 class="page-header">Revenue Collected</h4>
-        <table class="table table-bordered">
+        <label>Click To Update Or Delete</label>
+        <table class="table table-bordered table-hover">
           <thead>
             <tr class="active">
               <th>Amount</th>
               <th>Date</th>
-              <th class="hidden-xs hidden-sm">Delete</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let revenue of revenues">
+            <tr *ngFor="let revenue of revenues; let i = index" data-toggle="modal" (click)="onClickUpdateRevenue(revenue.revenueID, i)"
+              href='#update-revenue-modal'>
               <td>{{revenue.revenueAmount | currency: 'USD':true}}</td>
               <td>{{revenue.revenueDate | date: 'MM/dd/yyyy'}}</td>
-              <td class="hidden-xs hidden-sm">
-                <button class="btn btn-danger" data-toggle="modal" (click)="onClickDeleteRevenue(revenue.revenueID)" href='#delete-revenue-modal'>
-                  <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-                </button>
-              </td>
             </tr>
           </tbody>
+          <tfoot>
+            <tr class="active">
+              <th>{{totalRevenueTable | currency: 'USD':true}}</th>
+              <th></th>
+            </tr>
+          </tfoot>
         </table>
-        <h4 class="page-header">Actual Costs</h4>
-        <label>Labor Cost</label>
-        <table class="table table-bordered">
+        <button (click)="onClearJobRevenue()" class="btn btn-info" data-toggle="modal" href='#create-revenue-modal'>
+          <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Add Revenue</button>
+        <h4 class="page-header">Labor Cost</h4>
+        <label>Click To Update Or Delete</label>
+        <table class="table table-bordered table-hover">
           <thead>
             <tr class="active">
-              <th>Hours</th>
-              <th>Price</th>
+              <th>Role</th>
               <th>Date</th>
-              <th class="hidden-xs hidden-sm">Delete</th>
+              <th class="hidden-xs hidden-sm">Hours</th>
+              <th class="hidden-xs hidden-sm">Wage</th>
+              <th>Total</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let labor of labors">
-              <td>{{labor.laborHours}}</td>
-              <td>{{labor.laborPrice | currency: 'USD':true}}</td>
-              <td>{{labor.laborDate | date: 'MM/dd/yyyy'}}</td>
-              <td class="hidden-xs hidden-sm">
-                <button class="btn btn-danger" data-toggle="modal" (click)="onClickDeleteLabor(labor.laborID)" href='#delete-labor-modal'>
-                  <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-                </button>
-              </td>
+            <tr *ngFor="let jobLabor of jobLabors; let i = index" data-toggle="modal" (click)="onClickUpdateLabor(jobLabor.laborID, i)"
+              href='#update-labor-modal'>
+              <td>{{jobLabor.roleName}}</td>
+              <td>{{jobLabor.laborDate | date: 'MM/dd/yyyy'}}</td>
+              <td class="hidden-xs hidden-sm">{{jobLabor.laborHours}}</td>
+              <td class="hidden-xs hidden-sm">{{jobLabor.roleWage | currency: 'USD':true}}</td>
+              <td>{{jobLabor.roleWage*jobLabor.laborHours | currency: 'USD':true}}</td>
             </tr>
           </tbody>
+          <tfoot>
+            <tr class="active">
+              <th>Grand Total</th>
+              <th></th>
+              <th class="hidden-xs hidden-sm">{{totalHoursTable}}</th>
+              <th class="hidden-xs hidden-sm"></th>
+              <th>{{totalLaborPriceTable | currency: 'USD':true}}</th>
+            </tr>
+          </tfoot>
         </table>
-        <label *ngIf="jobMaterials[0] != null;">Materials Cost</label>
-        <table class="table table-bordered">
+        <button (click)="onClearJobLabor()" class="btn btn-info" data-toggle="modal" href='#create-labor-modal'>
+          <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Add Labor</button>
+        <h4 class="page-header" *ngIf="jobMaterials[0] != null;">Materials Cost</h4>
+        <label *ngIf="jobMaterials[0] != null;">Click To Update Or Delete</label>
+        <table class="table table-bordered table-hover">
           <thead *ngIf="jobMaterials[0] != null;">
             <tr class="active">
               <th>Material</th>
@@ -98,24 +120,31 @@
               <th class="hidden-xs hidden-sm">Price Per Unit</th>
               <th class="hidden-xs hidden-sm">Coverage In Linear Feet</th>
               <th>Total</th>
-              <th class="hidden-xs hidden-sm">Delete</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let jobMaterial of jobMaterials">
+            <tr *ngFor="let jobMaterial of jobMaterials; let i = index" data-toggle="modal" (click)="onClickUpdateJobMaterial(jobMaterial.materialID, i)"
+              href='#update-material-modal'>
               <td>{{jobMaterial.materialName}}</td>
               <td>{{jobMaterial.linearFeet}}</td>
               <td class="hidden-xs hidden-sm">{{jobMaterial.pricePerUnit | currency: 'USD':true}}</td>
               <td class="hidden-xs hidden-sm">{{jobMaterial.linearFeetCoverage}} ft</td>
               <td>{{jobMaterial.pricePerUnit / jobMaterial.linearFeetCoverage * jobMaterial.linearFeet | currency: 'USD':true}}</td>
-              <td class="hidden-xs hidden-sm">
-                <button class="btn btn-danger" data-toggle="modal" (click)="onClickDeleteJobMaterial(jobMaterial.materialID)" href='#delete-material-modal'>
-                  <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-                </button>
-              </td>
             </tr>
           </tbody>
+          <tfoot>
+            <tr class="active">
+              <th>Grand Total</th>
+              <th>{{totalLinearFeetTable}}</th>
+              <th class="hidden-xs hidden-sm"></th>
+              <th class="hidden-xs hidden-sm"></th>
+              <th>{{totalMaterialPriceTable | currency: 'USD':true}}</th>
+            </tr>
+          </tfoot>
         </table>
+        <button (click)="onClearJobMaterials()" class="btn btn-info" data-toggle="modal" href='#create-material-modal'>
+          <span class="glyphicon glyphicon-tint" aria-hidden="true"></span> Add Materials</button>
+        <hr>
         <!-- <label *ngIf="files.length != 0">Job Files</label>
         <table *ngIf="files.length != 0" class="table table-bordered">
           <thead>
@@ -139,9 +168,6 @@
         </table> -->
         <button *ngIf="status == 'IN-PROGRESS'" class="btn btn-primary" data-toggle="modal" href='#finish-job-modal'>
           <span class="glyphicon glyphicon-check" aria-hidden="true"></span> Finish Job</button>
-        <!-- <button *ngIf="status == 'IN-PROGRESS'" class="btn btn-info" data-toggle="modal" href='#update-job-modal'> -->
-        <button class="btn btn-info" data-toggle="modal" href='#update-job-modal'>
-          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Update Job</button>
         <button class="btn btn-danger" data-toggle="modal" href='#delete-job-modal'>
           <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete Job</button>
       </div>
@@ -158,6 +184,7 @@
       <h3 class="panel-title">Bid Details</h3>
     </div>
     <div class="panel-body">
+      <h4 class="page-header" style="margin-top: 0">General</h4>
       <table class="table table-bordered">
         <thead>
           <tr class="active">
@@ -175,32 +202,19 @@
         </tbody>
       </table>
       <h4 class="page-header">Estimated Costs</h4>
-      <label>Labor Cost</label>
       <table class="table table-bordered">
-        <tbody>
-          <tr>
-            <td>{{job[0].bidLabor | currency: 'USD':true}}</td>
-          </tr>
-        </tbody>
-      </table>
-      <label *ngIf="bidMaterials[0] != null;">Materials Cost</label>
-      <table class="table table-bordered">
-        <thead *ngIf="bidMaterials[0] != null;">
+        <thead>
           <tr class="active">
-            <th>Material</th>
-            <th>Linear Feet</th>
-            <th class="hidden-xs hidden-sm">Price Per Unit</th>
-            <th class="hidden-xs hidden-sm">Coverage In Linear Feet</th>
+            <th>Labor</th>
+            <th>Materials</th>
             <th>Total</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let bidMaterial of bidMaterials">
-            <td>{{bidMaterial.materialName}}</td>
-            <td>{{bidMaterial.linearFeet}}</td>
-            <td class="hidden-xs hidden-sm">{{bidMaterial.pricePerUnit | currency: 'USD':true}}</td>
-            <td class="hidden-xs hidden-sm">{{bidMaterial.linearFeetCoverage}} ft</td>
-            <td>{{bidMaterial.pricePerUnit / bidMaterial.linearFeetCoverage * bidMaterial.linearFeet | currency: 'USD':true}}</td>
+          <tr>
+            <td>{{job[0].bidLabor | currency: 'USD':true}}</td>
+            <td>{{job[0].bidMaterials | currency: 'USD':true}}</td>
+            <td>{{job[0].bidLabor + job[0].bidMaterials | currency: 'USD':true}}</td>
           </tr>
         </tbody>
       </table>
@@ -219,16 +233,20 @@
       <table class="table table-bordered">
         <thead>
           <tr class="active">
-            <th>ID</th>
             <th>Name</th>
             <th>Address</th>
+            <th>City</th>
+            <th class="hidden-xs hidden-sm">State</th>
+            <th class="hidden-xs hidden-sm">ZIP</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>{{job[0].customerID}}</td>
             <td>{{job[0].customerName}}</td>
             <td>{{job[0].customerAddress}}</td>
+            <td>{{job[0].customerCity}}</td>
+            <td class="hidden-xs hidden-sm">{{job[0].customerState}}</td>
+            <td class="hidden-xs hidden-sm">{{job[0].customerZIP}}</td>
           </tr>
         </tbody>
       </table>
@@ -238,6 +256,25 @@
   </div>
 </div>
 
+<!--                                     JOB POPUPS                                           -->
+<!--                Finish Job Popup                -->
+<div class="modal fade" id="finish-job-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Warning</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to finalize this job?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onFinish()">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
 <!--                Delete Job Popup                -->
 <div class="modal fade" id="delete-job-modal">
   <div class="modal-dialog">
@@ -256,38 +293,32 @@
     </div>
   </div>
 </div>
-<!--                Delete Material Popup                -->
-<div class="modal fade" id="delete-material-modal">
+<!--                                     REVENUE POPUPS                                           -->
+<!--                Update Revenue Popup                -->
+<div class="modal fade" id="update-revenue-modal">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Warning</h4>
+        <h4 class="modal-title">Update Revenue</h4>
       </div>
       <div class="modal-body">
-        <p>Are you sure you want to delete this material?</p>
+        <form (submit)="onUpdateJobRevenue()">
+          <div class="form-group">
+            <label>Amount</label>
+            <input type="number" [(ngModel)]="revenueAmount" name="revenueAmount" placeholder="Amount" class="form-control" required>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
+          <button type="reset" class="btn btn-warning">
+            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
+          <button type="button" class="btn btn-danger" data-toggle="modal" href='#delete-revenue-modal'>
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</button>
+        </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onDeleteMaterial()">Yes</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--                Delete Change Popup                -->
-<div class="modal fade" id="delete-change-modal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Warning</h4>
-      </div>
-      <div class="modal-body">
-        <p>Are you sure you want to delete this change order?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onDeleteChangeOrder()">Yes</button>
+        <button type="button" class="btn btn-info" data-dismiss="modal">
+          <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
       </div>
     </div>
   </div>
@@ -310,6 +341,67 @@
     </div>
   </div>
 </div>
+<!--                Create Revenue Popup                -->
+<div class="modal fade" id="create-revenue-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Add Revenue</h4>
+      </div>
+      <div class="modal-body">
+        <form (submit)="onCreateJobRevenue()">
+          <div class="form-group">
+            <label>Amount</label>
+            <input type="number" [(ngModel)]="revenueAmount" name="revenueAmount" placeholder="Amount" class="form-control" required>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Create</button>
+          <button type="reset" class="btn btn-warning">
+            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">
+          <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--                                     LABOR POPUPS                                           -->
+<!--                Update Labor Popup                -->
+<div class="modal fade" id="update-labor-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Update {{roleName}} Labor From {{laborDate | date: 'MM/dd/yyyy'}}</h4>
+      </div>
+      <div class="modal-body">
+        <form (submit)="onUpdateJobLabor()">
+          <div class="form-group">
+            <label>Hours</label>
+            <input type="number" [(ngModel)]="hours" name="hours" placeholder="Hours" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Wage</label>
+            <input type="number" [(ngModel)]="wage" name="wage" placeholder="Wage" class="form-control" required>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
+          <button type="reset" class="btn btn-warning">
+            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
+          <button type="button" class="btn btn-danger" data-toggle="modal" href='#delete-labor-modal'>
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">
+          <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 <!--                Delete Labor Popup                -->
 <div class="modal fade" id="delete-labor-modal">
   <div class="modal-dialog">
@@ -328,97 +420,97 @@
     </div>
   </div>
 </div>
-<!--                Finish Job Popup                -->
-<div class="modal fade" id="finish-job-modal">
+<!--                Create Labor Popup                -->
+<div class="modal fade" id="create-labor-modal">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Warning</h4>
+        <h4 class="modal-title">Add Labor</h4>
       </div>
       <div class="modal-body">
-        <p>Are you sure you want to finalize this job?</p>
+        <form (submit)="onCreateJobLabor()">
+          <table class="table table-bordered" *ngIf="labors[0] != null">
+            <thead>
+              <tr class="active">
+                <th>Role</th>
+                <th>Hours</th>
+                <th>Add</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <select (change)="onChangeLabor($event.target.value)" class="form-control">
+                    <option></option>
+                    <option [value]="i" *ngFor="let labor of labors; let i = index;">{{labor.roleName}}</option>
+                  </select>
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="hours" name="hours" placeholder="Hours" class="form-control" aria-describedby="hours-addon"
+                    required>
+                </td>
+                <td>
+                  <button (click)="onAddLabor()" type="button" class="btn btn-success">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table table-bordered" *ngIf="selectedLabors.length != 0;">
+            <thead>
+              <tr class="active">
+                <th>Role</th>
+                <th>Estimated Cost</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let selectedLabor of selectedLabors; let i = index">
+                <td>{{selectedLabor.roleName}}</td>
+                <td>{{selectedLabor.laborHours*selectedLabor.roleWage | currency:'USD':true}}
+                </td>
+                <td>
+                  <button (click)="onRemoveLabor(selectedLabor, i)" type="button" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr class="active">
+                <th>Total Labor Cost</th>
+                <th>{{totalLaborPrice | currency: 'USD':true}}</th>
+                <th></th>
+              </tr>
+            </tfoot>
+          </table>
+          <button type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Add</button>
+          <button type="reset" class="btn btn-warning" (click)="onClearJobLabor()">
+            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
+        </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onFinish()">Yes</button>
+        <button type="button" class="btn btn-info" data-dismiss="modal">
+          <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
       </div>
     </div>
   </div>
 </div>
-<!--                Update Job Popup                -->
-<div class="modal fade" id="update-job-modal">
+<!--                                     MATERIAL POPUPS                                           -->
+<!--                Create Material Popup                -->
+<div class="modal fade" id="create-material-modal">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Update Job</h4>
+        <h4 class="modal-title">Add Materials</h4>
       </div>
       <div class="modal-body">
-        <form (submit)="onUpdate()" style="padding-bottom: 20px;">
+        <form (submit)="onCreateBidMaterials()">
           <div class="form-group">
-            <h4>Add Revenue</h4>
-            <!-- <span class="input-group-addon">
-              <input type="checkbox" aria-label="...">
-            </span> -->
-            <input type="text" [(ngModel)]="revenueAmount" name="revenueAmount" placeholder="Revenue" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <h4>Add Change Order</h4>
-            <input type="text" [(ngModel)]="changeAmount" name="changeAmount" placeholder="Amount" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <h4>Add Labor</h4>
-            <label>Hours: </label>
-            <input type="text" [(ngModel)]="laborHours" name="laborHours" placeholder="Hours" class="form-control" required>
-            <label>Price: </label>
-            <input type="text" [(ngModel)]="laborPrice" name="laborPrice" placeholder="Price" class="form-control" required>
-          </div>
-          <!-- <label>Add Materials</label>
-          <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Materials
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-              <ng-container *ngIf="materials[0] != null; else noMaterials">
-                <li *ngFor="let material of materials; let i = index;">
-                  <a (click)="onAddMaterial(material, i)">{{material.materialName}}</a>
-                </li>
-              </ng-container>
-              <ng-template #noMaterials>
-                <li>
-                  <a>No more materials</a>
-                </li>
-              </ng-template>
-            </ul>
-          </div> -->
-          <!-- <table class="table table-striped table-hover">
-            <thead *ngIf="selectedMaterials[0] != null;">
-              <tr>
-                <th>Name</th>
-                <th>Quantity</th>
-                <th>Per Unit Cost</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let selectedMaterial of selectedMaterials; let i = index;">
-                <td>{{selectedMaterial.materialName}}</td>
-                <td>
-                  <input type="text" [(ngModel)]="selectedMaterial.quantity" name="quantity" placeholder="Quantity" class="form-control" required>
-                </td>
-                <td>
-                  <input type="text" [(ngModel)]="selectedMaterial.perUnitCost" name="perUnitCost" placeholder="Per Unit Cost" class="form-control"
-                    required>
-                </td>
-                <td>
-                  <button type="button" class="close" (click)="onRemoveMaterial(selectedMaterial, i)">&times;</button>
-                </td>
-              </tr>
-            </tbody>
-          </table> -->
-          <div class="form-group">
-            <h4>Add Materials</h4>
             <table class="table table-bordered" *ngIf="materials[0] != null">
               <thead>
                 <tr class="active">
@@ -430,10 +522,6 @@
               <tbody>
                 <tr>
                   <td>
-                    <!-- <select class="form-control">
-                        <option></option>
-                        <option *ngFor="let material of materials; let i = index;" (click)="onSelectMaterial(material, i)">{{material.materialName}}</option>
-                      </select> -->
                     <select (change)="onChangeMaterial($event.target.value)" class="form-control">
                       <option></option>
                       <option [value]="i" *ngFor="let material of materials; let i = index;">{{material.materialName}}</option>
@@ -443,9 +531,6 @@
                     <input type="text" [(ngModel)]="linearFeet" name="linearFeet" placeholder="Linear Feet" class="form-control" required>
                   </td>
                   <td>
-                    <!-- <button (click)="onAddMaterial(selectedMaterial, i)" type="button" class="btn btn-success">
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                      </button> -->
                     <button (click)="onAddMaterial()" type="button" class="btn btn-success">
                       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     </button>
@@ -481,7 +566,172 @@
               </tfoot>
             </table>
           </div>
-          <!-- <div class="form-group">
+          <button type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-tint" aria-hidden="true"></span> Create</button>
+          <button type="reset" class="btn btn-warning">
+            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">
+          <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--                Update Material Popup                -->
+<div class="modal fade" id="update-material-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Update {{materialName}}</h4>
+      </div>
+      <div class="modal-body">
+        <form (submit)="onUpdateJobMaterial()">
+          <div class="form-group">
+            <label>Linear Feet</label>
+            <input type="number" [(ngModel)]="linearFeet" name="linearFeet" placeholder="Linear Feet" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Price Per Unit</label>
+            <input type="number" [(ngModel)]="pricePerUnit" name="pricePerUnit" placeholder="Price Per Unit" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Coverage In Linear Feet</label>
+            <input type="number" [(ngModel)]="linearFeetCoverage" name="linearFeetCoverage" placeholder="Coverage In Linear Feet" class="form-control"
+              required>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
+          <button type="reset" class="btn btn-warning">
+            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
+          <button type="button" class="btn btn-danger" data-toggle="modal" href='#delete-material-modal'>
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">
+          <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--                Delete Material Popup                -->
+<div class="modal fade" id="delete-material-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Warning</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete
+          <b>{{materialName | lowercase}}</b>?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onDeleteMaterial()">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--                                     CHANGE ORDER POPUPS                                           -->
+<!--                Update Change Popup                -->
+<div class="modal fade" id="update-change-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Update Change Order</h4>
+      </div>
+      <div class="modal-body">
+        <form (submit)="onUpdateChangeOrder()">
+          <div class="form-group">
+            <label>Amount</label>
+            <input type="number" [(ngModel)]="changeAmount" name="changeAmount" placeholder="Amount" class="form-control" required>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
+          <button type="reset" class="btn btn-warning">
+            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
+          <button type="button" class="btn btn-danger" data-toggle="modal" href='#delete-change-modal'>
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">
+          <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--                Delete Change Popup                -->
+<div class="modal fade" id="delete-change-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Warning</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this change order?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onDeleteChangeOrder()">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--                Create Change Popup                -->
+<div class="modal fade" id="create-change-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Create Change Order</h4>
+      </div>
+      <div class="modal-body">
+        <form (submit)="onCreateChangeOrder()">
+          <div class="form-group">
+            <label>Amount</label>
+            <input type="number" [(ngModel)]="changeAmount" name="changeAmount" placeholder="Amount" class="form-control" required>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Create</button>
+          <button type="reset" class="btn btn-warning">
+            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">
+          <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--                                     FILE POPUPS                                           -->
+<!--                Delete File Popup                -->
+<div class="modal fade" id="delete-file-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Warning</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this file?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onDeleteFile()">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--               FOR UPLOAD FILE POPUP                -->
+<!-- <div class="form-group">
             <h4>Upload Files</h4>
             <button type="button" class="btn btn-info" (click)="fileInput.click()">
               <span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Browse Files</button>
@@ -505,34 +755,103 @@
               </tbody>
             </table>
           </div> -->
-          <button type="submit" class="btn btn-primary" (click)="uploader.uploadAll()">
-            <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
-          <button type="reset" class="btn btn-danger" (click)="onClear(); uploader.clearQueue()">
-            <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Clear</button>
-        </form>
-        <div class="modal-footer">
-          <button class="btn btn-info" data-dismiss="modal">
-            <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
+
+<!--                                        UNUSED MARKUP                                       -->
+<!-- <label>Add Materials</label>
+          <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Materials
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <ng-container *ngIf="materials[0] != null; else noMaterials">
+                <li *ngFor="let material of materials; let i = index;">
+                  <a (click)="onAddMaterial(material, i)">{{material.materialName}}</a>
+                </li>
+              </ng-container>
+              <ng-template #noMaterials>
+                <li>
+                  <a>No more materials</a>
+                </li>
+              </ng-template>
+            </ul>
+          </div> -->
+<!-- <table class="table table-striped table-hover">
+            <thead *ngIf="selectedMaterials[0] != null;">
+              <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Per Unit Cost</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let selectedMaterial of selectedMaterials; let i = index;">
+                <td>{{selectedMaterial.materialName}}</td>
+                <td>
+                  <input type="text" [(ngModel)]="selectedMaterial.quantity" name="quantity" placeholder="Quantity" class="form-control" required>
+                </td>
+                <td>
+                  <input type="text" [(ngModel)]="selectedMaterial.perUnitCost" name="perUnitCost" placeholder="Per Unit Cost" class="form-control"
+                    required>
+                </td>
+                <td>
+                  <button type="button" class="close" (click)="onRemoveMaterial(selectedMaterial, i)">&times;</button>
+                </td>
+              </tr>
+            </tbody>
+          </table> -->
+
+<!-- <table class="table table-bordered">
+              <thead *ngIf="bidMaterials[0] != null;">
+                <tr class="active">
+                  <th>Material</th>
+                  <th>Linear Feet</th>
+                  <th class="hidden-xs hidden-sm">Price Per Unit</th>
+                  <th class="hidden-xs hidden-sm">Coverage In Linear Feet</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let bidMaterial of bidMaterials">
+                  <td>{{bidMaterial.materialName}}</td>
+                  <td>{{bidMaterial.linearFeet}}</td>
+                  <td class="hidden-xs hidden-sm">{{bidMaterial.pricePerUnit | currency: 'USD':true}}</td>
+                  <td class="hidden-xs hidden-sm">{{bidMaterial.linearFeetCoverage}} ft</td>
+                  <td>{{bidMaterial.pricePerUnit / bidMaterial.linearFeetCoverage * bidMaterial.linearFeet | currency: 'USD':true}}</td>
+                </tr>
+              </tbody>
+            </table> -->
+
+
+<!--                Update Job Popup                -->
+<!-- <div class="modal fade" id="update-job-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Update Job</h4>
+        </div>
+        <div class="modal-body">
+          <form (submit)="onUpdate()" style="padding-bottom: 20px;">
+            <div class="form-group">
+              <h4>Add Labor</h4>
+              <label>Hours: </label>
+              <input type="text" [(ngModel)]="laborHours" name="laborHours" placeholder="Hours" class="form-control" required>
+              <label>Price: </label>
+              <input type="text" [(ngModel)]="laborPrice" name="laborPrice" placeholder="Price" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary" (click)="uploader.uploadAll()">
+              <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
+            <button type="reset" class="btn btn-danger" (click)="onClear(); uploader.clearQueue()">
+              <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Clear</button>
+          </form>
+          <div class="modal-footer">
+            <button class="btn btn-info" data-dismiss="modal">
+              <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-<!--                Delete File Popup                -->
-<div class="modal fade" id="delete-file-modal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Warning</h4>
-      </div>
-      <div class="modal-body">
-        <p>Are you sure you want to delete this file?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onDeleteFile()">Yes</button>
-      </div>
-    </div>
-  </div>
-</div>
+  </div> -->
+<!-- <button class="btn btn-info" data-toggle="modal" href='#update-job-modal'>
+          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Update Job</button> -->

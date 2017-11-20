@@ -336,7 +336,6 @@ router.post('/:id/new/bid-labor', passport.authenticate('jwt', { session: false 
         roleWage: request.body.roleWage,
         laborHours: request.body.laborHours
     };
-
     bid.createBidLaborById(newBidLabor, (message) => {
         if (message.message == "") {
             response.json({

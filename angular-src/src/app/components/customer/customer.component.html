@@ -10,31 +10,32 @@
       <div class="panel-heading">
         <h3 class="panel-title">Customer Details</h3>
       </div>
-      <div class="panel-body">
+      <div class="panel-body" style="word-break:break-all">
         <table class="table table-bordered">
           <thead>
             <tr class="active">
               <th>Address</th>
               <th>City</th>
-              <th>State</th>
-              <th>ZIP</th>
+              <th class="hidden-xs hidden-sm">State</th>
+              <th class="hidden-xs hidden-sm">ZIP</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>{{customer[0].address}}</td>
               <td>{{customer[0].city}}</td>
-              <td>{{customer[0].state}}</td>
-              <td>{{customer[0].zip}}</td>
+              <td class="hidden-xs hidden-sm">{{customer[0].state}}</td>
+              <td class="hidden-xs hidden-sm">{{customer[0].zip}}</td>
             </tr>
           </tbody>
         </table>
-        <button class="btn btn-primary" href="#update-customer-modal" data-toggle="modal">
+        <button (click)="onClickUpdateCustomer()" class="btn btn-info" href="#update-customer-modal" data-toggle="modal">
           <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Update Customer</button>
-        <button class="btn btn-info" href="#create-inquiry-modal" data-toggle="modal">
-          <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> Create Inquiry</button>
         <button class="btn btn-danger" data-toggle="modal" href='#delete-customer-modal'>
           <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete Customer</button>
+        <hr>
+        <button class="btn btn-primary" href="#create-inquiry-modal" data-toggle="modal">
+          <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> Create Inquiry</button>
       </div>
     </div>
   </ng-container>
@@ -45,79 +46,51 @@
 </div>
 
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-  <ng-container *ngIf="contacts; else noContacts">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3 class="panel-title">Contact Details</h3>
-      </div>
-      <div class="panel-body">
-        <table class="table table-bordered">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Contact Details</h3>
+    </div>
+    <div class="panel-body" style="word-break:break-all">
+      <ng-container *ngIf="contacts.length > 0; else noContacts">
+        <label>Click To Update Or Delete</label>
+        <table class="table table-bordered table-hover">
           <thead>
             <tr class="active">
               <th class="hidden-xs hidden-sm">Title</th>
               <th>Name</th>
               <th>Phone</th>
               <th class="hidden-xs hidden-sm">Email</th>
-              <th>Update</th>
-              <th class="hidden-xs hidden-sm">Delete</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let contact of contacts">
+            <tr *ngFor="let contact of contacts; let i = index" (click)="onClickUpdateContact(contact.contactID, i)" data-toggle="modal"
+              href='#update-contact-modal'>
               <td class="hidden-xs hidden-sm">{{contact.contactTitle}}</td>
               <td>{{contact.contactName}}</td>
               <td>{{contact.contactPhone}}</td>
               <td class="hidden-xs hidden-sm">{{contact.contactEmail}}</td>
-              <td>
-                <button class="btn btn-primary" type="button" (click)="onClickUpdateContact(contact.contactID)" data-toggle="modal" href='#update-contact-modal'>
-                  <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                </button>
-              </td>
-              <td class="hidden-xs hidden-sm">
-                <button class="btn btn-danger" type="button" (click)="onClickDeleteContact(contact.contactID)" data-toggle="modal" href='#delete-contact-modal'>
-                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                </button>
-              </td>
             </tr>
           </tbody>
         </table>
-        <button class="btn btn-info" type="button" data-toggle="modal" href='#create-contact-modal'>
-          <span class="glyphicon glyphicon-phone" aria-hidden="true"></span> Create Contact
-        </button>
-      </div>
-    </div>
-  </ng-container>
-  <ng-template>
-    <h2 class="page-header">No Contacts</h2>
-    <p>If this is incorrect, try refreshing the page.</p>
-  </ng-template>
-</div>
-
-<!--                Delete Customer Popup                -->
-<div class="modal fade" id="delete-customer-modal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Warning</h4>
-      </div>
-      <div class="modal-body">
-        <p>Are you sure you want to delete this user?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onDeleteCustomer()">Yes</button>
-      </div>
+      </ng-container>
+      <ng-template #noContacts>
+        <h5>No Contacts</h5>
+      </ng-template>
+      <button (click)="clearContactFields()" class="btn btn-info" type="button" data-toggle="modal" href='#create-contact-modal'>
+        <span class="glyphicon glyphicon-phone" aria-hidden="true"></span> Create Contact
+      </button>
     </div>
   </div>
 </div>
+
+<!--                              CUSTOMER POPUPS                                -->
 <!--                Update Customer Popup                -->
 <div class="modal fade" id="update-customer-modal">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Update Customer</h4>
+        <h4 class="modal-title">Update {{customer[0].customerName}}</h4>
       </div>
       <div class="modal-body">
         <form (submit)="onUpdateCustomer()">
@@ -143,13 +116,31 @@
           </div>
           <button type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
-          <button type="reset" class="btn btn-danger">
+          <button type="reset" class="btn btn-warning">
             <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-info" data-dismiss="modal">
           <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--                Delete Customer Popup                -->
+<div class="modal fade" id="delete-customer-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Warning</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this user?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onDeleteCustomer()">Yes</button>
       </div>
     </div>
   </div>
@@ -170,7 +161,7 @@
           </div>
           <button type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> Create</button>
-          <button type="reset" class="btn btn-danger">
+          <button type="reset" class="btn btn-warning">
             <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
         </form>
       </div>
@@ -181,31 +172,14 @@
     </div>
   </div>
 </div>
-<!--                Delete Contact Popup                -->
-<div class="modal fade" id="delete-contact-modal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Warning</h4>
-      </div>
-      <div class="modal-body">
-        <p>Are you sure you want to delete this contact?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onDeleteContact()">Yes</button>
-      </div>
-    </div>
-  </div>
-</div>
+<!--                              CONTACT POPUPS                                -->
 <!--                Update Contact Popup                -->
 <div class="modal fade" id="update-contact-modal">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Update Contact</h4>
+        <h4 class="modal-title">Update {{contactName}}</h4>
       </div>
       <div class="modal-body">
         <form (submit)="onUpdateContact()">
@@ -227,13 +201,35 @@
           </div>
           <button type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
-          <button type="reset" class="btn btn-danger">
+          <button type="reset" class="btn btn-warning">
             <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
+          <button class="btn btn-danger" type="button" data-toggle="modal" href='#delete-contact-modal'>
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete
+          </button>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-info" data-dismiss="modal">
           <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--                Delete Contact Popup                -->
+<div class="modal fade" id="delete-contact-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Warning</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete
+          <b>{{contactName}}</b>?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onDeleteContact()">Yes</button>
       </div>
     </div>
   </div>
@@ -265,8 +261,8 @@
             <input type="text" class="form-control" [(ngModel)]="contactEmail" name="contactEmail" placeholder="Email" required/>
           </div>
           <button type="submit" class="btn btn-primary">
-            <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Create</button>
-          <button type="reset" class="btn btn-danger">
+            <span class="glyphicon glyphicon-phone" aria-hidden="true"></span> Create</button>
+          <button type="reset" class="btn btn-warning">
             <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
         </form>
       </div>

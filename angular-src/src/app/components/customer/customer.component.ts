@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { CustomerService } from '../../services/customer.service';
 import { InquiryService } from '../../services/inquiry.service';
+declare var $;
 
 @Component({
   selector: 'app-customer',
@@ -10,6 +11,7 @@ import { InquiryService } from '../../services/inquiry.service';
 })
 export class CustomerComponent implements OnInit {
 
+  /** CUSTOMER **/
   id: any;
   customer: any;
   description: any;
@@ -20,6 +22,7 @@ export class CustomerComponent implements OnInit {
   state: any;
   zip: any;
 
+  /** CONTACT **/
   contactTitle: any;
   contactName: any;
   contactPhone: any;
@@ -36,11 +39,14 @@ export class CustomerComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
+    this.getCustomer();
+    this.getContacts();
+  }
+
+  /*************************************************** CUSTOMER FUNCTIONS ***********************************************************/
+  getCustomer() {
     this.customerService.getCustomerById(this.id).subscribe((customer) => {
       this.customer = customer;
-    });
-    this.customerService.getAllContacts(this.id).subscribe((contacts) => {
-      this.contacts = contacts;
     });
   }
 
@@ -54,6 +60,7 @@ export class CustomerComponent implements OnInit {
     this.inquiryService.createInquiry(newInquiry).subscribe((data) => {
       if (data.success) {
         console.log(data.msg);
+        $('#create-inquiry-modal').modal('hide');
         //this.router.navigate(['/inquiries']);
       } else {
         console.log(data.msg);
@@ -72,6 +79,14 @@ export class CustomerComponent implements OnInit {
     });
   }
 
+  onClickUpdateCustomer() {
+    this.name = this.customer[0].customerName;
+    this.address = this.customer[0].address;
+    this.city = this.customer[0].city;
+    this.state = this.customer[0].state;
+    this.zip = this.customer[0].zip;
+  }
+
   onUpdateCustomer() {
     let updatedCustomer = {
       customerID: this.id,
@@ -85,16 +100,36 @@ export class CustomerComponent implements OnInit {
     this.customerService.updateCustomer(updatedCustomer).subscribe((data) => {
       if (data.success) {
         console.log(data.msg);
+        this.getCustomer();
+        this.clearCustomerFields();
+        $('#update-customer-modal').modal('hide');
       } else {
         console.log(data.msg);
       }
     });
-    this.ngOnInit();
-    this.clearCustomerFields();
   }
 
-  onClickUpdateContact(contactID) {
+  clearCustomerFields() {
+    this.name = null;
+    this.address = null;
+    this.city = null;
+    this.state = null;
+    this.zip = null;
+  }
+
+  /*************************************************** CONTACT FUNCTIONS ***********************************************************/
+  getContacts() {
+    this.customerService.getAllContacts(this.id).subscribe((contacts) => {
+      this.contacts = contacts;
+    });
+  }
+
+  onClickUpdateContact(contactID, contactIndex) {
     this.contactID = contactID;
+    this.contactTitle = this.contacts[contactIndex].contactTitle;
+    this.contactName = this.contacts[contactIndex].contactName;
+    this.contactPhone = this.contacts[contactIndex].contactPhone;
+    this.contactEmail = this.contacts[contactIndex].contactEmail;
   }
 
   onUpdateContact() {
@@ -110,23 +145,21 @@ export class CustomerComponent implements OnInit {
       console.log(data);
       if (data.success) {
         console.log(data.msg);
-        this.ngOnInit();
+        this.getContacts();
         this.clearContactFields();
+        $('#update-contact-modal').modal('hide');
       } else {
         console.log(data.msg);
       }
     });
   }
 
-  onClickDeleteContact(contactID) {
-    this.contactID = contactID;
-  }
-
   onDeleteContact() {
     this.customerService.deleteContact(this.contactID).subscribe((data) => {
       if (data.success) {
         console.log(data.msg);
-        this.ngOnInit();
+        this.getContacts();
+        $('#update-contact-modal').modal('hide');
       } else {
         console.log(data.msg);
       }
@@ -146,20 +179,13 @@ export class CustomerComponent implements OnInit {
       console.log(data);
       if (data.success) {
         console.log(data.msg);
-        this.ngOnInit();
+        this.getContacts();
         this.clearContactFields();
+        $('#create-contact-modal').modal('hide');
       } else {
         console.log(data.msg);
       }
     });
-  }
-
-  clearCustomerFields() {
-    this.name = null;
-    this.address = null;
-    this.city = null;
-    this.state = null;
-    this.zip = null;
   }
 
   clearContactFields() {

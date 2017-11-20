@@ -37,7 +37,7 @@ export class BidComponent implements OnInit {
   bidMaterialID: number;
   materialIndex: any;
   /** Labor **/
-  labors: any;
+  labors: any = [];
   bidLabors: any;
   laborIndex: any;
   wage: number;
@@ -131,7 +131,7 @@ export class BidComponent implements OnInit {
     });
   }
 
-  onClickUpdateBid(){
+  onClickUpdateBid() {
     this.bidPrice = this.bid[0].bidPrice;
   }
 
@@ -161,18 +161,21 @@ export class BidComponent implements OnInit {
     this.totalMaterialPriceTable = 0;
     this.bidService.getBidMaterialsById(this.id).subscribe((bidMaterials) => {
       this.bidMaterials = bidMaterials;
+      for (let k = 0; k < this.bidMaterials.length; k++) {
+        this.totalMaterialPriceTable += ((this.bidMaterials[k].pricePerUnit / this.bidMaterials[k].linearFeetCoverage) * this.bidMaterials[k].linearFeet);
+      }
 
       this.materialService.getAllMaterials().subscribe((materials) => {
         this.materials = materials.materials;
 
-        for (let i = 0; i < this.materials.length; i++) {
-          for (let k = 0; k < this.bidMaterials.length; k++) {
-            if (this.materials[i].materialID == this.bidMaterials[k].materialID) {
-              this.materials.splice(i, 1);
-              this.totalMaterialPriceTable += ((this.bidMaterials[k].pricePerUnit / this.bidMaterials[k].linearFeetCoverage) * this.bidMaterials[k].linearFeet);
-            }
-          }
-        }
+        // for (let i = 0; i < this.materials.length; i++) {
+        //   for (let k = 0; k < this.bidMaterials.length; k++) {
+        //     if (this.materials[i].materialID == this.bidMaterials[k].materialID) {
+        //       this.materials.splice(i, 1);
+        //       this.totalMaterialPriceTable += ((this.bidMaterials[k].pricePerUnit / this.bidMaterials[k].linearFeetCoverage) * this.bidMaterials[k].linearFeet);
+        //     }
+        //   }
+        // }
       });
     });
   }
@@ -286,35 +289,38 @@ export class BidComponent implements OnInit {
     this.totalLaborPriceTable = 0;
     this.bidService.getBidLaborsById(this.id).subscribe((bidLabors) => {
       this.bidLabors = bidLabors;
+      for (let k = 0; k < this.bidLabors.length; k++) {
+        this.totalLaborPriceTable += (this.bidLabors[k].roleWage * this.bidLabors[k].laborHours);
+      }
 
       this.laborService.getAllLabors().subscribe((labors) => {
         this.labors = labors.labors;
 
-        for (let i = 0; i < this.labors.length; i++) {
-          for (let k = 0; k < this.bidLabors.length; k++) {
-            if (this.labors[i].roleID == this.bidLabors[k].roleID) {
-              this.labors.splice(i, 1);
-              this.totalLaborPriceTable += (bidLabors[k].roleWage * bidLabors[k].laborHours);
-            }
-          }
-        }
+        // for (let i = 0; i < this.labors.length; i++) {
+        //   for (let k = 0; k < this.bidLabors.length; k++) {
+        //     if (this.labors[i].roleID == this.bidLabors[k].roleID) {
+        //       this.labors.splice(i, 1);
+        //       this.totalLaborPriceTable += (this.bidLabors[k].roleWage * this.bidLabors[k].laborHours);
+        //       console.log(this.labors);
+        //     }
+        //   }
+        // }
       });
     });
   }
   /********** CREATE START **********/
   onCreateBidLabor() {
     this.selectedLabors.forEach((selectedLabor) => {
-      this.bidService.createBidLabor(selectedLabor).subscribe((data) => {
+      this.bidService.createBidLaborById(this.id, selectedLabor).subscribe((data) => {
         if (data.success) {
           console.log(data.msg);
+          this.getBidLabors();
+          $('#create-labor-modal').modal('hide');
         } else {
           console.log(data.msg);
         }
       });
     });
-
-    $('#create-labor-modal').modal('hide');
-    this.getBidLabors();
   }
 
   onAddLabor() {

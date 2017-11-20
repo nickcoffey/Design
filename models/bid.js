@@ -160,7 +160,7 @@ module.exports.createBidLabor = function (newBidLabor, callback) {
 }
 
 module.exports.createBidLaborById = function (newBidLabor, callback) {
-    const queryString = sqlString.format(`INSERT INTO BidLabor SET ?`, newBidLabor);
+    const queryString = sqlString.format(`INSERT INTO BidLabor SET ?`, [newBidLabor]);
     // const queryString = `INSERT INTO BidMaterial (materialID, bidID, quantity, perUnitCost) VALUES ((SELECT materialID FROM Material WHERE materialID=${newBidMaterial.materialID}), ${bidID}, ${newBidMaterial.quantity}, ${newBidMaterial.perUnitCost})`;
     console.log(queryString);
     connection.query(queryString, (error, rows, fields) => {

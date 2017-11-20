@@ -22,7 +22,8 @@
           <td>{{job.customerName}}</td>
           <td>{{job.jobStatus}}</td>
           <td>{{job.createdDate | date: 'MM/dd/yyyy'}}</td>
-          <td class="hidden-xs hidden-sm">{{job.endDate | date: 'MM/dd/yyyy'}}</td>
+          <td *ngIf="job.jobStatus != 'IN-PROGRESS'" class="hidden-xs hidden-sm">{{job.endDate | date: 'MM/dd/yyyy'}}</td>
+          <td *ngIf="job.jobStatus == 'IN-PROGRESS'" class="hidden-xs hidden-sm">N/A</td>
         </tr>
       </tbody>
     </table>
@@ -35,6 +36,8 @@
   </div>
 </ng-template>
 
+
+<!--                                              UNUSED MARKUP                                                       -->
 <!-- <ng-container *ngIf="inProgressLength!=0 || completedLength!=0; else noJobs">
   <ng-container *ngIf="inProgressLength!=0; else noInProgressJobs">
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">

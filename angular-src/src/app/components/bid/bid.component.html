@@ -60,7 +60,7 @@
             </tr>
           </tfoot>
         </table>
-        <button *ngIf="labors[0] != null" (click)="onClearBidLabor()" class="btn btn-info" data-toggle="modal" href='#create-labor-modal'>
+        <button (click)="onClearBidLabor()" class="btn btn-info" data-toggle="modal" href='#create-labor-modal'>
           <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Add Labor</button>
         <h4 class="page-header" *ngIf="bidMaterials[0] != null;">Material Cost</h4>
         <label *ngIf="bidMaterials[0] != null;">Click To Update Or Delete</label>

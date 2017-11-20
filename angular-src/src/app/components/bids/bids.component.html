@@ -54,7 +54,8 @@
           <td>{{bid.bidStatus}}</td>
           <!-- <td>{{bid.bidPrice | currency: 'USD':true}}</td> -->
           <td>{{bid.createdDate | date: 'MM/dd/yyyy'}}</td>
-          <td class="hidden-xs hidden-sm">{{bid.endDate | date: 'MM/dd/yyyy'}}</td>
+          <td *ngIf="bid.bidStatus != 'PENDING'" class="hidden-xs hidden-sm">{{bid.endDate | date: 'MM/dd/yyyy'}}</td>
+          <td *ngIf="bid.bidStatus == 'PENDING'" class="hidden-xs hidden-sm">N/A</td>
         </tr>
       </tbody>
     </table>
