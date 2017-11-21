@@ -14,28 +14,30 @@ declare var $;
 })
 export class InquiryComponent implements OnInit {
 
-  id: any;
+  /** INQUIRY **/
+  id: number = null;
   inquiry: any;
-  bidPrice: number;
-  linearFeet: number = 0;
-  createdDate: any;
-  bidLabor: number = 0;
-  materials: any;
-  material: any;
-  materialID: number;
-  totalMaterialPrice: number = 0;
+  createdDate: string = '';
+  status: string = '';
+  description: string = '';
+  /** BID **/
   margin: number = 0;
-  // totalCost:number = 0;
-  // selectedMaterials:SelectedMaterial[] = [];
-  selectedMaterials1: SelectedMaterial[] = [];
-  description: any;
-  status: any;
+  /** LABOR **/
+  bidLabor: number = 0;
+  bidPrice: number = null;
+  linearFeet: number = 0;
   labors: any;
   labor: any;
   selectedLabors: SelectedLabor[] = [];
-  laborHours: number;
-  laborID: number;
+  laborHours: number = null;
+  laborID: number = null;
   totalLaborPrice: number = 0;
+  /** MATERIALS **/
+  materials: any;
+  material: any;
+  materialID: number = null;
+  totalMaterialPrice: number = 0;
+  selectedMaterials1: SelectedMaterial[] = []; 
 
   constructor(
     private router: Router,
@@ -48,51 +50,78 @@ export class InquiryComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
+    this.getInquiry();
+    this.getMaterials();
+    this.getLabor();
+  }
 
+  /************************************ INQUIRY *********************************/
+  getInquiry() {
     this.inquiryService.getInquiryById(this.id).subscribe((inquiry) => {
       this.inquiry = inquiry;
       this.status = inquiry[0].inquiryStatus;
     });
+  }
 
-    this.materialService.getAllMaterials().subscribe((materials) => {
-      this.materials = materials.materials;
+  acceptInquiry(updatedInquiry) {
+    this.inquiryService.updateInquiryStatus(updatedInquiry).subscribe((data) => {
+      if (data.success) {
+        console.log(data.msg);
+      } else {
+        console.log(data.msg);
+      }
     });
+  }
 
+  /************************************ BID *********************************/
+  onCreate() {
+    const updatedInquiry = {
+      inquiryID: this.id,
+      inquiryStatus: "ACCEPTED",
+      removeEndDate: false
+    };
+    const newBid = {
+      inquiryID: this.id,
+      bidPrice: (1 + this.margin) * (this.totalMaterialPrice + this.totalLaborPrice + this.bidLabor)
+    };
+
+    this.createBid(newBid);
+    this.acceptInquiry(updatedInquiry);
+    this.createMaterials();
+    this.createLabor();
+    $('#create-bid-modal').modal('hide');
+    this.onClear();
+    this.router.navigate([`/bids`]);
+  }
+
+  createBid(newBid) {
+    this.bidService.createBid(newBid).subscribe((data) => {
+      if (data.success) {
+        console.log(data.msg);
+      } else {
+        console.log(data.msg);
+      }
+    });
+  }
+
+  /************************************ LABOR *********************************/
+  getLabor() {
     this.laborService.getAllLabors().subscribe((labors) => {
       this.labors = labors.labors;
     });
   }
 
-  // onAddMaterial(material, id){
-  //   this.selectedMaterials.push(material);
-  //   this.materials.splice(id, 1);
-  // }
-
-  // onSelectMaterial(material, id) {
-  //   // console.log(material);
-  //   this.material = material;
-  //   this.materialID = id;
-  // }
-
-  onRemoveMaterial(material, id) {
-    this.totalMaterialPrice -= (material.pricePerLinearFoot * material.linearFeet);
-    this.selectedMaterials1.splice(id, 1);
-    this.materials.push(material);
+  createLabor() {
+    this.selectedLabors.forEach((selectedLabor) => {
+      this.bidService.createBidLabor(selectedLabor).subscribe((data) => {
+        if (data.success) {
+          console.log(data.msg);
+        } else {
+          console.log(data.msg);
+        }
+      });
+    });
   }
-
-  // onAddMaterial() {
-  //   let selectedMaterial = {
-  //     materialID: this.material.materialID,
-  //     materialName: this.material.materialName,
-  //     pricePerLinearFoot: this.material.pricePerLinearFoot,
-  //     linearFeet: this.linearFeet
-  //   };
-  //   this.totalMaterialPrice += (selectedMaterial.pricePerLinearFoot * this.linearFeet);
-  //   this.selectedMaterials1.push(selectedMaterial);
-  //   this.materials.splice(this.materialID, 1);
-  //   this.material = null;
-  //   this.linearFeet = 0;
-  // }
 
   onAddLabor() {
     let selectedLabor = {
@@ -117,6 +146,32 @@ export class InquiryComponent implements OnInit {
   onChangeLabor(id) {
     this.laborID = id;
     // console.log(this.laborID);
+  }
+
+  /************************************ MATERIALS *********************************/
+  getMaterials() {
+    this.materialService.getAllMaterials().subscribe((materials) => {
+      this.materials = materials.materials;
+    });
+  }
+
+  createMaterials() {
+    this.selectedMaterials1.forEach(selectedMaterial => {
+      console.log(selectedMaterial);
+      this.bidService.createBidMaterial(selectedMaterial).subscribe((data) => {
+        if (data.success) {
+          console.log(data.msg);
+        } else {
+          console.log(data.msg);
+        }
+      });
+    });
+  }
+
+  onRemoveMaterial(material, id) {
+    this.totalMaterialPrice -= (material.pricePerLinearFoot * material.linearFeet);
+    this.selectedMaterials1.splice(id, 1);
+    this.materials.push(material);
   }
 
   onAddMaterial() {
@@ -153,81 +208,6 @@ export class InquiryComponent implements OnInit {
     this.bidLabor = 0;
     this.margin = 0;
     //this.ngOnInit();
-  }
-
-  // onRemoveMaterial(material, id){
-  //   this.selectedMaterials.splice(id, 1);
-  //   this.materials.push(material);
-  // }
-
-  // onClear(){
-  //   this.selectedMaterials.forEach(selectedMaterial => {
-  //     this.materials.push(selectedMaterial);
-  //   });
-  //   this.selectedMaterials = [];
-  //   //this.ngOnInit();
-  // }
-
-  onCreate() {
-    const newBid = {
-      inquiryID: this.id,
-      // bidLabor: this.bidLabor,
-      bidPrice: (1 + this.margin) * (this.totalMaterialPrice + this.totalLaborPrice + this.bidLabor)
-    };
-    const updatedInquiry = {
-      inquiryID: this.id,
-      inquiryStatus: "ACCEPTED",
-      removeEndDate: false
-    };
-
-    this.bidService.createBid(newBid).subscribe((data) => {
-      if (data.success) {
-        console.log(data.msg);
-      } else {
-        console.log(data.msg);
-      }
-    });
-    this.inquiryService.updateInquiryStatus(updatedInquiry).subscribe((data) => {
-      if (data.success) {
-        console.log(data.msg);
-      } else {
-        console.log(data.msg);
-      }
-    });
-    // this.selectedMaterials.forEach(selectedMaterial => {
-    //   console.log(selectedMaterial);
-    //   this.bidService.createBidMaterial(selectedMaterial).subscribe((data) => {
-    //     if(data.success){
-    //       console.log(data.msg);
-    //     } else{
-    //       console.log(data.msg);
-    //     }
-    //   });
-    // });
-    this.selectedMaterials1.forEach(selectedMaterial => {
-      console.log(selectedMaterial);
-      this.bidService.createBidMaterial(selectedMaterial).subscribe((data) => {
-        if (data.success) {
-          console.log(data.msg);
-        } else {
-          console.log(data.msg);
-        }
-      });
-    });
-
-    this.selectedLabors.forEach((selectedLabor) => {
-      this.bidService.createBidLabor(selectedLabor).subscribe((data) => {
-        if (data.success) {
-          console.log(data.msg);
-        } else {
-          console.log(data.msg);
-        }
-      });
-    });
-
-    $('#create-bid-modal').modal('hide');
-    this.onClear();
-    // this.router.navigate([`/bids`]);
   }
 
   onClickUpdate(){
@@ -276,3 +256,57 @@ interface SelectedLabor {
   roleWage: number,
   laborHours: number
 }
+
+
+/****************************************** UNUSED CODE *******************************************/
+  // onAddMaterial(material, id){
+  //   this.selectedMaterials.push(material);
+  //   this.materials.splice(id, 1);
+  // }
+
+  // onSelectMaterial(material, id) {
+  //   // console.log(material);
+  //   this.material = material;
+  //   this.materialID = id;
+  // }
+
+      // this.selectedMaterials.forEach(selectedMaterial => {
+    //   console.log(selectedMaterial);
+    //   this.bidService.createBidMaterial(selectedMaterial).subscribe((data) => {
+    //     if(data.success){
+    //       console.log(data.msg);
+    //     } else{
+    //       console.log(data.msg);
+    //     }
+    //   });
+    // });
+
+     // onRemoveMaterial(material, id){
+  //   this.selectedMaterials.splice(id, 1);
+  //   this.materials.push(material);
+  // }
+
+  // onClear(){
+  //   this.selectedMaterials.forEach(selectedMaterial => {
+  //     this.materials.push(selectedMaterial);
+  //   });
+  //   this.selectedMaterials = [];
+  //   //this.ngOnInit();
+  // }
+
+    // onAddMaterial() {
+  //   let selectedMaterial = {
+  //     materialID: this.material.materialID,
+  //     materialName: this.material.materialName,
+  //     pricePerLinearFoot: this.material.pricePerLinearFoot,
+  //     linearFeet: this.linearFeet
+  //   };
+  //   this.totalMaterialPrice += (selectedMaterial.pricePerLinearFoot * this.linearFeet);
+  //   this.selectedMaterials1.push(selectedMaterial);
+  //   this.materials.splice(this.materialID, 1);
+  //   this.material = null;
+  //   this.linearFeet = 0;
+  // }
+
+    // totalCost:number = 0;
+  // selectedMaterials:SelectedMaterial[] = [];

@@ -62,7 +62,7 @@ export class CustomerComponent implements OnInit {
       if (data.success) {
         console.log(data.msg);
         $('#create-inquiry-modal').modal('hide');
-        //this.router.navigate(['/inquiries']);
+        this.router.navigate(['/inquiries']);
       } else {
         console.log(data.msg);
       }
