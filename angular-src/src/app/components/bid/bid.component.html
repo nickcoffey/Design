@@ -96,9 +96,13 @@
         </table>
         <button *ngIf="materials[0] != null" (click)="onClearBidMaterial()" class="btn btn-info" data-toggle="modal" href='#create-material-modal'>
           <span class="glyphicon glyphicon-tint" aria-hidden="true"></span> Add Materials</button>
-        <hr *ngIf="bidMaterials[0] != null;">
+        <hr>
         <button *ngIf="status == 'PENDING'" class="btn btn-primary" data-toggle="modal" href='#create-job-modal'>
           <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Create Job</button>
+        <button *ngIf="status == 'PENDING'" class="btn btn-warning" data-toggle="modal" href='#decline-modal'>
+          <span class="glyphicon glyphicon-file" aria-hidden="true"></span> Decline Bid</button>
+        <button *ngIf="status == 'DECLINED'" class="btn btn-warning" data-toggle="modal" href='#reopen-modal'>
+          <span class="glyphicon glyphicon-file" aria-hidden="true"></span> Re-open Bid</button>
         <!-- <button *ngIf="status == 'PENDING'" type="button" class="btn btn-info" data-toggle="modal" href='#update-bid-modal'> -->
         <button class="btn btn-danger" data-toggle="modal" href='#delete-bid-modal'>
           <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete Bid</button>
@@ -200,6 +204,42 @@
     </div>
   </div>
 </div>
+<!--                Decline Bid Popup                -->
+<div class="modal fade" id="decline-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Warning</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to decline this bid?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onDecline()">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--                Re-Open Bid Popup                -->
+<div class="modal fade" id="reopen-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Warning</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to re-open this bid?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onReopen()">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
 <!--                Create Job Popup                -->
 <div class="modal fade" id="create-job-modal">
   <div class="modal-dialog">
@@ -273,8 +313,8 @@
           </div>
           <div class="form-group">
             <label>Price Per Unit</label>
-            <input required onKeyPress="if(this.value.length==5) return false;" #perUnit="ngModel" type="number" [(ngModel)]="pricePerUnit" name="pricePerUnit" placeholder="Price Per Unit"
-              class="form-control">
+            <input required onKeyPress="if(this.value.length==5) return false;" #perUnit="ngModel" type="number" [(ngModel)]="pricePerUnit"
+              name="pricePerUnit" placeholder="Price Per Unit" class="form-control">
             <div *ngIf="perUnit.invalid" style="color:#ff0000">
               <div *ngIf="perUnit.errors.required">
                 *Price per unit is required
@@ -333,7 +373,8 @@
                   </select>
                 </td>
                 <td>
-                  <input required mask="0000000" #feet2="ngModel" type="number" [(ngModel)]="linearFeet" name="linearFeet" placeholder="Linear Feet" class="form-control">
+                  <input required mask="0000000" #feet2="ngModel" type="number" [(ngModel)]="linearFeet" name="linearFeet" placeholder="Linear Feet"
+                    class="form-control">
                 </td>
                 <td>
                   <button [disabled]="feet2.invalid" (click)="onAddMaterial()" type="button" class="btn btn-success">
@@ -419,7 +460,8 @@
         <form #f2="ngForm" (submit)="onUpdateBidLabor()">
           <div class="form-group">
             <label>Wage</label>
-            <input required onKeyPress="if(this.value.length==5) return false;" #laborWage="ngModel" type="number" [(ngModel)]="wage" name="wage" placeholder="Wage" class="form-control">
+            <input required onKeyPress="if(this.value.length==5) return false;" #laborWage="ngModel" type="number" [(ngModel)]="wage"
+              name="wage" placeholder="Wage" class="form-control">
             <div *ngIf="laborWage.invalid" style="color:#ff0000">
               <div *ngIf="laborWage.errors.required">
                 *Wage is required

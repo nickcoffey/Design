@@ -36,7 +36,7 @@ export class InquiryComponent implements OnInit {
   materialID: number = null;
   linearFeet: number = 0;
   totalMaterialPrice: number = 0;
-  selectedMaterials1: SelectedMaterial[] = []; 
+  selectedMaterials1: SelectedMaterial[] = [];
 
   constructor(
     private router: Router,
@@ -62,6 +62,38 @@ export class InquiryComponent implements OnInit {
     });
   }
 
+  onReopen() {
+    const updatedInquiry = {
+      inquiryID: this.id,
+      inquiryStatus: "PENDING",
+      removeEndDate: false
+    };
+    this.inquiryService.updateInquiryStatus(updatedInquiry).subscribe((data) => {
+      if (data.success) {
+        console.log(data.msg);
+        this.ngOnInit();
+      } else {
+        console.log(data.msg);
+      }
+    });
+  }
+
+  onDecline() {
+    const updatedInquiry = {
+      inquiryID: this.id,
+      inquiryStatus: "DECLINED",
+      removeEndDate: false
+    };
+    this.inquiryService.updateInquiryStatus(updatedInquiry).subscribe((data) => {
+      if (data.success) {
+        console.log(data.msg);
+        this.ngOnInit();
+      } else {
+        console.log(data.msg);
+      }
+    });
+  }
+
   acceptInquiry(updatedInquiry) {
     this.inquiryService.updateInquiryStatus(updatedInquiry).subscribe((data) => {
       if (data.success) {
@@ -76,7 +108,7 @@ export class InquiryComponent implements OnInit {
     this.description = '';
   }
 
-  onClickUpdate(){
+  onClickUpdate() {
     this.description = this.inquiry[0].description;
   }
 
@@ -119,7 +151,7 @@ export class InquiryComponent implements OnInit {
     };
     const newBid = {
       inquiryID: this.id,
-      bidPrice: (1 + (this.margin/100)) * (this.totalMaterialPrice + this.totalLaborPrice)
+      bidPrice: (1 + (this.margin / 100)) * (this.totalMaterialPrice + this.totalLaborPrice)
     };
 
     this.createBid(newBid);
@@ -206,7 +238,7 @@ export class InquiryComponent implements OnInit {
   }
 
   onRemoveMaterial(material, id) {
-    this.totalMaterialPrice -= ((material.pricePerUnit/material.linearFeetCoverage) * material.linearFeet);
+    this.totalMaterialPrice -= ((material.pricePerUnit / material.linearFeetCoverage) * material.linearFeet);
     this.selectedMaterials1.splice(id, 1);
     this.materials.push(material);
   }
@@ -244,7 +276,7 @@ export class InquiryComponent implements OnInit {
     this.totalMaterialPrice = 0;
     this.laborHours = 0;
     this.margin = 0;
-    
+
     //this.ngOnInit();
   }
 }

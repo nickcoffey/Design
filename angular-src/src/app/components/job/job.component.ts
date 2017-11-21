@@ -148,6 +148,22 @@ export class JobComponent implements OnInit {
     });
   }
 
+  onReopen() {
+    let updatedJob = {
+      jobID: this.id,
+      jobStatus: "IN-PROGRESS"
+    };
+
+    this.jobService.updateJobStatus(updatedJob).subscribe((data) => {
+      if (data.success) {
+        console.log(data.msg);
+        this.ngOnInit();
+      } else {
+        console.log(data.msg);
+      }
+    });
+  }
+
   onFinish() {
     let updatedJob = {
       jobID: this.id,
@@ -157,7 +173,7 @@ export class JobComponent implements OnInit {
     this.jobService.updateJobStatus(updatedJob).subscribe((data) => {
       if (data.success) {
         console.log(data.msg);
-        this.router.navigate(['/jobs']);
+        this.ngOnInit();
       } else {
         console.log(data.msg);
       }
@@ -222,6 +238,14 @@ export class JobComponent implements OnInit {
       this.materialService.getAllMaterials().subscribe((materials) => {
         this.materials = materials.materials;
 
+        this.jobMaterials.forEach(jobMaterial => {
+          this.materials.forEach((material, i) => {
+            if (material.materialID == jobMaterial.materialID) {
+              this.materials.splice(i, 1);
+              this.totalMaterialPriceTable += ((jobMaterial.pricePerUnit / jobMaterial.linearFeetCoverage) * jobMaterial.linearFeet);
+            }
+          });
+        });
         // for (let i = 0; i < this.materials.length; i++) {
         //   for (let k = 0; k < this.jobMaterials.length; k++) {
         //     if (this.materials[i].materialID == this.jobMaterials[k].materialID) {

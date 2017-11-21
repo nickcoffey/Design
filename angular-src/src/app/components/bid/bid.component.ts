@@ -5,6 +5,7 @@ import { MaterialService } from '../../services/material.service';
 import { JobService } from '../../services/job.service';
 import { InquiryService } from '../../services/inquiry.service';
 import { LaborService } from '../../services/labor.service';
+import { forEach } from '@angular/router/src/utils/collection';
 declare var $;
 
 @Component({
@@ -38,6 +39,7 @@ export class BidComponent implements OnInit {
   materialIndex: number = null;
   /** Labor **/
   labors: any = [];
+  laborsLoop: any = [];
   bidLabors: any;
   laborIndex: number = null;
   wage: number = 0;
@@ -74,6 +76,36 @@ export class BidComponent implements OnInit {
   }
   onClear() {
     this.bidPrice = 0;
+  }
+
+  onDecline() {
+    const updatedBid = {
+      bidID: this.id,
+      bidStatus: "DECLINED"
+    };
+    this.bidService.updateBidStatus(updatedBid).subscribe((data) => {
+      if (data.success) {
+        console.log(data.msg);
+        this.ngOnInit();
+      } else {
+        console.log(data.msg);
+      }
+    });
+  }
+
+  onReopen() {
+    const updatedBid = {
+      bidID: this.id,
+      bidStatus: "PENDING"
+    };
+    this.bidService.updateBidStatus(updatedBid).subscribe((data) => {
+      if (data.success) {
+        console.log(data.msg);
+        this.ngOnInit();
+      } else {
+        console.log(data.msg);
+      }
+    });
   }
 
   onCreate() {
@@ -167,7 +199,14 @@ export class BidComponent implements OnInit {
 
       this.materialService.getAllMaterials().subscribe((materials) => {
         this.materials = materials.materials;
-
+        this.bidMaterials.forEach(bidMaterial => {
+          this.materials.forEach((material, i) => {
+            if (material.materialID == bidMaterial.materialID) {
+              this.materials.splice(i, 1);
+              this.totalMaterialPriceTable += ((bidMaterial.pricePerUnit / bidMaterial.linearFeetCoverage) * bidMaterial.linearFeet);
+            }
+          });
+        });
         // for (let i = 0; i < this.materials.length; i++) {
         //   for (let k = 0; k < this.bidMaterials.length; k++) {
         //     if (this.materials[i].materialID == this.bidMaterials[k].materialID) {
@@ -193,6 +232,7 @@ export class BidComponent implements OnInit {
     });
 
     $('#create-material-modal').modal('hide');
+    this.onClearBidMaterial();
     this.getBidMaterials();
   }
 
@@ -293,6 +333,7 @@ export class BidComponent implements OnInit {
   /**************************************************** Bid Labor **********************************************************************/
   getBidLabors() {
     this.totalLaborPriceTable = 0;
+    this.labors = [];
     this.bidService.getBidLaborsById(this.id).subscribe((bidLabors) => {
       this.bidLabors = bidLabors;
       for (let k = 0; k < this.bidLabors.length; k++) {
@@ -301,32 +342,42 @@ export class BidComponent implements OnInit {
 
       this.laborService.getAllLabors().subscribe((labors) => {
         this.labors = labors.labors;
-
-        // for (let i = 0; i < this.labors.length; i++) {
+        let index = null;
+        this.bidLabors.forEach(bidLabor => {
+          this.labors.forEach((labor, i) => {
+            if (labor.roleID == bidLabor.roleID) {
+              this.totalLaborPriceTable += (bidLabor.roleWage * bidLabor.laborHours);
+              this.labors.splice(i, 1);
+            }
+          })
+        });
+        // for (let i = 0; i < this.laborsLoop.length; i++) {
         //   for (let k = 0; k < this.bidLabors.length; k++) {
-        //     if (this.labors[i].roleID == this.bidLabors[k].roleID) {
-        //       this.labors.splice(i, 1);
+        //     if (this.laborsLoop[i].roleID == this.bidLabors[k].roleID) {
         //       this.totalLaborPriceTable += (this.bidLabors[k].roleWage * this.bidLabors[k].laborHours);
-        //       console.log(this.labors);
+        //       this.labors.splice(i, 1);
         //     }
         //   }
         // }
       });
     });
   }
+
   /********** CREATE START **********/
   onCreateBidLabor() {
     this.selectedLabors.forEach((selectedLabor) => {
       this.bidService.createBidLaborById(this.id, selectedLabor).subscribe((data) => {
         if (data.success) {
           console.log(data.msg);
-          this.getBidLabors();
-          $('#create-labor-modal').modal('hide');
         } else {
           console.log(data.msg);
         }
       });
     });
+
+    this.getBidLabors();
+    this.onClearBidLabor();
+    $('#create-labor-modal').modal('hide');
   }
 
   onAddLabor() {
