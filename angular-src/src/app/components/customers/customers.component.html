@@ -75,7 +75,7 @@
           </div>
           <div class="form-group">
             <label>ZIP</label>
-            <input onKeyPress="if(this.value.length==5) return false;" #customerZIP="ngModel" type="number" class="form-control" [(ngModel)]="zip" name="zip" placeholder="ZIP" />
+            <input mask="00000" #customerZIP="ngModel" type="number" class="form-control" [(ngModel)]="zip" name="zip" placeholder="ZIP" />
           </div>
           <button [disabled]="f.invalid" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Create</button>
           <button type="button" (click)="clearFields()" class="btn btn-warning"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>

@@ -22,21 +22,21 @@ export class JobComponent implements OnInit {
   url: string;
   uploader: FileUploader;
   /** JOB **/
-  id: any;
+  id: number = null;
   job: any;
-  jobLabor: any = null;
-  jobStatus: any = null;
-  createdDate: any = null;
-  endDate: any = null;
-  status: any;
+  jobLabor: number = 0;
+  jobStatus: string = '';
+  createdDate: string = '';
+  endDate: string = '';
+  status: string = '';
   /** JOB MATERIALS **/
   jobMaterials: any;
   materials: any;
   selectedMaterials1: SelectedMaterial[] = [];
   material: any;
-  materialName: any;
-  materialID: any;
-  materialIndex: any;
+  materialName: string = '';
+  materialID: number = null;
+  materialIndex: number = null;
   linearFeet: number = 0;
   pricePerUnit: number = 0;
   linearFeetCoverage: number = 0;
@@ -44,32 +44,32 @@ export class JobComponent implements OnInit {
   totalMaterialPriceTable: number = 0;
   totalLinearFeetTable: number = 0;
   /** JOB REVENUES **/
-  revenueID: any;
-  revenueIndex: any;
-  revenueAmount: any = null;
+  revenueID: number = null;
+  revenueIndex: number = null;
+  revenueAmount: number = 0;
   revenues: any;
   totalRevenueTable: number = 0;
   /** CHANGE ORDERS **/
-  changeID: any;
-  changeIndex: any;
-  changeAmount: any = null;
+  changeID: number = null;
+  changeIndex: number = null;
+  changeAmount: number = 0;
   changeOrders: any;
   totalChangeTable: number = 0;
   /** JOB LABOR **/
-  laborHours: any = null;
-  laborPrice: any = null;
+  laborHours: any = 0;
+  laborPrice: any = 0;
   jobLabors: any;
   labors: any;
-  laborID: any;
-  laborIndex: any;
+  laborID: number = null;
+  laborIndex: number = null;
   selectedLabors: SelectedLabor[] = [];
   totalLaborPrice: number = 0;
   totalLaborPriceTable: number = 0;
   totalHoursTable: number = 0;
-  hours: any;
-  wage: any;
-  roleName: any;
-  laborDate: any;
+  hours: number = 0;
+  wage: number = 0;
+  roleName: string = '';
+  laborDate: string = '';
 
   constructor(
     private router: Router,
@@ -239,12 +239,19 @@ export class JobComponent implements OnInit {
       this.materials.push(selectedMaterial);
     });
     this.selectedMaterials1 = [];
-    this.linearFeet = null;
-    this.pricePerUnit = null;
-    this.linearFeetCoverage = null;
+    this.linearFeet = 0;
+    this.pricePerUnit = 0;
+    this.linearFeetCoverage = 0;
+    this.totalMaterialPrice = 0;
   }
 
-  onCreateBidMaterials() {
+  clearMaterialUpdate() {
+    this.linearFeet = 0;
+    this.pricePerUnit = 0;
+    this.linearFeetCoverage = 0;
+  }
+
+  onCreateJobMaterials() {
     this.selectedMaterials1.forEach(selectedMaterial => {
       this.jobService.createJobMaterial(this.id, selectedMaterial).subscribe((data) => {
         if (data.success) {
@@ -278,7 +285,7 @@ export class JobComponent implements OnInit {
       linearFeetCoverage: this.materials[this.materialID].linearFeetCoverage,
       linearFeet: this.linearFeet
     };
-    this.totalMaterialPrice += (selectedMaterial.pricePerUnit / selectedMaterial.linearFeetCoverage * this.linearFeet);
+    this.totalMaterialPrice += ((selectedMaterial.pricePerUnit / selectedMaterial.linearFeetCoverage) * this.linearFeet);
     this.selectedMaterials1.push(selectedMaterial);
     this.materials.splice(this.materialID, 1);
     this.material = null;
@@ -286,7 +293,7 @@ export class JobComponent implements OnInit {
   }
 
   onRemoveMaterial(material, id) {
-    this.totalMaterialPrice -= (material.pricePerLinearFoot * material.linearFeet);
+    this.totalMaterialPrice -= ((material.pricePerUnit / material.linearFeetCoverage) * material.linearFeet);
     this.selectedMaterials1.splice(id, 1);
     this.materials.push(material);
   }
@@ -399,7 +406,7 @@ export class JobComponent implements OnInit {
   }
 
   onClearChangeOrder() {
-    this.changeAmount = null;
+    this.changeAmount = 0;
   }
 
   /************************************************* REVENUE FUNCTIONS *********************************************************/
@@ -414,7 +421,7 @@ export class JobComponent implements OnInit {
   }
 
   onClearJobRevenue() {
-    this.revenueAmount = null;
+    this.revenueAmount = 0;
   }
 
   onCreateJobRevenue() {
@@ -497,6 +504,20 @@ export class JobComponent implements OnInit {
     this.laborDate = this.jobLabors[laborIndex].laborDate;
   }
 
+  clearLaborUpdate() {
+    this.wage = 0;
+    this.hours = 0;
+  }
+
+  clearLaborCreate() {
+    this.selectedLabors.forEach(selectLabor => {
+      this.labors.push(selectLabor);
+    });
+    this.hours = 0;
+    this.totalLaborPrice = 0;
+    this.selectedLabors = [];
+  }
+
   onUpdateJobLabor() {
     let updatedJobLabor = {
       laborID: this.jobLabors[this.laborIndex].laborID,
@@ -556,10 +577,10 @@ export class JobComponent implements OnInit {
   /********** CREATE END **********/
 
   onClearJobLabor() {
-    this.hours = null;
-    this.wage = null;
-    this.roleName = null;
-    this.laborDate = null;
+    this.hours = 0;
+    this.wage = 0;
+    this.roleName = '';
+    this.laborDate = '';
   }
 
   onDeleteLabor() {

@@ -1,5 +1,6 @@
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-  <button class="btn btn-default" [routerLink]="['/bids']"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Go To Bids</button>
+  <button class="btn btn-default" [routerLink]="['/bids']">
+    <span class="glyphicon glyphicon-file" aria-hidden="true"></span> Go To Bids</button>
 </div>
 
 <h2 class="page-header col-xs-12 col-sm-12 col-md-12 col-lg-12">Bid #{{bid[0].bidID}}</h2>
@@ -226,13 +227,19 @@
         <h4 class="modal-title">Change Bid Price</h4>
       </div>
       <div class="modal-body">
-        <form (submit)="onUpdate()">
+        <form #f="ngForm" (submit)="onUpdate()">
           <div class="form-group">
-            <input type="text" [(ngModel)]="bidPrice" name="bidPrice" placeholder="Bid Price" class="form-control" required>
+            <input required mask="0000000" #price="ngModel" type="number" [(ngModel)]="bidPrice" name="bidPrice" placeholder="Bid Price"
+              class="form-control">
+            <div *ngIf="price.invalid" style="color:#ff0000">
+              <div *ngIf="price.errors.required">
+                *Bid price is required
+              </div>
+            </div>
           </div>
-          <button type="submit" class="btn btn-primary">
+          <button [disabled]="f.invalid" type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
-          <button type="reset" class="btn btn-warning" (click)="onClear()">
+          <button type="button" (click)="onClear()" class="btn btn-warning" (click)="onClear()">
             <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
         </form>
       </div>
@@ -253,23 +260,40 @@
         <h4 class="modal-title">Update {{materialName}}</h4>
       </div>
       <div class="modal-body">
-        <form (submit)="onUpdateBidMaterial()">
+        <form #f4="ngForm" (submit)="onUpdateBidMaterial()">
           <div class="form-group">
             <label>Linear Feet</label>
-            <input type="number" [(ngModel)]="linearFeet" name="linearFeet" placeholder="Linear Feet" class="form-control" required>
+            <input required mask="0000000" #feet="ngModel" type="number" [(ngModel)]="linearFeet" name="linearFeet" placeholder="Linear Feet"
+              class="form-control">
+            <div *ngIf="feet.invalid" style="color:#ff0000">
+              <div *ngIf="feet.errors.required">
+                *Linear feet are required
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <label>Price Per Unit</label>
-            <input type="number" [(ngModel)]="pricePerUnit" name="pricePerUnit" placeholder="Price Per Unit" class="form-control" required>
+            <input required onKeyPress="if(this.value.length==5) return false;" #perUnit="ngModel" type="number" [(ngModel)]="pricePerUnit" name="pricePerUnit" placeholder="Price Per Unit"
+              class="form-control">
+            <div *ngIf="perUnit.invalid" style="color:#ff0000">
+              <div *ngIf="perUnit.errors.required">
+                *Price per unit is required
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <label>Coverage In Linear Feet</label>
-            <input type="number" [(ngModel)]="linearFeetCoverage" name="linearFeetCoverage" placeholder="Coverage In Linear Feet" class="form-control"
-              required>
+            <input required mask="0000000" #coverage="ngModel" type="number" [(ngModel)]="linearFeetCoverage" name="linearFeetCoverage"
+              placeholder="Coverage In Linear Feet" class="form-control">
+            <div *ngIf="coverage.invalid" style="color:#ff0000">
+              <div *ngIf="coverage.errors.required">
+                *Coverage in linear feet is required
+              </div>
+            </div>
           </div>
-          <button type="submit" class="btn btn-primary">
+          <button [disabled]="f4.invalid" type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
-          <button type="reset" class="btn btn-warning">
+          <button type="button" (click)="clearMaterialUpdate()" class="btn btn-warning">
             <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
           <button type="button" class="btn btn-danger" data-toggle="modal" href='#delete-material-modal'>
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</button>
@@ -291,13 +315,13 @@
         <h4 class="modal-title">Add Materials</h4>
       </div>
       <div class="modal-body">
-        <form (submit)="onCreateMaterial()">
-          <table class="table table-bordered" *ngIf="materials[0] != null">
+        <form #f5="ngForm" (submit)="onCreateMaterial()">
+          <table class="table" *ngIf="materials[0] != null">
             <thead>
-              <tr class="active">
-                <th>Name</th>
-                <th>Linear Feet</th>
-                <th>Add</th>
+              <tr>
+                <th>Select Material</th>
+                <th>Enter Linear Feet</th>
+                <th>Add Material</th>
               </tr>
             </thead>
             <tbody>
@@ -309,34 +333,36 @@
                   </select>
                 </td>
                 <td>
-                  <input type="text" [(ngModel)]="linearFeet" name="linearFeet" placeholder="Linear Feet" class="form-control" required>
+                  <input required mask="0000000" #feet2="ngModel" type="number" [(ngModel)]="linearFeet" name="linearFeet" placeholder="Linear Feet" class="form-control">
                 </td>
                 <td>
-                  <button (click)="onAddMaterial()" type="button" class="btn btn-success">
+                  <button [disabled]="feet2.invalid" (click)="onAddMaterial()" type="button" class="btn btn-success">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                   </button>
                 </td>
               </tr>
             </tbody>
+            <tfoot>
+              <tr *ngIf="feet2.invalid" style="color:#ff0000">
+                <td *ngIf="feet2.errors.required"></td>
+                <td *ngIf="feet2.errors.required">*Linear feet are required</td>
+                <td *ngIf="feet2.errors.required"></td>
+              </tr>
+            </tfoot>
           </table>
-          <table class="table table-bordered" *ngIf="selectedMaterials1.length != 0;">
+          <label style="color:#ff0000" *ngIf="selectedMaterials1.length != 0;">Click To Remove</label>
+          <table class="table table-bordered table-hover" *ngIf="selectedMaterials1.length != 0;">
             <thead>
               <tr class="active">
                 <th>Name</th>
                 <th>Estimated Cost</th>
-                <th>Delete</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let selectedMaterial of selectedMaterials1; let i = index">
+              <tr *ngFor="let selectedMaterial of selectedMaterials1; let i = index" (click)="onRemoveMaterial(selectedMaterial, i)">
                 <td>{{selectedMaterial.materialName}}</td>
                 <td>{{selectedMaterial.linearFeet*(selectedMaterial.pricePerUnit/selectedMaterial.linearFeetCoverage) | currency:
                   'USD':true}}
-                </td>
-                <td>
-                  <button (click)="onRemoveMaterial(selectedMaterial, i)" type="button" class="btn btn-danger">
-                    <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-                  </button>
                 </td>
               </tr>
             </tbody>
@@ -344,13 +370,12 @@
               <tr class="active">
                 <th>Total Material Cost</th>
                 <th>{{totalMaterialPrice | currency: 'USD':true}}</th>
-                <th></th>
               </tr>
             </tfoot>
           </table>
-          <button type="submit" class="btn btn-primary">
+          <button [disabled]="f5.invalid" type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-tint" aria-hidden="true"></span> Add</button>
-          <button type="reset" class="btn btn-warning" (click)="onClearBidMaterial()">
+          <button type="button" (click)="onClearBidMaterial()" class="btn btn-warning">
             <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
         </form>
       </div>
@@ -391,19 +416,29 @@
         <h4 class="modal-title">Update {{roleName}}</h4>
       </div>
       <div class="modal-body">
-        <form (submit)="onUpdateBidLabor()">
+        <form #f2="ngForm" (submit)="onUpdateBidLabor()">
           <div class="form-group">
             <label>Wage</label>
-            <input type="text" [(ngModel)]="wage" name="wage" placeholder="Wage" class="form-control" required>
+            <input required onKeyPress="if(this.value.length==5) return false;" #laborWage="ngModel" type="number" [(ngModel)]="wage" name="wage" placeholder="Wage" class="form-control">
+            <div *ngIf="laborWage.invalid" style="color:#ff0000">
+              <div *ngIf="laborWage.errors.required">
+                *Wage is required
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <label>Hours</label>
-            <input type="text" [(ngModel)]="hours" name="hours" placeholder="Hours" class="form-control" required>
+            <input required mask="00000" #laborHours="ngModel" type="number" [(ngModel)]="hours" name="hours" placeholder="Hours" class="form-control">
+            <div *ngIf="laborHours.invalid" style="color:#ff0000">
+              <div *ngIf="laborHours.errors.required">
+                *Hours are required
+              </div>
+            </div>
           </div>
           <div class="form-group">
-            <button type="submit" class="btn btn-primary">
+            <button [disabled]="f2.invalid" type="submit" class="btn btn-primary">
               <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
-            <button type="reset" class="btn btn-warning">
+            <button type="button" (click)="onClearLaborUpdate()" class="btn btn-warning">
               <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
             <button type="button" class="btn btn-danger" data-toggle="modal" href='#delete-labor-modal'>
               <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</button>
@@ -426,13 +461,13 @@
         <h4 class="modal-title">Add Labor</h4>
       </div>
       <div class="modal-body">
-        <form (submit)="onCreateBidLabor()">
-          <table class="table table-bordered" *ngIf="labors[0] != null">
+        <form #f3="ngForm" (submit)="onCreateBidLabor()">
+          <table class="table" *ngIf="labors[0] != null">
             <thead>
-              <tr class="active">
-                <th>Role</th>
-                <th>Hours</th>
-                <th>Add</th>
+              <tr>
+                <th>Select Role</th>
+                <th>Enter Hours</th>
+                <th>Add Role</th>
               </tr>
             </thead>
             <tbody>
@@ -444,34 +479,36 @@
                   </select>
                 </td>
                 <td>
-                  <input type="number" [(ngModel)]="hours" name="hours" placeholder="Hours" class="form-control" aria-describedby="hours-addon"
-                    required>
+                  <input required mask="00000" #laborHours2="ngModel" type="number" [(ngModel)]="hours" name="hours" placeholder="Hours" class="form-control"
+                    aria-describedby="hours-addon">
                 </td>
                 <td>
-                  <button (click)="onAddLabor()" type="button" class="btn btn-success">
+                  <button [disabled]="laborHours2.invalid" (click)="onAddLabor()" type="button" class="btn btn-success">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                   </button>
                 </td>
               </tr>
             </tbody>
+            <tfoot>
+              <tr *ngIf="laborHours2.invalid">
+                <td *ngIf="laborHours2.errors.required"></td>
+                <td *ngIf="laborHours2.errors.required" style="color:#ff0000">*Hours are required</td>
+                <td *ngIf="laborHours2.errors.required"></td>
+              </tr>
+            </tfoot>
           </table>
-          <table class="table table-bordered" *ngIf="selectedLabors.length != 0;">
+          <label *ngIf="selectedLabors.length != 0;" style="color:#ff0000">Click To Remove</label>
+          <table class="table table-bordered table-hover" *ngIf="selectedLabors.length != 0;">
             <thead>
               <tr class="active">
                 <th>Role</th>
                 <th>Estimated Cost</th>
-                <th>Delete</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let selectedLabor of selectedLabors; let i = index">
+              <tr *ngFor="let selectedLabor of selectedLabors; let i = index" (click)="onRemoveLabor(selectedLabor, i)">
                 <td>{{selectedLabor.roleName}}</td>
                 <td>{{selectedLabor.laborHours*selectedLabor.roleWage | currency:'USD':true}}
-                </td>
-                <td>
-                  <button (click)="onRemoveLabor(selectedLabor, i)" type="button" class="btn btn-danger">
-                    <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-                  </button>
                 </td>
               </tr>
             </tbody>
@@ -479,13 +516,12 @@
               <tr class="active">
                 <th>Total Labor Cost</th>
                 <th>{{totalLaborPrice | currency: 'USD':true}}</th>
-                <th></th>
               </tr>
             </tfoot>
           </table>
-          <button type="submit" class="btn btn-primary">
+          <button [disabled]="f3.invalid" type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Add</button>
-          <button type="reset" class="btn btn-warning" (click)="onClearBidLabor()">
+          <button type="button" (click)="clearContactFields()" class="btn btn-warning">
             <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
         </form>
       </div>

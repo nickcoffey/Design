@@ -75,7 +75,7 @@ router.post('/update', passport.authenticate('jwt', { session: false }), (reques
     }
 
     bid.updateBid(updatedBid, (message) => {
-        if (message.message == "") {
+        if (message.warningCount == 0) {
             response.json({
                 success: true,
                 msg: 'Bid updated'
@@ -336,6 +336,8 @@ router.post('/:id/new/bid-labor', passport.authenticate('jwt', { session: false 
         roleWage: request.body.roleWage,
         laborHours: request.body.laborHours
     };
+    console.log(newBidLabor);
+
     bid.createBidLaborById(newBidLabor, (message) => {
         if (message.message == "") {
             response.json({

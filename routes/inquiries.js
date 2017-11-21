@@ -123,7 +123,7 @@ router.post('/update', passport.authenticate('jwt', {session: false}), (request,
     }
 
     inquiry.updateInquiry(updatedInquiry, (message) => {
-        if(message.message == ""){
+        if(message.warningCount == 0){
             response.json({
                 success: true,
                 msg: 'Inquiry updated'

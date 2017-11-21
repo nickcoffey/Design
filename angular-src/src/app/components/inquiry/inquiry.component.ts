@@ -23,19 +23,18 @@ export class InquiryComponent implements OnInit {
   /** BID **/
   margin: number = 0;
   /** LABOR **/
-  bidLabor: number = 0;
-  bidPrice: number = null;
-  linearFeet: number = 0;
+  bidPrice: number = 0;
   labors: any;
   labor: any;
   selectedLabors: SelectedLabor[] = [];
-  laborHours: number = null;
+  laborHours: number = 0;
   laborID: number = null;
   totalLaborPrice: number = 0;
   /** MATERIALS **/
-  materials: any;
-  material: any;
+  materials: Material[];
+  material: Material;
   materialID: number = null;
+  linearFeet: number = 0;
   totalMaterialPrice: number = 0;
   selectedMaterials1: SelectedMaterial[] = []; 
 
@@ -73,6 +72,44 @@ export class InquiryComponent implements OnInit {
     });
   }
 
+  clearDescription() {
+    this.description = '';
+  }
+
+  onClickUpdate(){
+    this.description = this.inquiry[0].description;
+  }
+
+  onUpdate() {
+    let updatedInquiry = {
+      inquiryID: this.id,
+      description: this.description
+    }
+
+    this.inquiryService.updateInquiry(updatedInquiry).subscribe((data) => {
+      if (data.success) {
+        console.log(data.msg);
+        this.clearDescription();
+        $('#update-modal').modal('hide');
+      } else {
+        console.log(data.msg);
+      }
+    });
+
+    this.ngOnInit();
+  }
+
+  onDelete() {
+    this.inquiryService.deleteInquiry(this.id).subscribe((data) => {
+      if (data.success) {
+        console.log(data.msg);
+        this.router.navigate(['/inquiries']);
+      } else {
+        console.log(data.msg);
+      }
+    });
+  }
+
   /************************************ BID *********************************/
   onCreate() {
     const updatedInquiry = {
@@ -82,7 +119,7 @@ export class InquiryComponent implements OnInit {
     };
     const newBid = {
       inquiryID: this.id,
-      bidPrice: (1 + this.margin) * (this.totalMaterialPrice + this.totalLaborPrice + this.bidLabor)
+      bidPrice: (1 + (this.margin/100)) * (this.totalMaterialPrice + this.totalLaborPrice)
     };
 
     this.createBid(newBid);
@@ -169,7 +206,7 @@ export class InquiryComponent implements OnInit {
   }
 
   onRemoveMaterial(material, id) {
-    this.totalMaterialPrice -= (material.pricePerLinearFoot * material.linearFeet);
+    this.totalMaterialPrice -= ((material.pricePerUnit/material.linearFeetCoverage) * material.linearFeet);
     this.selectedMaterials1.splice(id, 1);
     this.materials.push(material);
   }
@@ -205,41 +242,10 @@ export class InquiryComponent implements OnInit {
     this.totalLaborPrice = 0;
     this.selectedMaterials1 = [];
     this.totalMaterialPrice = 0;
-    this.bidLabor = 0;
+    this.laborHours = 0;
     this.margin = 0;
+    
     //this.ngOnInit();
-  }
-
-  onClickUpdate(){
-    this.description = this.inquiry[0].description;
-  }
-
-  onUpdate() {
-    let updatedInquiry = {
-      inquiryID: this.id,
-      description: this.description
-    }
-
-    this.inquiryService.updateInquiry(updatedInquiry).subscribe((data) => {
-      if (data.success) {
-        console.log(data.msg);
-      } else {
-        console.log(data.msg);
-      }
-    });
-
-    this.ngOnInit();
-  }
-
-  onDelete() {
-    this.inquiryService.deleteInquiry(this.id).subscribe((data) => {
-      if (data.success) {
-        console.log(data.msg);
-        this.router.navigate(['/inquiries']);
-      } else {
-        console.log(data.msg);
-      }
-    });
   }
 }
 
@@ -255,6 +261,12 @@ interface SelectedLabor {
   roleName: String,
   roleWage: number,
   laborHours: number
+}
+interface Material {
+  materialID: number,
+  materialName: String,
+  pricePerUnit: number,
+  linearFeetCoverage: number
 }
 
 

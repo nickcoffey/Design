@@ -15,37 +15,37 @@ declare var $;
 export class BidComponent implements OnInit {
 
   /** Bid **/
-  id: any;
+  id: number = null;
   bid: any;
-  bidPrice: any;
-  bidStatus: any;
-  createdDate: any;
-  endDate: any;
-  status: any;
+  bidPrice: number = null;
+  bidStatus: string = '';
+  createdDate: string = '';
+  endDate: string = '';
+  status: string = '';
   /** Materials **/
   bidMaterials: any;
   material: any;
-  materialID: number;
+  materialID: number = null;
   linearFeet: number = 0;
   pricePerUnit: number = 0;
-  materialName: any;
+  materialName: string = '';
   linearFeetCoverage: number = 0;
   totalMaterialPrice: number = 0;
   totalMaterialPriceTable: number = 0;
   materials: any;
   selectedMaterials1: SelectedMaterial[] = [];
-  bidMaterialID: number;
-  materialIndex: any;
+  bidMaterialID: number = null;
+  materialIndex: number = null;
   /** Labor **/
   labors: any = [];
   bidLabors: any;
-  laborIndex: any;
-  wage: number;
-  hours: number;
-  roleName: any;
-  laborID: any;
+  laborIndex: number = null;
+  wage: number = 0;
+  hours: number = 0;
+  roleName: string = '';
+  laborID: number = null;
   selectedLabors: SelectedLabor[] = [];
-  totalLaborPrice: number;
+  totalLaborPrice: number = 0;
   totalLaborPriceTable: number = 0;
 
   constructor(
@@ -132,7 +132,7 @@ export class BidComponent implements OnInit {
   }
 
   onClickUpdateBid() {
-    this.bidPrice = this.bid[0].bidPrice;
+    this.bidPrice = Math.round(this.bid[0].bidPrice);
   }
 
   onUpdate() {
@@ -147,13 +147,13 @@ export class BidComponent implements OnInit {
     this.bidService.updateBid(updatedBid).subscribe((data) => {
       if (data.success) {
         console.log(data.msg);
+        this.onClear();
+        this.getBid();
+        $('#update-bid-modal').modal('hide');
       } else {
         console.log(data.msg);
       }
     });
-    this.onClear();
-
-    this.ngOnInit();
   }
 
   /**************************************************** Bid Materials **********************************************************************/
@@ -247,14 +247,20 @@ export class BidComponent implements OnInit {
     });
   }
 
+  clearMaterialUpdate() {
+    this.linearFeet = 0;
+    this.pricePerUnit = 0;
+    this.linearFeetCoverage = 0;
+  }
+
   onClearBidMaterial() {
     this.selectedMaterials1.forEach(selectedMaterial => {
       this.materials.push(selectedMaterial);
     });
     this.selectedMaterials1 = [];
-    this.linearFeet = null;
-    this.pricePerUnit = null;
-    this.linearFeetCoverage = null;
+    this.linearFeet = 0;
+    this.pricePerUnit = 0;
+    this.linearFeetCoverage = 0;
   }
 
   onClickUpdateBidMaterial(materialID, materialIndex) {
@@ -385,11 +391,16 @@ export class BidComponent implements OnInit {
     });
   }
 
+  onClearLaborUpdate() {
+    this.wage = 0;
+    this.hours = 0;
+  }
+
   onClearBidLabor() {
     this.laborIndex = null;
-    this.wage = null;
-    this.hours = null;
-    this.roleName = null;
+    this.wage = 0;
+    this.hours = 0;
+    this.roleName = '';
     this.selectedLabors.forEach((selectedLabor) => {
       this.labors.push(selectedLabor);
     });

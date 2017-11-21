@@ -1,5 +1,6 @@
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-  <button class="btn btn-default" [routerLink]="['/jobs']"><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Go To Jobs</button>
+  <button class="btn btn-default" [routerLink]="['/jobs']">
+    <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Go To Jobs</button>
 </div>
 <h2 class="page-header col-xs-12 col-sm-12 col-md-12 col-lg-12">Job #{{job[0].jobID}}</h2>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -214,7 +215,7 @@
           <tr>
             <td>{{job[0].bidLabor | currency: 'USD':true}}</td>
             <td>{{job[0].bidMaterials | currency: 'USD':true}}</td>
-            <td>{{job[0].bidLabor + job[0].bidMaterials | currency: 'USD':true}}</td>
+            <th>{{job[0].bidLabor + job[0].bidMaterials | currency: 'USD':true}}</th>
           </tr>
         </tbody>
       </table>
@@ -303,14 +304,20 @@
         <h4 class="modal-title">Update Revenue</h4>
       </div>
       <div class="modal-body">
-        <form (submit)="onUpdateJobRevenue()">
+        <form #f4="ngForm" (submit)="onUpdateJobRevenue()">
           <div class="form-group">
             <label>Amount</label>
-            <input type="number" [(ngModel)]="revenueAmount" name="revenueAmount" placeholder="Amount" class="form-control" required>
+            <input required mask="0000000" #revenue2="ngModel" type="number" [(ngModel)]="revenueAmount" name="revenueAmount" placeholder="Amount"
+              class="form-control">
+            <div *ngIf="revenue2.invalid" style="color:#ff0000">
+              <div *ngIf="revenue2.errors.required">
+                *Revenue is required
+              </div>
+            </div>
           </div>
-          <button type="submit" class="btn btn-primary">
+          <button [disabled]="f4.invalid" type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
-          <button type="reset" class="btn btn-warning">
+          <button type="button" (click)="onClearJobRevenue()" class="btn btn-warning">
             <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
           <button type="button" class="btn btn-danger" data-toggle="modal" href='#delete-revenue-modal'>
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</button>
@@ -350,14 +357,20 @@
         <h4 class="modal-title">Add Revenue</h4>
       </div>
       <div class="modal-body">
-        <form (submit)="onCreateJobRevenue()">
+        <form #f3="ngForm" (submit)="onCreateJobRevenue()">
           <div class="form-group">
             <label>Amount</label>
-            <input type="number" [(ngModel)]="revenueAmount" name="revenueAmount" placeholder="Amount" class="form-control" required>
+            <input required mask="0000000" #revenue="ngModel" type="number" [(ngModel)]="revenueAmount" name="revenueAmount" placeholder="Amount"
+              class="form-control">
+            <div *ngIf="revenue.invalid" style="color:#ff0000">
+              <div *ngIf="revenue.errors.required">
+                *Revenue is required
+              </div>
+            </div>
           </div>
-          <button type="submit" class="btn btn-primary">
+          <button [disabled]="f3.invalid" type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Create</button>
-          <button type="reset" class="btn btn-warning">
+          <button type="button" (click)="onClearJobRevenue()" class="btn btn-warning">
             <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
         </form>
       </div>
@@ -378,18 +391,28 @@
         <h4 class="modal-title">Update {{roleName}} Labor From {{laborDate | date: 'MM/dd/yyyy'}}</h4>
       </div>
       <div class="modal-body">
-        <form (submit)="onUpdateJobLabor()">
+        <form #f5="ngForm" (submit)="onUpdateJobLabor()">
           <div class="form-group">
             <label>Hours</label>
-            <input type="number" [(ngModel)]="hours" name="hours" placeholder="Hours" class="form-control" required>
+            <input required mask="00000" #hours1="ngModel" type="number" [(ngModel)]="hours" name="hours" placeholder="Hours" class="form-control">
+            <div *ngIf="hours1.invalid" style="color:#ff0000">
+              <div *ngIf="hours1.errors.required">
+                *Hours are required
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <label>Wage</label>
-            <input type="number" [(ngModel)]="wage" name="wage" placeholder="Wage" class="form-control" required>
+            <input required onKeyPress="if(this.value.length==5) return false;" #wage1="ngModel" type="number" [(ngModel)]="wage" name="wage" placeholder="Wage" class="form-control">
+            <div *ngIf="wage1.invalid" style="color:#ff0000">
+              <div *ngIf="wage1.errors.required">
+                *Wage is required
+              </div>
+            </div>
           </div>
-          <button type="submit" class="btn btn-primary">
+          <button [disabled]="f5.invalid" type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
-          <button type="reset" class="btn btn-warning">
+          <button type="button" (click)="clearLaborUpdate()" class="btn btn-warning">
             <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
           <button type="button" class="btn btn-danger" data-toggle="modal" href='#delete-labor-modal'>
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</button>
@@ -429,13 +452,13 @@
         <h4 class="modal-title">Add Labor</h4>
       </div>
       <div class="modal-body">
-        <form (submit)="onCreateJobLabor()">
-          <table class="table table-bordered" *ngIf="labors[0] != null">
+        <form #f6="ngForm" (submit)="onCreateJobLabor()">
+          <table class="table" *ngIf="labors[0] != null">
             <thead>
-              <tr class="active">
-                <th>Role</th>
-                <th>Hours</th>
-                <th>Add</th>
+              <tr>
+                <th>Select Role</th>
+                <th>Enter Hours</th>
+                <th>Add Role</th>
               </tr>
             </thead>
             <tbody>
@@ -447,34 +470,36 @@
                   </select>
                 </td>
                 <td>
-                  <input type="number" [(ngModel)]="hours" name="hours" placeholder="Hours" class="form-control" aria-describedby="hours-addon"
-                    required>
+                  <input required mask="00000" #hours2="ngModel" type="number" [(ngModel)]="hours" name="hours" placeholder="Hours" class="form-control"
+                    aria-describedby="hours-addon">
                 </td>
                 <td>
-                  <button (click)="onAddLabor()" type="button" class="btn btn-success">
+                  <button [disabled]="hours2.invalid" (click)="onAddLabor()" type="button" class="btn btn-success">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                   </button>
                 </td>
               </tr>
             </tbody>
+            <tfoot>
+              <tr *ngIf="hours2.invalid" style="color:#ff0000">
+                <td *ngIf="hours2.errors.required"></td>
+                <td *ngIf="hours2.errors.required">*Hours are required</td>
+                <td *ngIf="hours2.errors.required"></td>
+              </tr>
+            </tfoot>
           </table>
-          <table class="table table-bordered" *ngIf="selectedLabors.length != 0;">
+          <label style="color:#ff0000" *ngIf="selectedLabors.length != 0;">Click To Delete</label>
+          <table class="table table-bordered table-hover" *ngIf="selectedLabors.length != 0;">
             <thead>
               <tr class="active">
                 <th>Role</th>
                 <th>Estimated Cost</th>
-                <th>Delete</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let selectedLabor of selectedLabors; let i = index">
+              <tr *ngFor="let selectedLabor of selectedLabors; let i = index" (click)="onRemoveLabor(selectedLabor, i)">
                 <td>{{selectedLabor.roleName}}</td>
                 <td>{{selectedLabor.laborHours*selectedLabor.roleWage | currency:'USD':true}}
-                </td>
-                <td>
-                  <button (click)="onRemoveLabor(selectedLabor, i)" type="button" class="btn btn-danger">
-                    <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-                  </button>
                 </td>
               </tr>
             </tbody>
@@ -482,13 +507,12 @@
               <tr class="active">
                 <th>Total Labor Cost</th>
                 <th>{{totalLaborPrice | currency: 'USD':true}}</th>
-                <th></th>
               </tr>
             </tfoot>
           </table>
-          <button type="submit" class="btn btn-primary">
+          <button [disabled]="f6.invalid" type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Add</button>
-          <button type="reset" class="btn btn-warning" (click)="onClearJobLabor()">
+          <button type="button" (click)="clearLaborCreate()" class="btn btn-warning" (click)="onClearJobLabor()">
             <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
         </form>
       </div>
@@ -509,14 +533,14 @@
         <h4 class="modal-title">Add Materials</h4>
       </div>
       <div class="modal-body">
-        <form (submit)="onCreateBidMaterials()">
+        <form #f8="ngForm" (submit)="onCreateJobMaterials()">
           <div class="form-group">
-            <table class="table table-bordered" *ngIf="materials[0] != null">
+            <table class="table" *ngIf="materials[0] != null">
               <thead>
-                <tr class="active">
-                  <th>Name</th>
-                  <th>Linear Feet</th>
-                  <th>Add</th>
+                <tr>
+                  <th>Select Material</th>
+                  <th>Enter Linear Feet</th>
+                  <th>Add Material</th>
                 </tr>
               </thead>
               <tbody>
@@ -528,47 +552,48 @@
                     </select>
                   </td>
                   <td>
-                    <input type="text" [(ngModel)]="linearFeet" name="linearFeet" placeholder="Linear Feet" class="form-control" required>
+                    <input required mask="0000000" #feet2="ngModel" type="number" [(ngModel)]="linearFeet" name="linearFeet" placeholder="Linear Feet" class="form-control">
                   </td>
                   <td>
-                    <button (click)="onAddMaterial()" type="button" class="btn btn-success">
+                    <button [disabled]="feet2.invalid" (click)="onAddMaterial()" type="button" class="btn btn-success">
                       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     </button>
                   </td>
                 </tr>
               </tbody>
+              <tfoot>
+                <tr *ngIf="feet2.invalid" style="color:#ff0000">
+                  <td *ngIf="feet2.errors.required"></td>
+                  <td *ngIf="feet2.errors.required">*Linear feet are required</td>
+                  <td *ngIf="feet2.errors.required"></td>
+                </tr>
+              </tfoot>
             </table>
-            <table class="table table-bordered" *ngIf="selectedMaterials1.length != 0;">
+            <label style="color:#ff0000" *ngIf="selectedMaterials1.length != 0;">Click To Delete</label>
+            <table class="table table-bordered table-hover" *ngIf="selectedMaterials1.length != 0;">
               <thead>
                 <tr class="active">
                   <th>Name</th>
                   <th>Estimated Cost</th>
-                  <th>Delete</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let selectedMaterial of selectedMaterials1; let i = index">
+                <tr *ngFor="let selectedMaterial of selectedMaterials1; let i = index" (click)="onRemoveMaterial(selectedMaterial, i)">
                   <td>{{selectedMaterial.materialName}}</td>
                   <td>{{selectedMaterial.linearFeet*selectedMaterial.pricePerUnit/selectedMaterial.linearFeetCoverage | currency:'USD':true}}</td>
-                  <td>
-                    <button (click)="onRemoveMaterial(selectedMaterial, i)" type="button" class="btn btn-danger">
-                      <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-                    </button>
-                  </td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr class="active">
                   <th>Total Material Cost</th>
                   <th>{{totalMaterialPrice | currency: 'USD':true}}</th>
-                  <th></th>
                 </tr>
               </tfoot>
             </table>
           </div>
-          <button type="submit" class="btn btn-primary">
+          <button [disabled]="f8.invalid" type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-tint" aria-hidden="true"></span> Create</button>
-          <button type="reset" class="btn btn-warning">
+          <button type="button" (click)="onClearJobMaterials()" class="btn btn-warning">
             <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
         </form>
       </div>
@@ -588,23 +613,40 @@
         <h4 class="modal-title">Update {{materialName}}</h4>
       </div>
       <div class="modal-body">
-        <form (submit)="onUpdateJobMaterial()">
+        <form #f7="ngForm" (submit)="onUpdateJobMaterial()">
           <div class="form-group">
             <label>Linear Feet</label>
-            <input type="number" [(ngModel)]="linearFeet" name="linearFeet" placeholder="Linear Feet" class="form-control" required>
+            <input required mask="0000000" #feet="ngModel" type="number" [(ngModel)]="linearFeet" name="linearFeet" placeholder="Linear Feet"
+              class="form-control">
+            <div *ngIf="feet.invalid" style="color:#ff0000">
+              <div *ngIf="feet.errors.required">
+                *Linear feet are required
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <label>Price Per Unit</label>
-            <input type="number" [(ngModel)]="pricePerUnit" name="pricePerUnit" placeholder="Price Per Unit" class="form-control" required>
+            <input required onKeyPress="if(this.value.length==5) return false;" #perUnit="ngModel" type="number" [(ngModel)]="pricePerUnit" name="pricePerUnit" placeholder="Price Per Unit"
+              class="form-control">
+            <div *ngIf="perUnit.invalid" style="color:#ff0000">
+              <div *ngIf="perUnit.errors.required">
+                *Per unit cost is required
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <label>Coverage In Linear Feet</label>
-            <input type="number" [(ngModel)]="linearFeetCoverage" name="linearFeetCoverage" placeholder="Coverage In Linear Feet" class="form-control"
-              required>
+            <input required mask="0000000" #coverage="ngModel" type="number" [(ngModel)]="linearFeetCoverage" name="linearFeetCoverage"
+              placeholder="Coverage In Linear Feet" class="form-control">
+            <div *ngIf="coverage.invalid" style="color:#ff0000">
+              <div *ngIf="coverage.errors.required">
+                *Coverage in linear feet is required
+              </div>
+            </div>
           </div>
-          <button type="submit" class="btn btn-primary">
+          <button [disabled]="f7.invalid" type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
-          <button type="reset" class="btn btn-warning">
+          <button type="button" (click)="clearMaterialUpdate()" class="btn btn-warning">
             <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
           <button type="button" class="btn btn-danger" data-toggle="modal" href='#delete-material-modal'>
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</button>
@@ -646,14 +688,20 @@
         <h4 class="modal-title">Update Change Order</h4>
       </div>
       <div class="modal-body">
-        <form (submit)="onUpdateChangeOrder()">
+        <form #f="ngForm" (submit)="onUpdateChangeOrder()">
           <div class="form-group">
             <label>Amount</label>
-            <input type="number" [(ngModel)]="changeAmount" name="changeAmount" placeholder="Amount" class="form-control" required>
+            <input required mask="0000000" #amount="ngModel" type="number" [(ngModel)]="changeAmount" name="changeAmount" placeholder="Amount"
+              class="form-control">
+            <div *ngIf="amount.invalid" style="color:#ff0000">
+              <div *ngIf="amount.errors.required">
+                *Change amount is required
+              </div>
+            </div>
           </div>
-          <button type="submit" class="btn btn-primary">
+          <button [disabled]="f.invalid" type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
-          <button type="reset" class="btn btn-warning">
+          <button type="button" (click)="onClearChangeOrder()" class="btn btn-warning">
             <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
           <button type="button" class="btn btn-danger" data-toggle="modal" href='#delete-change-modal'>
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</button>
@@ -693,14 +741,20 @@
         <h4 class="modal-title">Create Change Order</h4>
       </div>
       <div class="modal-body">
-        <form (submit)="onCreateChangeOrder()">
+        <form #f2="ngForm" (submit)="onCreateChangeOrder()">
           <div class="form-group">
             <label>Amount</label>
-            <input type="number" [(ngModel)]="changeAmount" name="changeAmount" placeholder="Amount" class="form-control" required>
+            <input required mask="0000000" #amount2="ngModel" type="number" [(ngModel)]="changeAmount" name="changeAmount" placeholder="Amount"
+              class="form-control">
+            <div *ngIf="amount2.invalid" style="color:#ff0000">
+              <div *ngIf="amount2.errors.required">
+                *Change amount is required
+              </div>
+            </div>
           </div>
-          <button type="submit" class="btn btn-primary">
+          <button [disabled]="f2.invalid" type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Create</button>
-          <button type="reset" class="btn btn-warning">
+          <button type="button" (click)="onClearChangeOrder()" class="btn btn-warning">
             <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
         </form>
       </div>

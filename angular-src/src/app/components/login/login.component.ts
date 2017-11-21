@@ -9,30 +9,35 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  username:String;
-  password:String;
+  username: string = '';
+  password: string = '';
 
   constructor(
-    private authService:AuthService,
-    private router:Router
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit() {
   }
 
-  onLogin(){
+  onLogin() {
     const user = {
       username: this.username,
       password: this.password
     };
 
     this.authService.authenticateUser(user).subscribe((data) => {
-      if(data.success){
+      if (data.success) {
         this.authService.storeUserData(data.token, data.user);
         this.router.navigate(['home']);
-      } else{
+      } else {
         this.router.navigate(['login']);
       }
     });
+  }
+
+  clearFields() {
+    this.username= '';
+    this.password = '';
   }
 }

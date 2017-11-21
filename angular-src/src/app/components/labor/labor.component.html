@@ -9,7 +9,6 @@
   <table class="table table-bordered table-hover">
     <thead>
       <tr class="active">
-        <th class="hidden-xs hidden-sm">ID</th>
         <th>Role</th>
         <th>Per Hour Wage</th>
       </tr>
@@ -17,7 +16,6 @@
     <tbody>
       <tr *ngFor="let labor of labors" (click)="onClickUpdate(labor.roleID, labor.roleName, labor.roleWage)" data-toggle="modal"
         href='#update-modal'>
-        <td class="hidden-xs hidden-sm">{{labor.roleID}}</td>
         <td>{{labor.roleName}}</td>
         <td>{{labor.roleWage | currency: 'USD':true}}</td>
       </tr>
@@ -48,7 +46,7 @@
           </div>
           <div class="form-group">
             <label>Role Wage Per Hour</label>
-            <input required onKeyPress="if(this.value.length==10) return false;" #wage="ngModel" type="number" [(ngModel)]="roleWage" name="roleWage" placeholder="Role Wage Per Hour" class="form-control" required>
+            <input required onKeyPress="if(this.value.length==5) return false;" #wage="ngModel" type="number" [(ngModel)]="roleWage" name="roleWage" placeholder="Role Wage Per Hour" class="form-control" required>
             <div *ngIf="wage.invalid" style="color:#ff0000">
               <div *ngIf="wage.errors.required">
                 *Wage is required
@@ -89,7 +87,7 @@
           </div>
           <div class="form-group">
             <label>Role Wage Per Hour</label>
-            <input required onKeyPress="if(this.value.length==10) return false;" #wage2="ngModel" type="number" [(ngModel)]="roleWage" name="roleWage" placeholder="Role Wage Per Hour" class="form-control" required>
+            <input required onKeyPress="if(this.value.length==5) return false;" #wage2="ngModel" type="number" [(ngModel)]="roleWage" name="roleWage" placeholder="Role Wage Per Hour" class="form-control" required>
             <div *ngIf="wage2.invalid" style="color:#ff0000">
               <div *ngIf="wage2.errors.required">
                 *Wage is required

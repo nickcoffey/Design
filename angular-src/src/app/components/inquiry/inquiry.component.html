@@ -113,14 +113,20 @@
         <h4 class="modal-title">Update Inquiry</h4>
       </div>
       <div class="modal-body">
-        <form (submit)="onUpdate()">
+        <form #f="ngForm" (submit)="onUpdate()">
           <div class="form-group">
             <label for="">Description</label>
-            <textarea type="text" class="form-control" [(ngModel)]="description" name="description" placeholder="Description"></textarea>
+            <textarea required maxlength="950" #inquiryDescription="ngModel" type="text" class="form-control" [(ngModel)]="description" name="description" placeholder="Description"></textarea>
+            {{description.length}}/950
+            <div *ngIf="inquiryDescription.invalid" style="color:#ff0000">
+              <div *ngIf="inquiryDescription.errors.required">
+                *Description is required
+              </div>
+            </div>
           </div>
-          <button type="submit" class="btn btn-primary">
+          <button [disabled]="f.invalid" type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
-          <button type="reset" class="btn btn-warning">
+          <button type="button" (click)="clearDescription()" class="btn btn-warning">
             <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
         </form>
       </div>
@@ -140,19 +146,19 @@
         <h4 class="modal-title">Create Bid</h4>
       </div>
       <div class="modal-body">
-        <form (submit)="onCreate()">
+        <form #f2="ngForm" (submit)="onCreate()">
           <div class="panel panel-primary">
             <div class="panel-heading">
               <h3 class="panel-title">Enter Costs</h3>
             </div>
             <div class="panel-body">
               <h4>Labor Cost</h4>
-              <table class="table table-bordered" *ngIf="labors[0] != null">
+              <table class="table" *ngIf="labors[0] != null">
                 <thead>
-                  <tr class="active">
-                    <th>Role</th>
-                    <th>Hours</th>
-                    <th>Add</th>
+                  <tr>
+                    <th>Select Role</th>
+                    <th>Enter Hours</th>
+                    <th>Add Role</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -164,34 +170,39 @@
                       </select>
                     </td>
                     <td>
-                      <input type="number" [(ngModel)]="laborHours" name="laborHours" placeholder="Labor Hours" class="form-control" aria-describedby="hours-addon"
-                        required>
+                      <input required mask="00000" #hours="ngModel" type="number" [(ngModel)]="laborHours" name="laborHours" placeholder="Labor Hours" class="form-control" aria-describedby="hours-addon">
                     </td>
                     <td>
-                      <button (click)="onAddLabor()" type="button" class="btn btn-success">
+                      <button [disabled]="hours.invalid" (click)="onAddLabor()" type="button" class="btn btn-success">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                       </button>
                     </td>
                   </tr>
                 </tbody>
+                <tfoot>
+                  <tr *ngIf="hours.invalid">
+                    <td></td>
+                    <td style="color:#ff0000">
+                      <div *ngIf="hours.errors.required">
+                        *Hours are required
+                      </div>
+                    </td>
+                    <td></td>
+                  </tr>
+                </tfoot>
               </table>
-              <table class="table table-bordered" *ngIf="selectedLabors.length != 0;">
+              <label style="color:#ff0000" *ngIf="selectedLabors.length != 0;">Click To Remove</label>
+              <table class="table table-bordered table-hover" *ngIf="selectedLabors.length != 0;">
                 <thead>
                   <tr class="active">
                     <th>Role</th>
                     <th>Estimated Cost</th>
-                    <th>Delete</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let selectedLabor of selectedLabors; let i = index">
+                  <tr *ngFor="let selectedLabor of selectedLabors; let i = index" (click)="onRemoveLabor(selectedLabor, i)">
                     <td>{{selectedLabor.roleName}}</td>
                     <td>{{selectedLabor.laborHours*selectedLabor.roleWage | currency:'USD':true}}
-                    </td>
-                    <td>
-                      <button (click)="onRemoveLabor(selectedLabor, i)" type="button" class="btn btn-danger">
-                        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-                      </button>
                     </td>
                   </tr>
                 </tbody>
@@ -199,19 +210,18 @@
                   <tr class="active">
                     <th>Total Labor Cost</th>
                     <th>{{totalLaborPrice | currency: 'USD':true}}</th>
-                    <th></th>
                   </tr>
                 </tfoot>
               </table>
             </div>
             <div class="panel-body">
               <h4>Material Cost</h4>
-              <table class="table table-bordered" *ngIf="materials[0] != null">
+              <table class="table" *ngIf="materials[0] != null">
                 <thead>
-                  <tr class="active">
-                    <th>Name</th>
-                    <th>Linear Feet</th>
-                    <th>Add</th>
+                  <tr>
+                    <th>Select Material</th>
+                    <th>Enter Linear Feet</th>
+                    <th>Add Material</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -223,34 +233,36 @@
                       </select>
                     </td>
                     <td>
-                      <input type="number" [(ngModel)]="linearFeet" name="linearFeet" placeholder="Linear Feet" class="form-control" required>
+                      <input required mask="0000000" #feet="ngModel" type="number" [(ngModel)]="linearFeet" name="linearFeet" placeholder="Linear Feet" class="form-control" required>
                     </td>
                     <td>
-                      <button (click)="onAddMaterial()" type="button" class="btn btn-success">
+                      <button [disabled]="feet.invalid" (click)="onAddMaterial()" type="button" class="btn btn-success">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                       </button>
                     </td>
                   </tr>
                 </tbody>
+                <tfoot>
+                  <tr *ngIf="feet.invalid">
+                    <td *ngIf="feet.errors.required"></td>
+                    <td *ngIf="feet.errors.required" style="color:#ff0000">*Linear feet are required</td>
+                    <td *ngIf="feet.errors.required"></td>
+                  </tr>
+                </tfoot>
               </table>
-              <table class="table table-bordered" *ngIf="selectedMaterials1.length != 0;">
+              <label *ngIf="selectedMaterials1.length != 0;" style="color:#ff0000"></label>
+              <table class="table table-bordered table-hover" *ngIf="selectedMaterials1.length != 0;">
                 <thead>
                   <tr class="active">
                     <th>Name</th>
                     <th>Estimated Cost</th>
-                    <th>Delete</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let selectedMaterial of selectedMaterials1; let i = index">
+                  <tr *ngFor="let selectedMaterial of selectedMaterials1; let i = index" (click)="onRemoveMaterial(selectedMaterial, i)">
                     <td>{{selectedMaterial.materialName}}</td>
                     <td>{{selectedMaterial.linearFeet*selectedMaterial.pricePerUnit/selectedMaterial.linearFeetCoverage | currency:
                       'USD':true}}
-                    </td>
-                    <td>
-                      <button (click)="onRemoveMaterial(selectedMaterial, i)" type="button" class="btn btn-danger">
-                        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-                      </button>
                     </td>
                   </tr>
                 </tbody>
@@ -258,29 +270,33 @@
                   <tr class="active">
                     <th>Total Material Cost</th>
                     <th>{{totalMaterialPrice | currency: 'USD':true}}</th>
-                    <th></th>
                   </tr>
                 </tfoot>
               </table>
               <hr>
-              <h4>Total Cost: {{totalLaborPrice + totalMaterialPrice + bidLabor | currency: 'USD':true}}</h4>
+              <h4>Total Cost: {{totalLaborPrice + totalMaterialPrice | currency: 'USD':true}}</h4>
             </div>
           </div>
           <div class="panel panel-primary">
             <div class="panel-heading">
-              <h3 class="panel-title">Enter Desired Margin</h3>
+              <h3 class="panel-title">Enter Desired % Profit Margin</h3>
             </div>
             <div class="panel-body">
               <div class="form-group">
-                <input type="number" [(ngModel)]="margin" name="margin" placeholder="Margin" class="form-control" required />
+                <input required mask="00" #profitMargin="ngModel" type="number" [(ngModel)]="margin" name="margin" placeholder="Margin" class="form-control" required />
+                <div *ngIf="profitMargin.invalid" style="color:#ff0000">
+                  <div *ngIf="profitMargin.errors.required">
+                    *Margin is required
+                  </div>
+                </div>
               </div>
               <hr>
-              <h4>Recommended Bid: {{(1 + margin)*(totalMaterialPrice + totalLaborPrice + bidLabor) | currency: 'USD':true}}</h4>
+              <h4>Recommended Bid: {{(1 + (margin/100))*(totalMaterialPrice + totalLaborPrice) | currency: 'USD':true}}</h4>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary">
+          <button [disabled]="f2.invalid" type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-file" aria-hidden="true"></span> Create</button>
-          <button type="reset" class="btn btn-warning" (click)="onClear()">
+          <button type="button" (click)="onClear()" class="btn btn-warning" (click)="onClear()">
             <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
         </form>
       </div>

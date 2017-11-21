@@ -61,7 +61,7 @@ router.post('/authenticate', (request, response, next) => {
             // If callback hash matches 
             if(isMatch){
                 const token = jwt.sign(restrictedUser, config.secret, {
-                    expiresIn: 3600 // 1 hour in seconds
+                    expiresIn: 86400 // 1 day in seconds
                 });
 
                 response.json({
