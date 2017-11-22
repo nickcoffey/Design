@@ -312,7 +312,7 @@ module.exports.getJobFilesById = function (jobID, callback) {
 
 module.exports.deleteJobFile = function (fileID, callback) {
     const queryString = sqlString.format(`DELETE FROM JobFiles WHERE fileID = ?`, [fileID]);
-    console.log(queryString);
+    // console.log(queryString);
     connection.query(queryString, (error, rows, fields) => {
         if (!error) {
             callback(rows);

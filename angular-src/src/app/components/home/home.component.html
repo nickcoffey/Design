@@ -1,22 +1,20 @@
-<div class="jumbotron">
-  <div class="container">
-    <h1>Allied Waterproofing</h1>
-    <p>Project Management Application</p>
-  </div>
-</div>
-
 <ng-container *ngIf="jobs.length > 0; else noJobs">
-  <h2 class="page-header">Current Jobs</h2>
-  <h4>Click To View Details</h4>
+  <!-- <h2 class="page-header">Current Jobs</h2> -->
+  <div class="jumbotron">
+    <div class="container">
+      <h1>Current Jobs</h1>
+      <p>Click To View Details</p>
+    </div>
+  </div>
   <div class="panel-group" id="accordion">
     <div class="panel panel-primary" *ngFor="let job of jobs; let i = index">
-      <div class="panel-heading">
+      <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" [attr.href]="'#accordion' + job.jobID">
         <h3>
           Job # {{job.jobID}}
-          <button type="button" class="btn btn-info collapsed" data-toggle="collapse" data-parent="#accordion" [attr.href]="'#accordion' + job.jobID">
+          <!-- <button type="button" class="btn btn-info collapsed" data-toggle="collapse" data-parent="#accordion" [attr.href]="'#accordion' + job.jobID">
             <span class="if-collapsed">Show</span>
             <span class="if-not-collapsed">Hide</span>
-          </button>
+          </button> -->
         </h3>
       </div>
       <div [attr.id]="'accordion' + job.jobID" class="panel-body panel-collapse collapse" style="margin-top:0;">

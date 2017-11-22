@@ -4,74 +4,78 @@
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
   <ng-container *ngIf="customer[0]; else noCustomer">
     <h2 class="page-header">{{customer[0].customerName}}</h2>
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3>Customer Details</h3>
-      </div>
-      <div class="panel-body" style="word-break:break-all">
-        <table class="table table-bordered">
-          <thead>
-            <tr class="active">
-              <th>Address</th>
-              <th>City</th>
-              <th class="hidden-xs hidden-sm">State</th>
-              <th class="hidden-xs hidden-sm">ZIP</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{{customer[0].address}}</td>
-              <td>{{customer[0].city}}</td>
-              <td class="hidden-xs hidden-sm">{{customer[0].state}}</td>
-              <td class="hidden-xs hidden-sm">{{customer[0].zip}}</td>
-            </tr>
-          </tbody>
-        </table>
-        <button (click)="onClickUpdateCustomer()" class="btn btn-info" href="#update-customer-modal" data-toggle="modal">
-          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Update Customer</button>
-        <button class="btn btn-danger" data-toggle="modal" href='#delete-customer-modal'>
-          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete Customer</button>
-        <hr>
-        <button class="btn btn-primary" href="#create-inquiry-modal" data-toggle="modal">
-          <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> Create Inquiry</button>
-      </div>
-    </div>
-    <ng-container *ngIf="contacts.length > 0; else noContacts">
+    <h4>Click To View Details</h4>
+    <div class="panel-group" id="accordion">
       <div class="panel panel-primary">
-        <div class="panel-heading">
-          <h3>Contact Details</h3>
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="'#customerAccordion">
+          <h3>Customer Details</h3>
         </div>
-        <div class="panel-body" style="word-break:break-all">
-          <label>Click To Update Or Delete</label>
-          <table class="table table-bordered table-hover">
+        <div id="customerAccordion" class="panel-body panel-collapse collapse in" style="word-break:break-all">
+          <table class="table table-bordered">
             <thead>
               <tr class="active">
-                <th class="hidden-xs hidden-sm">Title</th>
-                <th>Name</th>
-                <th>Phone</th>
-                <th class="hidden-xs hidden-sm">Email</th>
+                <th>Address</th>
+                <th>City</th>
+                <th class="hidden-xs hidden-sm">State</th>
+                <th class="hidden-xs hidden-sm">ZIP</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let contact of contacts; let i = index" (click)="onClickUpdateContact(contact.contactID, i)" data-toggle="modal"
-                href='#update-contact-modal'>
-                <td class="hidden-xs hidden-sm">{{contact.contactTitle}}</td>
-                <td>{{contact.contactName}}</td>
-                <td>{{contact.contactPhone}}</td>
-                <td class="hidden-xs hidden-sm">{{contact.contactEmail}}</td>
+              <tr>
+                <td>{{customer[0].address}}</td>
+                <td>{{customer[0].city}}</td>
+                <td class="hidden-xs hidden-sm">{{customer[0].state}}</td>
+                <td class="hidden-xs hidden-sm">{{customer[0].zip}}</td>
               </tr>
             </tbody>
           </table>
+          <button (click)="onClickUpdateCustomer()" class="btn btn-info" href="#update-customer-modal" data-toggle="modal">
+            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Update Customer</button>
+          <button class="btn btn-danger" data-toggle="modal" href='#delete-customer-modal'>
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete Customer</button>
+          <hr>
+          <button class="btn btn-primary" href="#create-inquiry-modal" data-toggle="modal">
+            <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> Create Inquiry</button>
+        </div>
+      </div>
+
+      <div class="panel panel-primary">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="'#contactAccordion">
+          <h3>Contact Details</h3>
+        </div>
+        <div id="contactAccordion" class="panel-body panel-collapse collapse" style="word-break:break-all">
+          <ng-container *ngIf="contacts.length > 0; else noContacts">
+            <label>Click To Update Or Delete</label>
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr class="active">
+                  <th class="hidden-xs hidden-sm">Title</th>
+                  <th>Name</th>
+                  <th>Phone</th>
+                  <th class="hidden-xs hidden-sm">Email</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let contact of contacts; let i = index" (click)="onClickUpdateContact(contact.contactID, i)" data-toggle="modal"
+                  href='#update-contact-modal'>
+                  <td class="hidden-xs hidden-sm">{{contact.contactTitle}}</td>
+                  <td>{{contact.contactName}}</td>
+                  <td>{{contact.contactPhone}}</td>
+                  <td class="hidden-xs hidden-sm">{{contact.contactEmail}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </ng-container>
+          <ng-template #noContacts>
+            <h5 class="page-header">No Contacts</h5>
+            <p>If this is incorrect, try refreshing the page.</p>
+          </ng-template>
           <button (click)="clearContactFields()" class="btn btn-info" type="button" data-toggle="modal" href='#create-contact-modal'>
             <span class="glyphicon glyphicon-phone" aria-hidden="true"></span> Create Contact
           </button>
         </div>
       </div>
-    </ng-container>
-    <ng-template #noContacts>
-      <h5 class="page-header">No Contacts</h5>
-      <p>If this is incorrect, try refreshing the page.</p>
-    </ng-template>
+    </div>
   </ng-container>
   <ng-template #noCustomer>
     <h2 class="page-header">No Customers</h2>

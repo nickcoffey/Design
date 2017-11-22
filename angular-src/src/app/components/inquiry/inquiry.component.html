@@ -7,80 +7,85 @@
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
   <ng-container *ngIf="inquiry[0]; else noInquiry">
     <h2 class="page-header">Inquiry #{{inquiry[0].inquiryID}}</h2>
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3>Inquiry Details</h3>
+    <h4>Click To View Details</h4>
+    <div class="panel-group" id="accordion">
+      <div class="panel panel-primary">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="'#inquiryAccordion">
+          <h3>Inquiry Details</h3>
+        </div>
+        <div id="inquiryAccordion" class="panel-body panel-collapse collapse in" style="word-break:break-all">
+          <table class="table table-bordered">
+            <thead>
+              <tr class="active">
+                <th>Received Date</th>
+                <th *ngIf="inquiry[0].inquiryStatus == 'ACCEPTED'">Accepted Date</th>
+                <th *ngIf="inquiry[0].inquiryStatus == 'DECLINED'">Declined Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{inquiry[0].receivedDate | date: 'MM/dd/yyyy'}}</td>
+                <td *ngIf="inquiry[0].inquiryStatus == 'ACCEPTED'">{{inquiry[0].endDate | date: 'MM/dd/yyyy'}}</td>
+                <td *ngIf="inquiry[0].inquiryStatus == 'DECLINED'">{{inquiry[0].endDate | date: 'MM/dd/yyyy'}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table table-bordered">
+            <thead>
+              <tr class="active">
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{inquiry[0].description}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <hr>
+          <button (click)="onClickUpdate()" class="btn btn-info" data-toggle="modal" href="#update-modal">
+            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Update Description</button>
+          <button *ngIf="status == 'PENDING'" class="btn btn-warning" data-toggle="modal" href='#decline-modal'>
+            <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> Decline Inquiry</button>
+          <button *ngIf="status == 'DECLINED'" class="btn btn-warning" data-toggle="modal" href='#reopen-modal'>
+            <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> Re-Open Inquiry</button>
+          <button class="btn btn-danger" data-toggle="modal" href='#delete-modal'>
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete Inquiry</button>
+          <hr *ngIf="status == 'PENDING'">
+          <button *ngIf="status == 'PENDING'" class="btn btn-primary" data-toggle="modal" href='#create-bid-modal'>
+            <span class="glyphicon glyphicon-file" aria-hidden="true"></span> Create Bid</button>
+        </div>
       </div>
-      <div class="panel-body" style="word-break:break-all">
-        <table class="table table-bordered">
-          <thead>
-            <tr class="active">
-              <th>Received Date</th>
-              <th *ngIf="inquiry[0].inquiryStatus == 'ACCEPTED'">Accepted Date</th>
-              <th *ngIf="inquiry[0].inquiryStatus == 'DECLINED'">Declined Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{{inquiry[0].receivedDate | date: 'MM/dd/yyyy'}}</td>
-              <td *ngIf="inquiry[0].inquiryStatus == 'ACCEPTED'">{{inquiry[0].endDate | date: 'MM/dd/yyyy'}}</td>
-              <td *ngIf="inquiry[0].inquiryStatus == 'DECLINED'">{{inquiry[0].endDate | date: 'MM/dd/yyyy'}}</td>
-            </tr>
-          </tbody>
-        </table>
-        <table class="table table-bordered">
-          <thead>
-            <tr class="active">
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{{inquiry[0].description}}</td>
-            </tr>
-          </tbody>
-        </table>
-        <hr>
-        <button (click)="onClickUpdate()" class="btn btn-info" data-toggle="modal" href="#update-modal">
-          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Update Description</button>
-        <button *ngIf="status == 'PENDING'" class="btn btn-warning" data-toggle="modal" href='#decline-modal'>
-          <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> Decline Inquiry</button>
-        <button *ngIf="status == 'DECLINED'" class="btn btn-warning" data-toggle="modal" href='#reopen-modal'>
-          <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> Re-Open Inquiry</button>
-        <button class="btn btn-danger" data-toggle="modal" href='#delete-modal'>
-          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete Inquiry</button>
-        <hr *ngIf="status == 'PENDING'">
-        <button *ngIf="status == 'PENDING'" class="btn btn-primary" data-toggle="modal" href='#create-bid-modal'>
-          <span class="glyphicon glyphicon-file" aria-hidden="true"></span> Create Bid</button>
-      </div>
-    </div>
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3>Customer Details</h3>
-      </div>
-      <div class="panel-body" style="word-break:break-all">
-        <table class="table table-bordered">
-          <thead>
-            <tr class="active">
-              <th>Name</th>
-              <th>Address</th>
-              <th>City</th>
-              <th class="hidden-xs hidden-sm">State</th>
-              <th class="hidden-xs hidden-sm">ZIP</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{{inquiry[0].customerName}}</td>
-              <td>{{inquiry[0].customerAddress}}</td>
-              <td>{{inquiry[0].customerCity}}</td>
-              <td class="hidden-xs hidden-sm">{{inquiry[0].customerState}}</td>
-              <td class="hidden-xs hidden-sm">{{inquiry[0].customerZIP}}</td>
-            </tr>
-          </tbody>
-        </table>
-        <button type="button" class="btn btn-primary btn-lg" [routerLink]="['/customers/'+inquiry[0].customerID]">
-          <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Open Customer</button>
+
+      <div class="panel panel-primary">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="'#customerAccordion">
+          <h3>Customer Details</h3>
+        </div>
+        <div id="customerAccordion" class="panel-body panel-collapse collapse" style="word-break:break-all">
+          <table class="table table-bordered">
+            <thead>
+              <tr class="active">
+                <th>Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th class="hidden-xs hidden-sm">State</th>
+                <th class="hidden-xs hidden-sm">ZIP</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{inquiry[0].customerName}}</td>
+                <td>{{inquiry[0].customerAddress}}</td>
+                <td>{{inquiry[0].customerCity}}</td>
+                <td class="hidden-xs hidden-sm">{{inquiry[0].customerState}}</td>
+                <td class="hidden-xs hidden-sm">{{inquiry[0].customerZIP}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <hr>
+          <button type="button" class="btn btn-primary btn-lg" [routerLink]="['/customers/'+inquiry[0].customerID]">
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Open Customer</button>
+        </div>
       </div>
     </div>
   </ng-container>

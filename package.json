@@ -17,6 +17,7 @@
     "jsonwebtoken": "*",
     "mkdirp": "*",
     "multer": "*",
+    "mime": "*",
     "multer-s3": "^2.7.0",
     "mysql": "*",
     "passport": "*",

@@ -41,7 +41,7 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Set Images Folder
-//app.use(express.static('uploads'));
+app.use(express.static('uploads'));
 app.use('/api/uploads', express.static('uploads/files'), serveIndex('uploads/files'));
 
 // Body Parser Middleware
