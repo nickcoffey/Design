@@ -283,3 +283,41 @@ module.exports.getJobLaborsById = function (id, callback) {
         }
     });
 }
+
+
+/********************************************************* Job Files *************************************************************************/
+module.exports.uploadJobFile = function (newJobFile, callback) {
+    const queryString = sqlString.format(`INSERT INTO JobFiles(fileName, jobID) VALUES(?, (SELECT Job.jobID FROM Job WHERE Job.jobID = ?))`, [newJobFile.fileName, newJobFile.jobID]);
+    // console.log(queryString);
+    connection.query(queryString, (error, rows, fields) => {
+        if (!error) {
+            callback(rows);
+        } else {
+            return error;
+        }
+    });
+}
+
+module.exports.getJobFilesById = function (jobID, callback) {
+    const queryString = sqlString.format(`SELECT * FROM JobFiles WHERE jobID = ?`, [jobID]);
+    // console.log(queryString);
+    connection.query(queryString, (error, rows, fields) => {
+        if (!error) {
+            callback(rows);
+        } else {
+            return error;
+        }
+    });
+}
+
+module.exports.deleteJobFile = function (fileID, callback) {
+    const queryString = sqlString.format(`DELETE FROM JobFiles WHERE fileID = ?`, [fileID]);
+    console.log(queryString);
+    connection.query(queryString, (error, rows, fields) => {
+        if (!error) {
+            callback(rows);
+        } else {
+            return error;
+        }
+    });
+}

@@ -9,15 +9,15 @@ import { BidService } from '../../services/bid.service';
 })
 export class HomeComponent implements OnInit {
 
-  jobs: any;
-  currentJobs:any;
-  currentJobsLength:any;
-  jobCosts:any[] = [];
-  bidCosts:any[] = [];
+  jobs: any = [];
+  currentJobs: any = [];
+  currentJobsLength: any;
+  jobCosts: any[] = [];
+  bidCosts: any[] = [];
 
   constructor(
-    private jobService:JobService,
-    private bidService:BidService
+    private jobService: JobService,
+    private bidService: BidService
   ) { }
 
   ngOnInit() {
@@ -38,5 +38,4 @@ export class HomeComponent implements OnInit {
       this.jobs = jobs.jobs;
     });
   }
-
 }

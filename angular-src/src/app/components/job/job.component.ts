@@ -19,6 +19,7 @@ export class JobComponent implements OnInit {
   files: any;
   filesUrls: any[] = [];
   fileName: any;
+  file: any;
   url: string;
   uploader: FileUploader;
   /** JOB **/
@@ -89,7 +90,7 @@ export class JobComponent implements OnInit {
     this.getRevenue();
     this.getLabor();
     this.getMaterials();
-    // this.getFiles();
+    this.getFiles();
   }
 
   /************************************************* JOB FUNCTIONS *********************************************************/
@@ -183,12 +184,9 @@ export class JobComponent implements OnInit {
   /************************************************* FILE FUNCTIONS *********************************************************/
   getFiles() {
     this.jobService.getJobFilesByID(this.id).subscribe((files) => {
-      this.files = files.files;
-      for (let i = 0; i < this.files.length; i++) {
-        this.filesUrls.push(`http://localhost:3000/uploads/jobs/${this.id}/${this.files[i]}`);
-      }
+      this.files = files;
+      console.log(this.files);
     });
-    // console.log(this.filesUrls);
   }
 
   setupFileUploader() {
@@ -203,21 +201,26 @@ export class JobComponent implements OnInit {
     }
     this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
       console.log(response);
+      this.ngOnInit();
+      // if(response.success = true) {
+      //   this.uploader.clearQueue();
+      // } 
     }
   }
 
   onClickDeleteFile(file) {
-    this.fileName = file;
+    this.file = file;
+    $('#delete-file-modal').modal('show');
   }
 
   onDeleteFile() {
-    let file = {
-      file: this.fileName
-    }
-    this.jobService.deleteJobFile(this.id, file).subscribe((data) => {
+    let fileToRemove = {
+      key: this.file.fileName
+    };
+    this.jobService.deleteJobFile(this.file.fileID, fileToRemove).subscribe((data) => {
       if (data.success) {
         console.log(data.msg);
-        this.ngOnInit();
+        this.getFiles();
       } else {
         console.log(data.msg);
       }
@@ -665,3 +668,18 @@ interface SelectedLabor {
   // selectedMaterials: SelectedMaterial[] = [];
 
    //readyItems: any[] = [];
+
+
+  //  onDeleteFile() {
+  //   let file = {
+  //     file: this.fileName
+  //   }
+  //   this.jobService.deleteJobFile(this.id, file).subscribe((data) => {
+  //     if (data.success) {
+  //       console.log(data.msg);
+  //       this.ngOnInit();
+  //     } else {
+  //       console.log(data.msg);
+  //     }
+  //   });
+  // }

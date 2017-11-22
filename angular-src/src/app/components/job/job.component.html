@@ -1,15 +1,14 @@
+<button class="btn btn-default pull-left" [routerLink]="['/jobs']">
+  <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Go To Jobs</button>
+
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-  <button class="btn btn-default" [routerLink]="['/jobs']">
-    <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Go To Jobs</button>
-</div>
-<h2 class="page-header col-xs-12 col-sm-12 col-md-12 col-lg-12">Job #{{job[0].jobID}}</h2>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-  <ng-container *ngIf="job; else noJob">
+  <ng-container *ngIf="job[0]; else noJob">
+    <h2 class="page-header">Job #{{job[0].jobID}}</h2>
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <h3 class="panel-title">Job Details</h3>
+        <h3>Job Details</h3>
       </div>
-      <div class="panel-body">
+      <div class="panel-body" style="word-break:break-all">
         <h4 class="page-header" style="margin-top: 0">General</h4>
         <table class="table table-bordered">
           <thead>
@@ -27,146 +26,193 @@
             </tr>
           </tbody>
         </table>
-        <h4 class="page-header">Change Orders</h4>
-        <label>Click To Update Or Delete</label>
-        <table class="table table-bordered table-hover">
-          <thead>
-            <tr class="active">
-              <th>Amount</th>
-              <th>Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let changeOrder of changeOrders; let i = index" data-toggle="modal" (click)="onClickUpdateChangeOrder(changeOrder.changeID, i)"
-              href='#update-change-modal'>
-              <td>{{changeOrder.changeAmount | currency: 'USD':true}}</td>
-              <td>{{changeOrder.changeDate | date: 'MM/dd/yyyy'}}</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr class="active">
-              <th>{{totalChangeTable | currency: 'USD':true}}</th>
-              <th></th>
-            </tr>
-          </tfoot>
-        </table>
-        <button (click)="onClearChangeOrder()" class="btn btn-info" data-toggle="modal" href='#create-change-modal'>
-          <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Create Change Order</button>
-        <h4 class="page-header">Revenue Collected</h4>
-        <label>Click To Update Or Delete</label>
-        <table class="table table-bordered table-hover">
-          <thead>
-            <tr class="active">
-              <th>Amount</th>
-              <th>Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let revenue of revenues; let i = index" data-toggle="modal" (click)="onClickUpdateRevenue(revenue.revenueID, i)"
-              href='#update-revenue-modal'>
-              <td>{{revenue.revenueAmount | currency: 'USD':true}}</td>
-              <td>{{revenue.revenueDate | date: 'MM/dd/yyyy'}}</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr class="active">
-              <th>{{totalRevenueTable | currency: 'USD':true}}</th>
-              <th></th>
-            </tr>
-          </tfoot>
-        </table>
-        <button (click)="onClearJobRevenue()" class="btn btn-info" data-toggle="modal" href='#create-revenue-modal'>
-          <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Add Revenue</button>
-        <h4 class="page-header">Labor Cost</h4>
-        <label>Click To Update Or Delete</label>
-        <table class="table table-bordered table-hover">
-          <thead>
-            <tr class="active">
-              <th>Role</th>
-              <th>Date</th>
-              <th class="hidden-xs hidden-sm">Hours</th>
-              <th class="hidden-xs hidden-sm">Wage</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let jobLabor of jobLabors; let i = index" data-toggle="modal" (click)="onClickUpdateLabor(jobLabor.laborID, i)"
-              href='#update-labor-modal'>
-              <td>{{jobLabor.roleName}}</td>
-              <td>{{jobLabor.laborDate | date: 'MM/dd/yyyy'}}</td>
-              <td class="hidden-xs hidden-sm">{{jobLabor.laborHours}}</td>
-              <td class="hidden-xs hidden-sm">{{jobLabor.roleWage | currency: 'USD':true}}</td>
-              <td>{{jobLabor.roleWage*jobLabor.laborHours | currency: 'USD':true}}</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr class="active">
-              <th>Grand Total</th>
-              <th></th>
-              <th class="hidden-xs hidden-sm">{{totalHoursTable}}</th>
-              <th class="hidden-xs hidden-sm"></th>
-              <th>{{totalLaborPriceTable | currency: 'USD':true}}</th>
-            </tr>
-          </tfoot>
-        </table>
-        <button (click)="onClearJobLabor()" class="btn btn-info" data-toggle="modal" href='#create-labor-modal'>
-          <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Add Labor</button>
-        <h4 class="page-header" *ngIf="jobMaterials[0] != null;">Materials Cost</h4>
-        <label *ngIf="jobMaterials[0] != null;">Click To Update Or Delete</label>
-        <table class="table table-bordered table-hover">
-          <thead *ngIf="jobMaterials[0] != null;">
-            <tr class="active">
-              <th>Material</th>
-              <th>Linear Feet</th>
-              <th class="hidden-xs hidden-sm">Price Per Unit</th>
-              <th class="hidden-xs hidden-sm">Coverage In Linear Feet</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let jobMaterial of jobMaterials; let i = index" data-toggle="modal" (click)="onClickUpdateJobMaterial(jobMaterial.materialID, i)"
-              href='#update-material-modal'>
-              <td>{{jobMaterial.materialName}}</td>
-              <td>{{jobMaterial.linearFeet}}</td>
-              <td class="hidden-xs hidden-sm">{{jobMaterial.pricePerUnit | currency: 'USD':true}}</td>
-              <td class="hidden-xs hidden-sm">{{jobMaterial.linearFeetCoverage}} ft</td>
-              <td>{{jobMaterial.pricePerUnit / jobMaterial.linearFeetCoverage * jobMaterial.linearFeet | currency: 'USD':true}}</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr class="active">
-              <th>Grand Total</th>
-              <th>{{totalLinearFeetTable}}</th>
-              <th class="hidden-xs hidden-sm"></th>
-              <th class="hidden-xs hidden-sm"></th>
-              <th>{{totalMaterialPriceTable | currency: 'USD':true}}</th>
-            </tr>
-          </tfoot>
-        </table>
-        <button (click)="onClearJobMaterials()" class="btn btn-info" data-toggle="modal" href='#create-material-modal'>
-          <span class="glyphicon glyphicon-tint" aria-hidden="true"></span> Add Materials</button>
+
+        <h4 class="page-header">Change Orders
+          <button class="btn btn-default btn-sm collapsed" data-toggle="collapse" data-target='#change-collapse'>
+            <span class="if-collapsed">Show</span>
+            <span class="if-not-collapsed">Hide</span>
+          </button>
+        </h4>
+        <div class="collapse" id="change-collapse">
+          <div *ngIf="changeOrders.length > 0;">
+            <label>Click To Update Or Delete</label>
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr class="active">
+                  <th>Amount</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let changeOrder of changeOrders; let i = index" data-toggle="modal" (click)="onClickUpdateChangeOrder(changeOrder.changeID, i)"
+                  href='#update-change-modal'>
+                  <td>{{changeOrder.changeAmount | currency: 'USD':true}}</td>
+                  <td>{{changeOrder.changeDate | date: 'MM/dd/yyyy'}}</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr class="active">
+                  <th>{{totalChangeTable | currency: 'USD':true}}</th>
+                  <th></th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+          <button (click)="onClearChangeOrder()" class="btn btn-info" data-toggle="modal" href='#create-change-modal'>
+            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Create Change Order</button>
+        </div>
+
+        <h4 class="page-header">Revenue Collected
+          <button class="btn btn-default btn-sm collapsed" data-toggle="collapse" data-target='#revenue-collapse'>
+            <span class="if-collapsed">Show</span>
+            <span class="if-not-collapsed">Hide</span>
+          </button>
+        </h4>
+        <div class="collapse" id="revenue-collapse">
+          <div *ngIf="revenues.length > 0;">
+            <label>Click To Update Or Delete</label>
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr class="active">
+                  <th>Amount</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let revenue of revenues; let i = index" data-toggle="modal" (click)="onClickUpdateRevenue(revenue.revenueID, i)"
+                  href='#update-revenue-modal'>
+                  <td>{{revenue.revenueAmount | currency: 'USD':true}}</td>
+                  <td>{{revenue.revenueDate | date: 'MM/dd/yyyy'}}</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr class="active">
+                  <th>{{totalRevenueTable | currency: 'USD':true}}</th>
+                  <th></th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+          <button (click)="onClearJobRevenue()" class="btn btn-info" data-toggle="modal" href='#create-revenue-modal'>
+            <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Add Revenue</button>
+        </div>
+
+        <h4 class="page-header">Labor Cost
+          <button class="btn btn-default btn-sm collapsed" data-toggle="collapse" data-target='#labor-collapse'>
+            <span class="if-collapsed">Show</span>
+            <span class="if-not-collapsed">Hide</span>
+          </button>
+        </h4>
+        <div class="collapse" id="labor-collapse">
+          <div *ngIf="jobLabors.length > 0;">
+            <label>Click To Update Or Delete</label>
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr class="active">
+                  <th>Role</th>
+                  <th>Date</th>
+                  <th class="hidden-xs hidden-sm">Hours</th>
+                  <th class="hidden-xs hidden-sm">Wage</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let jobLabor of jobLabors; let i = index" data-toggle="modal" (click)="onClickUpdateLabor(jobLabor.laborID, i)"
+                  href='#update-labor-modal'>
+                  <td>{{jobLabor.roleName}}</td>
+                  <td>{{jobLabor.laborDate | date: 'MM/dd/yyyy'}}</td>
+                  <td class="hidden-xs hidden-sm">{{jobLabor.laborHours}}</td>
+                  <td class="hidden-xs hidden-sm">{{jobLabor.roleWage | currency: 'USD':true}}</td>
+                  <td>{{jobLabor.roleWage*jobLabor.laborHours | currency: 'USD':true}}</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr class="active">
+                  <th>Grand Total</th>
+                  <th></th>
+                  <th class="hidden-xs hidden-sm">{{totalHoursTable}}</th>
+                  <th class="hidden-xs hidden-sm"></th>
+                  <th>{{totalLaborPriceTable | currency: 'USD':true}}</th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+          <button (click)="onClearJobLabor()" class="btn btn-info" data-toggle="modal" href='#create-labor-modal'>
+            <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Add Labor</button>
+        </div>
+
+        <h4 class="page-header">Materials Cost
+          <button class="btn btn-default btn-sm collapsed" data-toggle="collapse" data-target='#materials-collapse'>
+            <span class="if-collapsed">Show</span>
+            <span class="if-not-collapsed">Hide</span>
+          </button>
+        </h4>
+        <div class="collapse" id="materials-collapse">
+          <div *ngIf="jobMaterials.length > 0;">
+            <label>Click To Update Or Delete</label>
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr class="active">
+                  <th>Material</th>
+                  <th>Linear Feet</th>
+                  <th class="hidden-xs hidden-sm">Price Per Unit</th>
+                  <th class="hidden-xs hidden-sm">Coverage In Linear Feet</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let jobMaterial of jobMaterials; let i = index" data-toggle="modal" (click)="onClickUpdateJobMaterial(jobMaterial.materialID, i)"
+                  href='#update-material-modal'>
+                  <td>{{jobMaterial.materialName}}</td>
+                  <td>{{jobMaterial.linearFeet}}</td>
+                  <td class="hidden-xs hidden-sm">{{jobMaterial.pricePerUnit | currency: 'USD':true}}</td>
+                  <td class="hidden-xs hidden-sm">{{jobMaterial.linearFeetCoverage}} ft</td>
+                  <td>{{jobMaterial.pricePerUnit / jobMaterial.linearFeetCoverage * jobMaterial.linearFeet | currency: 'USD':true}}</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr class="active">
+                  <th>Grand Total</th>
+                  <th>{{totalLinearFeetTable}}</th>
+                  <th class="hidden-xs hidden-sm"></th>
+                  <th class="hidden-xs hidden-sm"></th>
+                  <th>{{totalMaterialPriceTable | currency: 'USD':true}}</th>
+                </tr>
+              </tfoot>
+            </table>
+            <button (click)="onClearJobMaterials()" class="btn btn-info" data-toggle="modal" href='#create-material-modal'>
+              <span class="glyphicon glyphicon-tint" aria-hidden="true"></span> Add Materials</button>
+          </div>
+        </div>
+
+        <h4 class="page-header">Files
+          <button class="btn btn-default btn-sm collapsed" data-toggle="collapse" data-target='#files-collapse'>
+            <span class="if-collapsed">Show</span>
+            <span class="if-not-collapsed">Hide</span>
+          </button>
+        </h4>
+        <div class="collapse" id="files-collapse">
+          <div *ngIf="files.length > 0">
+            <label>Double Click To Delete</label>
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr class="active">
+                  <th>Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let file of files" (dblclick)="onClickDeleteFile(file)">
+                  <td>
+                    <a target="_blank" href="https://s3.us-east-2.amazonaws.com/allied-waterproofing/{{file.fileName}}">{{file.fileName}}</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <button type="button" class="btn btn-info" data-toggle="modal" href='#upload-modal'>
+            <span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload File</button>
+        </div>
         <hr>
-        <!-- <label *ngIf="files.length != 0">Job Files</label>
-        <table *ngIf="files.length != 0" class="table table-bordered">
-          <thead>
-            <tr class="active">
-              <th>Name</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let file of files">
-              <td>
-                <a target="_blank" href="http://localhost:3000/api/uploads/jobs/{{id}}/{{file}}">{{file}}</a>
-              </td>
-              <td>
-                <button class="btn btn-danger" type="button" data-toggle="modal" href='#delete-file-modal' (click)="onClickDeleteFile(file)">
-                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table> -->
         <button *ngIf="status == 'IN-PROGRESS'" class="btn btn-primary" data-toggle="modal" href='#finish-job-modal'>
           <span class="glyphicon glyphicon-check" aria-hidden="true"></span> Finish Job</button>
         <button *ngIf="status == 'COMPLETED'" class="btn btn-warning" data-toggle="modal" href='#reopen-modal'>
@@ -175,88 +221,85 @@
           <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete Job</button>
       </div>
     </div>
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3>Bid Details</h3>
+      </div>
+      <div class="panel-body" style="word-break:break-all">
+        <h4 class="page-header" style="margin-top: 0">General</h4>
+        <table class="table table-bordered">
+          <thead>
+            <tr class="active">
+              <th>Initial Bid Price</th>
+              <th>Created Date</th>
+              <th>Accepted Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{job[0].bidPrice | currency: 'USD':true}}</td>
+              <td>{{job[0].bidCreatedDate | date: 'MM/dd/yyyy'}}</td>
+              <td>{{job[0].bidEndDate | date: 'MM/dd/yyyy'}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <h4 class="page-header">Estimated Costs</h4>
+        <table class="table table-bordered">
+          <thead>
+            <tr class="active">
+              <th>Labor</th>
+              <th>Materials</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{job[0].bidLabor | currency: 'USD':true}}</td>
+              <td>{{job[0].bidMaterials | currency: 'USD':true}}</td>
+              <th>{{job[0].bidLabor + job[0].bidMaterials | currency: 'USD':true}}</th>
+            </tr>
+          </tbody>
+        </table>
+        <button type="button" class="btn btn-primary btn-lg" [routerLink]="['/bids/'+job[0].bidID]">
+          <span class="glyphicon glyphicon-file" aria-hidden="true"></span> Open Bid</button>
+      </div>
+    </div>
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3>Customer Details</h3>
+      </div>
+      <div class="panel-body" style="word-break:break-all">
+        <table class="table table-bordered">
+          <thead>
+            <tr class="active">
+              <th>Name</th>
+              <th>Address</th>
+              <th>City</th>
+              <th class="hidden-xs hidden-sm">State</th>
+              <th class="hidden-xs hidden-sm">ZIP</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{job[0].customerName}}</td>
+              <td>{{job[0].customerAddress}}</td>
+              <td>{{job[0].customerCity}}</td>
+              <td class="hidden-xs hidden-sm">{{job[0].customerState}}</td>
+              <td class="hidden-xs hidden-sm">{{job[0].customerZIP}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <button type="button" class="btn btn-primary btn-lg" [routerLink]="['/customers/'+job[0].customerID]">
+          <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Open Customer</button>
+      </div>
+    </div>
   </ng-container>
   <ng-template #noJob>
     <h2 class="page-header">No Jobs</h2>
     <p>If this is incorrect, try refreshing the page.</p>
   </ng-template>
-</div>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h3 class="panel-title">Bid Details</h3>
-    </div>
-    <div class="panel-body">
-      <h4 class="page-header" style="margin-top: 0">General</h4>
-      <table class="table table-bordered">
-        <thead>
-          <tr class="active">
-            <th>Initial Bid Price</th>
-            <th>Created Date</th>
-            <th>Accepted Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{{job[0].bidPrice | currency: 'USD':true}}</td>
-            <td>{{job[0].bidCreatedDate | date: 'MM/dd/yyyy'}}</td>
-            <td>{{job[0].bidEndDate | date: 'MM/dd/yyyy'}}</td>
-          </tr>
-        </tbody>
-      </table>
-      <h4 class="page-header">Estimated Costs</h4>
-      <table class="table table-bordered">
-        <thead>
-          <tr class="active">
-            <th>Labor</th>
-            <th>Materials</th>
-            <th>Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{{job[0].bidLabor | currency: 'USD':true}}</td>
-            <td>{{job[0].bidMaterials | currency: 'USD':true}}</td>
-            <th>{{job[0].bidLabor + job[0].bidMaterials | currency: 'USD':true}}</th>
-          </tr>
-        </tbody>
-      </table>
-      <button type="button" class="btn btn-primary" [routerLink]="['/bids/'+job[0].bidID]">
-        <span class="glyphicon glyphicon-file" aria-hidden="true"></span> Open Bid</button>
-    </div>
-  </div>
-</div>
-
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h3 class="panel-title">Customer Details</h3>
-    </div>
-    <div class="panel-body">
-      <table class="table table-bordered">
-        <thead>
-          <tr class="active">
-            <th>Name</th>
-            <th>Address</th>
-            <th>City</th>
-            <th class="hidden-xs hidden-sm">State</th>
-            <th class="hidden-xs hidden-sm">ZIP</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{{job[0].customerName}}</td>
-            <td>{{job[0].customerAddress}}</td>
-            <td>{{job[0].customerCity}}</td>
-            <td class="hidden-xs hidden-sm">{{job[0].customerState}}</td>
-            <td class="hidden-xs hidden-sm">{{job[0].customerZIP}}</td>
-          </tr>
-        </tbody>
-      </table>
-      <button type="button" class="btn btn-primary" [routerLink]="['/customers/'+job[0].customerID]">
-        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Open Customer</button>
-    </div>
-  </div>
 </div>
 
 <!--                                     JOB POPUPS                                           -->
@@ -797,11 +840,49 @@
         <h4 class="modal-title">Warning</h4>
       </div>
       <div class="modal-body">
-        <p>Are you sure you want to delete this file?</p>
+        <p>Are you sure you want to delete
+          <b>{{file.fileName}}</b>?</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
         <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onDeleteFile()">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--                Upload File Popup                -->
+<div class="modal fade" id="upload-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Upload Files</h4>
+      </div>
+      <div class="modal-body">
+        <button [disabled]="uploader.queue.length != 0" type="button" class="btn btn-info" (click)="fileInput.click()">
+          <span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Browse Files</button>
+        <button [disabled]="uploader.queue.length == 0" type="button" class="btn btn-primary" (click)="uploader.uploadAll()">
+          <span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
+        <input name="file" type="file" style="display: none;" #fileInput ng2FileSelect [uploader]="uploader" />
+        <br>
+        <br>
+        <label style="color:#ff0000" *ngIf="uploader.queue.length != 0">Click To Remove</label>
+        <table *ngIf="uploader.queue.length" class="table table-bordered table-hover">
+          <thead>
+            <tr class="active">
+              <th>File</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of uploader.queue" (click)="item.remove()">
+              <td>{{item._file.name}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">
+          <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
       </div>
     </div>
   </div>

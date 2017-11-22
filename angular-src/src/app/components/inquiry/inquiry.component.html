@@ -1,15 +1,15 @@
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-  <button class="btn btn-default" [routerLink]="['/inquiries']">
-    <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> Go To Inquiries</button>
-</div>
+<button class="btn btn-default pull-left" [routerLink]="['/inquiries']">
+  <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> Go To Inquiries</button>
+<button *ngIf="inquiry[0].inquiryStatus == 'ACCEPTED' && inquiry[0];" [routerLink]="['/bids', inquiry[0].associatedBidID]"
+  class="btn btn-primary pull-right">
+  <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Go To Bid</button>
 
-<h2 class="page-header col-xs-12 col-sm-12 col-md-12 col-lg-12">Inquiry #{{inquiry[0].inquiryID}}</h2>
-
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-  <ng-container *ngIf="inquiry; else noInquiry">
+  <ng-container *ngIf="inquiry[0]; else noInquiry">
+    <h2 class="page-header">Inquiry #{{inquiry[0].inquiryID}}</h2>
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <h3 class="panel-title">Inquiry Details</h3>
+        <h3>Inquiry Details</h3>
       </div>
       <div class="panel-body" style="word-break:break-all">
         <table class="table table-bordered">
@@ -40,6 +40,7 @@
             </tr>
           </tbody>
         </table>
+        <hr>
         <button (click)="onClickUpdate()" class="btn btn-info" data-toggle="modal" href="#update-modal">
           <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Update Description</button>
         <button *ngIf="status == 'PENDING'" class="btn btn-warning" data-toggle="modal" href='#decline-modal'>
@@ -53,6 +54,35 @@
           <span class="glyphicon glyphicon-file" aria-hidden="true"></span> Create Bid</button>
       </div>
     </div>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3>Customer Details</h3>
+      </div>
+      <div class="panel-body" style="word-break:break-all">
+        <table class="table table-bordered">
+          <thead>
+            <tr class="active">
+              <th>Name</th>
+              <th>Address</th>
+              <th>City</th>
+              <th class="hidden-xs hidden-sm">State</th>
+              <th class="hidden-xs hidden-sm">ZIP</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{inquiry[0].customerName}}</td>
+              <td>{{inquiry[0].customerAddress}}</td>
+              <td>{{inquiry[0].customerCity}}</td>
+              <td class="hidden-xs hidden-sm">{{inquiry[0].customerState}}</td>
+              <td class="hidden-xs hidden-sm">{{inquiry[0].customerZIP}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <button type="button" class="btn btn-primary btn-lg" [routerLink]="['/customers/'+inquiry[0].customerID]">
+          <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Open Customer</button>
+      </div>
+    </div>
   </ng-container>
   <ng-template #noInquiry>
     <h2 class="page-header">No Inquiries</h2>
@@ -60,37 +90,6 @@
   </ng-template>
 </div>
 
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h3 class="panel-title">Customer Details</h3>
-    </div>
-    <div class="panel-body" style="word-break:break-all">
-      <table class="table table-bordered">
-        <thead>
-          <tr class="active">
-            <th>Name</th>
-            <th>Address</th>
-            <th>City</th>
-            <th class="hidden-xs hidden-sm">State</th>
-            <th class="hidden-xs hidden-sm">ZIP</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{{inquiry[0].customerName}}</td>
-            <td>{{inquiry[0].customerAddress}}</td>
-            <td>{{inquiry[0].customerCity}}</td>
-            <td class="hidden-xs hidden-sm">{{inquiry[0].customerState}}</td>
-            <td class="hidden-xs hidden-sm">{{inquiry[0].customerZIP}}</td>
-          </tr>
-        </tbody>
-      </table>
-      <button type="button" class="btn btn-primary" [routerLink]="['/customers/'+inquiry[0].customerID]">
-        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Open Customer</button>
-    </div>
-  </div>
-</div>
 <!--                Delete Popup                -->
 <div class="modal fade" id="delete-modal">
   <div class="modal-dialog">
@@ -192,7 +191,7 @@
             <div class="panel-heading">
               <h3 class="panel-title">Enter Costs</h3>
             </div>
-            <div class="panel-body">
+            <div class="panel-body" style="word-break:break-all">
               <h4>Labor Cost</h4>
               <table class="table" *ngIf="labors[0] != null">
                 <thead>
@@ -256,7 +255,7 @@
                 </tfoot>
               </table>
             </div>
-            <div class="panel-body">
+            <div class="panel-body" style="word-break:break-all">
               <h4>Material Cost</h4>
               <table class="table" *ngIf="materials[0] != null">
                 <thead>
@@ -324,7 +323,7 @@
             <div class="panel-heading">
               <h3 class="panel-title">Enter Desired % Profit Margin</h3>
             </div>
-            <div class="panel-body">
+            <div class="panel-body" style="word-break:break-all">
               <div class="form-group">
                 <input required mask="00" #profitMargin="ngModel" type="number" [(ngModel)]="margin" name="margin" placeholder="Margin" class="form-control"
                   required />

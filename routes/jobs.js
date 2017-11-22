@@ -3,7 +3,13 @@ const router = express.Router();
 const job = require('../models/job');
 const config = require('../config/database');
 const passport = require('passport');
-const fs = require('fs');
+var fs = require('fs');
+var multer = require('multer');
+var multerS3 = require('multer-s3');
+var AWS = require('aws-sdk');
+
+AWS.config.loadFromPath('./config/s3_config.json');
+var s3 = new AWS.S3();
 
 /********************************************************* Job *************************************************************************/
 
@@ -164,95 +170,6 @@ router.post('/delete/:id', passport.authenticate('jwt', { session: false }), (re
         }
     });
 });
-
-// Delete job file
-router.post('/:id/files/delete', passport.authenticate('jwt', { session: false }), (req, res, next) => {
-    const id = req.params.id;
-    const file = `./uploads/files/jobs/${id}/${req.body.file}`;
-    fs.unlink(file, (err) => {
-        if (err) {
-            res.json({
-                success: false,
-                msg: err
-            });
-        } else {
-            res.json({
-                success: true,
-                msg: "File deleted"
-            });
-        }
-    });
-});
-
-// Loop through job files
-router.get('/:id/files', passport.authenticate('jwt', { session: false }), (req, res, next) => {
-    const id = req.params.id;
-    const filesArray = [];
-    fs.readdir(`./uploads/files/jobs/${id}`, (err, files) => {
-        files.forEach((file, index) => {
-            filesArray.push(file);
-        });
-        res.json({ files: filesArray });
-    });
-});
-
-/** API path that will upload the files */
-router.post('/:id/upload', function (req, res, next) {
-    const id = req.params.id;
-
-    var multer = require('multer');
-    var storage = multer.diskStorage({ //multers disk storage settings
-        destination: function (req, file, cb) {
-            cb(null, `./uploads/files/jobs/${id}`);
-        },
-        filename: function (req, file, cb) {
-            fs.stat(`./uploads/files/jobs/${id}/${file.originalname}`, (error, stat) => {
-                if (error == null) {
-                    //fileExists = true;
-                    cb(null, `${file.originalname}(Copy)`);
-                } else if (error.code == 'ENOENT') {
-                    //fileExists = false;
-                    cb(null, `${file.originalname}`);
-                } else {
-                    //error
-                }
-            });
-        }
-    });
-
-    var upload = multer({ //multer settings
-        storage: storage
-    }).single('file');
-    upload(req, res, function (err) {
-        if (err) {
-            res.json({
-                success: false,
-                msg: err
-            });
-        } else {
-            res.json({
-                success: true,
-                msg: "File uploaded"
-            });
-        }
-    });
-});
-
-// function wait(){
-//     var date = new Date();
-//     var date2 = null;
-//     do {
-//         date2 = new Date();
-//     } while (date2 - date < 4000);
-// }
-
-function makeDirectory(id) {
-    var mkdirp = require('mkdirp');
-    mkdirp(`./uploads/files/jobs/${id}`, (err) => {
-        console.log(err);
-    });
-    // wait(); // wait 2 seconds
-}
 
 /********************************************************* Job Materials *************************************************************************/
 
@@ -631,5 +548,182 @@ router.get('/:id/job-labors', passport.authenticate('jwt', { session: false }), 
         }
     });
 });
+
+/********************************************************* Job Files *************************************************************************/
+
+// // Delete job file
+// router.post('/:id/files/delete', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+//     const id = req.params.id;
+//     const file = `./uploads/files/jobs/${id}/${req.body.file}`;
+//     fs.unlink(file, (err) => {
+//         if (err) {
+//             res.json({
+//                 success: false,
+//                 msg: err
+//             });
+//         } else {
+//             res.json({
+//                 success: true,
+//                 msg: "File deleted"
+//             });
+//         }
+//     });
+// });
+
+// Delete job file
+router.post('/:id/files/delete', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+    const id = req.params.id;
+    var params = { Bucket: "allied-waterproofing", Delete: { Objects: [{ Key: req.body.key }] } };
+    s3.deleteObjects(params, function (err, data) {
+        if (err) {
+            return res.send({
+                success: false,
+                msg: err
+            });
+        }
+        else {
+            job.deleteJobFile(id, (message) => {
+                if (message.warningCount == 0) {
+                    return res.send({
+                        success: true,
+                        msg: "File deleted"
+                    });
+                } else {
+                    return res.send({
+                        success: false,
+                        msg: message.message
+                    });
+                }
+            });
+        }
+    });
+});
+
+// Get file names
+router.get('/:id/files', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+    const id = req.params.id;
+    job.getJobFilesById(id, (fileNames) => {
+        if (!fileNames) {
+            return err;
+
+        } else {
+            return res.json(fileNames);
+        }
+    });
+});
+
+// Upload file
+router.post('/:id/upload', function (req, res, next) {
+    const id = req.params.id;
+    var upload = multer({
+        storage: multerS3({
+            s3: s3,
+            bucket: 'allied-waterproofing',
+            metadata: function (req, file, cb) {
+                cb(null, { fieldName: file.fieldname });
+            },
+            key: function (req, file, cb) {
+                cb(null, `${file.originalname}`)
+            }
+        })
+    }).single('file');
+    upload(req, res, function (err) {
+        let newJobFile = {
+            jobID: req.params.id,
+            fileName: req.file.originalname
+        };
+        job.uploadJobFile(newJobFile, (message) => {
+            if (message.warningCount == 0) {
+                if (err) {
+                    res.json({
+                        success: false,
+                        msg: err
+                    });
+                } else {
+                    res.json({
+                        success: true,
+                        msg: "File uploaded"
+                    });
+                }
+            } else {
+                res.json({
+                    success: false,
+                    msg: message.message
+                });
+            }
+        });
+    });
+});
+
+
+// // Loop through job files
+// router.get('/:id/files', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+//     const id = req.params.id;
+//     const filesArray = [];
+//     fs.readdir(`./uploads/files/jobs/${id}`, (err, files) => {
+//         files.forEach((file, index) => {
+//             filesArray.push(file);
+//         });
+//         res.json({ files: filesArray });
+//     });
+// });
+
+// /** API path that will upload the files */
+// router.post('/:id/upload', function (req, res, next) {
+//     const id = req.params.id;
+
+//     // var multer = require('multer');
+//     var storage = multer.diskStorage({ //multers disk storage settings
+//         destination: function (req, file, cb) {
+//             cb(null, `./uploads/files/jobs/${id}`);
+//         },
+//         filename: function (req, file, cb) {
+//             fs.stat(`./uploads/files/jobs/${id}/${file.originalname}`, (error, stat) => {
+//                 if (error == null) {
+//                     //fileExists = true;
+//                     cb(null, `${file.originalname}(Copy)`);
+//                 } else if (error.code == 'ENOENT') {
+//                     //fileExists = false;
+//                     cb(null, `${file.originalname}`);
+//                 } else {
+//                     //error
+//                 }
+//             });
+//         }
+//     });
+
+//     var upload = multer({ //multer settings
+//         storage: storage
+//     }).single('file');
+//     upload(req, res, function (err) {
+//         if (err) {
+//             res.json({
+//                 success: false,
+//                 msg: err
+//             });
+//         } else {
+//             res.json({
+//                 success: true,
+//                 msg: "File uploaded"
+//             });
+//         }
+//     });
+// });
+
+// function wait(){
+//     var date = new Date();
+//     var date2 = null;
+//     do {
+//         date2 = new Date();
+//     } while (date2 - date < 4000);
+// }
+
+// function makeDirectory(id) {
+//     var mkdirp = require('mkdirp');
+//     mkdirp(`./uploads/files/jobs/${id}`, (err) => {
+//         console.log(err);
+//     });
+//     // wait(); // wait 2 seconds
+// }
 
 module.exports = router;
