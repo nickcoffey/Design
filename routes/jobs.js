@@ -87,7 +87,7 @@ router.post('/new', passport.authenticate('jwt', { session: false }), (request, 
                 success: true,
                 msg: 'Job created'
             });
-            makeDirectory(message.insertId);
+            // makeDirectory(message.insertId);
         } else {
             response.json({
                 success: false,

@@ -121,7 +121,7 @@ export class BidComponent implements OnInit {
     this.jobService.createJob(newJob).subscribe((data) => {
       if (data.success) {
         console.log(data.msg);
-        this.ngOnInit();
+        // this.ngOnInit();
       } else {
         console.log(data.msg);
       }
@@ -129,7 +129,7 @@ export class BidComponent implements OnInit {
     this.bidService.updateBidStatus(updatedBid).subscribe((data) => {
       if (data.success) {
         console.log(data.msg);
-        this.ngOnInit();
+        // this.ngOnInit();
       } else {
         console.log(data.msg);
       }
