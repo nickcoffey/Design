@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LaborService } from '../../services/labor.service';
 import { Subject } from 'rxjs/Rx';
+import { AlertComponent } from '../alert/alert.component';
 declare var $;
 
 @Component({
@@ -16,7 +17,8 @@ export class LaborComponent implements OnInit {
   roleID: number = null;
 
   constructor(
-    private laborService: LaborService
+    private laborService: LaborService,
+    private alert: AlertComponent
   ) { }
 
   ngOnInit() {
@@ -47,6 +49,7 @@ export class LaborComponent implements OnInit {
         this.onClear();
         this.getLabor();
         $('#create-modal').modal('hide');
+        this.alert.displayAlert(data.msg, 'success');
       } else {
         console.log(data.msg);
       }
@@ -72,6 +75,7 @@ export class LaborComponent implements OnInit {
           this.onClear();
           this.getLabor();
           $('#update-modal').modal('hide');
+          this.alert.displayAlert(data.msg, 'success');
         } else {
           console.log(data.msg);
         }
@@ -85,6 +89,7 @@ export class LaborComponent implements OnInit {
         this.onClear();
         this.getLabor();
         $('#update-modal').modal('hide');
+        this.alert.displayAlert(data.msg, 'success');
       } else {
         console.log(data.msg);
       }

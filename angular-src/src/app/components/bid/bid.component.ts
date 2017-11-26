@@ -6,6 +6,7 @@ import { JobService } from '../../services/job.service';
 import { InquiryService } from '../../services/inquiry.service';
 import { LaborService } from '../../services/labor.service';
 import { forEach } from '@angular/router/src/utils/collection';
+import { AlertComponent } from '../alert/alert.component';
 declare var $;
 
 @Component({
@@ -57,7 +58,8 @@ export class BidComponent implements OnInit {
     private materialService: MaterialService,
     private jobService: JobService,
     private inquiryService: InquiryService,
-    private laborService: LaborService
+    private laborService: LaborService,
+    private alert: AlertComponent
   ) { }
 
   ngOnInit() {
@@ -85,7 +87,8 @@ export class BidComponent implements OnInit {
     };
     this.bidService.updateBidStatus(updatedBid).subscribe((data) => {
       if (data.success) {
-        console.log(data.msg);
+        // console.log(data.msg);
+        this.alert.displayAlert('Bid declined', 'success');
         this.ngOnInit();
       } else {
         console.log(data.msg);
@@ -100,7 +103,8 @@ export class BidComponent implements OnInit {
     };
     this.bidService.updateBidStatus(updatedBid).subscribe((data) => {
       if (data.success) {
-        console.log(data.msg);
+        // console.log(data.msg);
+        this.alert.displayAlert('Bid re-opened', 'success');
         this.ngOnInit();
       } else {
         console.log(data.msg);
@@ -120,43 +124,43 @@ export class BidComponent implements OnInit {
 
     this.jobService.createJob(newJob).subscribe((data) => {
       if (data.success) {
-        console.log(data.msg);
+        // console.log(data.msg);
+        this.bidService.updateBidStatus(updatedBid).subscribe((data) => {
+          if (data.success) {
+            // console.log(data.msg);
+            this.alert.displayAlert('Job created', 'success');
+            this.router.navigate(['/jobs']);
+            // this.ngOnInit();
+          } else {
+            console.log(data.msg);
+          }
+        });
         // this.ngOnInit();
       } else {
         console.log(data.msg);
       }
     });
-    this.bidService.updateBidStatus(updatedBid).subscribe((data) => {
-      if (data.success) {
-        console.log(data.msg);
-        // this.ngOnInit();
-      } else {
-        console.log(data.msg);
-      }
-    });
-
-    this.router.navigate(['/jobs']);
   }
 
   onDelete() {
     this.bidService.deleteBid(this.id).subscribe((data) => {
       if (data.success) {
         console.log(data.msg);
-      } else {
-        console.log(data.msg);
-      }
-    });
+        let updatedInquiry = {
+          inquiryID: this.bid[0].inquiryID,
+          inquiryStatus: "PENDING",
+          removeEndDate: true
+        };
 
-    let updatedInquiry = {
-      inquiryID: this.bid[0].inquiryID,
-      inquiryStatus: "PENDING",
-      removeEndDate: true
-    };
-
-    this.inquiryService.updateInquiryStatus(updatedInquiry).subscribe((data) => {
-      if (data.success) {
-        console.log(data.msg);
-        this.router.navigate(['/bids']);
+        this.inquiryService.updateInquiryStatus(updatedInquiry).subscribe((data) => {
+          if (data.success) {
+            // console.log(data.msg);
+            this.alert.displayAlert('Bid deleted', 'success');
+            this.router.navigate(['/bids']);
+          } else {
+            console.log(data.msg);
+          }
+        });
       } else {
         console.log(data.msg);
       }
@@ -178,10 +182,11 @@ export class BidComponent implements OnInit {
 
     this.bidService.updateBid(updatedBid).subscribe((data) => {
       if (data.success) {
-        console.log(data.msg);
+        // console.log(data.msg);
         this.onClear();
         this.getBid();
         $('#update-bid-modal').modal('hide');
+        this.alert.displayAlert('Price updated', 'success');
       } else {
         console.log(data.msg);
       }
@@ -231,9 +236,10 @@ export class BidComponent implements OnInit {
       });
     });
 
-    $('#create-material-modal').modal('hide');
     this.onClearBidMaterial();
     this.getBidMaterials();
+    $('#create-material-modal').modal('hide');
+    this.alert.displayAlert('Material added', 'success');
   }
 
   onSelectMaterial(material, id) {
@@ -281,6 +287,7 @@ export class BidComponent implements OnInit {
         console.log(data.msg);
         this.getBidMaterials();
         $('#update-material-modal').modal('hide');
+        this.alert.displayAlert('Material updated', 'success');
       } else {
         console.log(data.msg);
       }
@@ -324,6 +331,7 @@ export class BidComponent implements OnInit {
         console.log(data.msg);
         this.getBidMaterials();
         $('#update-material-modal').modal('hide');
+        this.alert.displayAlert('Material deleted', 'success');
       } else {
         console.log(data.msg);
       }
@@ -378,6 +386,7 @@ export class BidComponent implements OnInit {
     this.getBidLabors();
     this.onClearBidLabor();
     $('#create-labor-modal').modal('hide');
+    this.alert.displayAlert('Labor added', 'success');
   }
 
   onAddLabor() {
@@ -424,6 +433,7 @@ export class BidComponent implements OnInit {
         this.onClearBidLabor();
         this.getBidLabors();
         $('#update-labor-modal').modal('hide');
+        this.alert.displayAlert('Labor updated', 'success');
       } else {
         console.log(data.msg);
       }
@@ -436,6 +446,7 @@ export class BidComponent implements OnInit {
         console.log(data.msg);
         this.getBidLabors();
         $('#update-labor-modal').modal('hide');
+        this.alert.displayAlert('Labor deleted', 'success');
       } else {
         console.log(data.msg);
       }

@@ -222,7 +222,10 @@
             <button type="button" class="btn btn-info" data-toggle="modal" href='#upload-modal'>
               <span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload File</button>
           </div>
-          <hr>
+          <div class="collapsed" data-toggle="collapse" data-target='#files-collapse'>
+              <span class="if-collapsed"><br></span>
+              <span class="if-not-collapsed"><hr></span>
+          </div>
           <button *ngIf="status == 'IN-PROGRESS'" class="btn btn-primary" data-toggle="modal" href='#finish-job-modal'>
             <span class="glyphicon glyphicon-check" aria-hidden="true"></span> Finish Job</button>
           <button *ngIf="status == 'COMPLETED'" class="btn btn-warning" data-toggle="modal" href='#reopen-modal'>

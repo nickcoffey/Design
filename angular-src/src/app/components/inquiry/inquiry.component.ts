@@ -4,7 +4,7 @@ import { InquiryService } from '../../services/inquiry.service';
 import { MaterialService } from '../../services/material.service';
 import { LaborService } from '../../services/labor.service';
 import { BidService } from '../../services/bid.service';
-import { constants } from 'fs';
+import { AlertComponent } from '../alert/alert.component';
 declare var $;
 
 @Component({
@@ -44,7 +44,8 @@ export class InquiryComponent implements OnInit {
     private inquiryService: InquiryService,
     private materialService: MaterialService,
     private laborService: LaborService,
-    private bidService: BidService
+    private bidService: BidService,
+    private alert: AlertComponent
   ) { }
 
   ngOnInit() {
@@ -70,7 +71,8 @@ export class InquiryComponent implements OnInit {
     };
     this.inquiryService.updateInquiryStatus(updatedInquiry).subscribe((data) => {
       if (data.success) {
-        console.log(data.msg);
+        // console.log(data.msg);
+        this.alert.displayAlert('Inquiry re-opened', 'success');
         this.ngOnInit();
       } else {
         console.log(data.msg);
@@ -86,7 +88,8 @@ export class InquiryComponent implements OnInit {
     };
     this.inquiryService.updateInquiryStatus(updatedInquiry).subscribe((data) => {
       if (data.success) {
-        console.log(data.msg);
+        // console.log(data.msg);
+        this.alert.displayAlert('Inquiry declined', 'success');
         this.ngOnInit();
       } else {
         console.log(data.msg);
@@ -120,9 +123,10 @@ export class InquiryComponent implements OnInit {
 
     this.inquiryService.updateInquiry(updatedInquiry).subscribe((data) => {
       if (data.success) {
-        console.log(data.msg);
+        // console.log(data.msg);
         this.clearDescription();
         $('#update-modal').modal('hide');
+        this.alert.displayAlert('Description updated', 'success');
       } else {
         console.log(data.msg);
       }
@@ -134,7 +138,8 @@ export class InquiryComponent implements OnInit {
   onDelete() {
     this.inquiryService.deleteInquiry(this.id).subscribe((data) => {
       if (data.success) {
-        console.log(data.msg);
+        // console.log(data.msg);
+        this.alert.displayAlert(data.msg, 'success');
         this.router.navigate(['/inquiries']);
       } else {
         console.log(data.msg);
@@ -166,7 +171,8 @@ export class InquiryComponent implements OnInit {
   createBid(newBid) {
     this.bidService.createBid(newBid).subscribe((data) => {
       if (data.success) {
-        console.log(data.msg);
+        // console.log(data.msg);
+        this.alert.displayAlert(data.msg, 'success');
       } else {
         console.log(data.msg);
       }

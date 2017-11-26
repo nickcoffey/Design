@@ -33,7 +33,7 @@ router.post('/register', passport.authenticate('jwt', {session: false}), (reques
 router.post('/authenticate', (request, response, next) => {
     const username = request.body.username;
     const password = request.body.password;
-    console.log(username);
+    // console.log(username);
 
     User.getUserByUsername(username, (user, error) => {
         //console.log(`User = ${JSON.stringify(user)}`);
@@ -49,14 +49,15 @@ router.post('/authenticate', (request, response, next) => {
         // User without password for security
         let restrictedUser = {
             username: user[0].username,
-            name: user[0].name
+            name: user[0].name,
+            email: user[0].userEmail
         }
         /************************** FIX FROM STACK OVERFLOW ***********************************/
 
         User.comparePassword(password, user[0].password, (error, isMatch) => {
             // If callback contains error
             if(error){
-                return error;
+                return response.json({success: false, msg: error});;
             }
             // If callback hash matches 
             if(isMatch){
@@ -69,7 +70,8 @@ router.post('/authenticate', (request, response, next) => {
                     token: `JWT ${token}`,
                     user: {
                         name: user[0].name,
-                        username: user[0].username
+                        username: user[0].username,
+                        email: user[0].userEmail
                     }
                 });
             } else{

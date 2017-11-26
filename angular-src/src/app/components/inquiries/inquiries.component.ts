@@ -36,7 +36,7 @@ export class InquiriesComponent implements OnInit, AfterContentInit {
       this.inquiries = inquiries.inquiries;
       this.inquiriesLength = inquiries.inquiries.length;
       //this.inquiriesResource = new DataTableResource(this.inquiries);
-      this.filterInquiries(inquiries);
+      // this.filterInquiries(inquiries);
       this.setupDataTable();
     });
     // $(document).ready(function() {
@@ -45,7 +45,7 @@ export class InquiriesComponent implements OnInit, AfterContentInit {
   }
 
   ngAfterContentInit() {
-    this.applyTableColor();
+    // this.applyTableColor();
   }
 
   applyTableColor() {
@@ -75,7 +75,8 @@ export class InquiriesComponent implements OnInit, AfterContentInit {
 
   setupDataTable() {
     this.dtOptions = {
-      pagingType: 'full_numbers'
+      pagingType: 'full_numbers',
+      order: [0, 'desc']
     };
     this.dtTrigger.next();
     this.displayTable = true;

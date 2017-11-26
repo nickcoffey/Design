@@ -6,6 +6,7 @@ import { AuthService } from '../../services/auth.service';
 import { BidService } from '../../services/bid.service';
 import { LaborService } from '../../services/labor.service';
 import { FileUploader } from 'ng2-file-upload';
+import { AlertComponent } from '../alert/alert.component';
 declare var $;
 
 @Component({
@@ -79,7 +80,8 @@ export class JobComponent implements OnInit {
     private materialService: MaterialService,
     private bidService: BidService,
     private authService: AuthService,
-    private laborService: LaborService
+    private laborService: LaborService,
+    private alert: AlertComponent
   ) { }
 
   ngOnInit() {
@@ -128,21 +130,20 @@ export class JobComponent implements OnInit {
   onDeleteJob() {
     this.jobService.deleteJob(this.id).subscribe((data) => {
       if (data.success) {
-        console.log(data.msg);
-      } else {
-        console.log(data.msg);
-      }
-    });
-
-    let updatedBid = {
-      bidID: this.job[0].bidID,
-      bidStatus: "PENDING"
-    };
-
-    this.bidService.updateBidStatus(updatedBid).subscribe((data) => {
-      if (data.success) {
-        console.log(data.msg);
-        this.router.navigate(['/jobs']);
+        // console.log(data.msg);
+        let updatedBid = {
+          bidID: this.job[0].bidID,
+          bidStatus: "PENDING"
+        };
+        this.bidService.updateBidStatus(updatedBid).subscribe((data) => {
+          if (data.success) {
+            // console.log(data.msg);
+            this.alert.displayAlert('Job deleted', 'success');
+            this.router.navigate(['/jobs']);
+          } else {
+            console.log(data.msg);
+          }
+        });
       } else {
         console.log(data.msg);
       }
@@ -157,7 +158,8 @@ export class JobComponent implements OnInit {
 
     this.jobService.updateJobStatus(updatedJob).subscribe((data) => {
       if (data.success) {
-        console.log(data.msg);
+        // console.log(data.msg);
+        this.alert.displayAlert('Job re-opened', 'success');
         this.ngOnInit();
       } else {
         console.log(data.msg);
@@ -173,7 +175,8 @@ export class JobComponent implements OnInit {
 
     this.jobService.updateJobStatus(updatedJob).subscribe((data) => {
       if (data.success) {
-        console.log(data.msg);
+        // console.log(data.msg);
+        this.alert.displayAlert('Job completed', 'success');
         this.ngOnInit();
       } else {
         console.log(data.msg);
@@ -201,8 +204,10 @@ export class JobComponent implements OnInit {
       //console.log(file);
     }
     this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
-      console.log(response);
+      // console.log(response);
       this.ngOnInit();
+      this.alert.displayAlert('File uploaded', 'success');
+      $('#upload-modal').modal('hide');
       // if(response.success = true) {
       //   this.uploader.clearQueue();
       // } 
@@ -220,8 +225,10 @@ export class JobComponent implements OnInit {
     };
     this.jobService.deleteJobFile(this.file.fileID, fileToRemove).subscribe((data) => {
       if (data.success) {
-        console.log(data.msg);
+        // console.log(data.msg);
         this.getFiles();
+        $('#delete-file-modal').modal('hide');
+        this.alert.displayAlert(data.msg, 'success');
       } else {
         console.log(data.msg);
       }
@@ -284,14 +291,15 @@ export class JobComponent implements OnInit {
       this.jobService.createJobMaterial(this.id, selectedMaterial).subscribe((data) => {
         if (data.success) {
           console.log(data.msg);
-          this.getMaterials();
-          this.onClearJobMaterials();
-          $('#create-material-modal').modal('hide');
         } else {
           console.log(data.msg);
         }
       });
     });
+    this.getMaterials();
+    this.onClearJobMaterials();
+    $('#create-material-modal').modal('hide');
+    this.alert.displayAlert('Material added', 'success');
   }
 
   onSelectMaterial(material, id) {
@@ -349,6 +357,7 @@ export class JobComponent implements OnInit {
         console.log(data.msg);
         this.getMaterials();
         $('#update-material-modal').modal('hide');
+        this.alert.displayAlert('Material updated', 'success');
       } else {
         console.log(data.msg);
       }
@@ -364,6 +373,7 @@ export class JobComponent implements OnInit {
         console.log(data.msg);
         this.getMaterials();
         $('#update-material-modal').modal('hide');
+        this.alert.displayAlert('Material deleted', 'success');
       } else {
         console.log(data.msg);
       }
@@ -397,6 +407,7 @@ export class JobComponent implements OnInit {
         console.log(data.msg);
         this.getChangeOrders();
         $('#update-change-modal').modal('hide');
+        this.alert.displayAlert(data.msg, 'success');
       } else {
         console.log(data.msg);
       }
@@ -411,6 +422,7 @@ export class JobComponent implements OnInit {
         console.log(data.msg);
         this.getChangeOrders();
         $('#update-change-modal').modal('hide');
+        this.alert.displayAlert(data.msg, 'success');
       } else {
         console.log(data.msg);
       }
@@ -427,6 +439,7 @@ export class JobComponent implements OnInit {
         console.log(data.msg);
         this.getChangeOrders();
         $('#create-change-modal').modal('hide');
+        this.alert.displayAlert(data.msg, 'success');
       } else {
         console.log(data.msg);
       }
@@ -463,6 +476,7 @@ export class JobComponent implements OnInit {
         console.log(data.msg);
         this.getRevenue();
         $('#create-revenue-modal').modal('hide');
+        this.alert.displayAlert(data.msg, 'success');
       } else {
         console.log(data.msg);
       }
@@ -487,6 +501,7 @@ export class JobComponent implements OnInit {
         console.log(data.msg);
         this.getRevenue();
         $('#update-revenue-modal').modal('hide');
+        this.alert.displayAlert(data.msg, 'success');
       } else {
         console.log(data.msg);
       }
@@ -501,6 +516,7 @@ export class JobComponent implements OnInit {
         console.log(data.msg);
         this.getRevenue();
         $('#update-revenue-modal').modal('hide');
+        this.alert.displayAlert(data.msg, 'success');
       } else {
         console.log(data.msg);
       }
@@ -558,6 +574,7 @@ export class JobComponent implements OnInit {
         console.log(data.msg);
         this.getLabor();
         $('#update-labor-modal').modal('hide');
+        this.alert.displayAlert(data.msg, 'success');
       } else {
         console.log(data.msg);
       }
@@ -571,13 +588,14 @@ export class JobComponent implements OnInit {
       this.jobService.createLabor(this.id, selectedLabor).subscribe((data) => {
         if (data.success) {
           console.log(data.msg);
-          this.getLabor();
-          $('#create-labor-modal').modal('hide');
         } else {
           console.log(data.msg);
         }
       });
     });
+    this.getLabor();
+    $('#create-labor-modal').modal('hide');
+    this.alert.displayAlert('Labor added', 'success');
   }
 
   onAddLabor() {
@@ -616,9 +634,10 @@ export class JobComponent implements OnInit {
 
     this.jobService.deleteLabor(laborID).subscribe((data) => {
       if (data.success) {
-        console.log(data.msg);
+        // console.log(data.msg);
         this.getLabor();
         $('#update-labor-modal').modal('hide');
+        this.alert.displayAlert(data.msg, 'success');
       } else {
         console.log(data.msg);
       }

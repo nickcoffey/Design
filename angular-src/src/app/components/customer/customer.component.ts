@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { CustomerService } from '../../services/customer.service';
 import { InquiryService } from '../../services/inquiry.service';
+import { AlertComponent } from '../alert/alert.component';
 declare var $;
 
 @Component({
@@ -33,6 +34,7 @@ export class CustomerComponent implements OnInit {
   constructor(
     private customerService: CustomerService,
     private inquiryService: InquiryService,
+    private alert: AlertComponent,
     private router: Router,
     private route: ActivatedRoute
   ) { 
@@ -60,9 +62,10 @@ export class CustomerComponent implements OnInit {
 
     this.inquiryService.createInquiry(newInquiry).subscribe((data) => {
       if (data.success) {
-        console.log(data.msg);
-        $('#create-inquiry-modal').modal('hide');
+        // console.log(data.msg);
         this.clearDescription();
+        $('#create-inquiry-modal').modal('hide');
+        this.alert.displayAlert(data.msg, 'success');
         this.router.navigate(['/inquiries']);
       } else {
         console.log(data.msg);
@@ -73,7 +76,8 @@ export class CustomerComponent implements OnInit {
   onDeleteCustomer() {
     this.customerService.deleteCustomer(this.id).subscribe((data) => {
       if (data.success) {
-        console.log(data.msg);
+        // console.log(data.msg);
+        this.alert.displayAlert(data.msg, 'success');
         this.router.navigate(['/customers']);
       } else {
         console.log(data.msg);
@@ -101,10 +105,11 @@ export class CustomerComponent implements OnInit {
 
     this.customerService.updateCustomer(updatedCustomer).subscribe((data) => {
       if (data.success) {
-        console.log(data.msg);
+        // console.log(data.msg);
         this.getCustomer();
         this.clearCustomerFields();
         $('#update-customer-modal').modal('hide');
+        this.alert.displayAlert(data.msg, 'success');
       } else {
         console.log(data.msg);
       }
@@ -154,6 +159,7 @@ export class CustomerComponent implements OnInit {
         this.getContacts();
         this.clearContactFields();
         $('#update-contact-modal').modal('hide');
+        this.alert.displayAlert(data.msg, 'success');
       } else {
         console.log(data.msg);
       }
@@ -166,6 +172,7 @@ export class CustomerComponent implements OnInit {
         console.log(data.msg);
         this.getContacts();
         $('#update-contact-modal').modal('hide');
+        this.alert.displayAlert(data.msg, 'success');
       } else {
         console.log(data.msg);
       }
@@ -188,6 +195,7 @@ export class CustomerComponent implements OnInit {
         this.getContacts();
         this.clearContactFields();
         $('#create-contact-modal').modal('hide');
+        this.alert.displayAlert(data.msg, 'success');
       } else {
         console.log(data.msg);
       }

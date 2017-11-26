@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../../services/customer.service';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs/Rx';
+import { AlertComponent } from '../alert/alert.component'; 
 declare var $;
 
 @Component({
@@ -24,6 +25,7 @@ export class CustomersComponent implements OnInit {
 
   constructor(
     private customerService: CustomerService,
+    private alert: AlertComponent,
     private router: Router
   ) { }
 
@@ -57,10 +59,11 @@ export class CustomersComponent implements OnInit {
 
     this.customerService.createCustomer(newCustomer).subscribe((data) => {
       if (data.success) {
-        console.log(data.msg);
+        // console.log(data.msg);
         this.getCustomers();
         this.clearFields();
         $('#create-modal').modal('hide');
+        this.alert.displayAlert(data.msg, 'success');
       } else {
         console.log(data.msg);
       }

@@ -30,6 +30,7 @@
               </tr>
             </tbody>
           </table>
+          <br>
           <table class="table table-bordered">
             <thead>
               <tr class="active">
@@ -42,7 +43,7 @@
               </tr>
             </tbody>
           </table>
-          <hr>
+          <br>
           <button (click)="onClickUpdate()" class="btn btn-info" data-toggle="modal" href="#update-modal">
             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Update Description</button>
           <button *ngIf="status == 'PENDING'" class="btn btn-warning" data-toggle="modal" href='#decline-modal'>

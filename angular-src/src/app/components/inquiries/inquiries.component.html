@@ -1,5 +1,6 @@
 <div class="pull-left">
-  <button class="btn btn-default" [routerLink]="['/home']"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Go Home</button>
+  <button class="btn btn-default" [routerLink]="['/home']">
+    <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Go Home</button>
 </div>
 
 <ng-container *ngIf="inquiriesLength!=0; else noInquiries">
@@ -17,7 +18,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let inquiry of inquiries;" id="{{inquiry.inquiryID}}" [routerLink]="['/inquiries/'+inquiry.inquiryID]">
+        <tr *ngFor="let inquiry of inquiries;" id="{{inquiry.inquiryID}}" [ngClass]="{'info': inquiry.inquiryStatus=='PENDING','danger': inquiry.inquiryStatus=='DECLINED','success': inquiry.inquiryStatus=='ACCEPTED'}"
+          [routerLink]="['/inquiries/'+inquiry.inquiryID]">
           <td class="hidden-xs hidden-sm">{{inquiry.inquiryID}}</td>
           <td>{{inquiry.customerName}}</td>
           <td>{{inquiry.inquiryStatus}}</td>
@@ -35,7 +37,7 @@
     <p>If this is incorrect, try refreshing the page.</p>
   </div>
 </ng-template>
-  
+
 <!-- <ng-container *ngIf="pendingLength!=0 || acceptedLength!=0 || declinedLength!=0; else noInquiries">
   <ng-container *ngIf="pendingLength!=0; else noPendingInquiries">
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">

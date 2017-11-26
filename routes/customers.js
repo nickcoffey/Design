@@ -133,7 +133,13 @@ router.post('/:id/new/contact', passport.authenticate('jwt', {session: false}), 
         contactName: request.body.contactName,
         contactPhone: request.body.contactPhone,
         contactEmail: request.body.contactEmail
-    };  
+    };
+    if(newContact.contactPhone == null || newContact.contactPhone == undefined){
+        newContact.contactPhone = "";
+    }
+    if(newContact.contactEmail == null || newContact.contactEmail == undefined){
+        newContact.contactEmail == "";
+    }
 
     customer.createContact(newContact, (message) => {
         if(message.message == ""){

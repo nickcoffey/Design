@@ -28,13 +28,13 @@ export class JobsComponent implements OnInit {
     this.jobService.getAllJobs().subscribe((jobs) => {
       this.jobs = jobs.jobs;
       this.jobsLength = jobs.jobs.length;
-      this.filterJobs(jobs);
+      // this.filterJobs(jobs);
       this.setupDataTable();
     });
   }
 
   ngAfterContentInit() {
-    this.applyTableColor();
+    // this.applyTableColor();
   }
 
   applyTableColor() {
@@ -53,7 +53,8 @@ export class JobsComponent implements OnInit {
 
   setupDataTable() {
     this.dtOptions = {
-      pagingType: 'full_numbers'
+      pagingType: 'full_numbers',
+      order: [0, 'desc']
     };
     this.dtTrigger.next();
     this.displayTable = true;

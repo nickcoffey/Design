@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MaterialService } from '../../services/material.service';
 import { Subject } from 'rxjs/Rx';
+import { AlertComponent } from '../alert/alert.component';
 declare var $;
 
 @Component({
@@ -22,7 +23,8 @@ export class MaterialsComponent implements OnInit {
   displayTable: Boolean = false;
 
   constructor(
-    private materialService: MaterialService
+    private materialService: MaterialService,
+    private alert: AlertComponent
   ) { }
 
   ngOnInit() {
@@ -73,6 +75,7 @@ export class MaterialsComponent implements OnInit {
           this.onClear();
           this.getMaterials();
           $('#update-modal').modal('hide');
+          this.alert.displayAlert(data.msg, 'success');
         } else {
           console.log(data.msg);
         }
@@ -92,6 +95,7 @@ export class MaterialsComponent implements OnInit {
         this.onClear();
         this.getMaterials();
         $('#create-modal').modal('hide');
+        this.alert.displayAlert(data.msg, 'success');
       } else {
         console.log(data.msg);
       }
@@ -109,6 +113,7 @@ export class MaterialsComponent implements OnInit {
         this.onClear();
         this.getMaterials();
         $('#update-modal').modal('hide');
+        this.alert.displayAlert(data.msg, 'success');
       } else {
         console.log(data.msg);
       }

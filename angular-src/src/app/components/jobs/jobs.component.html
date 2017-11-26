@@ -1,5 +1,6 @@
 <div class="pull-left">
-  <button class="btn btn-default" [routerLink]="['/home']"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Go Home</button>
+  <button class="btn btn-default" [routerLink]="['/home']">
+    <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Go Home</button>
 </div>
 
 <ng-container *ngIf="jobsLength!=0; else noJobs">
@@ -17,7 +18,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let job of jobs;" id="{{job.jobID}}" [routerLink]="['/jobs/'+job.jobID]">
+        <tr *ngFor="let job of jobs;" id="{{job.jobID}}" [routerLink]="['/jobs/'+job.jobID]" [ngClass]="{'info': job.jobStatus=='IN-PROGRESS','success': job.jobStatus=='COMPLETED'}">
           <td class="hidden-xs hidden-sm">{{job.jobID}}</td>
           <td>{{job.customerName}}</td>
           <td>{{job.jobStatus}}</td>

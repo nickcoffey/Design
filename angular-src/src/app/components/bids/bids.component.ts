@@ -38,7 +38,7 @@ export class BidsComponent implements OnInit, AfterContentInit {
   }
 
   ngAfterContentInit() {
-    this.applyTableColor();
+    // this.applyTableColor();
   }
 
   applyTableColor() {
@@ -59,7 +59,8 @@ export class BidsComponent implements OnInit, AfterContentInit {
 
   setupDataTable(){
     this.dtOptions = {
-      pagingType: 'full_numbers'
+      pagingType: 'full_numbers',
+      order: [0, 'desc']
     };
     this.dtTrigger.next();
     this.displayTable = true;

@@ -30,6 +30,7 @@ import { InquiryComponent } from './components/inquiry/inquiry.component';
 import { JobComponent } from './components/job/job.component';
 import { LaborComponent } from './components/labor/labor.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { AlertComponent } from './components/alert/alert.component';
 
 import { CustomerService } from './services/customer.service';
 import { InquiryService } from './services/inquiry.service';
@@ -55,8 +56,8 @@ const appRoutes: Routes = [
   { path: 'bids/:id', component: BidComponent, canActivate: [AuthGuard] },
   { path: 'inquiries/:id', component: InquiryComponent, canActivate: [AuthGuard] },
   { path: 'jobs/:id', component: JobComponent, canActivate: [AuthGuard] },
-  { path: 'labor', component: LaborComponent, canActivate: [AuthGuard] },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] }
+  { path: 'labor', component: LaborComponent, canActivate: [AuthGuard] }
+  // ,{ path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
@@ -78,7 +79,8 @@ const appRoutes: Routes = [
     JobComponent,
     FileSelectDirective,
     LaborComponent,
-    ProfileComponent
+    ProfileComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -119,7 +121,8 @@ const appRoutes: Routes = [
     LaborService,
     AuthService,
     AuthGuard,
-    CookieService
+    CookieService,
+    AlertComponent
   ],
   bootstrap: [AppComponent]
 })

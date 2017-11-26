@@ -26,7 +26,7 @@ router.post('/new', passport.authenticate('jwt', { session: false }), (request, 
         if (message.message == "") {
             response.json({
                 success: true,
-                msg: 'Labor created'
+                msg: 'Labor Created'
             });
         } else {
             response.json({
