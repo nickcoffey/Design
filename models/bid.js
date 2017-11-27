@@ -204,3 +204,40 @@ module.exports.updateBidLabor = function (updatedBidLabor, callback) {
         }
     });
 }
+
+/********************************************************* Bid Files *************************************************************************/
+module.exports.uploadBidFile = function (newBidFile, callback) {
+    const queryString = sqlString.format(`INSERT INTO BidFiles(fileName, bidID) VALUES(?, (SELECT Bid.bidID FROM Bid WHERE Bid.bidID = ?))`, [newBidFile.fileName, newBidFile.bidID]);
+    // console.log(queryString);
+    connection.query(queryString, (error, rows, fields) => {
+        if (!error) {
+            callback(rows);
+        } else {
+            return error;
+        }
+    });
+}
+
+module.exports.getBidFilesById = function (bidID, callback) {
+    const queryString = sqlString.format(`SELECT * FROM BidFiles WHERE bidID = ?`, [bidID]);
+    // console.log(queryString);
+    connection.query(queryString, (error, rows, fields) => {
+        if (!error) {
+            callback(rows);
+        } else {
+            return error;
+        }
+    });
+}
+
+module.exports.deleteBidFile = function (fileID, callback) {
+    const queryString = sqlString.format(`DELETE FROM BidFiles WHERE fileID = ?`, [fileID]);
+    // console.log(queryString);
+    connection.query(queryString, (error, rows, fields) => {
+        if (!error) {
+            callback(rows);
+        } else {
+            return error;
+        }
+    });
+}

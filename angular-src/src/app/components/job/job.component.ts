@@ -188,7 +188,7 @@ export class JobComponent implements OnInit {
   getFiles() {
     this.jobService.getJobFilesByID(this.id).subscribe((files) => {
       this.files = files;
-      console.log(this.files);
+      // console.log(this.files);
     });
   }
 
@@ -204,13 +204,14 @@ export class JobComponent implements OnInit {
       //console.log(file);
     }
     this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
-      // console.log(response);
       this.ngOnInit();
-      this.alert.displayAlert('File uploaded', 'success');
       $('#upload-modal').modal('hide');
-      // if(response.success = true) {
-      //   this.uploader.clearQueue();
-      // } 
+      if(JSON.parse(response).success == true) {
+        this.alert.displayAlert(JSON.parse(response).msg, 'success');
+      } else {
+        this.alert.displayAlert(JSON.parse(response).msg, 'warning');
+      }
+      this.uploader.clearQueue();
     }
   }
 

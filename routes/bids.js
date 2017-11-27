@@ -3,6 +3,8 @@ const router = express.Router();
 const bid = require('../models/bid');
 const config = require('../config/database');
 const passport = require('passport');
+const multer = require('multer');
+const fs = require('fs');
 
 /************************************************************* Bid ***************************************************************************/
 
@@ -408,6 +410,113 @@ router.post('/update/bid-labor', passport.authenticate('jwt', { session: false }
             response.json({
                 success: false,
                 msg: message.message
+            });
+        }
+    });
+});
+
+/********************************************************* Bid Files *************************************************************************/
+// Upload bid file
+router.post('/:id/upload', function (req, res, next) {
+    const id = req.params.id;
+    var fileName = '';
+
+    var storage = multer.diskStorage({ //multers disk storage settings
+        destination: function (req, file, cb) {
+            cb(null, `./uploads/files`);
+        },
+        filename: function (req, file, cb) {
+            fs.stat(`./uploads/files/${file.originalname}`, (error, stat) => {
+                if (error == null) {
+                    //fileExists = true;
+                    fileName = `(Copy)${file.originalname}`;
+                    return res.json({
+                        success: false,
+                        msg: file.originalname + " exists"
+                    });
+                    console.log(file.originalname + " exists");
+                    cb(null, `(Copy)${file.originalname}`);
+                } else if (error.code == 'ENOENT') {
+                    //fileExists = false;
+                    fileName = file.originalname;
+                    console.log(file.originalname + " does not exist");
+                    cb(null, `${file.originalname}`);
+                } else {
+                    //error
+                }
+            });
+        }
+    });
+
+    var upload = multer({ //multer settings
+        storage: storage
+    }).single('file');
+
+    upload(req, res, function (err) {
+        let newBidFile = {
+            bidID: req.params.id,
+            fileName: fileName
+        };
+
+        bid.uploadBidFile(newBidFile, (message) => {
+            if (message.warningCount == 0) {
+                if (err) {
+                    res.json({
+                        success: false,
+                        msg: err
+                    });
+                } else {
+                    res.json({
+                        success: true,
+                        msg: "File uploaded"
+                    });
+                }
+            } else {
+                res.json({
+                    success: false,
+                    msg: message.message
+                });
+            }
+        });
+    });
+});
+
+// Get file names
+router.get('/:id/files', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+    const id = req.params.id;
+    bid.getBidFilesById(id, (fileNames) => {
+        if (!fileNames) {
+            return err;
+        } else {
+            return res.json(fileNames);
+        }
+    });
+});
+
+// Delete bid file
+router.post('/:id/files/delete', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+    const id = req.params.id;
+    const file = `./uploads/files/${req.body.key}`;
+
+    fs.unlink(file, (err) => {
+        if (err) {
+            res.json({
+                success: false,
+                msg: err
+            });
+        } else {
+            bid.deleteBidFile(id, (message) => {
+                if (message.warningCount == 0) {
+                    return res.send({
+                        success: true,
+                        msg: "File deleted"
+                    });
+                } else {
+                    return res.send({
+                        success: false,
+                        msg: message.message
+                    });
+                }
             });
         }
     });

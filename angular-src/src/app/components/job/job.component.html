@@ -230,7 +230,7 @@
             <span class="glyphicon glyphicon-check" aria-hidden="true"></span> Finish Job</button>
           <button *ngIf="status == 'COMPLETED'" class="btn btn-warning" data-toggle="modal" href='#reopen-modal'>
             <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Re-open Job</button>
-          <button class="btn btn-danger" data-toggle="modal" href='#delete-job-modal'>
+          <button *ngIf="status == 'COMPLETED'" class="btn btn-danger" data-toggle="modal" href='#delete-job-modal'>
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete Job</button>
         </div>
       </div>

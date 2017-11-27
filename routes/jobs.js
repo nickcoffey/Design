@@ -695,6 +695,10 @@ router.post('/:id/upload', function (req, res, next) {
                     //fileExists = true;
                     fileName = `(Copy)${file.originalname}`;
                     console.log(file.originalname + " exists");
+                    return res.json({
+                        success: false,
+                        msg: file.originalname + " exists"
+                    });
                     cb(null, `(Copy)${file.originalname}`);
                 } else if (error.code == 'ENOENT') {
                     //fileExists = false;

@@ -31,6 +31,9 @@ export class CustomerComponent implements OnInit {
   contacts: any;
   contactID: any;
 
+  /** INQUIRY **/
+  inquiries: any;
+
   constructor(
     private customerService: CustomerService,
     private inquiryService: InquiryService,
@@ -44,6 +47,7 @@ export class CustomerComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     this.getCustomer();
     this.getContacts();
+    this.getInquiries();
   }
 
   /*************************************************** CUSTOMER FUNCTIONS ***********************************************************/
@@ -126,6 +130,13 @@ export class CustomerComponent implements OnInit {
 
   clearDescription() {
     this.description = '';
+  }
+
+  /*************************************************** INQUIRY FUNCTIONS ***********************************************************/
+  getInquiries() {
+    this.inquiryService.getInquiriesByCustomer(this.id).subscribe(inquiries => {
+      this.inquiries = inquiries.inquiries;
+    });
   }
 
   /*************************************************** CONTACT FUNCTIONS ***********************************************************/

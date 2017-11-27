@@ -1,1 +1,7 @@
+[data-toggle="collapse"].collapsed .if-not-collapsed {
+    display: none;
+  }
+  [data-toggle="collapse"]:not(.collapsed) .if-collapsed {
+    display: none;
+  }
 .panel-heading:hover {background-color: #1863e6 !important;}

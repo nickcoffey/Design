@@ -1,0 +1,2 @@
+slb01br16ag - 22.95.95.11 - Prod A (Host) is the LB and it's on ECO_101 partition
+AND slb01br15bg - 22.95.95.12 - Prod B (Host) ECO_101 partition

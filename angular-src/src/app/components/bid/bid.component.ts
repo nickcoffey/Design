@@ -7,6 +7,8 @@ import { InquiryService } from '../../services/inquiry.service';
 import { LaborService } from '../../services/labor.service';
 import { forEach } from '@angular/router/src/utils/collection';
 import { AlertComponent } from '../alert/alert.component';
+import { AuthService } from '../../services/auth.service';
+import { FileUploader } from 'ng2-file-upload';
 declare var $;
 
 @Component({
@@ -16,7 +18,7 @@ declare var $;
 })
 export class BidComponent implements OnInit {
 
-  /** Bid **/
+  /** BID **/
   id: number = null;
   bid: any;
   bidPrice: number = null;
@@ -24,7 +26,7 @@ export class BidComponent implements OnInit {
   createdDate: string = '';
   endDate: string = '';
   status: string = '';
-  /** Materials **/
+  /** MATERIALS **/
   bidMaterials: any;
   material: any;
   materialID: number = null;
@@ -38,7 +40,7 @@ export class BidComponent implements OnInit {
   selectedMaterials1: SelectedMaterial[] = [];
   bidMaterialID: number = null;
   materialIndex: number = null;
-  /** Labor **/
+  /** LABOR **/
   labors: any = [];
   laborsLoop: any = [];
   bidLabors: any;
@@ -50,6 +52,13 @@ export class BidComponent implements OnInit {
   selectedLabors: SelectedLabor[] = [];
   totalLaborPrice: number = 0;
   totalLaborPriceTable: number = 0;
+  /** FILES **/
+  files: any;
+  filesUrls: any[] = [];
+  fileName: any;
+  file: any;
+  url: string;
+  uploader: FileUploader;
 
   constructor(
     private router: Router,
@@ -59,14 +68,17 @@ export class BidComponent implements OnInit {
     private jobService: JobService,
     private inquiryService: InquiryService,
     private laborService: LaborService,
+    private authService: AuthService,
     private alert: AlertComponent
   ) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
+    this.setupFileUploader();
     this.getBid();
     this.getBidMaterials();
     this.getBidLabors();
+    this.getFiles();
   }
 
   /**************************************************** Bid **********************************************************************/
@@ -468,6 +480,58 @@ export class BidComponent implements OnInit {
     });
     this.selectedLabors = [];
     this.totalLaborPrice = 0;
+  }
+
+  /************************************************* FILE FUNCTIONS *********************************************************/
+  getFiles() {
+    this.bidService.getBidFilesByID(this.id).subscribe((files) => {
+      this.files = files;
+      // console.log(this.files);
+    });
+  }
+
+  setupFileUploader() {
+    this.url = `/api/bids/${this.id}/upload`;
+    // this.url = `http://localhost:3000/api/bids/${this.id}/upload`;
+    this.authService.loadToken();
+    let headers: any = [{ name: 'Authorization', value: this.authService.authToken }, { name: 'Content-Type', value: 'application/json' }];
+    this.uploader = new FileUploader({ url: this.url });
+    this.uploader.onAfterAddingFile = (file) => {
+      file.withCredentials = false;
+      //this.readyItems.push(file);
+      //console.log(file);
+    }
+    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
+      this.ngOnInit();
+      $('#upload-modal').modal('hide');
+      if (JSON.parse(response).success == true) {
+        this.alert.displayAlert(JSON.parse(response).msg, 'success');
+      } else {
+        this.alert.displayAlert(JSON.parse(response).msg, 'warning');
+      }
+      this.uploader.clearQueue();
+    }
+  }
+
+  onClickDeleteFile(file) {
+    this.file = file;
+    $('#delete-file-modal').modal('show');
+  }
+
+  onDeleteFile() {
+    let fileToRemove = {
+      key: this.file.fileName
+    };
+    this.bidService.deleteBidFile(this.file.fileID, fileToRemove).subscribe((data) => {
+      if (data.success) {
+        // console.log(data.msg);
+        this.getFiles();
+        $('#delete-file-modal').modal('hide');
+        this.alert.displayAlert(data.msg, 'success');
+      } else {
+        console.log(data.msg);
+      }
+    });
   }
 }
 

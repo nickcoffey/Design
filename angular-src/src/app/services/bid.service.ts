@@ -163,4 +163,21 @@ export class BidService {
     headers.append('Authorization', this.authService.authToken);
     return this.http.post(`${this.localHttp}/bids/update/bid-labor`, JSON.stringify(updatedBidLabor), { headers: headers }).map(response => response.json());
   }
+
+  /********************************************************************* FILE FUNCTIONS ***********************************************************************/
+  getBidFilesByID(id) {
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Authorization', this.authService.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(`${this.localHttp}/bids/${id}/files`, { headers: headers }).map(response => response.json());
+  }
+
+  deleteBidFile(id, file) {
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', this.authService.authToken);
+    return this.http.post(`${this.localHttp}/bids/${id}/files/delete`, JSON.stringify(file), { headers: headers }).map(response => response.json());
+  }
 }

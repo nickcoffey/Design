@@ -43,14 +43,56 @@
               </tr>
             </tbody>
           </table>
-          <br>
+          <h4 class="page-header">Files (Only Works On Local Machine)
+            <button class="btn btn-default btn-sm collapsed" data-toggle="collapse" data-target='#files-collapse'>
+              <span class="if-collapsed">Show</span>
+              <span class="if-not-collapsed">Hide</span>
+            </button>
+          </h4>
+          <div class="collapse" id="files-collapse">
+            <div *ngIf="files.length > 0">
+              <label>Click To Open</label>
+              <table class="table" style="border: 1px solid #dddddd;">
+                <thead>
+                  <tr class="active">
+                    <th>Name</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let file of files">
+                    <td>
+                      <!-- <a target="_blank" href="https://s3.us-east-2.amazonaws.com/allied-waterproofing/{{file.fileName}}">{{file.fileName}}</a> -->
+                      <!-- <a target="_blank" href="http://localhost:3000/api/uploads/{{file.fileName}}">{{file.fileName}}</a> -->
+                      <a target="_blank" href="/api/uploads/{{file.fileName}}">{{file.fileName}}</a>
+                    </td>
+                    <td>
+                      <button (click)="onClickDeleteFile(file)" type="button" class="btn btn-danger btn-xs">
+                        &times; Delete
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <button type="button" class="btn btn-info" data-toggle="modal" href='#upload-modal'>
+              <span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload File</button>
+          </div>
+          <div class="collapsed" data-toggle="collapse" data-target='#files-collapse'>
+            <span class="if-collapsed">
+              <br>
+            </span>
+            <span class="if-not-collapsed">
+              <hr>
+            </span>
+          </div>
           <button (click)="onClickUpdate()" class="btn btn-info" data-toggle="modal" href="#update-modal">
             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Update Description</button>
           <button *ngIf="status == 'PENDING'" class="btn btn-warning" data-toggle="modal" href='#decline-modal'>
             <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> Decline Inquiry</button>
           <button *ngIf="status == 'DECLINED'" class="btn btn-warning" data-toggle="modal" href='#reopen-modal'>
             <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> Re-Open Inquiry</button>
-          <button class="btn btn-danger" data-toggle="modal" href='#delete-modal'>
+          <button *ngIf="inquiry[0].associatedBidID == null" class="btn btn-danger" data-toggle="modal" href='#delete-modal'>
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete Inquiry</button>
           <hr *ngIf="status == 'PENDING'">
           <button *ngIf="status == 'PENDING'" class="btn btn-primary" data-toggle="modal" href='#create-bid-modal'>
@@ -351,6 +393,72 @@
       </div>
       <div class="modal-footer">
         <button (click)="onClear()" type="button" class="btn btn-info" data-dismiss="modal">
+          <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--                                     FILE POPUPS                                           -->
+<!--                Delete File Popup                -->
+<div class="modal fade" id="delete-file-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Warning</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete
+          <b>{{file.fileName}}</b>?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onDeleteFile()">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--                Upload File Popup                -->
+<div class="modal fade" id="upload-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Upload Files</h4>
+      </div>
+      <div class="modal-body">
+        <button type="button" class="btn btn-info" *ngIf="uploader.queue.length == 0" (click)="(uploader.queue.length == 0) && fileInput.click()">
+          <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> Browse Files</button>
+        <input name="file" type="file" style="display: none;" #fileInput ng2FileSelect [uploader]="uploader" />
+        <br>
+        <br>
+        <table *ngIf="uploader.queue.length" class="table">
+          <thead>
+            <tr>
+              <th>Edit File Name
+                <div style="color:#ff0000">*Keep File Extension</div>
+              </th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of uploader.queue">
+              <td>
+                <input class="form-control" type="text" [value]="item.file.name" (change)="item.file.name = $event.target.value" />
+              </td>
+              <td>
+                <button (click)="item.remove()" type="button" class="btn btn-danger">
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Remove
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button type="button" class="btn btn-primary" *ngIf="uploader.queue.length != 0" (click)="(uploader.queue.length > 0) && uploader.uploadAll()">
+          <span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">
           <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
       </div>
     </div>

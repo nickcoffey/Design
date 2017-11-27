@@ -32,7 +32,7 @@
           <br>
           <button (click)="onClickUpdateCustomer()" class="btn btn-info" href="#update-customer-modal" data-toggle="modal">
             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Update Customer</button>
-          <button class="btn btn-danger" data-toggle="modal" href='#delete-customer-modal'>
+          <button *ngIf="inquiries.length == 0" class="btn btn-danger" data-toggle="modal" href='#delete-customer-modal'>
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete Customer</button>
           <hr>
           <button class="btn btn-primary" href="#create-inquiry-modal" data-toggle="modal">
@@ -158,7 +158,8 @@
         <h4 class="modal-title">Warning</h4>
       </div>
       <div class="modal-body">
-        <p>Are you sure you want to delete this customer and all of its inquiries, bids, and jobs?</p>
+        <p>Are you sure you want to delete this customer?</p>
+        <!-- <p>Are you sure you want to delete this customer and all of its inquiries, bids, and jobs?</p> -->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
