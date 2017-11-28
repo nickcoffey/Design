@@ -3216,6 +3216,9 @@ var LoginComponent = (function () {
         this.password = '';
     }
     LoginComponent.prototype.ngOnInit = function () {
+        if (this.authService.loggedIn()) {
+            this.router.navigate(['home']);
+        }
     };
     LoginComponent.prototype.onLogin = function () {
         var _this = this;
