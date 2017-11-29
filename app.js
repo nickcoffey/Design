@@ -35,7 +35,7 @@ const port = process.env.PORT || 8080;
 // const port = 3000;
 
 // Git Hook Auto-Deploy
-app.post('/deploy', (req, res) => {
+app.post('/api/deploy', (req, res) => {
     var spawn = require('child_process').spawn,
         deploy = spawn('sh', ['./deploy.sh']);
     deploy.stdout.on('data', (data) => {
