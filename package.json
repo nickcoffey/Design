@@ -11,19 +11,21 @@
     "aws-sdk": "^2.154.0",
     "bcryptjs": "*",
     "body-parser": "*",
+    "child_process": "^1.0.2",
     "cors": "2.8.4",
     "express": "*",
     "fs": "*",
     "jsonwebtoken": "*",
+    "mime": "*",
     "mkdirp": "*",
     "multer": "*",
-    "mime": "*",
     "multer-s3": "^2.7.0",
     "mysql": "*",
     "passport": "*",
     "passport-jwt": "*",
     "serve-index": "^1.9.1",
-    "sqlstring": "^2.3.0"
+    "sqlstring": "^2.3.0",
+    "sys": "0.0.1"
   },
   "author": "Nick Coffey",
   "license": "ISC"

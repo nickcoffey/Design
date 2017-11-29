@@ -36,14 +36,22 @@ const port = process.env.PORT || 8080;
 
 // Git Hook Auto-Deploy
 app.post('/api/deploy', (req, res) => {
-    const exec = require('child_process').exec;
-    const deploy = exec('../../Scripts/deploy.sh');
-    deploy.stdout.on('data', (data) => {
-        console.log(''+data);
+    var sys = require('sys');
+    var exec = require('child_process').exec;
+    var child;
+    child = exec('../../Scripts/deploy.sh', (err, stdout, stderr) =>{
+        sys.print(`stdout: ${stdout}`);
+        sys.print(`stderr: ${stderr}`);
+        if (err != null) {
+            console.log(`exec error: ${err}`);
+        }
     });
-    deploy.on('close', (code) => {
-        console.log(`Child process exited with code ${code}`);
-    });
+    // deploy.stdout.on('data', (data) => {
+    //     console.log(''+data);
+    // });
+    // deploy.on('close', (code) => {
+    //     console.log(`Child process exited with code ${code}`);
+    // });
     res.json(200, {message: 'GitHub Hook Received'});
 });
 
