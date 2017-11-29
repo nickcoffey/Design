@@ -6,7 +6,7 @@
 
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
   <ng-container *ngIf="inquiry[0]; else noInquiry">
-    <h2 class="page-header">Inquiry #{{inquiry[0].inquiryID}}</h2>
+    <h2 class="page-header">Inquiry #{{inquiry[0].inquiryID}} - {{inquiry[0].customerName}}</h2>
     <h4>Click To View Details</h4>
     <div class="panel-group" id="accordion">
       <div class="panel panel-primary">
@@ -43,7 +43,7 @@
               </tr>
             </tbody>
           </table>
-          <h4 class="page-header">Files (Only Works On Local Machine)
+          <h4 class="page-header">Files
             <button class="btn btn-default btn-sm collapsed" data-toggle="collapse" data-target='#files-collapse'>
               <span class="if-collapsed">Show</span>
               <span class="if-not-collapsed">Hide</span>
@@ -340,7 +340,7 @@
                   </tr>
                 </tfoot>
               </table>
-              <label *ngIf="selectedMaterials1.length != 0;" style="color:#ff0000"></label>
+              <label *ngIf="selectedMaterials1.length != 0;" style="color:#ff0000">Click To Remove</label>
               <table class="table table-bordered table-hover" *ngIf="selectedMaterials1.length != 0;">
                 <thead>
                   <tr class="active">

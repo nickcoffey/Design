@@ -220,7 +220,7 @@ export class BidComponent implements OnInit {
           this.materials.forEach((material, i) => {
             if (material.materialID == bidMaterial.materialID) {
               this.materials.splice(i, 1);
-              this.totalMaterialPriceTable += ((bidMaterial.pricePerUnit / bidMaterial.linearFeetCoverage) * bidMaterial.linearFeet);
+              // this.totalMaterialPriceTable += ((bidMaterial.pricePerUnit / bidMaterial.linearFeetCoverage) * bidMaterial.linearFeet);
             }
           });
         });
@@ -366,7 +366,7 @@ export class BidComponent implements OnInit {
         this.bidLabors.forEach(bidLabor => {
           this.labors.forEach((labor, i) => {
             if (labor.roleID == bidLabor.roleID) {
-              this.totalLaborPriceTable += (bidLabor.roleWage * bidLabor.laborHours);
+              // this.totalLaborPriceTable += (bidLabor.roleWage * bidLabor.laborHours);
               this.labors.splice(i, 1);
             }
           })

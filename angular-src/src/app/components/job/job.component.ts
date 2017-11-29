@@ -254,7 +254,7 @@ export class JobComponent implements OnInit {
           this.materials.forEach((material, i) => {
             if (material.materialID == jobMaterial.materialID) {
               this.materials.splice(i, 1);
-              this.totalMaterialPriceTable += ((jobMaterial.pricePerUnit / jobMaterial.linearFeetCoverage) * jobMaterial.linearFeet);
+              // this.totalMaterialPriceTable += ((jobMaterial.pricePerUnit / jobMaterial.linearFeetCoverage) * jobMaterial.linearFeet);
             }
           });
         });

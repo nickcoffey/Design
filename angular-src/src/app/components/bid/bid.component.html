@@ -5,7 +5,7 @@
 
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
   <ng-container *ngIf="bid[0]; else noBid">
-    <h2 class="page-header">Bid #{{bid[0].bidID}}</h2>
+    <h2 class="page-header">Bid #{{bid[0].bidID}} - {{bid[0].customerName}}</h2>
     <h4>Click To View Details</h4>
     <div class="panel-group" id="accordion">
       <div class="panel panel-primary">
@@ -17,7 +17,7 @@
           <table class="table table-bordered">
             <thead>
               <tr class="active">
-                <th>Price</th>
+                <th>Charged Price</th>
                 <th>Created Date</th>
                 <th *ngIf="bid[0].bidStatus == 'ACCEPTED'">Accepted Date</th>
                 <th *ngIf="bid[0].bidStatus == 'DECLINED'">Declined Date</th>
@@ -36,7 +36,7 @@
           <button (click)="onClickUpdateBid()" type="button" class="btn btn-info" data-toggle="modal" href='#update-bid-modal'>
             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Update Price</button>
 
-          <h4 class="page-header">Labor Costs
+          <h4 class="page-header">Estimated Labor Costs
             <button class="btn btn-default btn-sm collapsed" data-toggle="collapse" data-target='#labor-collapse'>
               <span class="if-collapsed">Show</span>
               <span class="if-not-collapsed">Hide</span>
@@ -76,7 +76,7 @@
               <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Add Labor</button>
           </div>
 
-          <h4 class="page-header">Material Cost
+          <h4 class="page-header">Estimated Material Costs
             <button class="btn btn-default btn-sm collapsed" data-toggle="collapse" data-target='#materials-collapse'>
               <span class="if-collapsed">Show</span>
               <span class="if-not-collapsed">Hide</span>
@@ -118,7 +118,7 @@
             <button *ngIf="materials.length > 0" (click)="onClearBidMaterial()" class="btn btn-info" data-toggle="modal" href='#create-material-modal'>
               <span class="glyphicon glyphicon-tint" aria-hidden="true"></span> Add Materials</button>
           </div>
-          <h4 class="page-header">Files (Only Works On Local Machine)
+          <h4 class="page-header">Files
             <button class="btn btn-default btn-sm collapsed" data-toggle="collapse" data-target='#files-collapse'>
               <span class="if-collapsed">Show</span>
               <span class="if-not-collapsed">Hide</span>
