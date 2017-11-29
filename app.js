@@ -34,18 +34,18 @@ const labors = require('./routes/labors');
 const port = process.env.PORT || 8080;
 // const port = 3000;
 
-// // Git Hook Auto-Deploy
-// app.post('/api/deploy', (req, res) => {
-//     const exec = require('child_process').exec, child;
-//     const deploy = exec('sh ../../Scripts/deploy.sh');
-//     deploy.stdout.on('data', (data) => {
-//         console.log(''+data);
-//     });
-//     deploy.on('close', (code) => {
-//         console.log(`Child process exited with code ${code}`);
-//     });
-//     res.json(200, {message: 'GitHub Hook Received'});
-// });
+// Git Hook Auto-Deploy
+app.post('/api/deploy', (req, res) => {
+    const exec = require('child_process').exec, child;
+    const deploy = exec('sh ../../Scripts/deploy.sh');
+    deploy.stdout.on('data', (data) => {
+        console.log(''+data);
+    });
+    deploy.on('close', (code) => {
+        console.log(`Child process exited with code ${code}`);
+    });
+    res.json(200, {message: 'GitHub Hook Received'});
+});
 
 // CORS Middleware
 app.use(cors());
