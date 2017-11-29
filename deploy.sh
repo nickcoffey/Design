@@ -1,5 +1,8 @@
 #!/bin/sh
 
-forever stop app.js;
-git pull;
-forever start app.js;
+echo "Stopping app"
+forever stop app.js
+echo "Pulling in changes"
+git pull
+echo "Starting app"
+forever start app.js
