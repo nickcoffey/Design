@@ -279,7 +279,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/alert/alert.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div href=\"#warningAlert\" id=\"warningAlert\" class=\"alert alert-dismissible alert-warning\" hidden></div>\n<div href=\"#successAlert\" id=\"successAlert\" class=\"alert alert-dismissible alert-success\" hidden></div>"
+module.exports = "<div href=\"#warningAlert\" id=\"warningAlert\" class=\"alert alert-dismissible alert-warning\" hidden></div>\r\n<div href=\"#successAlert\" id=\"successAlert\" class=\"alert alert-dismissible alert-success\" hidden></div>"
 
 /***/ }),
 
@@ -3181,7 +3181,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"jumbotron\">\r\n  <div class=\"container\">\r\n    <h1>Allied Waterproofing</h1>\r\n    <p>Project Management</p>\r\n  </div>\r\n</div>\r\n<!--                                Alerts                                                -->\r\n<div id=\"login-alert\" class=\"alert alert-dismissible alert-warning\" hidden></div>\r\n\r\n<h2 class=\"page-header\">Login</h2>\r\n<form #f=\"ngForm\" (submit)=\"onLogin()\">\r\n  <div class=\"form-group\">\r\n    <label>Username</label>\r\n    <input required maxlength=\"50\" #username1=\"ngModel\" type=\"text\" [(ngModel)]=\"username\" name=\"username\" placeholder=\"Username\"\r\n      class=\"form-control\">\r\n    <div *ngIf=\"username1.invalid\" style=\"color:#ff0000\">\r\n      <div *ngIf=\"username1.errors.required\">\r\n        *Username is required\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <label>Password</label>\r\n    <input required maxlength=\"50\" #password1=\"ngModel\" type=\"password\" [(ngModel)]=\"password\" name=\"password\" placeholder=\"Password\"\r\n      class=\"form-control\">\r\n    <div *ngIf=\"password1.invalid\" style=\"color:#ff0000\">\r\n      <div *ngIf=\"password1.errors.required\">\r\n        *Password is required\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <button [disabled]=\"f.invalid\" type=\"submit\" class=\"btn btn-primary\">\r\n    <span class=\"glyphicon glyphicon-log-in\" aria-hidden=\"true\"></span> Login</button>\r\n  <button type=\"button\" (click)=\"clearFields()\" class=\"btn btn-warning\">\r\n    <span class=\"glyphicon glyphicon-repeat\" aria-hidden=\"true\"></span> Clear</button>\r\n</form>"
+module.exports = "<div class=\"jumbotron\">\r\n  <div class=\"container\">\r\n    <h1>Allied Waterproofing</h1>\r\n    <p>Project Management</p>\r\n    <p>TESTING WEBHOOK</p>\r\n  </div>\r\n</div>\r\n<!--                                Alerts                                                -->\r\n<div id=\"login-alert\" class=\"alert alert-dismissible alert-warning\" hidden></div>\r\n\r\n<h2 class=\"page-header\">Login</h2>\r\n<form #f=\"ngForm\" (submit)=\"onLogin()\">\r\n  <div class=\"form-group\">\r\n    <label>Username</label>\r\n    <input required maxlength=\"50\" #username1=\"ngModel\" type=\"text\" [(ngModel)]=\"username\" name=\"username\" placeholder=\"Username\"\r\n      class=\"form-control\">\r\n    <div *ngIf=\"username1.invalid\" style=\"color:#ff0000\">\r\n      <div *ngIf=\"username1.errors.required\">\r\n        *Username is required\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <label>Password</label>\r\n    <input required maxlength=\"50\" #password1=\"ngModel\" type=\"password\" [(ngModel)]=\"password\" name=\"password\" placeholder=\"Password\"\r\n      class=\"form-control\">\r\n    <div *ngIf=\"password1.invalid\" style=\"color:#ff0000\">\r\n      <div *ngIf=\"password1.errors.required\">\r\n        *Password is required\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <button [disabled]=\"f.invalid\" type=\"submit\" class=\"btn btn-primary\">\r\n    <span class=\"glyphicon glyphicon-log-in\" aria-hidden=\"true\"></span> Login</button>\r\n  <button type=\"button\" (click)=\"clearFields()\" class=\"btn btn-warning\">\r\n    <span class=\"glyphicon glyphicon-repeat\" aria-hidden=\"true\"></span> Clear</button>\r\n</form>"
 
 /***/ }),
 
@@ -3530,7 +3530,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/profile/profile.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"pull-left\">\r\n  <button class=\"btn btn-default\" [routerLink]=\"['/home']\">\r\n    <span class=\"glyphicon glyphicon-home\" aria-hidden=\"true\"></span> Go Home</button>\r\n</div>\r\n\r\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <h2 class=\"page-header\">Profile</h2>\r\n</div>"
+module.exports = "<div class=\"pull-left\">\n  <button class=\"btn btn-default\" [routerLink]=\"['/home']\">\n    <span class=\"glyphicon glyphicon-home\" aria-hidden=\"true\"></span> Go Home</button>\n</div>\n\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\n  <h2 class=\"page-header\">Profile</h2>\n</div>"
 
 /***/ }),
 
@@ -3591,7 +3591,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/register/register.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<button class=\"btn btn-default\" [routerLink]=\"['/home']\">Go Home</button>\n<h2 class=\"page-header\">Register A New User</h2>\n<form (submit)=\"onRegister()\">\n  <div class=\"form-group\">\n    <label>Name</label>\n    <input type=\"text\" [(ngModel)]=\"name\" name=\"name\" placeholder=\"Name\" class=\"form-control\" required>\n  </div>\n  <div class=\"form-group\">\n    <label>Username</label>\n    <input type=\"text\" [(ngModel)]=\"username\" name=\"username\" placeholder=\"Username\" class=\"form-control\" required>\n  </div>\n  <div class=\"form-group\">\n    <label>Password</label>\n    <input type=\"password\" [(ngModel)]=\"password\" name=\"password\" placeholder=\"Password\" class=\"form-control\" required>\n  </div>\n  <button type=\"submit\" class=\"btn btn-primary\">Register</button>\n  <button type=\"reset\" class=\"btn btn-danger\">Clear</button>\n</form>"
+module.exports = "<button class=\"btn btn-default\" [routerLink]=\"['/home']\">Go Home</button>\r\n<h2 class=\"page-header\">Register A New User</h2>\r\n<form (submit)=\"onRegister()\">\r\n  <div class=\"form-group\">\r\n    <label>Name</label>\r\n    <input type=\"text\" [(ngModel)]=\"name\" name=\"name\" placeholder=\"Name\" class=\"form-control\" required>\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <label>Username</label>\r\n    <input type=\"text\" [(ngModel)]=\"username\" name=\"username\" placeholder=\"Username\" class=\"form-control\" required>\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <label>Password</label>\r\n    <input type=\"password\" [(ngModel)]=\"password\" name=\"password\" placeholder=\"Password\" class=\"form-control\" required>\r\n  </div>\r\n  <button type=\"submit\" class=\"btn btn-primary\">Register</button>\r\n  <button type=\"reset\" class=\"btn btn-danger\">Clear</button>\r\n</form>"
 
 /***/ }),
 
