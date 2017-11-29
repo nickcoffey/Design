@@ -1,6 +1,14 @@
 # Design
 Source Code for Allied Waterproofing Web App
 
+/***********************CHANGES TO BE MADE***********************/
+-Add notes per bid and job
+-Add location and name fields for job
+-Re-activate material and labor remove button in add pop-ups 
+/***********************CHANGES TO BE MADE***********************/
+
+
+
 /**********************FOR INPUT VALIDATION********************/
 #f="ngForm"
 
@@ -23,5 +31,3 @@ Refer to this to loop through contents of a folder server-side in order to serve
 
 Put status on material table to avoid making unwanted changes to past bids and jobs
 Remove delete add edit to material instead
-
-TESTING WEB HOOK 19
