@@ -177,7 +177,7 @@
         <h4 class="modal-title">Create A New Inquiry</h4>
       </div>
       <div class="modal-body">
-        <form (submit)="onCreate()">
+        <form #f4="ngForm" (submit)="onCreate()">
           <div class="form-group">
             <label>Description</label>
             <textarea required maxlength="950" #inquiryDescription="ngModel" type="text" [(ngModel)]="description" name="description"
@@ -188,7 +188,57 @@
               </div>
             </div>
           </div>
-          <button [disabled]="inquiryDescription.invalid" type="submit" class="btn btn-primary">
+          <div class="form-group">
+            <label>Job Name</label>
+            <input required maxlength="150" #nameOfJob="ngModel" type="text" [(ngModel)]="jobName" name="jobName"
+              placeholder="Job Name" class="form-control"/>
+            <div *ngIf="nameOfJob.invalid" style="color:#ff0000">
+              <div *ngIf="nameOfJob.errors.required">
+                *Job Name is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Job Address</label>
+            <input required maxlength="80" #addressOfJob="ngModel" type="text" [(ngModel)]="jobAddress" name="jobAddress"
+              placeholder="Job Address" class="form-control"/>
+            <div *ngIf="addressOfJob.invalid" style="color:#ff0000">
+              <div *ngIf="addressOfJob.errors.required">
+                *Job Address is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Job City</label>
+            <input required maxlength="80" #cityOfJob="ngModel" type="text" [(ngModel)]="jobCity" name="jobCity"
+              placeholder="Job City" class="form-control"/>
+            <div *ngIf="cityOfJob.invalid" style="color:#ff0000">
+              <div *ngIf="cityOfJob.errors.required">
+                *Job City is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Job State</label>
+            <input required maxlength="80" #stateOfJob="ngModel" type="text" [(ngModel)]="jobState" name="jobState"
+              placeholder="Job State" class="form-control" style="resize: vertical"/>
+            <div *ngIf="stateOfJob.invalid" style="color:#ff0000">
+              <div *ngIf="stateOfJob.errors.required">
+                *Job State is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Job ZIP</label>
+            <input required mask="00000" #zipOfJob="ngModel" type="number" [(ngModel)]="jobZIP" name="jobZIP"
+              placeholder="Job ZIP" class="form-control" style="resize: vertical"/>
+            <div *ngIf="zipOfJob.invalid" style="color:#ff0000">
+              <div *ngIf="zipOfJob.errors.required">
+                *Job ZIP is required
+              </div>
+            </div>
+          </div>
+          <button [disabled]="f4.invalid" type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> Create</button>
           <button type="button" (click)="clearDescription()" class="btn btn-warning">
             <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>

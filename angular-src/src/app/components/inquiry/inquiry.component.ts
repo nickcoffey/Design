@@ -22,6 +22,11 @@ export class InquiryComponent implements OnInit {
   createdDate: string = '';
   status: string = '';
   description: string = '';
+  jobName: string = '';
+  jobAddress: string = '';
+  jobCity: string = '';
+  jobState: string = '';
+  jobZIP: number = null;
   /** BID **/
   margin: number = 0;
   /** LABOR **/
@@ -117,6 +122,46 @@ export class InquiryComponent implements OnInit {
         console.log(data.msg);
       }
     });
+  }
+
+  onClickUpdateSite() {
+    this.jobName = this.inquiry[0].jobName,
+    this.jobAddress = this.inquiry[0].jobAddress,
+    this.jobCity = this.inquiry[0].jobCity,
+    this.jobState = this.inquiry[0].jobState,
+    this.jobZIP = this.inquiry[0].jobZIP
+  }
+
+  onUpdateSite() {
+    const updatedInquiry = {
+      inquiryID: this.id,
+      description: null,
+      receivedDate: null,
+      jobName: this.jobName,
+      jobAddress: this.jobAddress,
+      jobCity: this.jobCity,
+      jobState: this.jobState,
+      jobZIP: this.jobZIP
+    }
+
+    this.inquiryService.updateInquiry(updatedInquiry).subscribe((data) => {
+      if (data.success) {
+        // console.log(data.msg);
+        this.getInquiry();
+        $('#update-site-modal').modal('hide');
+        this.alert.displayAlert('Job site updated', 'success');
+      } else {
+        console.log(data.msg);
+      }
+    });
+  }
+
+  clearSite() {
+    this.jobName = '';
+    this.jobAddress = '';
+    this.jobCity = '';
+    this.jobState = '';
+    this.jobZIP = null;
   }
 
   clearDescription() {

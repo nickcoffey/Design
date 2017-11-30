@@ -14,6 +14,7 @@
           <h3>Inquiry Details</h3>
         </div>
         <div id="inquiryAccordion" class="panel-body panel-collapse collapse in" style="word-break:break-all">
+          <h4 class="page-header" style="margin-top: 0">General</h4>
           <table class="table table-bordered">
             <thead>
               <tr class="active">
@@ -44,8 +45,31 @@
             </tbody>
           </table>
           <br>
+          <table class="table table-bordered">
+            <thead>
+              <tr class="active">
+                <th>Job Name</th>
+                <th>Site Address</th>
+                <th>Site City</th>
+                <th>Site State</th>
+                <th>Site ZIP</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{inquiry[0].jobName}}</td>
+                <td>{{inquiry[0].jobAddress}}</td>
+                <td>{{inquiry[0].jobCity}}</td>
+                <td>{{inquiry[0].jobState}}</td>
+                <td>{{inquiry[0].jobZIP}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <br>
           <button (click)="onClickUpdate()" class="btn btn-info" data-toggle="modal" href="#update-modal">
             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Update Description</button>
+          <button (click)="onClickUpdateSite()" class="btn btn-info" data-toggle="modal" href="#update-site-modal">
+            <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Update Site Details</button>
           <br>
           <h4 class="page-header">Files
             <button class="btn btn-default btn-sm collapsed" data-toggle="collapse" data-target='#files-collapse'>
@@ -189,6 +213,79 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
         <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onDecline()">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--                Update Site Popup                -->
+<div class="modal fade" id="update-site-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Update Job Site Info</h4>
+      </div>
+      <div class="modal-body">
+        <form #f3="ngForm" (submit)="onUpdateSite()">
+          <div class="form-group">
+            <label>Job Name</label>
+            <input required maxlength="150" #nameOfJob="ngModel" type="text" [(ngModel)]="jobName" name="jobName" placeholder="Job Name"
+              class="form-control" />
+            <div *ngIf="nameOfJob.invalid" style="color:#ff0000">
+              <div *ngIf="nameOfJob.errors.required">
+                *Job Name is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Job Address</label>
+            <input required maxlength="80" #addressOfJob="ngModel" type="text" [(ngModel)]="jobAddress" name="jobAddress" placeholder="Job Address"
+              class="form-control" />
+            <div *ngIf="addressOfJob.invalid" style="color:#ff0000">
+              <div *ngIf="addressOfJob.errors.required">
+                *Job Address is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Job City</label>
+            <input required maxlength="80" #cityOfJob="ngModel" type="text" [(ngModel)]="jobCity" name="jobCity" placeholder="Job City"
+              class="form-control" />
+            <div *ngIf="cityOfJob.invalid" style="color:#ff0000">
+              <div *ngIf="cityOfJob.errors.required">
+                *Job City is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Job State</label>
+            <input required maxlength="80" #stateOfJob="ngModel" type="text" [(ngModel)]="jobState" name="jobState" placeholder="Job State"
+              class="form-control" style="resize: vertical" />
+            <div *ngIf="stateOfJob.invalid" style="color:#ff0000">
+              <div *ngIf="stateOfJob.errors.required">
+                *Job State is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Job ZIP</label>
+            <input required mask="00000" #zipOfJob="ngModel" type="number" [(ngModel)]="jobZIP" name="jobZIP" placeholder="Job ZIP" class="form-control"
+              style="resize: vertical" />
+            <div *ngIf="zipOfJob.invalid" style="color:#ff0000">
+              <div *ngIf="zipOfJob.errors.required">
+                *Job ZIP is required
+              </div>
+            </div>
+          </div>
+          <button [disabled]="f3.invalid" type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
+          <button type="button" (click)="clearSite()" class="btn btn-warning">
+            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">
+          <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
       </div>
     </div>
   </div>

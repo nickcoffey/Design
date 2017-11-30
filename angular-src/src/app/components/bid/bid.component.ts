@@ -5,10 +5,13 @@ import { MaterialService } from '../../services/material.service';
 import { JobService } from '../../services/job.service';
 import { InquiryService } from '../../services/inquiry.service';
 import { LaborService } from '../../services/labor.service';
+import { CustomerService } from '../../services/customer.service';
 import { forEach } from '@angular/router/src/utils/collection';
 import { AlertComponent } from '../alert/alert.component';
 import { AuthService } from '../../services/auth.service';
 import { FileUploader } from 'ng2-file-upload';
+import * as pdfMake from 'pdfmake/build/pdfmake';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 declare var $;
 
 @Component({
@@ -60,6 +63,9 @@ export class BidComponent implements OnInit {
   file: any;
   url: string;
   uploader: FileUploader;
+  /** CUSTOMER **/
+  contacts: any;
+  contactName: string = '';
 
   constructor(
     private router: Router,
@@ -70,8 +76,11 @@ export class BidComponent implements OnInit {
     private inquiryService: InquiryService,
     private laborService: LaborService,
     private authService: AuthService,
+    private customerService: CustomerService,
     private alert: AlertComponent
-  ) { }
+  ) {
+    pdfMake.vfs = pdfFonts.pdfMake.vfs;
+  }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
@@ -83,10 +92,17 @@ export class BidComponent implements OnInit {
   }
 
   /**************************************************** Bid **********************************************************************/
+  getContacts(customerID) {
+    this.customerService.getAllContacts(customerID).subscribe((contacts) => {
+      this.contacts = contacts;
+    });
+  }
+
   getBid() {
     this.bidService.getBidById(this.id).subscribe((bid) => {
       this.bid = bid;
       this.status = bid[0].bidStatus;
+      this.getContacts(this.bid[0].customerID);
     });
   }
   onClear() {
@@ -561,6 +577,286 @@ export class BidComponent implements OnInit {
         console.log(data.msg);
       }
     });
+  }
+
+  /************************************************* FORM FUNCTIONS *********************************************************/
+
+  onChangeContact(contactIndex) {
+    this.contactName = this.contacts[contactIndex].contactName;
+  }
+  
+  makeBidPDF() {
+    var documentDefinition = {
+      content: [
+        {
+          text: [
+            {
+              text: 'ALLIED WATERPROOFING CO., INC.\n',
+              style: 'header'
+            },
+            {
+              text: '5840 Mango Dr.\nSt.Louis, MO 63129\n',
+              style: 'subheader'
+            },
+            {
+              text: '\nPhone: ',
+              style: 'paragraph',
+              bold: true
+            },
+            {
+              text: '314-776-6886\n',
+              style: 'paragraph'
+            },
+            {
+              text: 'Fax: ',
+              style: 'paragraph',
+              bold: true
+            },
+            {
+              text: '314-892-1495\n',
+              style: 'paragraph'
+            },
+            {
+              text: 'www.AlliedWinc.com',
+              style: 'paragraph'
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: [
+                {
+                  text: '\nWBE\n',
+                  style: 'logo'
+                },
+                {
+                  text: 'Woman-Owned Business Enterprise\n State Of Missouri',
+                  style: 'logoText'
+                }
+              ],
+              margin: [-60, 0, 0, 0]
+            },
+            {
+              text: [
+                {
+                  text: '\nUNION\n',
+                  style: 'logo'
+                },
+                {
+                  text: 'Bricklayers Local #1',
+                  style: 'logoText'
+                }
+              ],
+              margin: [0, 0, 0, 0]
+            },
+            {
+              text: [
+                {
+                  text: '\nNWBOC\n',
+                  style: 'logo'
+                },
+                {
+                  text: 'WBE Certified',
+                  style: 'logoText'
+                }
+              ],
+              margin: [0, 0, -60, 0]
+            }
+          ]
+        },
+        {
+          text: '\n'
+        },
+        {
+          table: {
+            widths: ['*'],
+            body: [
+              [{ text: '', fillColor: '#000000' }]
+            ]
+          }
+        },
+        {
+          text: '\nProposal\n\n',
+          style: 'header',
+          bold: false
+        },
+        {
+          table: {
+            headerRows: 1,
+            style: 'paragraph',
+            widths: ['*', '*'],
+            body: [
+              [{ text: [{ text: 'Submitted to: ' }, { text: this.bid[0].customerName, bold: true }], fillColor: '#dedede' }, {text: [{ text: 'Date: '},{ text: this.getToday(), bold: true }],fillColor: '#dedede'}],
+              [{text: [{text: 'Name: '}, {text: this.contactName, bold: true}]}, {text: [{text: 'Job Name: '}, {text: this.bid[0].jobName, bold: true}]}],
+              [{text: [{text: 'Street: '}, {text: this.bid[0].customerAddress, bold: true}]}, {text: [{text: 'Street: '}, {text: this.bid[0].jobAddress, bold: true}]}],
+              [{text: [{text: 'City: '}, {text: this.bid[0].customerCity, bold: true}]}, {text: [{text: 'City: '}, {text: this.bid[0].jobCity, bold: true}]}],
+              [{text: [{text: 'State: '}, {text: this.bid[0].customerState, bold: true}]}, {text: [{text: 'State: '}, {text: this.bid[0].jobState, bold: true}]}]
+            ]
+          }
+        },
+        {
+          text: '\nWe purpose to furnish all Labor, Material and Equipment necessary to perform the itemized scope listed in our proposal.\n',
+          style: 'paragraph',
+          alignment: 'left'
+        },
+        {
+          text: '*Proposal valid for 90 days.',
+          style: 'paragraph',
+          alignment: 'left',
+          bold: true
+        }
+      ],
+      footer: function (currentPage, pageCount) {
+        if (currentPage == pageCount)
+          return {
+            columns: [
+              {
+                stack: [
+                  {
+                    text: 'Accepted:',
+                    style: 'paragraph',
+                    bold: true,
+                    margin: [-100, -40, 0, 0]
+                  },
+                  {
+                    canvas: [
+                      {
+                        type: 'line',
+                        x1: 125,
+                        y1: 0,
+                        x2: 300 - 10,
+                        y2: 0,
+                        lineWidth: 0.5
+                      }
+                    ]
+                  },
+                  {
+                    text: 'Owner, Contractor, or Architect',
+                    fontSize: 8,
+                    margin: [140, 0, 0, 0]
+                  },
+                  {
+                    text: 'By:',
+                    style: 'paragraph',
+                    bold: true,
+                    margin: [0, 20, 135, 0]
+                  },
+                  {
+                    canvas: [
+                      {
+                        type: 'line',
+                        x1: 125,
+                        y1: 0,
+                        x2: 300 - 10,
+                        y2: 0,
+                        lineWidth: 0.5
+                      }
+                    ]
+                  },
+                  {
+                    text: 'Name & Title',
+                    fontSize: 8,
+                    margin: [140, 0, 0, 0]
+                  }
+                ]
+              },
+              {
+                stack: [
+                  {
+                    text: 'Submitted:',
+                    style: 'paragraph',
+                    bold: true,
+                    margin: [0, -40, 200, 0]
+                  },
+                  {
+                    text: 'Allied Waterproofing Co., Inc.',
+                    fontSize: 12,
+                    margin: [80, -15, 0, 0]
+                  },
+                  {
+                    canvas: [
+                      {
+                        type: 'line',
+                        x1: 75,
+                        y1: 0,
+                        x2: 250 - 10,
+                        y2: 0,
+                        lineWidth: 0.5
+                      }
+                    ]
+                  },
+                  {
+                    text: 'By:',
+                    style: 'paragraph',
+                    bold: true,
+                    margin: [0, 30, 240, 0]
+                  },
+                  {
+                    text: 'Dottie Overy-Koch, Pres. WEB',
+                    fontSize: 12,
+                    margin: [80, -15, 0, 0]
+                  },
+                  {
+                    canvas: [
+                      {
+                        type: 'line',
+                        x1: 75,
+                        y1: 0,
+                        x2: 250 - 10,
+                        y2: 0,
+                        lineWidth: 0.5
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          };
+      },
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          alignment: 'center',
+        },
+        subheader: {
+          fontSize: 14,
+          bold: true,
+          alignment: 'center',
+        },
+        logo: {
+          fontSize: 22,
+          bold: true,
+          alignment: 'center'
+        },
+        logoText: {
+          fontSize: 10,
+          alignment: 'center'
+        },
+        paragraph: {
+          fontSize: 12,
+          alignment: 'center'
+        }
+      }
+
+    }
+    $('#create-form-modal').modal('hide');
+    pdfMake.createPdf(documentDefinition).download();
+  }
+
+  getToday() {
+    var today: any = new Date();
+    var dd = today.getDate().toString();
+    var mm = (today.getMonth() + 1).toString(); // January is 0
+    var yyyy = today.getFullYear();
+    if (parseInt(dd) < 10) {
+      dd = '0' + dd;
+    }
+    if (parseInt(mm) < 10) {
+      mm = '0' + mm;
+    }
+    return today = `${mm}/${dd}/${yyyy}`;
   }
 }
 

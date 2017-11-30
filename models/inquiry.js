@@ -36,7 +36,9 @@ module.exports.getInquiryById = function (id, callback) {
 }
 
 module.exports.createInquiry = function (newInquiry, callback) {
-    const queryString = `INSERT INTO Inquiry (customerID, description, inquiryStatus, receivedDate) VALUES ((SELECT customerID FROM Customer WHERE customerID=${newInquiry.customerID}), "${newInquiry.description}", "PENDING", NOW())`;
+    const queryString = sqlString.format(`INSERT INTO Inquiry SET ?, inquiryStatus = "PENDING", receivedDate = NOW()`, [newInquiry]);
+    console.log(queryString);
+    // const queryString = `INSERT INTO Inquiry (customerID, description, inquiryStatus, receivedDate) VALUES ((SELECT customerID FROM Customer WHERE customerID=${newInquiry.customerID}), "${newInquiry.description}", "PENDING", NOW())`;
     connection.query(queryString, (error, rows, fields) => {
         if (!error) {
             callback(rows);
@@ -76,7 +78,7 @@ module.exports.deleteInquiry = function (id, callback) {
 
 module.exports.updateInquiry = function (updatedInquiry, callback) {
     const queryString = sqlString.format(`UPDATE Inquiry SET ? WHERE inquiryID = ?`, [updatedInquiry, updatedInquiry.inquiryID]);
-    console.log(queryString);
+    // console.log(queryString);
     connection.query(queryString, (error, rows, fields) => {
         if (!error) {
             callback(rows);

@@ -57,6 +57,7 @@
               <table class="table table-bordered table-hover">
                 <thead>
                   <tr class="active">
+                    <th>ID</th>
                     <th>Amount</th>
                     <th>Date</th>
                   </tr>
@@ -64,6 +65,7 @@
                 <tbody>
                   <tr *ngFor="let changeOrder of changeOrders; let i = index" data-toggle="modal" (click)="onClickUpdateChangeOrder(changeOrder.changeID, i)"
                     href='#update-change-modal'>
+                    <td>CHG#{{changeOrder.changeID}}</td>
                     <td>{{changeOrder.changeAmount | currency: 'USD':true}}</td>
                     <td>{{changeOrder.changeDate | date: 'MM/dd/yyyy'}}</td>
                   </tr>
@@ -301,6 +303,65 @@
       </div>
 
       <div class="panel panel-primary">
+        <div class="panel-heading" style="cursor: pointer;" data-toggle="collapse" data-parent="#accordion" href="'#inquiryAccordion">
+          <h3>Inquiry Details</h3>
+        </div>
+        <div id="inquiryAccordion" class="panel-body panel-collapse collapse" style="word-break:break-all">
+          <table class="table table-bordered">
+            <thead>
+              <tr class="active">
+                <th>Received Date</th>
+                <th>Accepted Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{job[0].inquiryReceivedDate | date: 'MM/dd/yyyy'}}</td>
+                <td>{{job[0].inquiryEndDate | date: 'MM/dd/yyyy'}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <br>
+          <table class="table table-bordered">
+            <thead>
+              <tr class="active">
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{job[0].description}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <br>
+          <table class="table table-bordered">
+            <thead>
+              <tr class="active">
+                <th>Job Name</th>
+                <th>Site Address</th>
+                <th>Site City</th>
+                <th>Site State</th>
+                <th>Site ZIP</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{job[0].jobName}}</td>
+                <td>{{job[0].jobAddress}}</td>
+                <td>{{job[0].jobCity}}</td>
+                <td>{{job[0].jobState}}</td>
+                <td>{{job[0].jobZIP}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <hr>
+          <button type="button" class="btn btn-primary btn-lg" [routerLink]="['/inquiries/'+job[0].inquiryID]">
+            <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> Open Inquiry</button>
+        </div>
+      </div>
+
+      <div class="panel panel-primary">
         <div class="panel-heading" style="cursor: pointer;" data-toggle="collapse" data-parent="#accordion" href="'#customerAccordion">
           <h3>Customer Details</h3>
         </div>
@@ -404,8 +465,7 @@
       <div class="modal-body">
         <form (submit)="onUpdateNotes()">
           <div class="form-group">
-            <textarea maxlength="950" type="text" [(ngModel)]="jobNotes" name="jobNotes" placeholder="Notes" class="form-control" style="resize: vertical"></textarea>
-            {{jobNotes.length}}/950
+            <textarea maxlength="950" type="text" [(ngModel)]="jobNotes" name="jobNotes" placeholder="Notes" class="form-control" style="resize: vertical"></textarea> {{jobNotes.length}}/950
           </div>
           <button type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>

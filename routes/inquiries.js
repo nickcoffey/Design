@@ -66,7 +66,12 @@ router.post('/new', passport.authenticate('jwt', { session: false }), (request, 
     let newInquiry = {
         customerID: request.body.customerID,
         description: request.body.description,
-        receivedDate: request.body.receivedDate
+        // receivedDate: request.body.receivedDate,
+        jobName: request.body.jobName,
+        jobAddress: request.body.jobAddress,
+        jobCity: request.body.jobCity,
+        jobState: request.body.jobState,
+        jobZIP: request.body.jobZIP
     };
 
     inquiry.createInquiry(newInquiry, (message) => {
@@ -130,11 +135,30 @@ router.post('/delete/:id', passport.authenticate('jwt', { session: false }), (re
 router.post('/update', passport.authenticate('jwt', { session: false }), (request, response, next) => {
     let updatedInquiry = {
         inquiryID: request.body.inquiryID,
-        description: request.body.description
+        description: request.body.description,
+        jobName: request.body.jobName,
+        jobAddress: request.body.jobAddress,
+        jobCity: request.body.jobCity,
+        jobState: request.body.jobState,
+        jobZIP: request.body.jobZIP
     }
-
     if (updatedInquiry.description == null || updatedInquiry.description == undefined || updatedInquiry.description == "") {
         delete updatedInquiry.description;
+    }
+    if (updatedInquiry.jobName == null || updatedInquiry.jobName == undefined || updatedInquiry.jobName == "") {
+        delete updatedInquiry.jobName;
+    }
+    if (updatedInquiry.jobAddress == null || updatedInquiry.jobAddress == undefined || updatedInquiry.jobAddress == "") {
+        delete updatedInquiry.jobAddress;
+    }
+    if (updatedInquiry.jobCity == null || updatedInquiry.jobCity == undefined || updatedInquiry.jobCity == "") {
+        delete updatedInquiry.jobCity;
+    }
+    if (updatedInquiry.jobState == null || updatedInquiry.jobState == undefined || updatedInquiry.jobState == "") {
+        delete updatedInquiry.jobState;
+    }
+    if (updatedInquiry.jobZIP == null || updatedInquiry.jobZIP == undefined || updatedInquiry.jobZIP == "") {
+        delete updatedInquiry.jobZIP;
     }
 
     inquiry.updateInquiry(updatedInquiry, (message) => {

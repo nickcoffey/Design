@@ -15,7 +15,6 @@ export class CustomerComponent implements OnInit {
   /** CUSTOMER **/
   id: number = null;
   customer: any;
-  description: string = '';
   receivedDate: any;
   name: string = '';
   address: string = '';
@@ -33,6 +32,12 @@ export class CustomerComponent implements OnInit {
 
   /** INQUIRY **/
   inquiries: any;
+  description: string = '';
+  jobName: string = '';
+  jobAddress: string = '';
+  jobCity: string = '';
+  jobState: string = '';
+  jobZIP: number = null;
 
   constructor(
     private customerService: CustomerService,
@@ -61,7 +66,12 @@ export class CustomerComponent implements OnInit {
     const newInquiry = {
       customerID: this.id,
       description: this.description,
-      receivedDate: this.receivedDate
+      receivedDate: this.receivedDate,
+      jobName: this.jobName,
+      jobAddress: this.jobAddress,
+      jobCity: this.jobCity,
+      jobState: this.jobState,
+      jobZIP: this.jobZIP
     }
 
     this.inquiryService.createInquiry(newInquiry).subscribe((data) => {
@@ -130,6 +140,11 @@ export class CustomerComponent implements OnInit {
 
   clearDescription() {
     this.description = '';
+    this.jobName = '';
+    this.jobAddress = '';
+    this.jobCity = '';
+    this.jobState = '';
+    this.jobZIP = null;
   }
 
   /*************************************************** INQUIRY FUNCTIONS ***********************************************************/
