@@ -1,15 +1,14 @@
 # Design
 Source Code for Allied Waterproofing Web App
 
-/***********************CHANGES TO BE MADE***********************/
--Add notes per bid and job
--Add location and name fields for job
--Re-activate material and labor remove button in add pop-ups 
-/***********************CHANGES TO BE MADE***********************/
+(CHANGES TO BE MADE)
+1. Add location and name fields for job
+2. Re-activate material and labor remove button in add pop-ups 
 
 
 
-/**********************FOR INPUT VALIDATION********************/
+
+(FOR INPUT VALIDATION)
 #f="ngForm"
 
 required maxlength="40" #title="ngModel"
@@ -23,9 +22,11 @@ required maxlength="40" #title="ngModel"
 [disabled]="f.invalid"
 
 type="button" (click)="clearContactFields()"
-/**********************FOR INPUT VALIDATION********************/
 
 
+
+
+(PAST NOTES)
 https://stackoverflow.com/questions/32511789/looping-through-files-in-a-folder-node-js
 Refer to this to loop through contents of a folder server-side in order to serve the tree to frontend as a JSON
 

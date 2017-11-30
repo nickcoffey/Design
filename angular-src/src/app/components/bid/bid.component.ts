@@ -26,6 +26,7 @@ export class BidComponent implements OnInit {
   createdDate: string = '';
   endDate: string = '';
   status: string = '';
+  bidNotes: string = '';
   /** MATERIALS **/
   bidMaterials: any;
   material: any;
@@ -90,6 +91,7 @@ export class BidComponent implements OnInit {
   }
   onClear() {
     this.bidPrice = 0;
+    this.bidNotes = '';
   }
 
   onDecline() {
@@ -199,6 +201,33 @@ export class BidComponent implements OnInit {
         this.getBid();
         $('#update-bid-modal').modal('hide');
         this.alert.displayAlert('Price updated', 'success');
+      } else {
+        console.log(data.msg);
+      }
+    });
+  }
+
+  onClickUpdateNotes() {
+    this.bidNotes = this.bid[0].bidNotes;
+  }
+
+  onUpdateNotes() {
+    let updatedBid = {
+      bidID: this.id,
+      bidPrice: null,
+      bidStatus: null,
+      createdDate: null,
+      endDate: null,
+      bidNotes: this.bidNotes
+    };
+
+    this.bidService.updateBid(updatedBid).subscribe((data) => {
+      if (data.success) {
+        // console.log(data.msg);
+        this.onClear();
+        this.getBid();
+        $('#update-notes-modal').modal('hide');
+        this.alert.displayAlert('Notes updated', 'success');
       } else {
         console.log(data.msg);
       }

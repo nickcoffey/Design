@@ -43,6 +43,10 @@
               </tr>
             </tbody>
           </table>
+          <br>
+          <button (click)="onClickUpdate()" class="btn btn-info" data-toggle="modal" href="#update-modal">
+            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Update Description</button>
+          <br>
           <h4 class="page-header">Files
             <button class="btn btn-default btn-sm collapsed" data-toggle="collapse" data-target='#files-collapse'>
               <span class="if-collapsed">Show</span>
@@ -86,17 +90,14 @@
               <hr>
             </span>
           </div>
-          <button (click)="onClickUpdate()" class="btn btn-info" data-toggle="modal" href="#update-modal">
-            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Update Description</button>
+          <button *ngIf="status == 'PENDING'" class="btn btn-primary" data-toggle="modal" href='#create-bid-modal'>
+            <span class="glyphicon glyphicon-file" aria-hidden="true"></span> Create Bid</button>
           <button *ngIf="status == 'PENDING'" class="btn btn-warning" data-toggle="modal" href='#decline-modal'>
             <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> Decline Inquiry</button>
           <button *ngIf="status == 'DECLINED'" class="btn btn-warning" data-toggle="modal" href='#reopen-modal'>
             <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> Re-Open Inquiry</button>
           <button *ngIf="inquiry[0].associatedBidID == null" class="btn btn-danger" data-toggle="modal" href='#delete-modal'>
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete Inquiry</button>
-          <hr *ngIf="status == 'PENDING'">
-          <button *ngIf="status == 'PENDING'" class="btn btn-primary" data-toggle="modal" href='#create-bid-modal'>
-            <span class="glyphicon glyphicon-file" aria-hidden="true"></span> Create Bid</button>
         </div>
       </div>
 
@@ -205,7 +206,7 @@
           <div class="form-group">
             <label for="">Description</label>
             <textarea required maxlength="950" #inquiryDescription="ngModel" type="text" class="form-control" [(ngModel)]="description"
-              name="description" placeholder="Description"></textarea> {{description.length}}/950
+              name="description" placeholder="Description" style="resize: vertical"></textarea> {{description.length}}/950
             <div *ngIf="inquiryDescription.invalid" style="color:#ff0000">
               <div *ngIf="inquiryDescription.errors.required">
                 *Description is required

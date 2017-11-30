@@ -33,9 +33,24 @@
             </tbody>
           </table>
           <br>
+          <table *ngIf="bid[0].bidNotes != null" class="table table-bordered">
+            <thead>
+              <tr class="active">
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{bid[0].bidNotes}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <br>
           <button (click)="onClickUpdateBid()" type="button" class="btn btn-info" data-toggle="modal" href='#update-bid-modal'>
             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Update Price</button>
-
+            <button (click)="onClickUpdateNotes()" type="button" class="btn btn-info" data-toggle="modal" href='#update-notes-modal'>
+              <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Update Notes</button>
+          <br>
           <h4 class="page-header">Estimated Labor Costs
             <button class="btn btn-default btn-sm collapsed" data-toggle="collapse" data-target='#labor-collapse'>
               <span class="if-collapsed">Show</span>
@@ -340,6 +355,32 @@
             </div>
           </div>
           <button [disabled]="f.invalid" type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
+          <button type="button" (click)="onClear()" class="btn btn-warning" (click)="onClear()">
+            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">
+          <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--                Update Notes Popup                -->
+<div class="modal fade" id="update-notes-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Update Bid Notes</h4>
+      </div>
+      <div class="modal-body">
+        <form (submit)="onUpdateNotes()">
+          <div class="form-group">
+            <textarea maxlength="950" type="text" [(ngModel)]="bidNotes" name="bidNotes" placeholder="Notes" class="form-control" style="resize: vertical"></textarea> {{bidNotes.length}}/950
+          </div>
+          <button type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
           <button type="button" (click)="onClear()" class="btn btn-warning" (click)="onClear()">
             <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>

@@ -103,7 +103,8 @@ router.post('/update', passport.authenticate('jwt', { session: false }), (reques
         jobID: request.body.jobID,
         jobStatus: request.body.jobStatus,
         createdDate: request.body.createdDate,
-        endDate: request.body.endDate
+        endDate: request.body.endDate,
+        jobNotes: request.body.jobNotes
     }
 
     if (updatedJob.jobStatus == null || updatedJob.jobStatus == undefined || updatedJob.jobStatus == "") {
@@ -114,6 +115,9 @@ router.post('/update', passport.authenticate('jwt', { session: false }), (reques
     }
     if (updatedJob.endDate == null || updatedJob.endDate == undefined || updatedJob.endDate == "") {
         delete updatedJob.endDate;
+    }
+    if (updatedJob.jobNotes == null || updatedJob.jobNotes == undefined || updatedJob.jobNotes == "") {
+        delete updatedJob.jobNotes;
     }
 
     job.updateJob(updatedJob, (message) => {

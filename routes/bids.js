@@ -57,7 +57,8 @@ router.post('/update', passport.authenticate('jwt', { session: false }), (reques
         bidLabor: request.body.bidLabor,
         bidStatus: request.body.bidStatus,
         createdDate: request.body.createdDate,
-        endDate: request.body.endDate
+        endDate: request.body.endDate,
+        bidNotes: request.body.bidNotes
     }
 
     if (updatedBid.bidPrice == null || updatedBid.bidPrice == undefined || updatedBid.bidPrice == "") {
@@ -74,6 +75,9 @@ router.post('/update', passport.authenticate('jwt', { session: false }), (reques
     }
     if (updatedBid.endDate == null || updatedBid.endDate == undefined || updatedBid.endDate == "") {
         delete updatedBid.endDate;
+    }
+    if (updatedBid.bidNotes == null || updatedBid.bidNotes == undefined || updatedBid.bidNotes == "") {
+        delete updatedBid.bidNotes;
     }
 
     bid.updateBid(updatedBid, (message) => {

@@ -31,6 +31,7 @@ export class JobComponent implements OnInit {
   createdDate: string = '';
   endDate: string = '';
   status: string = '';
+  jobNotes: string = '';
   /** JOB MATERIALS **/
   jobMaterials: any;
   materials: any;
@@ -125,6 +126,35 @@ export class JobComponent implements OnInit {
     this.onClear();
 
     this.ngOnInit();
+  }
+
+  onClearNotes() {
+    this.jobNotes = '';
+  }
+
+  onClickUpdateNotes() {
+    this.jobNotes = this.job[0].jobNotes;
+  }
+
+  onUpdateNotes() {
+    let updatedJob = {
+      jobID: this.id,
+      jobStatus: null,
+      createdDate: null,
+      endDate: null,
+      jobNotes: this.jobNotes
+    };
+
+    this.jobService.updateJob(updatedJob).subscribe((data) => {
+      if (data.success) {
+        console.log(data.msg);
+        this.getJob();
+        $('#update-notes-modal').modal('hide');
+        this.alert.displayAlert('Notes updated', 'success');
+      } else {
+        console.log(data.msg);
+      }
+    });
   }
 
   onDeleteJob() {

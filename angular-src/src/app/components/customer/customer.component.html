@@ -181,7 +181,7 @@
           <div class="form-group">
             <label>Description</label>
             <textarea required maxlength="950" #inquiryDescription="ngModel" type="text" [(ngModel)]="description" name="description"
-              placeholder="Description" class="form-control"></textarea> {{description.length}}/950
+              placeholder="Description" class="form-control" style="resize: vertical"></textarea> {{description.length}}/950
             <div *ngIf="inquiryDescription.invalid" style="color:#ff0000">
               <div *ngIf="inquiryDescription.errors.required">
                 *Description is required
