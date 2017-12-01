@@ -94,7 +94,8 @@ module.exports.deleteJob = function (id, callback) {
 
 /********************************************************* Job Materials *************************************************************************/
 module.exports.createJobMaterial = function (newJobMaterial, callback) {
-    const queryString = sqlString.format(`INSERT INTO JobMaterial SET ?`, newJobMaterial);
+    const queryString = sqlString.format(`INSERT INTO JobMaterial SET ?, materialDate = NOW()`, newJobMaterial);
+    console.log(queryString);
     // const queryString = `INSERT INTO JobMaterial (materialID, jobID, quantity, perUnitCost) VALUES ((SELECT materialID FROM Material WHERE materialID=${newJobMaterial.materialID}), ${id}, ${newJobMaterial.quantity}, ${newJobMaterial.perUnitCost})`;
     connection.query(queryString, (error, rows, fields) => {
         if (!error) {

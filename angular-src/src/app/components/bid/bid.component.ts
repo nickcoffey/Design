@@ -5,6 +5,7 @@ import { MaterialService } from '../../services/material.service';
 import { JobService } from '../../services/job.service';
 import { InquiryService } from '../../services/inquiry.service';
 import { LaborService } from '../../services/labor.service';
+import { EquipmentService } from '../../services/equipment.service';
 import { CustomerService } from '../../services/customer.service';
 import { forEach } from '@angular/router/src/utils/collection';
 import { AlertComponent } from '../alert/alert.component';
@@ -56,6 +57,28 @@ export class BidComponent implements OnInit {
   selectedLabors: SelectedLabor[] = [];
   totalLaborPrice: number = 0;
   totalLaborPriceTable: number = 0;
+  /** EQUIPMENT **/
+  equipments: any;
+  bidEquipments: any;
+  equipment: any;
+  equipmentIndex: number = null;
+  equipmentID: number = null;
+  equipmentName: string = '';
+  pricePerDay: number = 0;
+  intervalCost: number = 0;
+  DaysSelected: number = null;
+  pricePer1Week: number = null;
+  WeekSelected1: number = null;
+  pricePer2Week: number = null;
+  WeekSelected2: number = null;
+  pricePer3Week: number = null;
+  WeekSelected3: number = null;
+  equipmentNumOfIntervals: number = 0;
+  equipmentInterval: number = null;
+  equipmentIntervals: string[] = ['Day(s)', '1 Week', '2 Weeks', '3 Weeks'];
+  selectedEquipments: SelectedEquipment[] = [];
+  totalEquipmentPrice: number = 0;
+  totalEquipmentPriceTable: number = 0;
   /** FILES **/
   files: any;
   filesUrls: any[] = [];
@@ -75,6 +98,7 @@ export class BidComponent implements OnInit {
     private jobService: JobService,
     private inquiryService: InquiryService,
     private laborService: LaborService,
+    private equipmentService: EquipmentService,
     private authService: AuthService,
     private customerService: CustomerService,
     private alert: AlertComponent
@@ -88,6 +112,7 @@ export class BidComponent implements OnInit {
     this.getBid();
     this.getBidMaterials();
     this.getBidLabors();
+    this.getBidEquipments();
     this.getFiles();
   }
 
@@ -395,6 +420,258 @@ export class BidComponent implements OnInit {
     });
   }
 
+  /**************************************************** Bid Equipment **********************************************************************/
+  getBidEquipments() {
+    this.totalEquipmentPriceTable = 0;
+    this.equipments = [];
+    this.bidService.getBidEquipmentsById(this.id).subscribe((bidEquipments) => {
+      this.bidEquipments = bidEquipments;
+      this.bidEquipments.forEach((bidEquipment) => {
+        if (bidEquipment.DaysSelected == 1) {
+          this.totalEquipmentPriceTable += (bidEquipment.pricePerDay * bidEquipment.intervals);
+        } else if (bidEquipment.WeekSelected1 == 1) {
+          this.totalEquipmentPriceTable += (bidEquipment.pricePer1Week * bidEquipment.intervals);
+        } else if (bidEquipment.WeekSelected2 == 1) {
+          this.totalEquipmentPriceTable += (bidEquipment.pricePer2Week * bidEquipment.intervals);
+        } else if (bidEquipment.WeekSelected3 == 1) {
+          this.totalEquipmentPriceTable += (bidEquipment.pricePer3Week * bidEquipment.intervals);
+        }
+      });
+
+      this.equipmentService.getAllEquipments().subscribe((equipments) => {
+        this.equipments = equipments;
+        let equipmentIndex = null;
+        this.bidEquipments.forEach(bidEquipment => {
+          this.equipments.forEach((equipment, i) => {
+            if (equipment.equipmentID == bidEquipment.equipmentID) {
+              // this.totalLaborPriceTable += (bidLabor.roleWage * bidLabor.laborHours);
+              this.equipments.splice(i, 1);
+            }
+          })
+        });
+      });
+    });
+  }
+
+  onClickUpdateBidEquipment(equipmentIndex) {
+    this.equipmentIndex = equipmentIndex;
+    this.equipmentName = this.bidEquipments[equipmentIndex].equipmentName;
+    this.equipmentNumOfIntervals = this.bidEquipments[equipmentIndex].intervals;
+    this.pricePerDay = this.bidEquipments[equipmentIndex].pricePerDay;
+    this.DaysSelected = this.bidEquipments[equipmentIndex].DaysSelected;
+    this.pricePer1Week = this.bidEquipments[equipmentIndex].pricePer1Week;
+    this.WeekSelected1 = this.bidEquipments[equipmentIndex].WeekSelected1;
+    this.pricePer2Week = this.bidEquipments[equipmentIndex].pricePer2Week;
+    this.WeekSelected2 = this.bidEquipments[equipmentIndex].WeekSelected2;
+    this.pricePer3Week = this.bidEquipments[equipmentIndex].pricePer3Week;
+    this.WeekSelected3 = this.bidEquipments[equipmentIndex].WeekSelected3;
+    console.log(this.DaysSelected);
+    if (this.DaysSelected == 1) {
+      (<HTMLSelectElement>document.getElementById('updateEquipmentInterval')).selectedIndex = 0;
+      this.intervalCost = this.bidEquipments[equipmentIndex].pricePerDay;
+    } else if (this.WeekSelected1 == 1) {
+      (<HTMLSelectElement>document.getElementById('updateEquipmentInterval')).selectedIndex = 1;
+      this.intervalCost = this.bidEquipments[equipmentIndex].pricePer1Week;
+    } else if (this.WeekSelected2 == 1) {
+      (<HTMLSelectElement>document.getElementById('updateEquipmentInterval')).selectedIndex = 2;
+      this.intervalCost = this.bidEquipments[equipmentIndex].pricePer2Week;
+    } else if (this.WeekSelected3 == 1) {
+      (<HTMLSelectElement>document.getElementById('updateEquipmentInterval')).selectedIndex = 3;
+      this.intervalCost = this.bidEquipments[equipmentIndex].pricePer3Week;
+    }
+  }
+
+  onUpdateBidEquipment() {
+    if ((<HTMLSelectElement>document.getElementById('updateEquipmentInterval')).selectedIndex == 0) {
+      this.DaysSelected = 1;
+      this.pricePerDay = this.intervalCost;
+      this.WeekSelected1 = 0;
+      this.pricePer1Week = this.bidEquipments[this.equipmentIndex].pricePer1Week;
+      this.WeekSelected2 = 0;
+      this.pricePer2Week = this.bidEquipments[this.equipmentIndex].pricePer2Week;
+      this.WeekSelected3 = 0;
+      this.pricePer3Week = this.bidEquipments[this.equipmentIndex].pricePer3Week;
+    } else if ((<HTMLSelectElement>document.getElementById('updateEquipmentInterval')).selectedIndex == 1) {
+      this.DaysSelected = 0;
+      this.pricePerDay = this.bidEquipments[this.equipmentIndex].pricePerDay;
+      this.WeekSelected1 = 1;
+      this.pricePer1Week = this.intervalCost;
+      this.WeekSelected2 = 0;
+      this.pricePer2Week = this.bidEquipments[this.equipmentIndex].pricePer2Week;
+      this.WeekSelected3 = 0;
+      this.pricePer3Week = this.bidEquipments[this.equipmentIndex].pricePer3Week;
+    } else if ((<HTMLSelectElement>document.getElementById('updateEquipmentInterval')).selectedIndex == 2) {
+      this.DaysSelected = 0;
+      this.pricePerDay = this.bidEquipments[this.equipmentIndex].pricePerDay;
+      this.WeekSelected1 = 0;
+      this.pricePer1Week = this.bidEquipments[this.equipmentIndex].pricePer1Week;
+      this.WeekSelected2 = 1;
+      this.pricePer2Week = this.intervalCost;
+      this.WeekSelected3 = 0;
+      this.pricePer3Week = this.bidEquipments[this.equipmentIndex].pricePer3Week;
+    } else if ((<HTMLSelectElement>document.getElementById('updateEquipmentInterval')).selectedIndex == 3) {
+      this.DaysSelected = 0;
+      this.pricePerDay = this.bidEquipments[this.equipmentIndex].pricePerDay;
+      this.WeekSelected1 = 0;
+      this.pricePer1Week = this.bidEquipments[this.equipmentIndex].pricePer1Week;
+      this.WeekSelected2 = 0;
+      this.pricePer2Week = this.bidEquipments[this.equipmentIndex].pricePer2Week;
+      this.WeekSelected3 = 1;
+      this.pricePer3Week = this.intervalCost;
+    }
+    let updatedBidEquipment = {
+      bidEquipmentID: this.bidEquipments[this.equipmentIndex].bidEquipmentID,
+      equipmentName: this.equipmentName,
+      equipmentID: this.bidEquipments[this.equipmentIndex].equipmentID,
+      intervals: this.equipmentNumOfIntervals,
+      pricePerDay: this.pricePerDay,
+      DaysSelected: this.DaysSelected,
+      pricePer1Week: this.pricePer1Week,
+      WeekSelected1: this.WeekSelected1,
+      pricePer2Week: this.pricePer2Week,
+      WeekSelected2: this.WeekSelected2,
+      pricePer3Week: this.pricePer3Week,
+      WeekSelected3: this.WeekSelected3
+    };
+    // console.log(updatedBidEquipment);
+    this.bidService.updateBidEquipment(updatedBidEquipment).subscribe((data) => {
+      if (data.success) {
+        // console.log(data.msg);
+        this.onClearBidEquipment();
+        this.getBidEquipments();
+        $('#update-equipment-modal').modal('hide');
+        this.alert.displayAlert('Equipment updated', 'success');
+      } else {
+        console.log(data.msg);
+      }
+    });
+  }
+
+  onDeleteBidEquipment() {
+    this.bidService.deleteBidEquipment(this.bidEquipments[this.equipmentIndex].bidEquipmentID).subscribe((data) => {
+      if (data.success) {
+        console.log(data.msg);
+        this.getBidEquipments();
+        $('#update-equipment-modal').modal('hide');
+        this.alert.displayAlert('Equipment deleted', 'success');
+      } else {
+        console.log(data.msg);
+      }
+    });
+  }
+
+  onClearBidEquipment() {
+    this.selectedEquipments.forEach((selectedEquipment) => {
+      this.equipments.push(selectedEquipment);
+    });
+    this.selectedEquipments = [];
+    this.totalEquipmentPrice = 0;
+    this.equipmentNumOfIntervals = 0;
+  }
+
+  onCreateBidEquipment() {
+    this.selectedEquipments.forEach((selectedEquipment) => {
+      this.bidService.createBidEquipmentById(this.id, selectedEquipment).subscribe((data) => {
+        if (data.success) {
+          console.log(data.msg);
+        } else {
+          console.log(data.msg);
+        }
+      });
+    });
+
+    this.getBidEquipments();
+    this.onClearBidEquipment();
+    $('#create-equipment-modal').modal('hide');
+    this.alert.displayAlert('Equipment added', 'success');
+  }
+
+  onAddEquipment() {
+    let selectedEquipment = {
+      equipmentID: this.equipments[this.equipmentID].equipmentID,
+      equipmentName: this.equipments[this.equipmentID].equipmentName,
+      intervals: this.equipmentNumOfIntervals,
+      pricePerDay: this.equipments[this.equipmentID].pricePerDay,
+      DaysSelected: this.equipments[this.equipmentID].DaysSelected,
+      pricePer1Week: this.equipments[this.equipmentID].pricePer1Week,
+      WeekSelected1: this.equipments[this.equipmentID].WeekSelected1,
+      pricePer2Week: this.equipments[this.equipmentID].pricePer2Week,
+      WeekSelected2: this.equipments[this.equipmentID].WeekSelected2,
+      pricePer3Week: this.equipments[this.equipmentID].pricePer3Week,
+      WeekSelected3: this.equipments[this.equipmentID].WeekSelected3
+    };
+    if (this.equipmentInterval == 0) {
+      this.totalEquipmentPrice += (selectedEquipment.pricePerDay * this.equipmentNumOfIntervals);
+      selectedEquipment.DaysSelected = 1;
+      selectedEquipment.WeekSelected1 = 0;
+      selectedEquipment.WeekSelected2 = 0;
+      selectedEquipment.WeekSelected3 = 0;
+    } else if (this.equipmentInterval == 1) {
+      this.totalEquipmentPrice += (selectedEquipment.pricePer1Week * this.equipmentNumOfIntervals);
+      selectedEquipment.WeekSelected1 = 1;
+      selectedEquipment.DaysSelected = 0;
+      selectedEquipment.WeekSelected2 = 0;
+      selectedEquipment.WeekSelected3 = 0;
+    } else if (this.equipmentInterval == 2) {
+      this.totalEquipmentPrice += (selectedEquipment.pricePer2Week * this.equipmentNumOfIntervals);
+      selectedEquipment.WeekSelected2 = 1;
+      selectedEquipment.DaysSelected = 0;
+      selectedEquipment.WeekSelected1 = 0;
+      selectedEquipment.WeekSelected3 = 0;
+    } else if (this.equipmentInterval == 3) {
+      this.totalEquipmentPrice += (selectedEquipment.pricePer3Week * this.equipmentNumOfIntervals);
+      selectedEquipment.WeekSelected3 = 1;
+      selectedEquipment.DaysSelected = 0;
+      selectedEquipment.WeekSelected1 = 0;
+      selectedEquipment.WeekSelected2 = 0;
+    }
+
+    this.selectedEquipments.push(selectedEquipment);
+    this.equipments.splice(this.equipmentID, 1);
+    this.equipment = null;
+    this.equipmentNumOfIntervals = 0;
+    console.log(this.selectedEquipments);
+  }
+
+  onRemoveEquipment(equipment, id) {
+    if (equipment.DaysSelected == 1) {
+      this.totalEquipmentPrice -= (equipment.pricePerDay * equipment.intervals);
+    } else if (equipment.WeekSelected1 == 1) {
+      this.totalEquipmentPrice -= (equipment.pricePer1Week * equipment.intervals);
+    } else if (equipment.WeekSelected2 == 1) {
+      this.totalEquipmentPrice -= (equipment.pricePer2Week * equipment.intervals);
+    } else if (equipment.WeekSelected3 == 1) {
+      this.totalEquipmentPrice -= (equipment.pricePer3Week * equipment.intervals);
+    }
+    this.selectedEquipments.splice(id, 1);
+    this.equipments.push(equipment);
+  }
+
+  onChangeEquipment(id) {
+    this.equipmentID = id;
+    // console.log(this.equipmentID);
+  }
+
+  onClearEquipmentUpdate() {
+    this.equipmentName = '';
+    this.intervalCost = null;
+    this.equipmentNumOfIntervals = null;
+  }
+
+  onChangeInterval(interval) {
+    this.equipmentInterval = interval;
+    // console.log(this.equipmentInterval);
+    if (interval == 0) {
+      this.intervalCost = this.bidEquipments[this.equipmentIndex].pricePerDay;
+    } else if (interval == 1) {
+      this.intervalCost = this.bidEquipments[this.equipmentIndex].pricePer1Week;
+    } else if (interval == 2) {
+      this.intervalCost = this.bidEquipments[this.equipmentIndex].pricePer2Week;
+    } else if (interval == 3) {
+      this.intervalCost = this.bidEquipments[this.equipmentIndex].pricePer3Week;
+    }
+  }
+
   /**************************************************** Bid Labor **********************************************************************/
   getBidLabors() {
     this.totalLaborPriceTable = 0;
@@ -584,7 +861,7 @@ export class BidComponent implements OnInit {
   onChangeContact(contactIndex) {
     this.contactName = this.contacts[contactIndex].contactName;
   }
-  
+
   makeBidPDF() {
     var documentDefinition = {
       content: [
@@ -687,11 +964,11 @@ export class BidComponent implements OnInit {
             style: 'paragraph',
             widths: ['*', '*'],
             body: [
-              [{ text: [{ text: 'Submitted to: ' }, { text: this.bid[0].customerName, bold: true }], fillColor: '#dedede' }, {text: [{ text: 'Date: '},{ text: this.getToday(), bold: true }],fillColor: '#dedede'}],
-              [{text: [{text: 'Name: '}, {text: this.contactName, bold: true}]}, {text: [{text: 'Job Name: '}, {text: this.bid[0].jobName, bold: true}]}],
-              [{text: [{text: 'Street: '}, {text: this.bid[0].customerAddress, bold: true}]}, {text: [{text: 'Street: '}, {text: this.bid[0].jobAddress, bold: true}]}],
-              [{text: [{text: 'City: '}, {text: this.bid[0].customerCity, bold: true}]}, {text: [{text: 'City: '}, {text: this.bid[0].jobCity, bold: true}]}],
-              [{text: [{text: 'State: '}, {text: this.bid[0].customerState, bold: true}]}, {text: [{text: 'State: '}, {text: this.bid[0].jobState, bold: true}]}]
+              [{ text: [{ text: 'Submitted to: ' }, { text: this.bid[0].customerName, bold: true }], fillColor: '#dedede' }, { text: [{ text: 'Date: ' }, { text: this.getToday(), bold: true }], fillColor: '#dedede' }],
+              [{ text: [{ text: 'Name: ' }, { text: this.contactName, bold: true }] }, { text: [{ text: 'Job Name: ' }, { text: this.bid[0].jobName, bold: true }] }],
+              [{ text: [{ text: 'Street: ' }, { text: this.bid[0].customerAddress, bold: true }] }, { text: [{ text: 'Street: ' }, { text: this.bid[0].jobAddress, bold: true }] }],
+              [{ text: [{ text: 'City: ' }, { text: this.bid[0].customerCity, bold: true }] }, { text: [{ text: 'City: ' }, { text: this.bid[0].jobCity, bold: true }] }],
+              [{ text: [{ text: 'State: ' }, { text: this.bid[0].customerState, bold: true }] }, { text: [{ text: 'State: ' }, { text: this.bid[0].jobState, bold: true }] }]
             ]
           }
         },
@@ -873,7 +1150,19 @@ interface SelectedLabor {
   roleWage: number,
   laborHours: number
 }
-
+interface SelectedEquipment {
+  equipmentID: number,
+  equipmentName: String,
+  intervals: number,
+  pricePerDay: number,
+  DaysSelected: number,
+  pricePer1Week: number,
+  WeekSelected1: number,
+  pricePer2Week: number,
+  WeekSelected2: number,
+  pricePer3Week: number
+  WeekSelected3: number
+}
 /*********************************************************** Unused code **************************************************************/
 // onAddMaterial() {
 //   let selectedMaterial = {

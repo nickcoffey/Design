@@ -13,7 +13,7 @@
         <div class="panel-heading" style="cursor: pointer;" data-toggle="collapse" data-parent="#accordion" href="'#inquiryAccordion">
           <h3>Inquiry Details</h3>
         </div>
-        <div id="inquiryAccordion" class="panel-body panel-collapse collapse in" style="word-break:break-all">
+        <div id="inquiryAccordion" class="panel-body panel-collapse collapse in" style="word-break:break-word">
           <h4 class="page-header" style="margin-top: 0">General</h4>
           <table class="table table-bordered">
             <thead>
@@ -51,8 +51,8 @@
                 <th>Job Name</th>
                 <th>Site Address</th>
                 <th>Site City</th>
-                <th>Site State</th>
-                <th>Site ZIP</th>
+                <th class="hidden-xs hidden-sm">Site State</th>
+                <th class="hidden-xs hidden-sm">Site ZIP</th>
               </tr>
             </thead>
             <tbody>
@@ -60,14 +60,15 @@
                 <td>{{inquiry[0].jobName}}</td>
                 <td>{{inquiry[0].jobAddress}}</td>
                 <td>{{inquiry[0].jobCity}}</td>
-                <td>{{inquiry[0].jobState}}</td>
-                <td>{{inquiry[0].jobZIP}}</td>
+                <td class="hidden-xs hidden-sm">{{inquiry[0].jobState}}</td>
+                <td class="hidden-xs hidden-sm">{{inquiry[0].jobZIP}}</td>
               </tr>
             </tbody>
           </table>
           <br>
           <button (click)="onClickUpdate()" class="btn btn-info" data-toggle="modal" href="#update-modal">
             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Update Description</button>
+          <div class="hidden-md hidden-lg" style="margin-bottom: 5px"></div>
           <button (click)="onClickUpdateSite()" class="btn btn-info" data-toggle="modal" href="#update-site-modal">
             <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Update Site Details</button>
           <br>
@@ -116,8 +117,10 @@
           </div>
           <button *ngIf="status == 'PENDING'" class="btn btn-primary" data-toggle="modal" href='#create-bid-modal'>
             <span class="glyphicon glyphicon-file" aria-hidden="true"></span> Create Bid</button>
+          <div class="hidden-md hidden-lg" style="margin-bottom: 5px"></div>
           <button *ngIf="status == 'PENDING'" class="btn btn-warning" data-toggle="modal" href='#decline-modal'>
             <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> Decline Inquiry</button>
+          <div class="hidden-md hidden-lg" style="margin-bottom: 5px"></div>
           <button *ngIf="status == 'DECLINED'" class="btn btn-warning" data-toggle="modal" href='#reopen-modal'>
             <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> Re-Open Inquiry</button>
           <button *ngIf="inquiry[0].associatedBidID == null" class="btn btn-danger" data-toggle="modal" href='#delete-modal'>
@@ -129,7 +132,7 @@
         <div class="panel-heading" style="cursor: pointer;" data-toggle="collapse" data-parent="#accordion" href="'#customerAccordion">
           <h3>Customer Details</h3>
         </div>
-        <div id="customerAccordion" class="panel-body panel-collapse collapse" style="word-break:break-all">
+        <div id="customerAccordion" class="panel-body panel-collapse collapse" style="word-break:break-word">
           <table class="table table-bordered">
             <thead>
               <tr class="active">
@@ -337,7 +340,7 @@
             <div class="panel-heading">
               <h3 class="panel-title">Enter Costs</h3>
             </div>
-            <div class="panel-body" style="word-break:break-all">
+            <div class="panel-body" style="word-break:break-word">
               <h4>Labor Cost</h4>
               <table class="table" *ngIf="labors[0] != null">
                 <thead>
@@ -401,7 +404,81 @@
                 </tfoot>
               </table>
             </div>
-            <div class="panel-body" style="word-break:break-all">
+            <div class="panel-body" style="word-break:break-word">
+              <h4>Equipment Cost</h4>
+              <table class="table" *ngIf="equipments[0] != null">
+                <thead>
+                  <tr>
+                    <th>Select Equipment</th>
+                    <th>Select Interval</th>
+                    <th>Enter Intervals</th>
+                    <th>Add Equipment</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <select (change)="onChangeEquipment($event.target.value)" class="form-control">
+                        <option></option>
+                        <option [value]="i" *ngFor="let equipment of equipments; let i = index;">{{equipment.equipmentName}}</option>
+                      </select>
+                    </td>
+                    <td>
+                      <select (change)="onChangeInterval($event.target.value)" class="form-control">
+                        <option></option>
+                        <option [value]="i" *ngFor="let interval of equipmentIntervals; let i = index;">{{interval}}</option>
+                      </select>
+                    </td>
+                    <td>
+                      <input required mask="00000" #intervals="ngModel" type="number" [(ngModel)]="equipmentNumOfIntervals" name="equipmentNumOfIntervals" placeholder="Number Of Intervals"
+                        class="form-control" aria-describedby="days-addon">
+                    </td>
+                    <td>
+                      <button [disabled]="intervals.invalid" (click)="onAddEquipment()" type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr *ngIf="intervals.invalid">
+                    <td></td>
+                    <td></td>
+                    <td style="color:#ff0000">
+                      <div *ngIf="intervals.errors.required">
+                        *Number of intervals is required
+                      </div>
+                    </td>
+                    <td></td>
+                  </tr>
+                </tfoot>
+              </table>
+              <label style="color:#ff0000" *ngIf="selectedEquipments.length != 0;">Click To Remove</label>
+              <table class="table table-bordered table-hover" *ngIf="selectedEquipments.length != 0;">
+                <thead>
+                  <tr class="active">
+                    <th>Equipment</th>
+                    <th>Estimated Cost</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let selectedEquipment of selectedEquipments; let i = index" (click)="onRemoveEquipment(selectedEquipment, i)">
+                    <td>{{selectedEquipment.equipmentName}}</td>
+                    <td *ngIf="selectedEquipment.DaysSelected == 1">{{selectedEquipment.intervals*selectedEquipment.pricePerDay | currency:'USD':true}}</td>
+                    <td *ngIf="selectedEquipment.WeekSelected1 == 1">{{selectedEquipment.intervals*selectedEquipment.pricePer1Week | currency:'USD':true}}</td>
+                    <td *ngIf="selectedEquipment.WeekSelected2 == 1">{{selectedEquipment.intervals*selectedEquipment.pricePer2Week | currency:'USD':true}}</td>
+                    <td *ngIf="selectedEquipment.WeekSelected3 == 1">{{selectedEquipment.intervals*selectedEquipment.pricePer3Week | currency:'USD':true}}</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr class="active">
+                    <th>Total Equipment Cost</th>
+                    <th>{{totalEquipmentPrice | currency: 'USD':true}}</th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            <div class="panel-body" style="word-break:break-word">
               <h4>Material Cost</h4>
               <table class="table" *ngIf="materials[0] != null">
                 <thead>
@@ -462,14 +539,14 @@
                 </tfoot>
               </table>
               <hr>
-              <h4>Total Cost: {{totalLaborPrice + totalMaterialPrice | currency: 'USD':true}}</h4>
+              <h4>Total Cost: {{totalLaborPrice + totalMaterialPrice + totalEquipmentPrice | currency: 'USD':true}}</h4>
             </div>
           </div>
           <div class="panel panel-primary">
             <div class="panel-heading">
               <h3 class="panel-title">Enter Desired % Profit Margin</h3>
             </div>
-            <div class="panel-body" style="word-break:break-all">
+            <div class="panel-body" style="word-break:break-word">
               <div class="form-group">
                 <input required mask="00" #profitMargin="ngModel" type="number" [(ngModel)]="margin" name="margin" placeholder="Margin" class="form-control"
                   required />
@@ -480,7 +557,7 @@
                 </div>
               </div>
               <hr>
-              <h4>Recommended Bid: {{(1 + (margin/100))*(totalMaterialPrice + totalLaborPrice) | currency: 'USD':true}}</h4>
+              <h4>Recommended Bid: {{(1 + (margin/100))*(totalMaterialPrice + totalLaborPrice + totalEquipmentPrice) | currency: 'USD':true}}</h4>
             </div>
           </div>
           <button [disabled]="f2.invalid" type="submit" class="btn btn-primary">

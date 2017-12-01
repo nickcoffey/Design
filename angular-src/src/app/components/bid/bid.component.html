@@ -12,7 +12,7 @@
         <div class="panel-heading" style="cursor: pointer;" data-toggle="collapse" data-parent="#accordion" href="'#bidAccordion">
           <h3>Bid Details</h3>
         </div>
-        <div id="bidAccordion" class="panel-body panel-collapse collapse in" style="word-break:break-all">
+        <div id="bidAccordion" class="panel-body panel-collapse collapse in" style="word-break:break-word">
           <h4 class="page-header" style="margin-top:0;">General</h4>
           <table class="table table-bordered">
             <thead>
@@ -48,8 +48,10 @@
           <br>
           <button (click)="onClickUpdateBid()" type="button" class="btn btn-info" data-toggle="modal" href='#update-bid-modal'>
             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Update Price</button>
+          <div class="hidden-md hidden-lg" style="margin-bottom: 5px"></div>
           <button (click)="onClickUpdateNotes()" type="button" class="btn btn-info" data-toggle="modal" href='#update-notes-modal'>
             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Update Notes</button>
+          <div class="hidden-md hidden-lg" style="margin-bottom: 5px"></div>
           <button type="button" class="btn btn-primary" data-toggle="modal" href='#create-form-modal'>
             <span class="glyphicon glyphicon-file" aria-hidden="true"></span> Generate Form</button>
           <br>
@@ -91,6 +93,61 @@
             </div>
             <button *ngIf="labors.length > 0;" (click)="onClearBidLabor()" class="btn btn-info" data-toggle="modal" href='#create-labor-modal'>
               <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Add Labor</button>
+          </div>
+
+          <h4 class="page-header">Estimated Equipment Costs
+            <button class="btn btn-default btn-sm collapsed" data-toggle="collapse" data-target='#equipment-collapse'>
+              <span class="if-collapsed">Show</span>
+              <span class="if-not-collapsed">Hide</span>
+            </button>
+          </h4>
+          <div class="collapse" id="equipment-collapse">
+            <div *ngIf="bidEquipments.length > 0;">
+              <label>Click To Update Or Delete</label>
+              <table class="table table-bordered table-hover">
+                <thead>
+                  <tr class="active">
+                    <th>Equipment</th>
+                    <th class="hidden-xs hidden-sm">Price Per Interval</th>
+                    <th>Intervals</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let bidEquipment of bidEquipments; let i = index" (click)="onClickUpdateBidEquipment(i)" data-toggle="modal"
+                    href='#update-equipment-modal'>
+                    <td>{{bidEquipment.equipmentName}}</td>
+                    <td *ngIf="bidEquipment.DaysSelected == 1" class="hidden-xs hidden-sm">{{bidEquipment.pricePerDay | currency: 'USD':true}}
+                      <b>per day</b>
+                    </td>
+                    <td *ngIf="bidEquipment.WeekSelected1 == 1" class="hidden-xs hidden-sm">{{bidEquipment.pricePer1Week | currency: 'USD':true}}
+                      <b>per week</b>
+                    </td>
+                    <td *ngIf="bidEquipment.WeekSelected2 == 1" class="hidden-xs hidden-sm">{{bidEquipment.pricePer2Week | currency: 'USD':true}}
+                      <b>per 2 weeks</b>
+                    </td>
+                    <td *ngIf="bidEquipment.WeekSelected3 == 1" class="hidden-xs hidden-sm">{{bidEquipment.pricePer3Week | currency: 'USD':true}}
+                      <b>per 3 weeks</b>
+                    </td>
+                    <td>{{bidEquipment.intervals}}</td>
+                    <td *ngIf="bidEquipment.DaysSelected == 1">{{bidEquipment.intervals*bidEquipment.pricePerDay | currency: 'USD':true}}</td>
+                    <td *ngIf="bidEquipment.WeekSelected1 == 1">{{bidEquipment.intervals*bidEquipment.pricePer1Week | currency: 'USD':true}}</td>
+                    <td *ngIf="bidEquipment.WeekSelected2 == 1">{{bidEquipment.intervals*bidEquipment.pricePer2Week | currency: 'USD':true}}</td>
+                    <td *ngIf="bidEquipment.WeekSelected3 == 1">{{bidEquipment.intervals*bidEquipment.pricePer3Week | currency: 'USD':true}}</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr class="active" *ngIf="totalEquipmentPriceTable != 0">
+                    <th>Grand Total</th>
+                    <th class="hidden-xs hidden-sm"></th>
+                    <th></th>
+                    <th>{{totalEquipmentPriceTable | currency: 'USD':true}}</th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            <button *ngIf="equipments.length > 0;" (click)="onClearBidEquipment()" class="btn btn-info" data-toggle="modal" href='#create-equipment-modal'>
+              <span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span> Add Equipment</button>
           </div>
 
           <h4 class="page-header">Estimated Material Costs
@@ -180,10 +237,13 @@
           </div>
           <button *ngIf="status == 'PENDING'" class="btn btn-primary" data-toggle="modal" href='#create-job-modal'>
             <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Create Job</button>
+          <div class="hidden-md hidden-lg" style="margin-bottom: 5px"></div>
           <button *ngIf="status == 'PENDING'" class="btn btn-warning" data-toggle="modal" href='#decline-modal'>
             <span class="glyphicon glyphicon-file" aria-hidden="true"></span> Decline Bid</button>
+          <div class="hidden-md hidden-lg" style="margin-bottom: 5px"></div>
           <button *ngIf="status == 'DECLINED'" class="btn btn-warning" data-toggle="modal" href='#reopen-modal'>
             <span class="glyphicon glyphicon-file" aria-hidden="true"></span> Re-open Bid</button>
+          <div class="hidden-md hidden-lg" style="margin-bottom: 5px"></div>
           <button *ngIf="bid[0].associatedJobID == null" class="btn btn-danger" data-toggle="modal" href='#delete-bid-modal'>
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete Bid</button>
         </div>
@@ -193,7 +253,7 @@
         <div class="panel-heading" style="cursor: pointer;" data-toggle="collapse" data-parent="#accordion" href="'#inquiryAccordion">
           <h3>Inquiry Details</h3>
         </div>
-        <div id="inquiryAccordion" class="panel-body panel-collapse collapse" style="word-break:break-all">
+        <div id="inquiryAccordion" class="panel-body panel-collapse collapse" style="word-break:break-word">
           <table class="table table-bordered">
             <thead>
               <tr class="active">
@@ -228,8 +288,8 @@
                 <th>Job Name</th>
                 <th>Site Address</th>
                 <th>Site City</th>
-                <th>Site State</th>
-                <th>Site ZIP</th>
+                <th class="hidden-xs hidden-sm">Site State</th>
+                <th class="hidden-xs hidden-sm">Site ZIP</th>
               </tr>
             </thead>
             <tbody>
@@ -237,8 +297,8 @@
                 <td>{{bid[0].jobName}}</td>
                 <td>{{bid[0].jobAddress}}</td>
                 <td>{{bid[0].jobCity}}</td>
-                <td>{{bid[0].jobState}}</td>
-                <td>{{bid[0].jobZIP}}</td>
+                <td class="hidden-xs hidden-sm">{{bid[0].jobState}}</td>
+                <td class="hidden-xs hidden-sm">{{bid[0].jobZIP}}</td>
               </tr>
             </tbody>
           </table>
@@ -252,7 +312,7 @@
         <div class="panel-heading" style="cursor: pointer;" data-toggle="collapse" data-parent="#accordion" href="'#customerAccordion">
           <h3>Customer Details</h3>
         </div>
-        <div id="customerAccordion" class="panel-body panel-collapse collapse" style="word-break:break-all">
+        <div id="customerAccordion" class="panel-body panel-collapse collapse" style="word-break:break-word">
           <table class="table table-bordered">
             <thead>
               <tr class="active">
@@ -597,6 +657,184 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
         <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onDeleteBidMaterial()">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--                                     Bid Equipment Popups                                           -->
+<!--                Create equipment popup                -->
+<div class="modal fade" id="create-equipment-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Add Equipment</h4>
+      </div>
+      <div class="modal-body">
+        <form #f7="ngForm" (submit)="onCreateBidEquipment()">
+          <table class="table" *ngIf="equipments[0] != null">
+            <thead>
+              <tr>
+                <th>Select Equipment</th>
+                <th>Select Interval</th>
+                <th>Enter Intervals</th>
+                <th>Add Equipment</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <select (change)="onChangeEquipment($event.target.value)" class="form-control">
+                    <option></option>
+                    <option [value]="i" *ngFor="let equipment of equipments; let i = index;">{{equipment.equipmentName}}</option>
+                  </select>
+                </td>
+                <td>
+                  <select (change)="onChangeInterval($event.target.value)" class="form-control">
+                    <option></option>
+                    <option [value]="i" *ngFor="let interval of equipmentIntervals; let i = index;">{{interval}}</option>
+                  </select>
+                </td>
+                <td>
+                  <input required mask="00000" #intervals="ngModel" type="number" [(ngModel)]="equipmentNumOfIntervals" name="equipmentNumOfIntervals"
+                    placeholder="Number Of Intervals" class="form-control" aria-describedby="days-addon">
+                </td>
+                <td>
+                  <button [disabled]="intervals.invalid" (click)="onAddEquipment()" type="button" class="btn btn-success">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr *ngIf="intervals.invalid">
+                <td></td>
+                <td></td>
+                <td style="color:#ff0000">
+                  <div *ngIf="intervals.errors.required">
+                    *Number of intervals is required
+                  </div>
+                </td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+          <label style="color:#ff0000" *ngIf="selectedEquipments.length != 0;">Click To Remove</label>
+          <table class="table table-bordered table-hover" *ngIf="selectedEquipments.length != 0;">
+            <thead>
+              <tr class="active">
+                <th>Equipment</th>
+                <th>Estimated Cost</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let selectedEquipment of selectedEquipments; let i = index" (click)="onRemoveEquipment(selectedEquipment, i)">
+                <td>{{selectedEquipment.equipmentName}}</td>
+                <td *ngIf="selectedEquipment.DaysSelected == 1">{{selectedEquipment.intervals*selectedEquipment.pricePerDay | currency:'USD':true}}</td>
+                <td *ngIf="selectedEquipment.WeekSelected1 == 1">{{selectedEquipment.intervals*selectedEquipment.pricePer1Week | currency:'USD':true}}</td>
+                <td *ngIf="selectedEquipment.WeekSelected2 == 1">{{selectedEquipment.intervals*selectedEquipment.pricePer2Week | currency:'USD':true}}</td>
+                <td *ngIf="selectedEquipment.WeekSelected3 == 1">{{selectedEquipment.intervals*selectedEquipment.pricePer3Week | currency:'USD':true}}</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr class="active">
+                <th>Total Equipment Cost</th>
+                <th>{{totalEquipmentPrice | currency: 'USD':true}}</th>
+              </tr>
+            </tfoot>
+          </table>
+          <button [disabled]="f7.invalid" type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Add</button>
+          <button type="button" (click)="clearContactFields()" class="btn btn-warning">
+            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">
+          <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--                Update equipment popup                -->
+<div class="modal fade" id="update-equipment-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Update {{equipmentName}}</h4>
+      </div>
+      <div class="modal-body">
+        <form #f8="ngForm" (submit)="onUpdateBidEquipment()">
+          <div class="form-group">
+            <label>Name</label>
+            <input required maxlength="100" #equipmentName1="ngModel" type="text" [(ngModel)]="equipmentName" name="equipmentName" placeholder="Wage"
+              class="form-control">
+            <div *ngIf="equipmentName1.invalid" style="color:#ff0000">
+              <div *ngIf="equipmentName1.errors.required">
+                *Name is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Interval</label>
+            <select id="updateEquipmentInterval" (change)="onChangeInterval($event.target.value)" class="form-control">
+              <option [value]="i" *ngFor="let interval of equipmentIntervals; let i = index;">{{interval}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Price Per Interval</label>
+            <input required onKeyPress="if(this.value.length==9) return false;" #intervalCost1="ngModel" type="number" [(ngModel)]="intervalCost"
+              name="intervalCost" placeholder="Price Per Day" class="form-control">
+            <div *ngIf="intervalCost1.invalid" style="color:#ff0000">
+              <div *ngIf="intervalCost1.errors.required">
+                *Interval Cost is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label># Of Intervals</label>
+            <input required mask="00000" #intervals="ngModel" type="number" [(ngModel)]="equipmentNumOfIntervals" name="equipmentNumOfIntervals"
+              placeholder="Intervals" class="form-control">
+            <div *ngIf="intervals.invalid" style="color:#ff0000">
+              <div *ngIf="intervals.errors.required">
+                *Number of intervals is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <button [disabled]="f8.invalid" type="submit" class="btn btn-primary">
+              <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
+            <button type="button" (click)="onClearEquipmentUpdate()" class="btn btn-warning">
+              <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" href='#delete-equipment-modal'>
+              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">
+          <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--                Delete equipment Popup                -->
+<div class="modal fade" id="delete-equipment-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Warning</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete
+          <b>{{equipmentName | lowercase}}</b> from the current bid?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onDeleteBidEquipment()">Yes</button>
       </div>
     </div>
   </div>

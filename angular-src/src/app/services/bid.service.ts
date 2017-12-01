@@ -164,6 +164,56 @@ export class BidService {
     return this.http.post(`${this.localHttp}/bids/update/bid-labor`, JSON.stringify(updatedBidLabor), { headers: headers }).map(response => response.json());
   }
 
+  /************************************************************** Bid Equipments ***************************************************************************************/
+
+  getBidEquipmentsById(bidId) {
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Authorization', this.authService.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(`${this.localHttp}/bids/${bidId}/bid-equipments`, { headers: headers }).map(response => response.json());
+  }
+
+  createBidEquipment(newBidEquipment) {
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', this.authService.authToken);
+    return this.http.post(`${this.localHttp}/bids/new/bid-equipment`, JSON.stringify(newBidEquipment), { headers: headers }).map(response => response.json());
+  }
+
+  getCurrentBidEquipmentsCost(bidID) {
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Authorization', this.authService.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(`${this.localHttp}/bids/${bidID}/bid-equipments/cost`, { headers: headers }).map(response => response.json());
+  }
+
+  createBidEquipmentById(id, bidEquipment) {
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', this.authService.authToken);
+    return this.http.post(`${this.localHttp}/bids/${id}/new/bid-equipment`, JSON.stringify(bidEquipment), { headers: headers }).map(response => response.json());
+  }
+
+  deleteBidEquipment(equipmentID) {
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', this.authService.authToken);
+    return this.http.post(`${this.localHttp}/bids/delete/bid-equipment/${equipmentID}`, JSON.stringify({}), { headers: headers }).map(response => response.json());
+  }
+
+  updateBidEquipment(updatedBidEquipment) {
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', this.authService.authToken);
+    return this.http.post(`${this.localHttp}/bids/update/bid-equipment`, JSON.stringify(updatedBidEquipment), { headers: headers }).map(response => response.json());
+  }
+
   /********************************************************************* FILE FUNCTIONS ***********************************************************************/
   getBidFilesByID(id) {
     this.authService.loadToken();

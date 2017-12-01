@@ -342,7 +342,7 @@ router.post('/:id/new/bid-labor', passport.authenticate('jwt', { session: false 
         roleWage: request.body.roleWage,
         laborHours: request.body.laborHours
     };
-    console.log(newBidLabor);
+    // console.log(newBidLabor);
 
     bid.createBidLaborById(newBidLabor, (message) => {
         if (message.message == "") {
@@ -409,6 +409,166 @@ router.post('/update/bid-labor', passport.authenticate('jwt', { session: false }
             response.json({
                 success: true,
                 msg: 'Bid labor updated'
+            });
+        } else {
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
+/********************************************************* Bid Equipment *************************************************************************/
+
+// Create bid equipment
+router.post('/new/bid-equipment', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    let newBidEquipment = {
+        equipmentID: request.body.equipmentID,
+        equipmentName: request.body.equipmentName,
+        intervals: request.body.intervals,
+        pricePerDay: request.body.pricePerDay,
+        DaysSelected: request.body.DaysSelected,
+        pricePer1Week: request.body.pricePer1Week,
+        WeekSelected1: request.body.WeekSelected1,
+        pricePer2Week: request.body.pricePer2Week,
+        WeekSelected2: request.body.WeekSelected2,
+        pricePer3Week: request.body.pricePer3Week,
+        WeekSelected3: request.body.WeekSelected3
+    };
+    console.log(newBidEquipment);
+
+    bid.createBidEquipment(newBidEquipment, (message) => {
+        if (message.message == "") {
+            response.json({
+                success: true,
+                msg: 'Bid equipment created'
+            });
+        } else {
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
+// Create bid equipment by ID
+router.post('/:id/new/bid-equipment', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    let newBidEquipment = {
+        bidID: request.params.id,
+        equipmentID: request.body.equipmentID,
+        equipmentName: request.body.equipmentName,
+        intervals: request.body.intervals,
+        pricePerDay: request.body.pricePerDay,
+        DaysSelected: request.body.DaysSelected,
+        pricePer1Week: request.body.pricePer1Week,
+        WeekSelected1: request.body.WeekSelected1,
+        pricePer2Week: request.body.pricePer2Week,
+        WeekSelected2: request.body.WeekSelected2,
+        pricePer3Week: request.body.pricePer3Week,
+        WeekSelected3: request.body.WeekSelected3
+    };
+
+    bid.createBidEquipmentById(newBidEquipment, (message) => {
+        if (message.message == "") {
+            response.json({
+                success: true,
+                msg: 'Bid equipment created'
+            });
+        } else {
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
+// Delete bid equipment
+router.post('/delete/bid-equipment/:id', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    let bidEquipmentID = request.params.id;
+
+    bid.deleteBidEquipment(bidEquipmentID, (message) => {
+        if (message.message == "") {
+            response.json({
+                success: true,
+                msg: 'Bid equipment deleted'
+            });
+        } else {
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
+// Get bid equipments by id
+router.get('/:id/bid-equipments', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    const id = request.params.id;
+    bid.getBidEquipmentsById(id, (bidEquipments) => {
+        if (!bidEquipments) {
+            return err;
+        } else {
+            return response.json(bidEquipments);
+        }
+    });
+});
+
+// Update Bid Equipment
+router.post('/update/bid-equipment', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    let updatedBidEquipment = {
+        bidEquipmentID: request.body.bidEquipmentID,
+        equipmentID: request.body.equipmentID,
+        equipmentName: request.body.equipmentName,
+        intervals: request.body.intervals,
+        pricePerDay: request.body.pricePerDay,
+        DaysSelected: request.body.DaysSelected,
+        pricePer1Week: request.body.pricePer1Week,
+        WeekSelected1: request.body.WeekSelected1,
+        pricePer2Week: request.body.pricePer2Week,
+        WeekSelected2: request.body.WeekSelected2,
+        pricePer3Week: request.body.pricePer3Week,
+        WeekSelected3: request.body.WeekSelected3
+    };
+    // console.log(updatedBidEquipment);
+    // if (updatedBidEquipment.equipmentName == null || updatedBidEquipment.equipmentName == undefined || updatedBidEquipment.equipmentName == "") {
+    //     delete updatedBidEquipment.equipmentName;
+    // }
+    // if (updatedBidEquipment.intervals == null || updatedBidEquipment.intervals == undefined || updatedBidEquipment.intervals == "") {
+    //     delete updatedBidEquipment.intervals;
+    // }
+    // if (updatedBidEquipment.pricePerDay == null || updatedBidEquipment.pricePerDay == undefined || updatedBidEquipment.pricePerDay == "") {
+    //     delete updatedBidEquipment.pricePerDay;
+    // }
+    // if (updatedBidEquipment.DaysSelected == null || updatedBidEquipment.DaysSelected == undefined || updatedBidEquipment.DaysSelected == "") {
+    //     delete updatedBidEquipment.DaysSelected;
+    // }
+    // if (updatedBidEquipment.pricePer1Week == null || updatedBidEquipment.pricePer1Week == undefined || updatedBidEquipment.pricePer1Week == "") {
+    //     delete updatedBidEquipment.pricePer1Week;
+    // }
+    // if (updatedBidEquipment.WeekSelected1 == null || updatedBidEquipment.WeekSelected1 == undefined || updatedBidEquipment.WeekSelected1 == "") {
+    //     delete updatedBidEquipment.WeekSelected1;
+    // }
+    // if (updatedBidEquipment.pricePer2Week == null || updatedBidEquipment.pricePer2Week == undefined || updatedBidEquipment.pricePer2Week == "") {
+    //     delete updatedBidEquipment.pricePer2Week;
+    // }
+    // if (updatedBidEquipment.WeekSelected2 == null || updatedBidEquipment.WeekSelected2 == undefined || updatedBidEquipment.WeekSelected2 == "") {
+    //     delete updatedBidEquipment.WeekSelected2;
+    // }
+    // if (updatedBidEquipment.pricePer3Week == null || updatedBidEquipment.pricePer3Week == undefined || updatedBidEquipment.pricePer3Week == "") {
+    //     delete updatedBidEquipment.pricePer3Week;
+    // }
+    // if (updatedBidEquipment.WeekSelected3 == null || updatedBidEquipment.WeekSelected3 == undefined || updatedBidEquipment.WeekSelected3 == "") {
+    //     delete updatedBidEquipment.WeekSelected3;
+    // }
+
+    bid.updateBidEquipment(updatedBidEquipment, (message) => {
+        if (message.warningCount == 0) {
+            response.json({
+                success: true,
+                msg: 'Bid equipment updated'
             });
         } else {
             response.json({

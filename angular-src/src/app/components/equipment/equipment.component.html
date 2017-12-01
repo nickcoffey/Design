@@ -1,0 +1,200 @@
+<div class="pull-left">
+  <button class="btn btn-default" [routerLink]="['/home']">
+    <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Go Home</button>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <h2 class="page-header">Equipment</h2>
+  <h4>Click To Update Or Delete</h4>
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr class="active">
+        <th>Name</th>
+        <th>Daily Price</th>
+        <th>Weekly Price</th>
+        <th>Price Per 2 Weeks</th>
+        <th class="hidden-xs hidden-sm">Price Per 3 Weeks</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let equipment of equipments" (click)="onClickUpdate(equipment)"
+        data-toggle="modal" href='#update-modal'>
+        <td>{{equipment.equipmentName}}</td>
+        <td>{{equipment.pricePerDay | currency: 'USD':true}}</td>
+        <td>{{equipment.pricePer1Week | currency: 'USD':true}}</td>
+        <td>{{equipment.pricePer2Week | currency: 'USD':true}}</td>
+        <td class="hidden-xs hidden-sm">{{equipment.pricePer3Week | currency: 'USD':true}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="button" class="btn btn-primary" data-toggle="modal" href='#create-modal'>
+    <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Create New</button>
+</div>
+
+<!--                Create Popup                -->
+<div class="modal fade" id="create-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Create New Equipment</h4>
+      </div>
+      <div class="modal-body">
+        <form #f="ngForm" (submit)="onCreate()">
+          <div class="form-group">
+            <label>Equipment Name</label>
+            <input required maxlength="100" #name="ngModel" type="text" [(ngModel)]="equipmentName" name="equipmentName" placeholder="Equipment Name"
+              class="form-control">
+            <div *ngIf="name.invalid" style="color:#ff0000">
+              <div *ngIf="name.errors.required">
+                *Name is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Daily Price</label>
+            <input required onKeyPress="if(this.value.length==9) return false;" #daily="ngModel" type="number" [(ngModel)]="pricePerDay"
+              name="pricePerDay" placeholder="Daily Price" class="form-control">
+            <div *ngIf="daily.invalid" style="color:#ff0000">
+              <div *ngIf="daily.errors.required">
+                *Daily price is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Weekly Price</label>
+            <input required onKeyPress="if(this.value.length==9) return false;" #weekly="ngModel" type="number" [(ngModel)]="pricePer1Week"
+              name="pricePer1Week" placeholder="Weekly Price" class="form-control">
+            <div *ngIf="weekly.invalid" style="color:#ff0000">
+              <div *ngIf="weekly.errors.required">
+                *Weekly price is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Price Per 2 Weeks</label>
+            <input required onKeyPress="if(this.value.length==9) return false;" #weeks2="ngModel" type="number" [(ngModel)]="pricePer2Week"
+              name="pricePer2Week" placeholder="Price Per 2 Weeks" class="form-control">
+            <div *ngIf="weeks2.invalid" style="color:#ff0000">
+              <div *ngIf="weeks2.errors.required">
+                *Price per 2 weeks is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Price Per 3 Weeks</label>
+            <input required onKeyPress="if(this.value.length==9) return false;" #weeks3="ngModel" type="number" [(ngModel)]="pricePer3Week"
+              name="pricePer3Week" placeholder="Price Per 3 Weeks" class="form-control">
+            <div *ngIf="weeks3.invalid" style="color:#ff0000">
+              <div *ngIf="weeks3.errors.required">
+                *Price per 3 weeks is required
+              </div>
+            </div>
+          </div>
+          <button [disabled]="f.invalid" type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Create</button>
+          <button type="button" (click)="onClear()" class="btn btn-warning">
+            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button (click)="onClear()" type="button" class="btn btn-info" data-dismiss="modal">
+          <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--                Update Popup                -->
+<div class="modal fade" id="update-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Update Equipment</h4>
+      </div>
+      <div class="modal-body">
+        <form #f2="ngForm" (submit)="onUpdate()">
+          <div class="form-group">
+            <label>Equipment Name</label>
+            <input required maxlength="100" #name2="ngModel" type="text" [(ngModel)]="equipmentName" name="equipmentName" placeholder="Equipment Name"
+              class="form-control">
+            <div *ngIf="name2.invalid" style="color:#ff0000">
+              <div *ngIf="name2.errors.required">
+                *Name is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Daily Price</label>
+            <input required onKeyPress="if(this.value.length==9) return false;" #daily2="ngModel" type="number" [(ngModel)]="pricePerDay"
+              name="pricePerDay" placeholder="Daily Price" class="form-control">
+            <div *ngIf="daily2.invalid" style="color:#ff0000">
+              <div *ngIf="daily2.errors.required">
+                *Daily price is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Weekly Price</label>
+            <input required onKeyPress="if(this.value.length==9) return false;" #weekly2="ngModel" type="number" [(ngModel)]="pricePer1Week"
+              name="pricePer1Week" placeholder="Weekly Price" class="form-control">
+            <div *ngIf="weekly2.invalid" style="color:#ff0000">
+              <div *ngIf="weekly2.errors.required">
+                *Weekly price is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Price Per 2 Weeks</label>
+            <input required onKeyPress="if(this.value.length==9) return false;" #weeks22="ngModel" type="number" [(ngModel)]="pricePer2Week"
+              name="pricePer2Week" placeholder="Price Per 2 Weeks" class="form-control">
+            <div *ngIf="weeks22.invalid" style="color:#ff0000">
+              <div *ngIf="weeks22.errors.required">
+                *Price per 2 weeks is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Price Per 3 Weeks</label>
+            <input required onKeyPress="if(this.value.length==9) return false;" #weeks32="ngModel" type="number" [(ngModel)]="pricePer3Week"
+              name="pricePer3Week" placeholder="Price Per 3 Weeks" class="form-control">
+            <div *ngIf="weeks32.invalid" style="color:#ff0000">
+              <div *ngIf="weeks32.errors.required">
+                *Price per 3 weeks is required
+              </div>
+            </div>
+          </div>
+          <button [disabled]="f2.invalid" type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
+          <button type="button" (click)="onClear()" class="btn btn-warning">
+            <span class="glyphicon glyphicon-refresh" (click)="onClear()" aria-hidden="true"></span> Clear</button>
+          <button type="button" class="btn btn-danger" data-toggle="modal" href='#delete-modal'>
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete
+          </button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button (click)="onClear()" type="button" class="btn btn-info" data-dismiss="modal">
+          <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--                Delete Popup                -->
+<div class="modal fade" id="delete-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Warning</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this equipment?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onDelete(); onClear()">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>

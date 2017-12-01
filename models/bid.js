@@ -205,6 +205,65 @@ module.exports.updateBidLabor = function (updatedBidLabor, callback) {
     });
 }
 
+/********************************************************* Bid Equipment *************************************************************************/
+
+module.exports.createBidEquipment = function (newBidEquipment, callback) {
+    const queryString = sqlString.format(`INSERT INTO BidEquipment SET ?, bidID=(SELECT MAX(bidID) FROM Bid)`, newBidEquipment);
+    connection.query(queryString, (error, rows, fields) => {
+        if (!error) {
+            callback(rows);
+        } else {
+            return error;
+        }
+    });
+}
+
+module.exports.createBidEquipmentById = function (newBidEquipment, callback) {
+    const queryString = sqlString.format(`INSERT INTO BidEquipment SET ?`, [newBidEquipment]);
+    // const queryString = `INSERT INTO BidMaterial (materialID, bidID, quantity, perUnitCost) VALUES ((SELECT materialID FROM Material WHERE materialID=${newBidMaterial.materialID}), ${bidID}, ${newBidMaterial.quantity}, ${newBidMaterial.perUnitCost})`;
+    console.log(queryString);
+    connection.query(queryString, (error, rows, fields) => {
+        if (!error) {
+            callback(rows);
+        } else {
+            return error;
+        }
+    });
+}
+
+module.exports.deleteBidEquipment = function (id, callback) {
+    const queryString = `DELETE FROM BidEquipment WHERE bidEquipmentID=${id}`;
+    connection.query(queryString, (error, rows, fields) => {
+        if (!error) {
+            callback(rows);
+        } else {
+            return error;
+        }
+    });
+}
+
+module.exports.getBidEquipmentsById = function (id, callback) {
+    const queryString = `SELECT * FROM BidEquipment WHERE bidID=${id}`;
+    connection.query(queryString, (error, rows, fields) => {
+        if (!error) {
+            callback(rows);
+        } else {
+            return error;
+        }
+    });
+}
+
+module.exports.updateBidEquipment = function (updatedBidEquipment, callback) {
+    const queryString = sqlString.format(`UPDATE BidEquipment SET ? WHERE bidEquipmentID = ?`, [updatedBidEquipment, updatedBidEquipment.bidEquipmentID]);
+    connection.query(queryString, (error, rows, fields) => {
+        if (!error) {
+            callback(rows);
+        } else {
+            return error;
+        }
+    });
+}
+
 /********************************************************* Bid Files *************************************************************************/
 module.exports.uploadBidFile = function (newBidFile, callback) {
     const queryString = sqlString.format(`INSERT INTO BidFiles(fileName, bidID) VALUES(?, (SELECT Bid.bidID FROM Bid WHERE Bid.bidID = ?))`, [newBidFile.fileName, newBidFile.bidID]);

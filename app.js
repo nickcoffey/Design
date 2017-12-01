@@ -29,6 +29,7 @@ const bids = require('./routes/bids');
 const jobs = require('./routes/jobs');
 const materials = require('./routes/materials');
 const labors = require('./routes/labors');
+const equipments = require('./routes/equipments');
 
 // Port Number
 const port = process.env.PORT || 8080;
@@ -86,6 +87,7 @@ app.use('/api/bids', bids);
 app.use('/api/jobs', jobs);
 app.use('/api/materials', materials);
 app.use('/api/labors', labors);
+app.use('/api/equipments', equipments);
 
 // Index Route
 app.get('/', (request, response) => {

@@ -10,7 +10,7 @@
         <div class="panel-heading" style="cursor: pointer;" data-toggle="collapse" data-parent="#accordion" href="'#jobAccordion">
           <h3>Job Details</h3>
         </div>
-        <div id="jobAccordion" class="panel-body panel-collapse collapse in" style="word-break:break-all">
+        <div id="jobAccordion" class="panel-body panel-collapse collapse in" style="word-break:break-word">
           <h4 class="page-header" style="margin-top: 0">General</h4>
           <table class="table table-bordered">
             <thead>
@@ -72,6 +72,7 @@
                 </tbody>
                 <tfoot>
                   <tr class="active">
+                    <th>Grand Total</th>
                     <th>{{totalChangeTable | currency: 'USD':true}}</th>
                     <th></th>
                   </tr>
@@ -174,6 +175,7 @@
                 <thead>
                   <tr class="active">
                     <th>Material</th>
+                    <th>Date</th>
                     <th>Linear Feet</th>
                     <th class="hidden-xs hidden-sm">Price Per Unit</th>
                     <th class="hidden-xs hidden-sm">Coverage In Linear Feet</th>
@@ -184,6 +186,7 @@
                   <tr *ngFor="let jobMaterial of jobMaterials; let i = index" data-toggle="modal" (click)="onClickUpdateJobMaterial(jobMaterial.materialID, i)"
                     href='#update-material-modal'>
                     <td>{{jobMaterial.materialName}}</td>
+                    <td>{{jobMaterial.materialDate | date: 'MM/dd/yyyy'}}</td>
                     <td>{{jobMaterial.linearFeet}}</td>
                     <td class="hidden-xs hidden-sm">{{jobMaterial.pricePerUnit | currency: 'USD':true}}</td>
                     <td class="hidden-xs hidden-sm">{{jobMaterial.linearFeetCoverage}} ft</td>
@@ -193,6 +196,7 @@
                 <tfoot>
                   <tr class="active">
                     <th>Grand Total</th>
+                    <th></th>
                     <th>{{totalLinearFeetTable}}</th>
                     <th class="hidden-xs hidden-sm"></th>
                     <th class="hidden-xs hidden-sm"></th>
@@ -250,8 +254,10 @@
           </div>
           <button *ngIf="status == 'IN-PROGRESS'" class="btn btn-primary" data-toggle="modal" href='#finish-job-modal'>
             <span class="glyphicon glyphicon-check" aria-hidden="true"></span> Finish Job</button>
+          <div class="hidden-md hidden-lg" style="margin-bottom: 5px"></div>
           <button *ngIf="status == 'COMPLETED'" class="btn btn-warning" data-toggle="modal" href='#reopen-modal'>
             <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Re-open Job</button>
+          <div class="hidden-md hidden-lg" style="margin-bottom: 5px"></div>
           <button *ngIf="status == 'COMPLETED'" class="btn btn-danger" data-toggle="modal" href='#delete-job-modal'>
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete Job</button>
         </div>
@@ -261,7 +267,7 @@
         <div class="panel-heading" style="cursor: pointer;" data-toggle="collapse" data-parent="#accordion" href="'#bidAccordion">
           <h3>Bid Details</h3>
         </div>
-        <div id="bidAccordion" class="panel-body panel-collapse collapse" style="word-break:break-all">
+        <div id="bidAccordion" class="panel-body panel-collapse collapse" style="word-break:break-word">
           <h4 class="page-header" style="margin-top: 0">General</h4>
           <table class="table table-bordered">
             <thead>
@@ -284,6 +290,7 @@
             <thead>
               <tr class="active">
                 <th>Labor</th>
+                <th>Equipment</th>
                 <th>Materials</th>
                 <th>Total</th>
               </tr>
@@ -291,8 +298,9 @@
             <tbody>
               <tr>
                 <td>{{job[0].bidLabor | currency: 'USD':true}}</td>
+                <td>{{job[0].bidEquipment | currency: 'USD':true}}</td>
                 <td>{{job[0].bidMaterials | currency: 'USD':true}}</td>
-                <th>{{job[0].bidLabor + job[0].bidMaterials | currency: 'USD':true}}</th>
+                <th>{{job[0].bidLabor + job[0].bidMaterials + job[0].bidEquipment | currency: 'USD':true}}</th>
               </tr>
             </tbody>
           </table>
@@ -306,7 +314,7 @@
         <div class="panel-heading" style="cursor: pointer;" data-toggle="collapse" data-parent="#accordion" href="'#inquiryAccordion">
           <h3>Inquiry Details</h3>
         </div>
-        <div id="inquiryAccordion" class="panel-body panel-collapse collapse" style="word-break:break-all">
+        <div id="inquiryAccordion" class="panel-body panel-collapse collapse" style="word-break:break-word">
           <table class="table table-bordered">
             <thead>
               <tr class="active">
@@ -341,8 +349,8 @@
                 <th>Job Name</th>
                 <th>Site Address</th>
                 <th>Site City</th>
-                <th>Site State</th>
-                <th>Site ZIP</th>
+                <th class="hidden-xs hidden-sm">Site State</th>
+                <th class="hidden-xs hidden-sm">Site ZIP</th>
               </tr>
             </thead>
             <tbody>
@@ -350,8 +358,8 @@
                 <td>{{job[0].jobName}}</td>
                 <td>{{job[0].jobAddress}}</td>
                 <td>{{job[0].jobCity}}</td>
-                <td>{{job[0].jobState}}</td>
-                <td>{{job[0].jobZIP}}</td>
+                <td class="hidden-xs hidden-sm">{{job[0].jobState}}</td>
+                <td class="hidden-xs hidden-sm">{{job[0].jobZIP}}</td>
               </tr>
             </tbody>
           </table>
@@ -365,7 +373,7 @@
         <div class="panel-heading" style="cursor: pointer;" data-toggle="collapse" data-parent="#accordion" href="'#customerAccordion">
           <h3>Customer Details</h3>
         </div>
-        <div id="customerAccordion" class="panel-body panel-collapse collapse" style="word-break:break-all">
+        <div id="customerAccordion" class="panel-body panel-collapse collapse" style="word-break:break-word">
           <table class="table table-bordered">
             <thead>
               <tr class="active">

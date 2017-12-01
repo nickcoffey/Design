@@ -31,6 +31,7 @@ import { JobComponent } from './components/job/job.component';
 import { LaborComponent } from './components/labor/labor.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AlertComponent } from './components/alert/alert.component';
+import { EquipmentComponent } from './components/equipment/equipment.component';
 
 import { CustomerService } from './services/customer.service';
 import { InquiryService } from './services/inquiry.service';
@@ -38,6 +39,7 @@ import { BidService } from './services/bid.service';
 import { JobService } from './services/job.service';
 import { MaterialService } from './services/material.service';
 import { LaborService } from './services/labor.service';
+import { EquipmentService } from './services/equipment.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
 import { CookieService } from 'ngx-cookie-service';
@@ -56,7 +58,8 @@ const appRoutes: Routes = [
   { path: 'bids/:id', component: BidComponent, canActivate: [AuthGuard] },
   { path: 'inquiries/:id', component: InquiryComponent, canActivate: [AuthGuard] },
   { path: 'jobs/:id', component: JobComponent, canActivate: [AuthGuard] },
-  { path: 'labor', component: LaborComponent, canActivate: [AuthGuard] }
+  { path: 'labor', component: LaborComponent, canActivate: [AuthGuard] },
+  { path: 'equipment', component: EquipmentComponent, canActivate: [AuthGuard] }
   // ,{ path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] }
 ];
 
@@ -80,7 +83,8 @@ const appRoutes: Routes = [
     FileSelectDirective,
     LaborComponent,
     ProfileComponent,
-    AlertComponent
+    AlertComponent,
+    EquipmentComponent
   ],
   imports: [
     BrowserModule,
@@ -119,6 +123,7 @@ const appRoutes: Routes = [
     JobService,
     MaterialService,
     LaborService,
+    EquipmentService,
     AuthService,
     AuthGuard,
     CookieService,

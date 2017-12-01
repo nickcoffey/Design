@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { InquiryService } from '../../services/inquiry.service';
 import { MaterialService } from '../../services/material.service';
 import { LaborService } from '../../services/labor.service';
+import { EquipmentService } from '../../services/equipment.service';
 import { BidService } from '../../services/bid.service';
 import { AlertComponent } from '../alert/alert.component';
 import { AuthService } from '../../services/auth.service';
@@ -29,14 +30,23 @@ export class InquiryComponent implements OnInit {
   jobZIP: number = null;
   /** BID **/
   margin: number = 0;
-  /** LABOR **/
   bidPrice: number = 0;
+  /** LABOR **/
   labors: any;
   labor: any;
   selectedLabors: SelectedLabor[] = [];
   laborHours: number = 0;
   laborID: number = null;
   totalLaborPrice: number = 0;
+  /** EQUIPMENT **/
+  equipments: any;
+  equipment: any;
+  equipmentID: number = null;
+  equipmentNumOfIntervals: number = 0;
+  equipmentInterval: number = null;
+  equipmentIntervals: string[] = ['Day(s)','1 Week','2 Weeks','3 Weeks'];
+  selectedEquipments: SelectedEquipment[] = [];
+  totalEquipmentPrice: number = 0;
   /** MATERIALS **/
   materials: Material[];
   material: Material;
@@ -59,6 +69,7 @@ export class InquiryComponent implements OnInit {
     private materialService: MaterialService,
     private laborService: LaborService,
     private bidService: BidService,
+    private equipmentService: EquipmentService,
     private authService: AuthService,
     private alert: AlertComponent
   ) { }
@@ -69,6 +80,7 @@ export class InquiryComponent implements OnInit {
     this.getInquiry();
     this.getMaterials();
     this.getLabor();
+    this.getEquipment();
     this.getFiles();
   }
 
@@ -126,10 +138,10 @@ export class InquiryComponent implements OnInit {
 
   onClickUpdateSite() {
     this.jobName = this.inquiry[0].jobName,
-    this.jobAddress = this.inquiry[0].jobAddress,
-    this.jobCity = this.inquiry[0].jobCity,
-    this.jobState = this.inquiry[0].jobState,
-    this.jobZIP = this.inquiry[0].jobZIP
+      this.jobAddress = this.inquiry[0].jobAddress,
+      this.jobCity = this.inquiry[0].jobCity,
+      this.jobState = this.inquiry[0].jobState,
+      this.jobZIP = this.inquiry[0].jobZIP
   }
 
   onUpdateSite() {
@@ -213,13 +225,14 @@ export class InquiryComponent implements OnInit {
     };
     const newBid = {
       inquiryID: this.id,
-      bidPrice: (1 + (this.margin / 100)) * (this.totalMaterialPrice + this.totalLaborPrice)
+      bidPrice: (1 + (this.margin / 100)) * (this.totalMaterialPrice + this.totalLaborPrice + this.totalEquipmentPrice)
     };
 
     this.createBid(newBid);
     this.acceptInquiry(updatedInquiry);
     this.createMaterials();
     this.createLabor();
+    this.createEquipment();
     $('#create-bid-modal').modal('hide');
     this.onClear();
     this.router.navigate([`/bids`]);
@@ -280,6 +293,97 @@ export class InquiryComponent implements OnInit {
     // console.log(this.laborID);
   }
 
+    /************************************ EQUIPMENT *********************************/
+    getEquipment() {
+      this.equipmentService.getAllEquipments().subscribe((equipments) => {
+        this.equipments = equipments;
+      });
+    }
+  
+    createEquipment() {
+      console.log(this.selectedEquipments);
+      this.selectedEquipments.forEach((selectedEquipment) => {
+        this.bidService.createBidEquipment(selectedEquipment).subscribe((data) => {
+          if (data.success) {
+            console.log(data.msg);
+          } else {
+            console.log(data.msg);
+          }
+        });
+      });
+    }
+  
+    onAddEquipment() {
+      let selectedEquipment = {
+        equipmentID: this.equipments[this.equipmentID].equipmentID,
+        equipmentName: this.equipments[this.equipmentID].equipmentName,
+        intervals: this.equipmentNumOfIntervals,
+        pricePerDay: this.equipments[this.equipmentID].pricePerDay,
+        DaysSelected: this.equipments[this.equipmentID].DaysSelected,
+        pricePer1Week: this.equipments[this.equipmentID].pricePer1Week,
+        WeekSelected1: this.equipments[this.equipmentID].WeekSelected1,
+        pricePer2Week: this.equipments[this.equipmentID].pricePer2Week,
+        WeekSelected2: this.equipments[this.equipmentID].WeekSelected2,
+        pricePer3Week: this.equipments[this.equipmentID].pricePer3Week,
+        WeekSelected3: this.equipments[this.equipmentID].WeekSelected3
+      };
+      if(this.equipmentInterval == 0) {
+        this.totalEquipmentPrice += (selectedEquipment.pricePerDay * this.equipmentNumOfIntervals);
+        selectedEquipment.DaysSelected = 1;
+        selectedEquipment.WeekSelected1 = 0;
+        selectedEquipment.WeekSelected2 = 0;
+        selectedEquipment.WeekSelected3 = 0;
+      } else if(this.equipmentInterval == 1) {
+        this.totalEquipmentPrice += (selectedEquipment.pricePer1Week * this.equipmentNumOfIntervals);
+        selectedEquipment.WeekSelected1 = 1;
+        selectedEquipment.DaysSelected = 0;
+        selectedEquipment.WeekSelected2 = 0;
+        selectedEquipment.WeekSelected3 = 0;
+      } else if(this.equipmentInterval == 2) {
+        this.totalEquipmentPrice += (selectedEquipment.pricePer2Week * this.equipmentNumOfIntervals);
+        selectedEquipment.WeekSelected2 = 1;
+        selectedEquipment.DaysSelected = 0;
+        selectedEquipment.WeekSelected1 = 0;
+        selectedEquipment.WeekSelected3 = 0;
+      } else if(this.equipmentInterval == 3) {
+        this.totalEquipmentPrice += (selectedEquipment.pricePer3Week * this.equipmentNumOfIntervals);
+        selectedEquipment.WeekSelected3 = 1;
+        selectedEquipment.DaysSelected = 0;
+        selectedEquipment.WeekSelected1 = 0;
+        selectedEquipment.WeekSelected2 = 0;
+      }
+
+      this.selectedEquipments.push(selectedEquipment);
+      this.equipments.splice(this.equipmentID, 1);
+      this.equipment = null;
+      this.equipmentNumOfIntervals = 0;
+      console.log(this.selectedEquipments);
+    }
+  
+    onRemoveEquipment(equipment, id) {
+      if(equipment.DaysSelected == 1) {
+        this.totalEquipmentPrice -= (equipment.pricePerDay * equipment.intervals);
+      } else if(equipment.WeekSelected1 == 1) {
+        this.totalEquipmentPrice -= (equipment.pricePer1Week * equipment.intervals);
+      } else if(equipment.WeekSelected2 == 1) {
+        this.totalEquipmentPrice -= (equipment.pricePer2Week * equipment.intervals);
+      } else if(equipment.WeekSelected3 == 1) {
+        this.totalEquipmentPrice -= (equipment.pricePer3Week * equipment.intervals);
+      }
+      this.selectedEquipments.splice(id, 1);
+      this.equipments.push(equipment);
+    }
+  
+    onChangeEquipment(id) {
+      this.equipmentID = id;
+      // console.log(this.equipmentID);
+    }
+
+    onChangeInterval(interval) {
+      this.equipmentInterval = interval;
+      // console.log(this.equipmentInterval);
+    }
+
   /************************************ MATERIALS *********************************/
   getMaterials() {
     this.materialService.getAllMaterials().subscribe((materials) => {
@@ -333,67 +437,73 @@ export class InquiryComponent implements OnInit {
     this.selectedLabors.forEach((selectedLabor) => {
       this.labors.push(selectedLabor);
     });
+    this.selectedEquipments.forEach((selectedEquipment) => {
+      this.equipments.push(selectedEquipment);
+    });
     this.selectedLabors = [];
     this.totalLaborPrice = 0;
+    this.laborHours = 0;
+    this.selectedEquipments = [];
+    this.totalEquipmentPrice = 0;
+    this.equipmentNumOfIntervals = 0;
     this.selectedMaterials1 = [];
     this.totalMaterialPrice = 0;
-    this.laborHours = 0;
     this.margin = 0;
 
     //this.ngOnInit();
   }
 
-    /************************************************* FILE FUNCTIONS *********************************************************/
-    getFiles() {
-      this.inquiryService.getInquiryFilesByID(this.id).subscribe((files) => {
-        this.files = files;
-        // console.log(this.files);
-      });
+  /************************************************* FILE FUNCTIONS *********************************************************/
+  getFiles() {
+    this.inquiryService.getInquiryFilesByID(this.id).subscribe((files) => {
+      this.files = files;
+      // console.log(this.files);
+    });
+  }
+
+  setupFileUploader() {
+    this.url = `/api/inquiries/${this.id}/upload`;
+    // this.url = `http://localhost:3000/api/inquiries/${this.id}/upload`;
+    this.authService.loadToken();
+    let headers: any = [{ name: 'Authorization', value: this.authService.authToken }, { name: 'Content-Type', value: 'application/json' }];
+    this.uploader = new FileUploader({ url: this.url });
+    this.uploader.onAfterAddingFile = (file) => {
+      file.withCredentials = false;
+      //this.readyItems.push(file);
+      //console.log(file);
     }
-  
-    setupFileUploader() {
-      this.url = `/api/inquiries/${this.id}/upload`;
-      // this.url = `http://localhost:3000/api/inquiries/${this.id}/upload`;
-      this.authService.loadToken();
-      let headers: any = [{ name: 'Authorization', value: this.authService.authToken }, { name: 'Content-Type', value: 'application/json' }];
-      this.uploader = new FileUploader({ url: this.url });
-      this.uploader.onAfterAddingFile = (file) => {
-        file.withCredentials = false;
-        //this.readyItems.push(file);
-        //console.log(file);
+    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
+      this.ngOnInit();
+      $('#upload-modal').modal('hide');
+      if (JSON.parse(response).success == true) {
+        this.alert.displayAlert(JSON.parse(response).msg, 'success');
+      } else {
+        this.alert.displayAlert(JSON.parse(response).msg, 'warning');
       }
-      this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
-        this.ngOnInit();
-        $('#upload-modal').modal('hide');
-        if (JSON.parse(response).success == true) {
-          this.alert.displayAlert(JSON.parse(response).msg, 'success');
-        } else {
-          this.alert.displayAlert(JSON.parse(response).msg, 'warning');
-        }
-        this.uploader.clearQueue();
+      this.uploader.clearQueue();
+    }
+  }
+
+  onClickDeleteFile(file) {
+    this.file = file;
+    $('#delete-file-modal').modal('show');
+  }
+
+  onDeleteFile() {
+    let fileToRemove = {
+      key: this.file.fileName
+    };
+    this.inquiryService.deleteInquiryFile(this.file.fileID, fileToRemove).subscribe((data) => {
+      if (data.success) {
+        // console.log(data.msg);
+        this.getFiles();
+        $('#delete-file-modal').modal('hide');
+        this.alert.displayAlert(data.msg, 'success');
+      } else {
+        console.log(data.msg);
       }
-    }
-  
-    onClickDeleteFile(file) {
-      this.file = file;
-      $('#delete-file-modal').modal('show');
-    }
-  
-    onDeleteFile() {
-      let fileToRemove = {
-        key: this.file.fileName
-      };
-      this.inquiryService.deleteInquiryFile(this.file.fileID, fileToRemove).subscribe((data) => {
-        if (data.success) {
-          // console.log(data.msg);
-          this.getFiles();
-          $('#delete-file-modal').modal('hide');
-          this.alert.displayAlert(data.msg, 'success');
-        } else {
-          console.log(data.msg);
-        }
-      });
-    }
+    });
+  }
 }
 
 interface SelectedMaterial {
@@ -408,6 +518,19 @@ interface SelectedLabor {
   roleName: String,
   roleWage: number,
   laborHours: number
+}
+interface SelectedEquipment {
+  equipmentID: number,
+  equipmentName: String,
+  intervals: number,
+  pricePerDay: number,
+  DaysSelected: number,
+  pricePer1Week: number,
+  WeekSelected1: number,
+  pricePer2Week: number,
+  WeekSelected2: number,
+  pricePer3Week: number
+  WeekSelected3: number
 }
 interface Material {
   materialID: number,

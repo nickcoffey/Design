@@ -10,7 +10,7 @@
         <div class="panel-heading" style="cursor: pointer;" data-toggle="collapse" data-parent="#accordion" href="'#customerAccordion">
           <h3>Customer Details</h3>
         </div>
-        <div id="customerAccordion" class="panel-body panel-collapse collapse in" style="word-break:break-all">
+        <div id="customerAccordion" class="panel-body panel-collapse collapse in" style="word-break:break-word">
           <table class="table table-bordered">
             <thead>
               <tr class="active">
@@ -32,6 +32,7 @@
           <br>
           <button (click)="onClickUpdateCustomer()" class="btn btn-info" href="#update-customer-modal" data-toggle="modal">
             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Update Customer</button>
+          <div class="hidden-md hidden-lg" style="margin-bottom: 5px"></div>
           <button *ngIf="inquiries.length == 0" class="btn btn-danger" data-toggle="modal" href='#delete-customer-modal'>
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete Customer</button>
           <hr>
@@ -44,7 +45,7 @@
         <div class="panel-heading" style="cursor: pointer;" data-toggle="collapse" data-parent="#accordion" href="'#contactAccordion">
           <h3>Contact Details</h3>
         </div>
-        <div id="contactAccordion" class="panel-body panel-collapse collapse" style="word-break:break-all">
+        <div id="contactAccordion" class="panel-body panel-collapse collapse" style="word-break:break-word">
           <ng-container *ngIf="contacts.length > 0; else noContacts">
             <label>Click To Update Or Delete</label>
             <table class="table table-bordered table-hover">

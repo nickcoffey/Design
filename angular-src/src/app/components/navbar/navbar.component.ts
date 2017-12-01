@@ -27,8 +27,13 @@ export class NavbarComponent implements OnInit {
   onLogout(){
     this.authService.logout();
     // console.log('Logged out');
-    $("html, body").animate({ scrollTop: 0 }, "slow");
+    $('#navbar-ex1-collapse').collapse('hide');
+    // $("html, body").animate({ scrollTop: 0 }, "slow");
     this.alert.displayAlert('Logged out', 'success');
     this.router.navigate(['/']);
+  }
+
+  closeDropdown() {
+    $('#navbar-ex1-collapse').collapse('hide');
   }
 }
