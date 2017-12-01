@@ -3,6 +3,11 @@ Source Code for Allied Waterproofing Web App
 
 (CHANGES TO BE MADE)
 
+1. Adding job name to top of inquiry, bid, and job
+2. Adding job name to inquiries, bids, and jobs tables.
+3. Pulling in bid price price to bid form
+4. Allowing itemized list to be made for bid form
+
 1. Make equipment, bid equipment, and job equipment tables
 
 Equipment ID  | Equipment Name | Price Per Day | Price Per 1 Week | Price Per 2 Weeks | Price Per 3 Weeks
