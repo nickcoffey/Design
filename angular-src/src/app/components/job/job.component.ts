@@ -7,6 +7,7 @@ import { BidService } from '../../services/bid.service';
 import { LaborService } from '../../services/labor.service';
 import { FileUploader } from 'ng2-file-upload';
 import { AlertComponent } from '../alert/alert.component';
+import { EquipmentService } from '../../services/equipment.service';
 declare var $;
 
 @Component({
@@ -73,6 +74,28 @@ export class JobComponent implements OnInit {
   wage: number = 0;
   roleName: string = '';
   laborDate: string = '';
+  /** EQUIPMENT **/
+  equipments: any;
+  jobEquipments: any;
+  equipment: any;
+  equipmentIndex: number = null;
+  equipmentID: number = null;
+  equipmentName: string = '';
+  pricePerDay: number = 0;
+  intervalCost: number = 0;
+  DaysSelected: number = null;
+  pricePer1Week: number = null;
+  WeekSelected1: number = null;
+  pricePer2Week: number = null;
+  WeekSelected2: number = null;
+  pricePer3Week: number = null;
+  WeekSelected3: number = null;
+  equipmentNumOfIntervals: number = 0;
+  equipmentInterval: number = null;
+  equipmentIntervals: string[] = ['Day(s)', '1 Week', '2 Weeks', '3 Weeks'];
+  selectedEquipments: SelectedEquipment[] = [];
+  totalEquipmentPrice: number = 0;
+  totalEquipmentPriceTable: number = 0;
 
   constructor(
     private router: Router,
@@ -82,7 +105,8 @@ export class JobComponent implements OnInit {
     private bidService: BidService,
     private authService: AuthService,
     private laborService: LaborService,
-    private alert: AlertComponent
+    private alert: AlertComponent,
+    private equipmentService: EquipmentService
   ) { }
 
   ngOnInit() {
@@ -93,6 +117,7 @@ export class JobComponent implements OnInit {
     this.getRevenue();
     this.getLabor();
     this.getMaterials();
+    this.getJobEquipments();
     this.getFiles();
   }
 
@@ -236,7 +261,7 @@ export class JobComponent implements OnInit {
     this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
       this.ngOnInit();
       $('#upload-modal').modal('hide');
-      if(JSON.parse(response).success == true) {
+      if (JSON.parse(response).success == true) {
         this.alert.displayAlert(JSON.parse(response).msg, 'success');
       } else {
         this.alert.displayAlert(JSON.parse(response).msg, 'warning');
@@ -674,6 +699,258 @@ export class JobComponent implements OnInit {
       }
     });
   }
+
+    /**************************************************** Job Equipment **********************************************************************/
+    getJobEquipments() {
+      this.totalEquipmentPriceTable = 0;
+      this.equipments = [];
+      this.jobService.getJobEquipmentsById(this.id).subscribe((jobEquipments) => {
+        this.jobEquipments = jobEquipments;
+        this.jobEquipments.forEach((jobEquipment) => {
+          if (jobEquipment.DaysSelected == 1) {
+            this.totalEquipmentPriceTable += (jobEquipment.pricePerDay * jobEquipment.intervals);
+          } else if (jobEquipment.WeekSelected1 == 1) {
+            this.totalEquipmentPriceTable += (jobEquipment.pricePer1Week * jobEquipment.intervals);
+          } else if (jobEquipment.WeekSelected2 == 1) {
+            this.totalEquipmentPriceTable += (jobEquipment.pricePer2Week * jobEquipment.intervals);
+          } else if (jobEquipment.WeekSelected3 == 1) {
+            this.totalEquipmentPriceTable += (jobEquipment.pricePer3Week * jobEquipment.intervals);
+          }
+        });
+  
+        this.equipmentService.getAllEquipments().subscribe((equipments) => {
+          this.equipments = equipments;
+          let equipmentIndex = null;
+          // this.jobEquipments.forEach(jobEquipment => {
+          //   this.equipments.forEach((equipment, i) => {
+          //     if (equipment.equipmentID == jobEquipment.equipmentID) {
+          //       // this.totalLaborPriceTable += (jobLabor.roleWage * jobLabor.laborHours);
+          //       this.equipments.splice(i, 1);
+          //     }
+          //   })
+          // });
+        });
+       });
+    }
+  
+    onClickUpdateJobEquipment(equipmentIndex) {
+      this.equipmentIndex = equipmentIndex;
+      this.equipmentName = this.jobEquipments[equipmentIndex].equipmentName;
+      this.equipmentNumOfIntervals = this.jobEquipments[equipmentIndex].intervals;
+      this.pricePerDay = this.jobEquipments[equipmentIndex].pricePerDay;
+      this.DaysSelected = this.jobEquipments[equipmentIndex].DaysSelected;
+      this.pricePer1Week = this.jobEquipments[equipmentIndex].pricePer1Week;
+      this.WeekSelected1 = this.jobEquipments[equipmentIndex].WeekSelected1;
+      this.pricePer2Week = this.jobEquipments[equipmentIndex].pricePer2Week;
+      this.WeekSelected2 = this.jobEquipments[equipmentIndex].WeekSelected2;
+      this.pricePer3Week = this.jobEquipments[equipmentIndex].pricePer3Week;
+      this.WeekSelected3 = this.jobEquipments[equipmentIndex].WeekSelected3;
+      console.log(this.DaysSelected);
+      if (this.DaysSelected == 1) {
+        (<HTMLSelectElement>document.getElementById('updateEquipmentInterval')).selectedIndex = 0;
+        this.intervalCost = this.jobEquipments[equipmentIndex].pricePerDay;
+      } else if (this.WeekSelected1 == 1) {
+        (<HTMLSelectElement>document.getElementById('updateEquipmentInterval')).selectedIndex = 1;
+        this.intervalCost = this.jobEquipments[equipmentIndex].pricePer1Week;
+      } else if (this.WeekSelected2 == 1) {
+        (<HTMLSelectElement>document.getElementById('updateEquipmentInterval')).selectedIndex = 2;
+        this.intervalCost = this.jobEquipments[equipmentIndex].pricePer2Week;
+      } else if (this.WeekSelected3 == 1) {
+        (<HTMLSelectElement>document.getElementById('updateEquipmentInterval')).selectedIndex = 3;
+        this.intervalCost = this.jobEquipments[equipmentIndex].pricePer3Week;
+      }
+    }
+  
+    onUpdateJobEquipment() {
+      if ((<HTMLSelectElement>document.getElementById('updateEquipmentInterval')).selectedIndex == 0) {
+        this.DaysSelected = 1;
+        this.pricePerDay = this.intervalCost;
+        this.WeekSelected1 = 0;
+        this.pricePer1Week = this.jobEquipments[this.equipmentIndex].pricePer1Week;
+        this.WeekSelected2 = 0;
+        this.pricePer2Week = this.jobEquipments[this.equipmentIndex].pricePer2Week;
+        this.WeekSelected3 = 0;
+        this.pricePer3Week = this.jobEquipments[this.equipmentIndex].pricePer3Week;
+      } else if ((<HTMLSelectElement>document.getElementById('updateEquipmentInterval')).selectedIndex == 1) {
+        this.DaysSelected = 0;
+        this.pricePerDay = this.jobEquipments[this.equipmentIndex].pricePerDay;
+        this.WeekSelected1 = 1;
+        this.pricePer1Week = this.intervalCost;
+        this.WeekSelected2 = 0;
+        this.pricePer2Week = this.jobEquipments[this.equipmentIndex].pricePer2Week;
+        this.WeekSelected3 = 0;
+        this.pricePer3Week = this.jobEquipments[this.equipmentIndex].pricePer3Week;
+      } else if ((<HTMLSelectElement>document.getElementById('updateEquipmentInterval')).selectedIndex == 2) {
+        this.DaysSelected = 0;
+        this.pricePerDay = this.jobEquipments[this.equipmentIndex].pricePerDay;
+        this.WeekSelected1 = 0;
+        this.pricePer1Week = this.jobEquipments[this.equipmentIndex].pricePer1Week;
+        this.WeekSelected2 = 1;
+        this.pricePer2Week = this.intervalCost;
+        this.WeekSelected3 = 0;
+        this.pricePer3Week = this.jobEquipments[this.equipmentIndex].pricePer3Week;
+      } else if ((<HTMLSelectElement>document.getElementById('updateEquipmentInterval')).selectedIndex == 3) {
+        this.DaysSelected = 0;
+        this.pricePerDay = this.jobEquipments[this.equipmentIndex].pricePerDay;
+        this.WeekSelected1 = 0;
+        this.pricePer1Week = this.jobEquipments[this.equipmentIndex].pricePer1Week;
+        this.WeekSelected2 = 0;
+        this.pricePer2Week = this.jobEquipments[this.equipmentIndex].pricePer2Week;
+        this.WeekSelected3 = 1;
+        this.pricePer3Week = this.intervalCost;
+      }
+      let updatedJobEquipment = {
+        jobEquipmentID: this.jobEquipments[this.equipmentIndex].jobEquipmentID,
+        equipmentName: this.equipmentName,
+        equipmentID: this.jobEquipments[this.equipmentIndex].equipmentID,
+        intervals: this.equipmentNumOfIntervals,
+        pricePerDay: this.pricePerDay,
+        DaysSelected: this.DaysSelected,
+        pricePer1Week: this.pricePer1Week,
+        WeekSelected1: this.WeekSelected1,
+        pricePer2Week: this.pricePer2Week,
+        WeekSelected2: this.WeekSelected2,
+        pricePer3Week: this.pricePer3Week,
+        WeekSelected3: this.WeekSelected3
+      };
+      // console.log(updatedJobEquipment);
+      this.jobService.updateJobEquipment(updatedJobEquipment).subscribe((data) => {
+        if (data.success) {
+          // console.log(data.msg);
+          this.onClearJobEquipment();
+          this.getJobEquipments();
+          $('#update-equipment-modal').modal('hide');
+          this.alert.displayAlert('Equipment updated', 'success');
+        } else {
+          console.log(data.msg);
+        }
+      });
+    }
+  
+    onDeleteJobEquipment() {
+      this.jobService.deleteJobEquipment(this.jobEquipments[this.equipmentIndex].jobEquipmentID).subscribe((data) => {
+        if (data.success) {
+          console.log(data.msg);
+          this.getJobEquipments();
+          $('#update-equipment-modal').modal('hide');
+          this.alert.displayAlert('Equipment deleted', 'success');
+        } else {
+          console.log(data.msg);
+        }
+      });
+    }
+  
+    onClearJobEquipment() {
+      this.selectedEquipments.forEach((selectedEquipment) => {
+        this.equipments.push(selectedEquipment);
+      });
+      this.selectedEquipments = [];
+      this.totalEquipmentPrice = 0;
+      this.equipmentNumOfIntervals = 0;
+    }
+  
+    onCreateJobEquipment() {
+      this.selectedEquipments.forEach((selectedEquipment) => {
+        this.jobService.createJobEquipmentById(this.id, selectedEquipment).subscribe((data) => {
+          if (data.success) {
+            console.log(data.msg);
+          } else {
+            console.log(data.msg);
+          }
+        });
+      });
+  
+      this.getJobEquipments();
+      this.onClearJobEquipment();
+      $('#create-equipment-modal').modal('hide');
+      this.alert.displayAlert('Equipment added', 'success');
+    }
+  
+    onAddEquipment() {
+      let selectedEquipment = {
+        equipmentID: this.equipments[this.equipmentID].equipmentID,
+        equipmentName: this.equipments[this.equipmentID].equipmentName,
+        intervals: this.equipmentNumOfIntervals,
+        pricePerDay: this.equipments[this.equipmentID].pricePerDay,
+        DaysSelected: this.equipments[this.equipmentID].DaysSelected,
+        pricePer1Week: this.equipments[this.equipmentID].pricePer1Week,
+        WeekSelected1: this.equipments[this.equipmentID].WeekSelected1,
+        pricePer2Week: this.equipments[this.equipmentID].pricePer2Week,
+        WeekSelected2: this.equipments[this.equipmentID].WeekSelected2,
+        pricePer3Week: this.equipments[this.equipmentID].pricePer3Week,
+        WeekSelected3: this.equipments[this.equipmentID].WeekSelected3
+      };
+      if (this.equipmentInterval == 0) {
+        this.totalEquipmentPrice += (selectedEquipment.pricePerDay * this.equipmentNumOfIntervals);
+        selectedEquipment.DaysSelected = 1;
+        selectedEquipment.WeekSelected1 = 0;
+        selectedEquipment.WeekSelected2 = 0;
+        selectedEquipment.WeekSelected3 = 0;
+      } else if (this.equipmentInterval == 1) {
+        this.totalEquipmentPrice += (selectedEquipment.pricePer1Week * this.equipmentNumOfIntervals);
+        selectedEquipment.WeekSelected1 = 1;
+        selectedEquipment.DaysSelected = 0;
+        selectedEquipment.WeekSelected2 = 0;
+        selectedEquipment.WeekSelected3 = 0;
+      } else if (this.equipmentInterval == 2) {
+        this.totalEquipmentPrice += (selectedEquipment.pricePer2Week * this.equipmentNumOfIntervals);
+        selectedEquipment.WeekSelected2 = 1;
+        selectedEquipment.DaysSelected = 0;
+        selectedEquipment.WeekSelected1 = 0;
+        selectedEquipment.WeekSelected3 = 0;
+      } else if (this.equipmentInterval == 3) {
+        this.totalEquipmentPrice += (selectedEquipment.pricePer3Week * this.equipmentNumOfIntervals);
+        selectedEquipment.WeekSelected3 = 1;
+        selectedEquipment.DaysSelected = 0;
+        selectedEquipment.WeekSelected1 = 0;
+        selectedEquipment.WeekSelected2 = 0;
+      }
+  
+      this.selectedEquipments.push(selectedEquipment);
+      this.equipments.splice(this.equipmentID, 1);
+      this.equipment = null;
+      this.equipmentNumOfIntervals = 0;
+      console.log(this.selectedEquipments);
+    }
+  
+    onRemoveEquipment(equipment, id) {
+      if (equipment.DaysSelected == 1) {
+        this.totalEquipmentPrice -= (equipment.pricePerDay * equipment.intervals);
+      } else if (equipment.WeekSelected1 == 1) {
+        this.totalEquipmentPrice -= (equipment.pricePer1Week * equipment.intervals);
+      } else if (equipment.WeekSelected2 == 1) {
+        this.totalEquipmentPrice -= (equipment.pricePer2Week * equipment.intervals);
+      } else if (equipment.WeekSelected3 == 1) {
+        this.totalEquipmentPrice -= (equipment.pricePer3Week * equipment.intervals);
+      }
+      this.selectedEquipments.splice(id, 1);
+      this.equipments.push(equipment);
+    }
+  
+    onChangeEquipment(id) {
+      this.equipmentID = id;
+      // console.log(this.equipmentID);
+    }
+  
+    onClearEquipmentUpdate() {
+      this.equipmentName = '';
+      this.intervalCost = null;
+      this.equipmentNumOfIntervals = null;
+    }
+  
+    onChangeInterval(interval) {
+      this.equipmentInterval = interval;
+      // console.log(this.equipmentInterval);
+      if (interval == 0) {
+        this.intervalCost = this.jobEquipments[this.equipmentIndex].pricePerDay;
+      } else if (interval == 1) {
+        this.intervalCost = this.jobEquipments[this.equipmentIndex].pricePer1Week;
+      } else if (interval == 2) {
+        this.intervalCost = this.jobEquipments[this.equipmentIndex].pricePer2Week;
+      } else if (interval == 3) {
+        this.intervalCost = this.jobEquipments[this.equipmentIndex].pricePer3Week;
+      }
+    }
 }
 
 interface SelectedMaterial {
@@ -688,6 +965,19 @@ interface SelectedLabor {
   roleName: String,
   roleWage: number,
   laborHours: number
+}
+interface SelectedEquipment {
+  equipmentID: number,
+  equipmentName: String,
+  intervals: number,
+  pricePerDay: number,
+  DaysSelected: number,
+  pricePer1Week: number,
+  WeekSelected1: number,
+  pricePer2Week: number,
+  WeekSelected2: number,
+  pricePer3Week: number
+  WeekSelected3: number
 }
 
 /************************************************* UNUSED CODE *********************************************************/

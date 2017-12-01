@@ -285,6 +285,63 @@ module.exports.getJobLaborsById = function (id, callback) {
     });
 }
 
+/********************************************************* Job Equipment *************************************************************************/
+module.exports.createJobEquipment = function (newJobEquipment, callback) {
+    const queryString = sqlString.format(`INSERT INTO JobEquipment SET ?, jobID=(SELECT MAX(jobID) FROM Job, equipmentDate=NOW())`, newJobEquipment);
+    connection.query(queryString, (error, rows, fields) => {
+        if (!error) {
+            callback(rows);
+        } else {
+            return error;
+        }
+    });
+}
+
+module.exports.createJobEquipmentById = function (newJobEquipment, callback) {
+    const queryString = sqlString.format(`INSERT INTO JobEquipment SET ?, equipmentDate=NOW()`, [newJobEquipment]);
+    // const queryString = `INSERT INTO JobMaterial (materialID, jobID, quantity, perUnitCost) VALUES ((SELECT materialID FROM Material WHERE materialID=${newJobMaterial.materialID}), ${jobID}, ${newJobMaterial.quantity}, ${newJobMaterial.perUnitCost})`;
+    console.log(queryString);
+    connection.query(queryString, (error, rows, fields) => {
+        if (!error) {
+            callback(rows);
+        } else {
+            return error;
+        }
+    });
+}
+
+module.exports.deleteJobEquipment = function (id, callback) {
+    const queryString = `DELETE FROM JobEquipment WHERE jobEquipmentID=${id}`;
+    connection.query(queryString, (error, rows, fields) => {
+        if (!error) {
+            callback(rows);
+        } else {
+            return error;
+        }
+    });
+}
+
+module.exports.getJobEquipmentsById = function (id, callback) {
+    const queryString = `SELECT * FROM JobEquipment WHERE jobID=${id}`;
+    connection.query(queryString, (error, rows, fields) => {
+        if (!error) {
+            callback(rows);
+        } else {
+            return error;
+        }
+    });
+}
+
+module.exports.updateJobEquipment = function (updatedJobEquipment, callback) {
+    const queryString = sqlString.format(`UPDATE JobEquipment SET ? WHERE jobEquipmentID = ?`, [updatedJobEquipment, updatedJobEquipment.jobEquipmentID]);
+    connection.query(queryString, (error, rows, fields) => {
+        if (!error) {
+            callback(rows);
+        } else {
+            return error;
+        }
+    });
+}
 
 /********************************************************* Job Files *************************************************************************/
 module.exports.uploadJobFile = function (newJobFile, callback) {

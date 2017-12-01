@@ -554,6 +554,166 @@ router.get('/:id/job-labors', passport.authenticate('jwt', { session: false }), 
     });
 });
 
+/********************************************************* Job Equipment *************************************************************************/
+
+// Create job equipment
+router.post('/new/job-equipment', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    let newJobEquipment = {
+        equipmentID: request.body.equipmentID,
+        equipmentName: request.body.equipmentName,
+        intervals: request.body.intervals,
+        pricePerDay: request.body.pricePerDay,
+        DaysSelected: request.body.DaysSelected,
+        pricePer1Week: request.body.pricePer1Week,
+        WeekSelected1: request.body.WeekSelected1,
+        pricePer2Week: request.body.pricePer2Week,
+        WeekSelected2: request.body.WeekSelected2,
+        pricePer3Week: request.body.pricePer3Week,
+        WeekSelected3: request.body.WeekSelected3
+    };
+    console.log(newJobEquipment);
+
+    job.createJobEquipment(newJobEquipment, (message) => {
+        if (message.message == "") {
+            response.json({
+                success: true,
+                msg: 'Job equipment created'
+            });
+        } else {
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
+// Create job equipment by ID
+router.post('/:id/new/job-equipment', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    let newJobEquipment = {
+        jobID: request.params.id,
+        equipmentID: request.body.equipmentID,
+        equipmentName: request.body.equipmentName,
+        intervals: request.body.intervals,
+        pricePerDay: request.body.pricePerDay,
+        DaysSelected: request.body.DaysSelected,
+        pricePer1Week: request.body.pricePer1Week,
+        WeekSelected1: request.body.WeekSelected1,
+        pricePer2Week: request.body.pricePer2Week,
+        WeekSelected2: request.body.WeekSelected2,
+        pricePer3Week: request.body.pricePer3Week,
+        WeekSelected3: request.body.WeekSelected3
+    };
+
+    job.createJobEquipmentById(newJobEquipment, (message) => {
+        if (message.message == "") {
+            response.json({
+                success: true,
+                msg: 'Job equipment created'
+            });
+        } else {
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
+// Delete job equipment
+router.post('/delete/job-equipment/:id', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    let jobEquipmentID = request.params.id;
+
+    job.deleteJobEquipment(jobEquipmentID, (message) => {
+        if (message.message == "") {
+            response.json({
+                success: true,
+                msg: 'Job equipment deleted'
+            });
+        } else {
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
+// Get job equipments by id
+router.get('/:id/job-equipments', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    const id = request.params.id;
+    job.getJobEquipmentsById(id, (jobEquipments) => {
+        if (!jobEquipments) {
+            return err;
+        } else {
+            return response.json(jobEquipments);
+        }
+    });
+});
+
+// Update Job Equipment
+router.post('/update/job-equipment', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    let updatedJobEquipment = {
+        jobEquipmentID: request.body.jobEquipmentID,
+        equipmentID: request.body.equipmentID,
+        equipmentName: request.body.equipmentName,
+        intervals: request.body.intervals,
+        pricePerDay: request.body.pricePerDay,
+        DaysSelected: request.body.DaysSelected,
+        pricePer1Week: request.body.pricePer1Week,
+        WeekSelected1: request.body.WeekSelected1,
+        pricePer2Week: request.body.pricePer2Week,
+        WeekSelected2: request.body.WeekSelected2,
+        pricePer3Week: request.body.pricePer3Week,
+        WeekSelected3: request.body.WeekSelected3
+    };
+    // console.log(updatedJobEquipment);
+    // if (updatedJobEquipment.equipmentName == null || updatedJobEquipment.equipmentName == undefined || updatedJobEquipment.equipmentName == "") {
+    //     delete updatedJobEquipment.equipmentName;
+    // }
+    // if (updatedJobEquipment.intervals == null || updatedJobEquipment.intervals == undefined || updatedJobEquipment.intervals == "") {
+    //     delete updatedJobEquipment.intervals;
+    // }
+    // if (updatedJobEquipment.pricePerDay == null || updatedJobEquipment.pricePerDay == undefined || updatedJobEquipment.pricePerDay == "") {
+    //     delete updatedJobEquipment.pricePerDay;
+    // }
+    // if (updatedJobEquipment.DaysSelected == null || updatedJobEquipment.DaysSelected == undefined || updatedJobEquipment.DaysSelected == "") {
+    //     delete updatedJobEquipment.DaysSelected;
+    // }
+    // if (updatedJobEquipment.pricePer1Week == null || updatedJobEquipment.pricePer1Week == undefined || updatedJobEquipment.pricePer1Week == "") {
+    //     delete updatedJobEquipment.pricePer1Week;
+    // }
+    // if (updatedJobEquipment.WeekSelected1 == null || updatedJobEquipment.WeekSelected1 == undefined || updatedJobEquipment.WeekSelected1 == "") {
+    //     delete updatedJobEquipment.WeekSelected1;
+    // }
+    // if (updatedJobEquipment.pricePer2Week == null || updatedJobEquipment.pricePer2Week == undefined || updatedJobEquipment.pricePer2Week == "") {
+    //     delete updatedJobEquipment.pricePer2Week;
+    // }
+    // if (updatedJobEquipment.WeekSelected2 == null || updatedJobEquipment.WeekSelected2 == undefined || updatedJobEquipment.WeekSelected2 == "") {
+    //     delete updatedJobEquipment.WeekSelected2;
+    // }
+    // if (updatedJobEquipment.pricePer3Week == null || updatedJobEquipment.pricePer3Week == undefined || updatedJobEquipment.pricePer3Week == "") {
+    //     delete updatedJobEquipment.pricePer3Week;
+    // }
+    // if (updatedJobEquipment.WeekSelected3 == null || updatedJobEquipment.WeekSelected3 == undefined || updatedJobEquipment.WeekSelected3 == "") {
+    //     delete updatedJobEquipment.WeekSelected3;
+    // }
+
+    job.updateJobEquipment(updatedJobEquipment, (message) => {
+        if (message.warningCount == 0) {
+            response.json({
+                success: true,
+                msg: 'Job equipment updated'
+            });
+        } else {
+            response.json({
+                success: false,
+                msg: message.message
+            });
+        }
+    });
+});
+
 /********************************************************* Job Files *************************************************************************/
 
 // Delete job file
