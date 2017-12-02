@@ -12,6 +12,7 @@
         <tr class="active">
           <th class="hidden-xs hidden-sm">ID</th>
           <th>Customer</th>
+          <th>Job Name</th>
           <th>Status</th>
           <th>Created Date</th>
           <th class="hidden-xs hidden-sm">Completion Date</th>
@@ -21,6 +22,7 @@
         <tr *ngFor="let job of jobs;" id="{{job.jobID}}" [routerLink]="['/jobs/'+job.jobID]" [ngClass]="{'info': job.jobStatus=='IN-PROGRESS','success': job.jobStatus=='COMPLETED'}">
           <td class="hidden-xs hidden-sm">{{job.jobID}}</td>
           <td>{{job.customerName}}</td>
+          <td>{{job.jobName}}</td>
           <td>{{job.jobStatus}}</td>
           <td>{{job.createdDate | date: 'MM/dd/yyyy'}}</td>
           <td *ngIf="job.jobStatus != 'IN-PROGRESS'" class="hidden-xs hidden-sm">{{job.endDate | date: 'MM/dd/yyyy'}}</td>

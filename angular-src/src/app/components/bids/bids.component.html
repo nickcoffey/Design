@@ -12,6 +12,7 @@
         <tr class="active">
           <th class="hidden-xs hidden-sm">ID</th>
           <th>Customer</th>
+          <th>Job Name</th>
           <th>Status</th>
           <!-- <th>Price</th> -->
           <th>Created Date</th>
@@ -22,6 +23,7 @@
         <tr *ngFor="let bid of bids;" id="{{bid.bidID}}" [routerLink]="['/bids/'+bid.bidID]" [ngClass]="{'info': bid.bidStatus=='PENDING','danger': bid.bidStatus=='DECLINED','success': bid.bidStatus=='ACCEPTED'}">
           <td class="hidden-xs hidden-sm">{{bid.bidID}}</td>
           <td>{{bid.customerName}}</td>
+          <td>{{bid.jobName}}</td>
           <td>{{bid.bidStatus}}</td>
           <!-- <td>{{bid.bidPrice | currency: 'USD':true}}</td> -->
           <td>{{bid.createdDate | date: 'MM/dd/yyyy'}}</td>

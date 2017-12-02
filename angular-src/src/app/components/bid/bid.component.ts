@@ -26,6 +26,7 @@ export class BidComponent implements OnInit {
   id: number = null;
   bid: any;
   bidPrice: number = null;
+  margin: number = null;
   bidStatus: string = '';
   createdDate: string = '';
   endDate: string = '';
@@ -223,13 +224,17 @@ export class BidComponent implements OnInit {
   }
 
   onClickUpdateBid() {
-    this.bidPrice = Math.round(this.bid[0].bidPrice);
+    this.bidPrice = this.bid[0].bidPrice;
+    this.margin = this.bid[0].margin;
+    // this.bidPrice = Math.round((this.totalEquipmentPriceTable + this.totalLaborPriceTable + this.totalMaterialPriceTable) * ((1 + this.margin / 100)));
+    // this.margin = Math.round((((this.totalEquipmentPriceTable + this.totalLaborPriceTable + this.totalMaterialPriceTable) / this.bidPrice) * 100));
   }
 
   onUpdate() {
     let updatedBid = {
       bidID: this.id,
       bidPrice: this.bidPrice,
+      margin: this.margin,
       bidStatus: this.bidStatus,
       createdDate: this.createdDate,
       endDate: this.endDate
@@ -982,6 +987,11 @@ export class BidComponent implements OnInit {
           style: 'paragraph',
           alignment: 'left',
           bold: true
+        },
+        {
+          text: [{text: 'Price: '},{text: `$${Math.round(this.bid[0].bidPrice)}`, bold: false}],
+          style: 'subheader',
+          alignment: 'center'
         }
       ],
       footer: function (currentPage, pageCount) {
