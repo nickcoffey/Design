@@ -13,7 +13,7 @@
           <th class="hidden-xs hidden-sm">ID</th>
           <th>Customer</th>
           <th>Job Name</th>
-          <th>Status</th>
+          <th class="hidden-xs hidden-sm">Status</th>
           <!-- <th>Price</th> -->
           <th>Created Date</th>
           <th class="hidden-xs hidden-sm">Accepted/Declined Date</th>
@@ -24,7 +24,7 @@
           <td class="hidden-xs hidden-sm">{{bid.bidID}}</td>
           <td>{{bid.customerName}}</td>
           <td>{{bid.jobName}}</td>
-          <td>{{bid.bidStatus}}</td>
+          <td class="hidden-xs hidden-sm">{{bid.bidStatus}}</td>
           <!-- <td>{{bid.bidPrice | currency: 'USD':true}}</td> -->
           <td>{{bid.createdDate | date: 'MM/dd/yyyy'}}</td>
           <td *ngIf="bid.bidStatus != 'PENDING'" class="hidden-xs hidden-sm">{{bid.endDate | date: 'MM/dd/yyyy'}}</td>

@@ -22,6 +22,7 @@
               <tr class="active">
                 <th>Charged Price</th>
                 <th>Profit Margin</th>
+                <!-- <th>Total Costs</th> -->
                 <th>Created Date</th>
                 <th *ngIf="bid[0].bidStatus == 'ACCEPTED'">Accepted Date</th>
                 <th *ngIf="bid[0].bidStatus == 'DECLINED'">Declined Date</th>
@@ -30,7 +31,8 @@
             <tbody>
               <tr>
                 <td>{{bid[0].bidPrice | currency: 'USD':true}}</td>
-                <td>{{bid[0].margin}}%</td>
+                <td>{{((bid[0].bidPrice / (totalEquipmentPriceTable + totalLaborPriceTable + totalMaterialPriceTable) - 1)) | percent:'.2-2'}}</td>
+                <!-- <td>{{(totalEquipmentPriceTable + totalLaborPriceTable + totalMaterialPriceTable) | currency: 'USD':true}}</td> -->
                 <td>{{bid[0].createdDate | date: 'MM/dd/yyyy'}}</td>
                 <td *ngIf="bid[0].bidStatus == 'ACCEPTED'">{{bid[0].endDate | date: 'MM/dd/yyyy'}}</td>
                 <td *ngIf="bid[0].bidStatus == 'DECLINED'">{{bid[0].endDate | date: 'MM/dd/yyyy'}}</td>
@@ -472,7 +474,7 @@
               </div>
             </div>
           </div>
-          <label>Margin</label>
+          <!-- <label>Margin</label>
           <div class="form-group">
             <input required mask="000" #bidMargin="ngModel" type="number" [(ngModel)]="margin" name="margin" placeholder="Bid Margin"
               class="form-control">
@@ -481,7 +483,7 @@
                 *Margin is required
               </div>
             </div>
-          </div>
+          </div> -->
           <button [disabled]="f.invalid" type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
           <button type="button" (click)="onClear()" class="btn btn-warning" (click)="onClear()">

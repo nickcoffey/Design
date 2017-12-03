@@ -224,10 +224,10 @@ export class BidComponent implements OnInit {
   }
 
   onClickUpdateBid() {
-    this.bidPrice = this.bid[0].bidPrice;
-    this.margin = this.bid[0].margin;
-    // this.bidPrice = Math.round((this.totalEquipmentPriceTable + this.totalLaborPriceTable + this.totalMaterialPriceTable) * ((1 + this.margin / 100)));
+    this.bidPrice = (this.bid[0].bidPrice).toFixed(2);
+    // this.margin = this.bid[0].margin;
     // this.margin = Math.round((((this.totalEquipmentPriceTable + this.totalLaborPriceTable + this.totalMaterialPriceTable) / this.bidPrice) * 100));
+    // this.bidPrice = Math.round((this.totalEquipmentPriceTable + this.totalLaborPriceTable + this.totalMaterialPriceTable) * ((1 + this.margin / 100)));
   }
 
   onUpdate() {
@@ -247,6 +247,27 @@ export class BidComponent implements OnInit {
         this.getBid();
         $('#update-bid-modal').modal('hide');
         this.alert.displayAlert('Price updated', 'success');
+      } else {
+        console.log(data.msg);
+      }
+    });
+  }
+
+  onUpdatePrice(newPrice) {
+    console.log(newPrice);
+    let updatedBid = {
+      bidID: this.id,
+      bidPrice: newPrice,
+      bidStatus: null,
+      createdDate: null,
+      endDate: null
+    }
+
+    this.bidService.updateBid(updatedBid).subscribe((data) => {
+      if (data.success) {
+        // console.log(data.msg);
+        this.onClear();
+        this.getBid();
       } else {
         console.log(data.msg);
       }
@@ -723,6 +744,8 @@ export class BidComponent implements OnInit {
     });
 
     this.getBidLabors();
+    // this.onUpdatePrice();
+    this.getBid();
     this.onClearBidLabor();
     $('#create-labor-modal').modal('hide');
     this.alert.displayAlert('Labor added', 'success');
@@ -989,7 +1012,7 @@ export class BidComponent implements OnInit {
           bold: true
         },
         {
-          text: [{text: 'Price: '},{text: `$${Math.round(this.bid[0].bidPrice)}`, bold: false}],
+          text: [{ text: 'Price: ' }, { text: `$${Math.round(this.bid[0].bidPrice)}`, bold: false }],
           style: 'subheader',
           alignment: 'center'
         }

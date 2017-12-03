@@ -13,7 +13,7 @@
           <th class="hidden-xs hidden-sm">ID</th>
           <th>Customer</th>
           <th>Job Name</th>
-          <th>Status</th>
+          <th class="hidden-xs hidden-sm">Status</th>
           <th>Received Date</th>
           <th class="hidden-xs hidden-sm">Accepted/Declined Date</th>
         </tr>
@@ -24,7 +24,7 @@
           <td class="hidden-xs hidden-sm">{{inquiry.inquiryID}}</td>
           <td>{{inquiry.customerName}}</td>
           <td>{{inquiry.jobName}}</td>
-          <td>{{inquiry.inquiryStatus}}</td>
+          <td class="hidden-xs hidden-sm">{{inquiry.inquiryStatus}}</td>
           <td>{{inquiry.receivedDate | date: 'MM/dd/yyyy'}}</td>
           <td *ngIf="inquiry.inquiryStatus != 'PENDING'" class="hidden-xs hidden-sm">{{inquiry.endDate | date: 'MM/dd/yyyy'}}</td>
           <td *ngIf="inquiry.inquiryStatus == 'PENDING'" class="hidden-xs hidden-sm">N/A</td>

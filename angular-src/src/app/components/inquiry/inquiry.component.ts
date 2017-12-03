@@ -226,7 +226,7 @@ export class InquiryComponent implements OnInit {
     const newBid = {
       inquiryID: this.id,
       bidPrice: (1 + (this.margin / 100)) * (this.totalMaterialPrice + this.totalLaborPrice + this.totalEquipmentPrice),
-      margin: this.margin
+      // margin: this.margin
     };
 
     this.createBid(newBid);

@@ -101,7 +101,7 @@ router.post('/new', passport.authenticate('jwt', { session: false }), (request, 
         inquiryID: request.body.inquiryID,
         // bidLabor: request.body.bidLabor,
         bidPrice: request.body.bidPrice,
-        margin: request.body.margin
+        // margin: request.body.margin
     };
 
     bid.createBid(newBid, (message) => {
