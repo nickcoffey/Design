@@ -6,8 +6,12 @@
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
   <ng-container *ngIf="bid[0]; else noBid">
     <h2 class="page-header">Bid #{{bid[0].bidID}}</h2>
-    <h3>Customer - <span style="font-weight:normal">{{bid[0].customerName}}</span></h3>
-    <h3>Job - <span style="font-weight:normal">{{bid[0].jobName}}</span></h3>
+    <h3>Customer -
+      <span style="font-weight:normal">{{bid[0].customerName}}</span>
+    </h3>
+    <h3>Job -
+      <span style="font-weight:normal">{{bid[0].jobName}}</span>
+    </h3>
     <hr>
     <h4>Click To View Details</h4>
     <div class="panel-group" id="accordion">
@@ -21,8 +25,8 @@
             <thead>
               <tr class="active">
                 <th>Charged Price</th>
-                <th>Profit Margin</th>
-                <!-- <th>Total Costs</th> -->
+                <th>Estimated Costs</th>
+                <th class="hidden-xs hidden-sm">Profit Margin</th>
                 <th>Created Date</th>
                 <th *ngIf="bid[0].bidStatus == 'ACCEPTED'">Accepted Date</th>
                 <th *ngIf="bid[0].bidStatus == 'DECLINED'">Declined Date</th>
@@ -31,8 +35,10 @@
             <tbody>
               <tr>
                 <td>{{bid[0].bidPrice | currency: 'USD':true}}</td>
-                <td>{{((bid[0].bidPrice / (totalEquipmentPriceTable + totalLaborPriceTable + totalMaterialPriceTable) - 1)) | percent:'.2-2'}}</td>
-                <!-- <td>{{(totalEquipmentPriceTable + totalLaborPriceTable + totalMaterialPriceTable) | currency: 'USD':true}}</td> -->
+                <td>{{(totalEquipmentPriceTable + totalLaborPriceTable + totalMaterialPriceTable) | currency: 'USD':true}}</td>
+                <td class="hidden-xs hidden-sm">{{((bid[0].bidPrice / (totalEquipmentPriceTable + totalLaborPriceTable + totalMaterialPriceTable) - 1)) |
+                  percent:'.2-2'}}
+                </td>
                 <td>{{bid[0].createdDate | date: 'MM/dd/yyyy'}}</td>
                 <td *ngIf="bid[0].bidStatus == 'ACCEPTED'">{{bid[0].endDate | date: 'MM/dd/yyyy'}}</td>
                 <td *ngIf="bid[0].bidStatus == 'DECLINED'">{{bid[0].endDate | date: 'MM/dd/yyyy'}}</td>
@@ -434,7 +440,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title">Create Form</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" style="word-break:break-word">
         <form #f6="ngForm" (submit)="makeBidPDF()">
           <div class="form-group">
             <label>Select Contact</label>
@@ -443,8 +449,54 @@
               <option [value]="i" *ngFor="let contact of contacts; let i = index;">{{contact.contactName}} - {{contact.contactTitle}}</option>
             </select>
           </div>
+          <div class="form-group">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Enter Text</th>
+                  <th>Add Line</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <textarea required maxlength="150" #line="ngModel" type="text" [(ngModel)]="bidLine" name="bidLine" placeholder="New Line"
+                      class="form-control" style="resize: vertical"></textarea> {{bidLine.length}}/150
+                  </td>
+                  <td>
+                    <button [disabled]="line.invalid" (click)="onAddFormLine()" type="button" class="btn btn-success">
+                      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr *ngIf="line.invalid" style="color:#ff0000">
+                  <td *ngIf="line.errors.required">*Text is required</td>
+                  <td *ngIf="line.errors.required"></td>
+                </tr>
+              </tfoot>
+            </table>
+            <label *ngIf="bidText.length > 0" style="color:#ff0000"></label>
+            <table *ngIf="bidText.length > 0" class="table table-bordered table-hover">
+              <thead>
+                <tr class="active">
+                  <th>Line</th>
+                  <th>Text</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let text of bidText; let i = index;" (click)="onRemoveLine(i)">
+                  <td>{{i+1}}</td>
+                  <td>{{text.text}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <button type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-file" aria-hidden="true"></span> Generate Form</button>
+          <button type="button" (click)="clearBidLine()" class="btn btn-warning">
+            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
         </form>
       </div>
       <div class="modal-footer">

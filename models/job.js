@@ -83,6 +83,7 @@ module.exports.updateJobStatus = function (updatedJob, callback) {
 
 module.exports.deleteJob = function (id, callback) {
     const queryString = `DELETE FROM Job WHERE jobID=${id}`;
+    // console.log(queryString);
     connection.query(queryString, (error, rows, fields) => {
         if (!error) {
             callback(rows);

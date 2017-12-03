@@ -16,7 +16,7 @@ router.post('/update-status', passport.authenticate('jwt', { session: false }), 
     };
 
     bid.updateBidStatus(updatedBid, (message) => {
-        if (message.message.includes("Rows matched: 1  Changed: 1  Warnings: 0")) {
+        if (message.warningCount == 0) {
             response.json({
                 success: true,
                 msg: 'Bid status updated'

@@ -10,7 +10,7 @@
     <div class="panel panel-primary" *ngFor="let job of jobs; let i = index">
       <div class="panel-heading" style="cursor: pointer;" data-toggle="collapse" data-parent="#accordion" [attr.href]="'#accordion' + job.jobID">
         <h3>
-          Job # {{job.jobID}}
+          {{job.jobName}} - <span style="font-weight:normal">#{{job.jobID}}</span>
           <!-- <button type="button" class="btn btn-info collapsed" data-toggle="collapse" data-parent="#accordion" [attr.href]="'#accordion' + job.jobID">
             <span class="if-collapsed">Show</span>
             <span class="if-not-collapsed">Hide</span>
@@ -19,7 +19,7 @@
       </div>
       <div [attr.id]="'accordion' + job.jobID" class="panel-body panel-collapse collapse" style="margin-top:0;">
         <h4>Customer:</h4>
-        <h5>{{job.customerName}}</h5>
+        <h5 style="font-weight:normal">{{job.customerName}}</h5>
         <hr>
         <h4>Budget:</h4>
         <div class="progress progress-striped active">

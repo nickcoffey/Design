@@ -18,6 +18,7 @@
             <thead>
               <tr class="active">
                 <th>Expected Revenue</th>
+                <th>Actual Costs</th>
                 <th>Created Date</th>
                 <th *ngIf="job[0].jobStatus == 'COMPLETED'">Completion Date</th>
               </tr>
@@ -25,6 +26,7 @@
             <tbody>
               <tr>
                 <td>{{job[0].bidPrice + totalChangeTable | currency: 'USD':true}}</td>
+                <td>{{(totalEquipmentPriceTable + totalMaterialPriceTable + totalLaborPriceTable) | currency: 'USD':true}}</td>
                 <td>{{job[0].createdDate | date: 'MM/dd/yyyy'}}</td>
                 <td *ngIf="job[0].jobStatus == 'COMPLETED'">{{job[0].endDate | date: 'MM/dd/yyyy'}}</td>
               </tr>

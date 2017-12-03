@@ -32,6 +32,8 @@ export class BidComponent implements OnInit {
   endDate: string = '';
   status: string = '';
   bidNotes: string = '';
+  bidLine: string = '';
+  bidText: FormText[] = [];
   /** MATERIALS **/
   bidMaterials: any;
   material: any;
@@ -185,8 +187,8 @@ export class BidComponent implements OnInit {
           if (data.success) {
             // console.log(data.msg);
             this.alert.displayAlert('Job created', 'success');
-            this.router.navigate(['/jobs']);
-            // this.ngOnInit();
+            // this.router.navigate(['/jobs']);
+            this.ngOnInit();
           } else {
             console.log(data.msg);
           }
@@ -733,18 +735,22 @@ export class BidComponent implements OnInit {
 
   /********** CREATE START **********/
   onCreateBidLabor() {
-    this.selectedLabors.forEach((selectedLabor) => {
+  this.selectedLabors.forEach((selectedLabor) => {
       this.bidService.createBidLaborById(this.id, selectedLabor).subscribe((data) => {
         if (data.success) {
-          console.log(data.msg);
+          console.log(data.msg); 
         } else {
           console.log(data.msg);
         }
       });
     });
 
+    // let oldMargin = ((this.bid[0].bidPrice / (this.totalEquipmentPriceTable + this.totalLaborPriceTable + this.totalMaterialPriceTable) - 1));
+    // console.log(oldMargin);
+    // newPrice = ((this.totalEquipmentPriceTable + this.totalLaborPriceTable + this.totalMaterialPriceTable) * (1 + oldMargin));
+    // console.log(newPrice);
+    // this.onUpdatePrice(newPrice);
     this.getBidLabors();
-    // this.onUpdatePrice();
     this.getBid();
     this.onClearBidLabor();
     $('#create-labor-modal').modal('hide');
@@ -885,6 +891,19 @@ export class BidComponent implements OnInit {
   }
 
   /************************************************* FORM FUNCTIONS *********************************************************/
+  onAddFormLine() {
+    let newLine = {
+      text: `${this.bidLine}\n\n`
+    };
+    this.bidText.push(newLine);
+    this.clearBidLine();
+  }
+  clearBidLine() {
+    this.bidLine = '';
+  }
+  onRemoveLine(index) {
+    this.bidText.splice(index, 1);
+  }
 
   onChangeContact(contactIndex) {
     this.contactName = this.contacts[contactIndex].contactName;
@@ -1015,6 +1034,15 @@ export class BidComponent implements OnInit {
           text: [{ text: 'Price: ' }, { text: `$${Math.round(this.bid[0].bidPrice)}`, bold: false }],
           style: 'subheader',
           alignment: 'center'
+        }, 
+        {
+          text: '\nDescription: \n\n' ,
+          style: 'subheader',
+          alignment: 'center'
+        },
+        {
+          text: this.bidText,
+          style: 'paragraph'
         }
       ],
       footer: function (currentPage, pageCount) {
@@ -1153,6 +1181,8 @@ export class BidComponent implements OnInit {
     }
     $('#create-form-modal').modal('hide');
     pdfMake.createPdf(documentDefinition).download();
+    this.clearBidLine();
+    this.bidText = [];
   }
 
   getToday() {
@@ -1196,6 +1226,10 @@ interface SelectedEquipment {
   pricePer3Week: number
   WeekSelected3: number
 }
+interface FormText {
+  text: string
+}
+
 /*********************************************************** Unused code **************************************************************/
 // onAddMaterial() {
 //   let selectedMaterial = {

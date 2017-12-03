@@ -236,7 +236,8 @@ export class InquiryComponent implements OnInit {
     this.createEquipment();
     $('#create-bid-modal').modal('hide');
     this.onClear();
-    this.router.navigate([`/bids`]);
+    // this.router.navigate([`/bids`]);
+    this.ngOnInit();
   }
 
   createBid(newBid) {

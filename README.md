@@ -3,9 +3,7 @@ Source Code for Allied Waterproofing Web App
 
 (CHANGES TO BE MADE)
 
-1. Adding margin to bid
-2. Allowing itemized list to be made for bid form
-3. Re-activate material and labor remove button in add pop-ups 
+1. Re-activate material and labor remove button in add pop-ups 
 
 <!-- 1. Make equipment, bid equipment, and job equipment tables
 

@@ -162,7 +162,7 @@ router.post('/delete/:id', passport.authenticate('jwt', { session: false }), (re
     const id = request.params.id;
 
     job.deleteJob(id, (message) => {
-        if (message.message == "") {
+        if (message.warningCount == 0) {
             response.json({
                 success: true,
                 msg: 'Job Deleted'
