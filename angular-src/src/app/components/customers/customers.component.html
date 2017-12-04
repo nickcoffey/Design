@@ -1,5 +1,18 @@
 <div class="pull-left">
-  <button class="btn btn-default" [routerLink]="['/home']"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Go Home</button>
+  <button class="btn btn-default" [routerLink]="['/home']">
+    <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Go Home</button>
+</div>
+<div class="pull-right">
+  <a target="_blank" href="/api/help/customersHelp.pdf">
+    <button type="button" class="btn btn-default">Help
+      <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+    </button>
+  </a>
+  <!-- <a target="_blank" href="http://localhost:3000/api/help/customersHelp.pdf">
+    <button type="button" class="btn btn-default">Help
+      <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+    </button>
+  </a> -->
 </div>
 
 <h2 class="page-header col-xs-12 col-sm-12 col-md-12 col-lg-12">Customers</h2>
@@ -24,7 +37,8 @@
         </tr>
       </tbody>
     </table>
-    <button type="button" class="btn btn-primary" href="#create-modal" data-toggle="modal"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Create New</button>
+    <button type="button" class="btn btn-primary" href="#create-modal" data-toggle="modal">
+      <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Create New</button>
   </ng-container>
   <ng-template #noCustomers>
     <h2 class="page-header">No Customers</h2>
@@ -53,7 +67,8 @@
           </div>
           <div class="form-group">
             <label>Address</label>
-            <input required maxlength="80" #customerAddress="ngModel" type="text" [(ngModel)]="address" name="address" placeholder="Address" class="form-control">
+            <input required maxlength="80" #customerAddress="ngModel" type="text" [(ngModel)]="address" name="address" placeholder="Address"
+              class="form-control">
             <div *ngIf="customerAddress.invalid" style="color:#ff0000">
               <div *ngIf="customerAddress.errors.required">
                 *Address is required
@@ -62,7 +77,8 @@
           </div>
           <div class="form-group">
             <label>City</label>
-            <input required maxlength="80" #customerCity="ngModel" type="text" class="form-control" [(ngModel)]="city" name="city" placeholder="City" />
+            <input required maxlength="80" #customerCity="ngModel" type="text" class="form-control" [(ngModel)]="city" name="city" placeholder="City"
+            />
             <div *ngIf="customerCity.invalid" style="color:#ff0000">
               <div *ngIf="customerCity.errors.required">
                 *City is required
@@ -71,18 +87,23 @@
           </div>
           <div class="form-group">
             <label>State</label>
-            <input maxlength="80" #customerState="ngModel" type="text" class="form-control" [(ngModel)]="state" name="state" placeholder="State" />
+            <input maxlength="80" #customerState="ngModel" type="text" class="form-control" [(ngModel)]="state" name="state" placeholder="State"
+            />
           </div>
           <div class="form-group">
             <label>ZIP</label>
-            <input mask="00000" #customerZIP="ngModel" type="number" class="form-control" [(ngModel)]="zip" name="zip" placeholder="ZIP" />
+            <input mask="00000" #customerZIP="ngModel" type="number" class="form-control" [(ngModel)]="zip" name="zip" placeholder="ZIP"
+            />
           </div>
-          <button [disabled]="f.invalid" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Create</button>
-          <button type="button" (click)="clearFields()" class="btn btn-warning"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
+          <button [disabled]="f.invalid" type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Create</button>
+          <button type="button" (click)="clearFields()" class="btn btn-warning">
+            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clear</button>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-info" data-dismiss="modal"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
+        <button type="button" class="btn btn-info" data-dismiss="modal">
+          <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Close</button>
       </div>
     </div>
   </div>

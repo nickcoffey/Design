@@ -34,6 +34,7 @@ export class BidComponent implements OnInit {
   bidNotes: string = '';
   bidLine: string = '';
   bidText: FormText[] = [];
+  priceMask: any = [/[0-9]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/,  '.', /\d/, /\d/];
   /** MATERIALS **/
   bidMaterials: any;
   material: any;

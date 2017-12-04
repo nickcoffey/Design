@@ -62,9 +62,10 @@ app.use(cors());
 // Set Static Folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Set Images Folder
+// Set Images & Help Folder
 app.use(express.static('uploads'));
 app.use('/api/uploads', express.static('uploads/files'), serveIndex('uploads/files'));
+app.use('/api/help', express.static('uploads/help'), serveIndex('uploads/help'));
 
 // Body Parser Middleware
 app.use(bodyParser.json({

@@ -1,5 +1,17 @@
 <button class="btn btn-default pull-left" [routerLink]="['/bids']">
   <span class="glyphicon glyphicon-file" aria-hidden="true"></span> Go To Bids</button>
+<a [ngClass]="{'col-md-offset-4': bid[0].bidStatus == 'ACCEPTED' && bid[0], 'pull-right': bid[0].bidStatus != 'ACCEPTED' && bid[0]}"
+  target="_blank" href="/api/help/bidDetailsHelp.pdf">
+  <button type="button" class="btn btn-default">Help
+    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+  </button>
+</a>
+<!-- <a [ngClass]="{'col-md-offset-4': bid[0].bidStatus == 'ACCEPTED' && bid[0], 'pull-right': bid[0].bidStatus != 'ACCEPTED' && bid[0]}"
+  target="_blank" href="http://localhost:3000/api/help/bidDetailsHelp.pdf">
+  <button type="button" class="btn btn-default">Help
+    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+  </button>
+</a> -->
 <button *ngIf="bid[0].bidStatus == 'ACCEPTED' && bid[0];" [routerLink]="['/jobs', bid[0].associatedJobID]" class="btn btn-primary pull-right">
   <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Go To Job</button>
 
@@ -518,8 +530,10 @@
         <form #f="ngForm" (submit)="onUpdate()">
           <label>Price</label>
           <div class="form-group">
-            <input required mask="0000000" #price="ngModel" type="number" [(ngModel)]="bidPrice" name="bidPrice" placeholder="Bid Price"
-              class="form-control">
+            <!-- <input required mask="0000000" #price="ngModel" type="number" [(ngModel)]="bidPrice" name="bidPrice" placeholder="Bid Price"
+              class="form-control"> -->
+            <input required onKeyPress="if(this.value.length==10) return false;" #price="ngModel" type="number" [(ngModel)]="bidPrice"
+              name="bidPrice" placeholder="Bid Price" class="form-control">
             <div *ngIf="price.invalid" style="color:#ff0000">
               <div *ngIf="price.errors.required">
                 *Bid price is required

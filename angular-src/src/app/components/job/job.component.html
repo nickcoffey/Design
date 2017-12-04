@@ -1,10 +1,26 @@
 <button class="btn btn-default pull-left" [routerLink]="['/jobs']">
   <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Go To Jobs</button>
+<div class="pull-right">
+  <a target="_blank" href="/api/help/jobDetailsHelp.pdf">
+    <button type="button" class="btn btn-default">Help
+      <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+    </button>
+  </a>
+  <!-- <a target="_blank" href="http://localhost:3000/api/help/jobDetailsHelp.pdf">
+      <button type="button" class="btn btn-default">Help
+        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+      </button>
+    </a> -->
+</div>
 
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
   <ng-container *ngIf="job[0]; else noJob">
-    <h2 class="page-header">Job #{{job[0].jobID}} - <span style="font-weight:normal">{{job[0].jobName}}</span></h2>
-    <h3>Customer - <span style="font-weight:normal">{{job[0].customerName}}</span></h3>
+    <h2 class="page-header">Job #{{job[0].jobID}} -
+      <span style="font-weight:normal">{{job[0].jobName}}</span>
+    </h2>
+    <h3>Customer -
+      <span style="font-weight:normal">{{job[0].customerName}}</span>
+    </h3>
     <hr>
     <h4>Click To View Details</h4>
     <div class="panel-group" id="accordion">

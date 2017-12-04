@@ -9,6 +9,8 @@ import { FileSelectDirective}  from 'ng2-file-upload';
 import { DataTablesModule } from 'angular-datatables';
 import { Ng2FileTreeModule } from 'ng2-file-tree/ng2-file-tree';
 import { InputMaskModule } from 'ng2-inputmask';
+// import { CurrencyMaskModule } from 'ng2-currency-mask';
+// import { TextMaskModule } from 'angular2-text-mask';
 //import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //import { MdSidenavModule, MdToolbarModule, MdIconModule, MdButtonModule, MdMenuModule } from '@angular/material';
 //import { FlexLayoutModule } from '@angular/flex-layout';
@@ -95,6 +97,8 @@ const appRoutes: Routes = [
     DataTablesModule,
     Ng2FileTreeModule,
     InputMaskModule
+    // CurrencyMaskModule
+    // TextMaskModule
     // Ng2FileInputModule.forRoot(
     //   {
     //     browseText: "Browse",

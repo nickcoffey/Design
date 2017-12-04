@@ -1,5 +1,17 @@
 <button class="btn btn-default pull-left" [routerLink]="['/customers']">
   <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Go To Customers</button>
+<div class="pull-right">
+  <a target="_blank" href="/api/help/customerDetailsHelp.pdf">
+      <button type="button" class="btn btn-default">Help
+        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+      </button>
+    </a>
+  <!-- <a target="_blank" href="http://localhost:3000/api/help/customerDetailsHelp.pdf">
+    <button type="button" class="btn btn-default">Help
+      <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+    </button>
+  </a> -->
+</div>
 
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
   <ng-container *ngIf="customer[0]; else noCustomer">
@@ -191,8 +203,8 @@
           </div>
           <div class="form-group">
             <label>Job Name</label>
-            <input required maxlength="150" #nameOfJob="ngModel" type="text" [(ngModel)]="jobName" name="jobName"
-              placeholder="Job Name" class="form-control"/>
+            <input required maxlength="150" #nameOfJob="ngModel" type="text" [(ngModel)]="jobName" name="jobName" placeholder="Job Name"
+              class="form-control" />
             <div *ngIf="nameOfJob.invalid" style="color:#ff0000">
               <div *ngIf="nameOfJob.errors.required">
                 *Job Name is required
@@ -201,8 +213,8 @@
           </div>
           <div class="form-group">
             <label>Job Address</label>
-            <input required maxlength="80" #addressOfJob="ngModel" type="text" [(ngModel)]="jobAddress" name="jobAddress"
-              placeholder="Job Address" class="form-control"/>
+            <input required maxlength="80" #addressOfJob="ngModel" type="text" [(ngModel)]="jobAddress" name="jobAddress" placeholder="Job Address"
+              class="form-control" />
             <div *ngIf="addressOfJob.invalid" style="color:#ff0000">
               <div *ngIf="addressOfJob.errors.required">
                 *Job Address is required
@@ -211,8 +223,8 @@
           </div>
           <div class="form-group">
             <label>Job City</label>
-            <input required maxlength="80" #cityOfJob="ngModel" type="text" [(ngModel)]="jobCity" name="jobCity"
-              placeholder="Job City" class="form-control"/>
+            <input required maxlength="80" #cityOfJob="ngModel" type="text" [(ngModel)]="jobCity" name="jobCity" placeholder="Job City"
+              class="form-control" />
             <div *ngIf="cityOfJob.invalid" style="color:#ff0000">
               <div *ngIf="cityOfJob.errors.required">
                 *Job City is required
@@ -221,8 +233,8 @@
           </div>
           <div class="form-group">
             <label>Job State</label>
-            <input required maxlength="80" #stateOfJob="ngModel" type="text" [(ngModel)]="jobState" name="jobState"
-              placeholder="Job State" class="form-control" style="resize: vertical"/>
+            <input required maxlength="80" #stateOfJob="ngModel" type="text" [(ngModel)]="jobState" name="jobState" placeholder="Job State"
+              class="form-control" style="resize: vertical" />
             <div *ngIf="stateOfJob.invalid" style="color:#ff0000">
               <div *ngIf="stateOfJob.errors.required">
                 *Job State is required
@@ -231,8 +243,8 @@
           </div>
           <div class="form-group">
             <label>Job ZIP</label>
-            <input required mask="00000" #zipOfJob="ngModel" type="number" [(ngModel)]="jobZIP" name="jobZIP"
-              placeholder="Job ZIP" class="form-control" style="resize: vertical"/>
+            <input required mask="00000" #zipOfJob="ngModel" type="number" [(ngModel)]="jobZIP" name="jobZIP" placeholder="Job ZIP" class="form-control"
+              style="resize: vertical" />
             <div *ngIf="zipOfJob.invalid" style="color:#ff0000">
               <div *ngIf="zipOfJob.errors.required">
                 *Job ZIP is required

@@ -1,5 +1,17 @@
 <button class="btn btn-default pull-left" [routerLink]="['/inquiries']">
   <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> Go To Inquiries</button>
+<a [ngClass]="{'col-md-offset-4': inquiry[0].inquiryStatus == 'ACCEPTED' && inquiry[0], 'pull-right': inquiry[0].inquiryStatus != 'ACCEPTED' && inquiry[0]}"
+  target="_blank" href="/api/help/inquiryDetailsHelp.pdf">
+  <button type="button" class="btn btn-default">Help
+    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+  </button>
+</a>
+<!-- <a [ngClass]="{'col-md-offset-4': inquiry[0].inquiryStatus == 'ACCEPTED' && inquiry[0], 'pull-right': inquiry[0].inquiryStatus != 'ACCEPTED' && inquiry[0]}"
+  target="_blank" href="http://localhost:3000/api/help/inquiryDetailsHelp.pdf">
+  <button type="button" class="btn btn-default">Help
+    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+  </button>
+</a> -->
 <button *ngIf="inquiry[0].inquiryStatus == 'ACCEPTED' && inquiry[0];" [routerLink]="['/bids', inquiry[0].associatedBidID]"
   class="btn btn-primary pull-right">
   <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Go To Bid</button>
@@ -7,8 +19,12 @@
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
   <ng-container *ngIf="inquiry[0]; else noInquiry">
     <h2 class="page-header">Inquiry #{{inquiry[0].inquiryID}}</h2>
-    <h3>Customer - <span style="font-weight:normal">{{inquiry[0].customerName}}</span></h3>
-    <h3>Job - <span style="font-weight:normal">{{inquiry[0].jobName}}</span></h3>
+    <h3>Customer -
+      <span style="font-weight:normal">{{inquiry[0].customerName}}</span>
+    </h3>
+    <h3>Job -
+      <span style="font-weight:normal">{{inquiry[0].jobName}}</span>
+    </h3>
     <hr>
     <h4>Click To View Details</h4>
     <div class="panel-group" id="accordion">
@@ -433,8 +449,8 @@
                       </select>
                     </td>
                     <td>
-                      <input required mask="00000" #intervals="ngModel" type="number" [(ngModel)]="equipmentNumOfIntervals" name="equipmentNumOfIntervals" placeholder="Number Of Intervals"
-                        class="form-control" aria-describedby="days-addon">
+                      <input required mask="00000" #intervals="ngModel" type="number" [(ngModel)]="equipmentNumOfIntervals" name="equipmentNumOfIntervals"
+                        placeholder="Number Of Intervals" class="form-control" aria-describedby="days-addon">
                     </td>
                     <td>
                       <button [disabled]="intervals.invalid" (click)="onAddEquipment()" type="button" class="btn btn-success">
@@ -560,7 +576,9 @@
                 </div>
               </div>
               <hr>
-              <h4>Recommended Bid: {{(1 + (margin/100))*(totalMaterialPrice + totalLaborPrice + totalEquipmentPrice) | currency: 'USD':true}}</h4>
+              <h4>Recommended Bid: {{(1 + (margin/100))*(totalMaterialPrice + totalLaborPrice + totalEquipmentPrice) | currency:
+                'USD':true}}
+              </h4>
             </div>
           </div>
           <button [disabled]="f2.invalid" type="submit" class="btn btn-primary">
