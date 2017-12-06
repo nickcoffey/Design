@@ -2,13 +2,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpModule } from '@angular/http';
+import { MyDatePickerModule } from 'angular4-datepicker/src/my-date-picker/my-date-picker.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { Ng2FileInputModule } from 'ng2-file-input';
 import { FileSelectDirective}  from 'ng2-file-upload';
 //import { DataTableModule } from 'angular-4-data-table';
 import { DataTablesModule } from 'angular-datatables';
-import { Ng2FileTreeModule } from 'ng2-file-tree/ng2-file-tree';
+// import { Ng2FileTreeModule } from 'ng2-file-tree/ng2-file-tree';
 import { InputMaskModule } from 'ng2-inputmask';
+import { ReportsComponent } from './components/reports/reports.component';
 // import { CurrencyMaskModule } from 'ng2-currency-mask';
 // import { TextMaskModule } from 'angular2-text-mask';
 //import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -61,7 +63,8 @@ const appRoutes: Routes = [
   { path: 'inquiries/:id', component: InquiryComponent, canActivate: [AuthGuard] },
   { path: 'jobs/:id', component: JobComponent, canActivate: [AuthGuard] },
   { path: 'labor', component: LaborComponent, canActivate: [AuthGuard] },
-  { path: 'equipment', component: EquipmentComponent, canActivate: [AuthGuard] }
+  { path: 'equipment', component: EquipmentComponent, canActivate: [AuthGuard] },
+  { path: 'reports', component: ReportsComponent, canActivate: [AuthGuard] }
   // ,{ path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] }
 ];
 
@@ -86,17 +89,19 @@ const appRoutes: Routes = [
     LaborComponent,
     ProfileComponent,
     AlertComponent,
-    EquipmentComponent
+    EquipmentComponent,
+    ReportsComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     HttpModule,
+    MyDatePickerModule,
     FormsModule,
     ReactiveFormsModule,
     DataTablesModule,
-    Ng2FileTreeModule,
     InputMaskModule
+    // Ng2FileTreeModule
     // CurrencyMaskModule
     // TextMaskModule
     // Ng2FileInputModule.forRoot(

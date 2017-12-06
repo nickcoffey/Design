@@ -24,6 +24,14 @@ export class BidService {
     return this.http.get(`${this.localHttp}/bids/all`, { headers: headers }).map(response => response.json());
   }
 
+  getBidsByDates(dates) {
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Authorization', this.authService.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(`${this.localHttp}/bids/by-date`, JSON.stringify(dates), { headers: headers }).map(response => response.json());
+  }
+
   getBidById(id) {
     this.authService.loadToken();
     let headers = new Headers();

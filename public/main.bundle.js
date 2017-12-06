@@ -82,42 +82,42 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ng2_file_upload__ = __webpack_require__("../../../../ng2-file-upload/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ng2_file_upload___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_ng2_file_upload__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angular_datatables__ = __webpack_require__("../../../../angular-datatables/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_ng2_file_tree_ng2_file_tree__ = __webpack_require__("../../../../ng2-file-tree/ng2-file-tree.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_ng2_file_tree_ng2_file_tree___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_ng2_file_tree_ng2_file_tree__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular4_datepicker_src_my_date_picker_my_date_picker_module__ = __webpack_require__("../../../../angular4-datepicker/src/my-date-picker/my-date-picker.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng2_file_upload__ = __webpack_require__("../../../../ng2-file-upload/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng2_file_upload___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_ng2_file_upload__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angular_datatables__ = __webpack_require__("../../../../angular-datatables/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_ng2_inputmask__ = __webpack_require__("../../../../ng2-inputmask/src/input-mask.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_navbar_navbar_component__ = __webpack_require__("../../../../../src/app/components/navbar/navbar.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_home_home_component__ = __webpack_require__("../../../../../src/app/components/home/home.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_customers_customers_component__ = __webpack_require__("../../../../../src/app/components/customers/customers.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_login_login_component__ = __webpack_require__("../../../../../src/app/components/login/login.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_register_register_component__ = __webpack_require__("../../../../../src/app/components/register/register.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_inquiries_inquiries_component__ = __webpack_require__("../../../../../src/app/components/inquiries/inquiries.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_bids_bids_component__ = __webpack_require__("../../../../../src/app/components/bids/bids.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_jobs_jobs_component__ = __webpack_require__("../../../../../src/app/components/jobs/jobs.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_customer_customer_component__ = __webpack_require__("../../../../../src/app/components/customer/customer.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_create_bid_create_bid_component__ = __webpack_require__("../../../../../src/app/components/create-bid/create-bid.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_materials_materials_component__ = __webpack_require__("../../../../../src/app/components/materials/materials.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_bid_bid_component__ = __webpack_require__("../../../../../src/app/components/bid/bid.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_inquiry_inquiry_component__ = __webpack_require__("../../../../../src/app/components/inquiry/inquiry.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_job_job_component__ = __webpack_require__("../../../../../src/app/components/job/job.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_labor_labor_component__ = __webpack_require__("../../../../../src/app/components/labor/labor.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_profile_profile_component__ = __webpack_require__("../../../../../src/app/components/profile/profile.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_alert_alert_component__ = __webpack_require__("../../../../../src/app/components/alert/alert.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_equipment_equipment_component__ = __webpack_require__("../../../../../src/app/components/equipment/equipment.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__services_customer_service__ = __webpack_require__("../../../../../src/app/services/customer.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__services_inquiry_service__ = __webpack_require__("../../../../../src/app/services/inquiry.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__services_bid_service__ = __webpack_require__("../../../../../src/app/services/bid.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__services_job_service__ = __webpack_require__("../../../../../src/app/services/job.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__services_material_service__ = __webpack_require__("../../../../../src/app/services/material.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__services_labor_service__ = __webpack_require__("../../../../../src/app/services/labor.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__services_equipment_service__ = __webpack_require__("../../../../../src/app/services/equipment.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__guards_auth_guard__ = __webpack_require__("../../../../../src/app/guards/auth.guard.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37_ngx_cookie_service__ = __webpack_require__("../../../../ngx-cookie-service/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_reports_reports_component__ = __webpack_require__("../../../../../src/app/components/reports/reports.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_navbar_navbar_component__ = __webpack_require__("../../../../../src/app/components/navbar/navbar.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_home_home_component__ = __webpack_require__("../../../../../src/app/components/home/home.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_customers_customers_component__ = __webpack_require__("../../../../../src/app/components/customers/customers.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_login_login_component__ = __webpack_require__("../../../../../src/app/components/login/login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_register_register_component__ = __webpack_require__("../../../../../src/app/components/register/register.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_inquiries_inquiries_component__ = __webpack_require__("../../../../../src/app/components/inquiries/inquiries.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_bids_bids_component__ = __webpack_require__("../../../../../src/app/components/bids/bids.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_jobs_jobs_component__ = __webpack_require__("../../../../../src/app/components/jobs/jobs.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_customer_customer_component__ = __webpack_require__("../../../../../src/app/components/customer/customer.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_create_bid_create_bid_component__ = __webpack_require__("../../../../../src/app/components/create-bid/create-bid.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_materials_materials_component__ = __webpack_require__("../../../../../src/app/components/materials/materials.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_bid_bid_component__ = __webpack_require__("../../../../../src/app/components/bid/bid.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_inquiry_inquiry_component__ = __webpack_require__("../../../../../src/app/components/inquiry/inquiry.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_job_job_component__ = __webpack_require__("../../../../../src/app/components/job/job.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_labor_labor_component__ = __webpack_require__("../../../../../src/app/components/labor/labor.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_profile_profile_component__ = __webpack_require__("../../../../../src/app/components/profile/profile.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_alert_alert_component__ = __webpack_require__("../../../../../src/app/components/alert/alert.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_equipment_equipment_component__ = __webpack_require__("../../../../../src/app/components/equipment/equipment.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__services_customer_service__ = __webpack_require__("../../../../../src/app/services/customer.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__services_inquiry_service__ = __webpack_require__("../../../../../src/app/services/inquiry.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__services_bid_service__ = __webpack_require__("../../../../../src/app/services/bid.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__services_job_service__ = __webpack_require__("../../../../../src/app/services/job.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__services_material_service__ = __webpack_require__("../../../../../src/app/services/material.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__services_labor_service__ = __webpack_require__("../../../../../src/app/services/labor.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__services_equipment_service__ = __webpack_require__("../../../../../src/app/services/equipment.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__guards_auth_guard__ = __webpack_require__("../../../../../src/app/guards/auth.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38_ngx_cookie_service__ = __webpack_require__("../../../../ngx-cookie-service/index.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -129,10 +129,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 // import { Ng2FileInputModule } from 'ng2-file-input';
 
 //import { DataTableModule } from 'angular-4-data-table';
 
+// import { Ng2FileTreeModule } from 'ng2-file-tree/ng2-file-tree';
 
 
 // import { CurrencyMaskModule } from 'ng2-currency-mask';
@@ -170,21 +172,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 var appRoutes = [
-    { path: '', component: __WEBPACK_IMPORTED_MODULE_13__components_login_login_component__["a" /* LoginComponent */] },
-    { path: 'home', component: __WEBPACK_IMPORTED_MODULE_11__components_home_home_component__["a" /* HomeComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_36__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'customers', component: __WEBPACK_IMPORTED_MODULE_12__components_customers_customers_component__["a" /* CustomersComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_36__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'customers/:id', component: __WEBPACK_IMPORTED_MODULE_18__components_customer_customer_component__["a" /* CustomerComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_36__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'inquiries', component: __WEBPACK_IMPORTED_MODULE_15__components_inquiries_inquiries_component__["a" /* InquiriesComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_36__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'bids', component: __WEBPACK_IMPORTED_MODULE_16__components_bids_bids_component__["a" /* BidsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_36__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'jobs', component: __WEBPACK_IMPORTED_MODULE_17__components_jobs_jobs_component__["a" /* JobsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_36__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'register', component: __WEBPACK_IMPORTED_MODULE_14__components_register_register_component__["a" /* RegisterComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_36__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'create-bid/:id', component: __WEBPACK_IMPORTED_MODULE_19__components_create_bid_create_bid_component__["a" /* CreateBidComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_36__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'materials', component: __WEBPACK_IMPORTED_MODULE_20__components_materials_materials_component__["a" /* MaterialsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_36__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'bids/:id', component: __WEBPACK_IMPORTED_MODULE_21__components_bid_bid_component__["a" /* BidComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_36__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'inquiries/:id', component: __WEBPACK_IMPORTED_MODULE_22__components_inquiry_inquiry_component__["a" /* InquiryComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_36__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'jobs/:id', component: __WEBPACK_IMPORTED_MODULE_23__components_job_job_component__["a" /* JobComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_36__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'labor', component: __WEBPACK_IMPORTED_MODULE_24__components_labor_labor_component__["a" /* LaborComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_36__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'equipment', component: __WEBPACK_IMPORTED_MODULE_27__components_equipment_equipment_component__["a" /* EquipmentComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_36__guards_auth_guard__["a" /* AuthGuard */]] }
+    { path: '', component: __WEBPACK_IMPORTED_MODULE_14__components_login_login_component__["a" /* LoginComponent */] },
+    { path: 'home', component: __WEBPACK_IMPORTED_MODULE_12__components_home_home_component__["a" /* HomeComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_37__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'customers', component: __WEBPACK_IMPORTED_MODULE_13__components_customers_customers_component__["a" /* CustomersComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_37__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'customers/:id', component: __WEBPACK_IMPORTED_MODULE_19__components_customer_customer_component__["a" /* CustomerComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_37__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'inquiries', component: __WEBPACK_IMPORTED_MODULE_16__components_inquiries_inquiries_component__["a" /* InquiriesComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_37__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'bids', component: __WEBPACK_IMPORTED_MODULE_17__components_bids_bids_component__["a" /* BidsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_37__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'jobs', component: __WEBPACK_IMPORTED_MODULE_18__components_jobs_jobs_component__["a" /* JobsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_37__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'register', component: __WEBPACK_IMPORTED_MODULE_15__components_register_register_component__["a" /* RegisterComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_37__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'create-bid/:id', component: __WEBPACK_IMPORTED_MODULE_20__components_create_bid_create_bid_component__["a" /* CreateBidComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_37__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'materials', component: __WEBPACK_IMPORTED_MODULE_21__components_materials_materials_component__["a" /* MaterialsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_37__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'bids/:id', component: __WEBPACK_IMPORTED_MODULE_22__components_bid_bid_component__["a" /* BidComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_37__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'inquiries/:id', component: __WEBPACK_IMPORTED_MODULE_23__components_inquiry_inquiry_component__["a" /* InquiryComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_37__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'jobs/:id', component: __WEBPACK_IMPORTED_MODULE_24__components_job_job_component__["a" /* JobComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_37__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'labor', component: __WEBPACK_IMPORTED_MODULE_25__components_labor_labor_component__["a" /* LaborComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_37__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'equipment', component: __WEBPACK_IMPORTED_MODULE_28__components_equipment_equipment_component__["a" /* EquipmentComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_37__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'reports', component: __WEBPACK_IMPORTED_MODULE_9__components_reports_reports_component__["a" /* ReportsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_37__guards_auth_guard__["a" /* AuthGuard */]] }
     // ,{ path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] }
 ];
 var AppModule = (function () {
@@ -195,36 +198,38 @@ var AppModule = (function () {
 AppModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["NgModule"])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_9__app_component__["a" /* AppComponent */],
-            __WEBPACK_IMPORTED_MODULE_10__components_navbar_navbar_component__["a" /* NavbarComponent */],
-            __WEBPACK_IMPORTED_MODULE_11__components_home_home_component__["a" /* HomeComponent */],
-            __WEBPACK_IMPORTED_MODULE_12__components_customers_customers_component__["a" /* CustomersComponent */],
-            __WEBPACK_IMPORTED_MODULE_13__components_login_login_component__["a" /* LoginComponent */],
-            __WEBPACK_IMPORTED_MODULE_14__components_register_register_component__["a" /* RegisterComponent */],
-            __WEBPACK_IMPORTED_MODULE_15__components_inquiries_inquiries_component__["a" /* InquiriesComponent */],
-            __WEBPACK_IMPORTED_MODULE_16__components_bids_bids_component__["a" /* BidsComponent */],
-            __WEBPACK_IMPORTED_MODULE_17__components_jobs_jobs_component__["a" /* JobsComponent */],
-            __WEBPACK_IMPORTED_MODULE_18__components_customer_customer_component__["a" /* CustomerComponent */],
-            __WEBPACK_IMPORTED_MODULE_19__components_create_bid_create_bid_component__["a" /* CreateBidComponent */],
-            __WEBPACK_IMPORTED_MODULE_20__components_materials_materials_component__["a" /* MaterialsComponent */],
-            __WEBPACK_IMPORTED_MODULE_21__components_bid_bid_component__["a" /* BidComponent */],
-            __WEBPACK_IMPORTED_MODULE_22__components_inquiry_inquiry_component__["a" /* InquiryComponent */],
-            __WEBPACK_IMPORTED_MODULE_23__components_job_job_component__["a" /* JobComponent */],
-            __WEBPACK_IMPORTED_MODULE_5_ng2_file_upload__["FileSelectDirective"],
-            __WEBPACK_IMPORTED_MODULE_24__components_labor_labor_component__["a" /* LaborComponent */],
-            __WEBPACK_IMPORTED_MODULE_25__components_profile_profile_component__["a" /* ProfileComponent */],
-            __WEBPACK_IMPORTED_MODULE_26__components_alert_alert_component__["a" /* AlertComponent */],
-            __WEBPACK_IMPORTED_MODULE_27__components_equipment_equipment_component__["a" /* EquipmentComponent */]
+            __WEBPACK_IMPORTED_MODULE_10__app_component__["a" /* AppComponent */],
+            __WEBPACK_IMPORTED_MODULE_11__components_navbar_navbar_component__["a" /* NavbarComponent */],
+            __WEBPACK_IMPORTED_MODULE_12__components_home_home_component__["a" /* HomeComponent */],
+            __WEBPACK_IMPORTED_MODULE_13__components_customers_customers_component__["a" /* CustomersComponent */],
+            __WEBPACK_IMPORTED_MODULE_14__components_login_login_component__["a" /* LoginComponent */],
+            __WEBPACK_IMPORTED_MODULE_15__components_register_register_component__["a" /* RegisterComponent */],
+            __WEBPACK_IMPORTED_MODULE_16__components_inquiries_inquiries_component__["a" /* InquiriesComponent */],
+            __WEBPACK_IMPORTED_MODULE_17__components_bids_bids_component__["a" /* BidsComponent */],
+            __WEBPACK_IMPORTED_MODULE_18__components_jobs_jobs_component__["a" /* JobsComponent */],
+            __WEBPACK_IMPORTED_MODULE_19__components_customer_customer_component__["a" /* CustomerComponent */],
+            __WEBPACK_IMPORTED_MODULE_20__components_create_bid_create_bid_component__["a" /* CreateBidComponent */],
+            __WEBPACK_IMPORTED_MODULE_21__components_materials_materials_component__["a" /* MaterialsComponent */],
+            __WEBPACK_IMPORTED_MODULE_22__components_bid_bid_component__["a" /* BidComponent */],
+            __WEBPACK_IMPORTED_MODULE_23__components_inquiry_inquiry_component__["a" /* InquiryComponent */],
+            __WEBPACK_IMPORTED_MODULE_24__components_job_job_component__["a" /* JobComponent */],
+            __WEBPACK_IMPORTED_MODULE_6_ng2_file_upload__["FileSelectDirective"],
+            __WEBPACK_IMPORTED_MODULE_25__components_labor_labor_component__["a" /* LaborComponent */],
+            __WEBPACK_IMPORTED_MODULE_26__components_profile_profile_component__["a" /* ProfileComponent */],
+            __WEBPACK_IMPORTED_MODULE_27__components_alert_alert_component__["a" /* AlertComponent */],
+            __WEBPACK_IMPORTED_MODULE_28__components_equipment_equipment_component__["a" /* EquipmentComponent */],
+            __WEBPACK_IMPORTED_MODULE_9__components_reports_reports_component__["a" /* ReportsComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
             __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* RouterModule */].forRoot(appRoutes),
             __WEBPACK_IMPORTED_MODULE_3__angular_http__["HttpModule"],
-            __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormsModule */],
-            __WEBPACK_IMPORTED_MODULE_4__angular_forms__["b" /* ReactiveFormsModule */],
-            __WEBPACK_IMPORTED_MODULE_6_angular_datatables__["a" /* DataTablesModule */],
-            __WEBPACK_IMPORTED_MODULE_7_ng2_file_tree_ng2_file_tree__["Ng2FileTreeModule"],
+            __WEBPACK_IMPORTED_MODULE_4_angular4_datepicker_src_my_date_picker_my_date_picker_module__["a" /* MyDatePickerModule */],
+            __WEBPACK_IMPORTED_MODULE_5__angular_forms__["a" /* FormsModule */],
+            __WEBPACK_IMPORTED_MODULE_5__angular_forms__["c" /* ReactiveFormsModule */],
+            __WEBPACK_IMPORTED_MODULE_7_angular_datatables__["a" /* DataTablesModule */],
             __WEBPACK_IMPORTED_MODULE_8_ng2_inputmask__["a" /* InputMaskModule */]
+            // Ng2FileTreeModule
             // CurrencyMaskModule
             // TextMaskModule
             // Ng2FileInputModule.forRoot(
@@ -249,19 +254,19 @@ AppModule = __decorate([
             MdMenuModule*/
         ],
         providers: [
-            __WEBPACK_IMPORTED_MODULE_28__services_customer_service__["a" /* CustomerService */],
-            __WEBPACK_IMPORTED_MODULE_29__services_inquiry_service__["a" /* InquiryService */],
-            __WEBPACK_IMPORTED_MODULE_30__services_bid_service__["a" /* BidService */],
-            __WEBPACK_IMPORTED_MODULE_31__services_job_service__["a" /* JobService */],
-            __WEBPACK_IMPORTED_MODULE_32__services_material_service__["a" /* MaterialService */],
-            __WEBPACK_IMPORTED_MODULE_33__services_labor_service__["a" /* LaborService */],
-            __WEBPACK_IMPORTED_MODULE_34__services_equipment_service__["a" /* EquipmentService */],
-            __WEBPACK_IMPORTED_MODULE_35__services_auth_service__["a" /* AuthService */],
-            __WEBPACK_IMPORTED_MODULE_36__guards_auth_guard__["a" /* AuthGuard */],
-            __WEBPACK_IMPORTED_MODULE_37_ngx_cookie_service__["a" /* CookieService */],
-            __WEBPACK_IMPORTED_MODULE_26__components_alert_alert_component__["a" /* AlertComponent */]
+            __WEBPACK_IMPORTED_MODULE_29__services_customer_service__["a" /* CustomerService */],
+            __WEBPACK_IMPORTED_MODULE_30__services_inquiry_service__["a" /* InquiryService */],
+            __WEBPACK_IMPORTED_MODULE_31__services_bid_service__["a" /* BidService */],
+            __WEBPACK_IMPORTED_MODULE_32__services_job_service__["a" /* JobService */],
+            __WEBPACK_IMPORTED_MODULE_33__services_material_service__["a" /* MaterialService */],
+            __WEBPACK_IMPORTED_MODULE_34__services_labor_service__["a" /* LaborService */],
+            __WEBPACK_IMPORTED_MODULE_35__services_equipment_service__["a" /* EquipmentService */],
+            __WEBPACK_IMPORTED_MODULE_36__services_auth_service__["a" /* AuthService */],
+            __WEBPACK_IMPORTED_MODULE_37__guards_auth_guard__["a" /* AuthGuard */],
+            __WEBPACK_IMPORTED_MODULE_38_ngx_cookie_service__["a" /* CookieService */],
+            __WEBPACK_IMPORTED_MODULE_27__components_alert_alert_component__["a" /* AlertComponent */]
         ],
-        bootstrap: [__WEBPACK_IMPORTED_MODULE_9__app_component__["a" /* AppComponent */]]
+        bootstrap: [__WEBPACK_IMPORTED_MODULE_10__app_component__["a" /* AppComponent */]]
     })
 ], AppModule);
 
@@ -318,7 +323,7 @@ var AlertComponent = (function () {
     AlertComponent.prototype.displayAlert = function (message, type) {
         switch (type) {
             case 'warning': {
-                $("#warningAlert").html("<h4 style='margin-bottom: 0;'>" + message + "<button type='button' class='close' data-dismiss='alert'>&times;</button></h4>");
+                $("#warningAlert").html("<h4 style='margin-bottom: 0;font-weight:normal'>" + message + "<button type='button' class='close' data-dismiss='alert'>&times;</button></h4>");
                 $("#warningAlert").fadeTo(2000, 500).slideUp(500, function () {
                     $("#warningAlert").slideUp(500);
                 });
@@ -326,7 +331,7 @@ var AlertComponent = (function () {
                 break;
             }
             case 'success': {
-                $("#successAlert").html("<h4 style='margin-bottom: 0;'>" + message + "<button type='button' class='close' data-dismiss='alert'>&times;</button></h4>");
+                $("#successAlert").html("<h4 style='margin-bottom: 0;font-weight:normal'>" + message + "<button type='button' class='close' data-dismiss='alert'>&times;</button></h4>");
                 $("#successAlert").fadeTo(2000, 500).slideUp(500, function () {
                     $("#successAlert").slideUp(500);
                 });
@@ -4771,7 +4776,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/navbar/navbar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- https://stackoverflow.com/questions/38209713/how-to-make-a-responsive-nav-bar-using-angular-material-2 -->\r\n<!--<md-sidenav-containe fullscreen>-->\r\n<!--<md-sidenav-container>\r\n    <md-toolbar color=\"primary\">\r\n        <button md-button [routerLink]=\"['/']\"><md-icon>home</md-icon>Allied Waterproofing</button>\r\n        <span class=\"fill-remaining-space\"></span>\r\n        <div fxLayout=\"row\" fxShow=\"false\" fxShow.gt-sm>\r\n            <button md-button [routerLink]=\"['/customers']\">Customers</button>\r\n            <button md-button [routerLink]=\"['/']\">Something</button>\r\n        </div>\r\n        <button md-button [md-menu-trigger-for]=\"menu\" fxHide=\"false\" fxHide.gt-sm><md-icon>menu</md-icon></button>\r\n    </md-toolbar>\r\n    <md-menu x-position=\"before\" #menu=\"mdMenu\">\r\n        <button md-menu-item [routerLink]=\"['/customers']\">Customers</button>\r\n        <button md-menu-item [routerLink]=\"['/']\">Something</button>\r\n    </md-menu>\r\n</md-sidenav-container>-->\r\n\r\n<nav class=\"navbar navbar-inverse navbar-fixed-top\" role=\"navigation\">\r\n    <!-- Brand and toggle get grouped for better mobile display -->\r\n    <div class=\"navbar-header\">\r\n        <button *ngIf=\"authService.loggedIn()\" type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-ex1-collapse\">\r\n            <span class=\"sr-only\">Toggle navigation</span>\r\n            <span class=\"icon-bar\"></span>\r\n            <span class=\"icon-bar\"></span>\r\n            <span class=\"icon-bar\"></span>\r\n        </button>\r\n        <a class=\"navbar-brand\">Allied Waterproofing</a>\r\n    </div>\r\n\r\n    <!-- Collect the nav links, forms, and other content for toggling -->\r\n    <div id=\"navbar-ex1-collapse\" class=\"collapse navbar-collapse navbar-ex1-collapse\">\r\n        <ul class=\"nav navbar-nav\">\r\n            <li><a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" (click)=\"closeDropdown()\" [routerLink]=\"['/home']\"><span class=\"glyphicon glyphicon-home\" aria-hidden=\"true\"></span> Home</a></li>\r\n            <li><a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" (click)=\"closeDropdown()\" [routerLink]=\"['/customers']\"><span class=\"glyphicon glyphicon-user\" aria-hidden=\"true\"></span> Customers</a></li>\r\n            <li><a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" (click)=\"closeDropdown()\" [routerLink]=\"['/inquiries']\"><span class=\"glyphicon glyphicon-inbox\" aria-hidden=\"true\"></span> Inquiries</a></li>\r\n            <li><a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" (click)=\"closeDropdown()\" [routerLink]=\"['/bids']\"><span class=\"glyphicon glyphicon-file\" aria-hidden=\"true\"></span> Bids</a></li>\r\n            <li><a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" (click)=\"closeDropdown()\" [routerLink]=\"['/jobs']\"><span class=\"glyphicon glyphicon-briefcase\" aria-hidden=\"true\"></span> Jobs</a></li>\r\n        </ul>\r\n        <ul class=\"nav navbar-nav navbar-right\">\r\n            <li class=\"dropdown\">\r\n                <a *ngIf=\"authService.loggedIn()\" href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\">\r\n                    <span class=\"glyphicon glyphicon-collapse-down\"></span> Manage\r\n                </a>\r\n                <ul class=\"dropdown-menu\" role=\"menu\">\r\n                    <li>\r\n                        <a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" (click)=\"closeDropdown()\" [routerLink]=\"['/materials']\">\r\n                            <span class=\"glyphicon glyphicon-tint\" aria-hidden=\"true\"></span> Materials</a>\r\n                    </li>\r\n                    <li>\r\n                        <a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" (click)=\"closeDropdown()\" [routerLink]=\"['/equipment']\">\r\n                            <span class=\"glyphicon glyphicon-blackboard\" aria-hidden=\"true\"></span> Equipment</a>\r\n                    </li>\r\n                    <li>\r\n                        <a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" (click)=\"closeDropdown()\" [routerLink]=\"['/labor']\">\r\n                            <span class=\"glyphicon glyphicon-wrench\" aria-hidden=\"true\"></span> Labor</a>\r\n                    </li>\r\n                    <!-- <li class=\"divider\"></li>\r\n                    <li>\r\n                        <a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" [routerLink]=\"['/profile']\">\r\n                            <span class=\"glyphicon glyphicon-info-sign\" aria-hidden=\"true\"></span> Profile</a>\r\n                    </li> -->\r\n                </ul>\r\n            </li>\r\n            <!-- <li><a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" [routerLink]=\"['/materials']\"><span class=\"glyphicon glyphicon-tint\" aria-hidden=\"true\"></span> Materials</a></li>\r\n            <li><a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" [routerLink]=\"['/labor']\"><span class=\"glyphicon glyphicon-wrench\" aria-hidden=\"true\"></span> Labor</a></li> -->\r\n            <!-- <li><a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" [routerLink]=\"['/register']\">Register User</a></li> -->\r\n            <li><a *ngIf=\"authService.loggedIn()\" data-toggle=\"modal\" href='#logout-modal'><span class=\"glyphicon glyphicon-log-out\" aria-hidden=\"true\"></span> Logout</a></li>\r\n        </ul>\r\n    </div><!-- /.navbar-collapse -->\r\n</nav>\r\n\r\n\r\n<!--                Logout Popup                -->\r\n<div class=\"modal fade\" id=\"logout-modal\">\r\n    <div class=\"modal-dialog\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header\">\r\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\r\n                <h4 class=\"modal-title\">Warning</h4>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <p>Are you sure you want to logout?</p>\r\n            </div>\r\n            <div class=\"modal-footer\">\r\n                <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">No</button>\r\n                <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\" (click)=\"onLogout()\">Yes</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
+module.exports = "<!-- https://stackoverflow.com/questions/38209713/how-to-make-a-responsive-nav-bar-using-angular-material-2 -->\r\n<!--<md-sidenav-containe fullscreen>-->\r\n<!--<md-sidenav-container>\r\n    <md-toolbar color=\"primary\">\r\n        <button md-button [routerLink]=\"['/']\"><md-icon>home</md-icon>Allied Waterproofing</button>\r\n        <span class=\"fill-remaining-space\"></span>\r\n        <div fxLayout=\"row\" fxShow=\"false\" fxShow.gt-sm>\r\n            <button md-button [routerLink]=\"['/customers']\">Customers</button>\r\n            <button md-button [routerLink]=\"['/']\">Something</button>\r\n        </div>\r\n        <button md-button [md-menu-trigger-for]=\"menu\" fxHide=\"false\" fxHide.gt-sm><md-icon>menu</md-icon></button>\r\n    </md-toolbar>\r\n    <md-menu x-position=\"before\" #menu=\"mdMenu\">\r\n        <button md-menu-item [routerLink]=\"['/customers']\">Customers</button>\r\n        <button md-menu-item [routerLink]=\"['/']\">Something</button>\r\n    </md-menu>\r\n</md-sidenav-container>-->\r\n\r\n<nav class=\"navbar navbar-inverse navbar-fixed-top\" role=\"navigation\">\r\n    <!-- Brand and toggle get grouped for better mobile display -->\r\n    <div class=\"navbar-header\">\r\n        <button *ngIf=\"authService.loggedIn()\" type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-ex1-collapse\">\r\n            <span class=\"sr-only\">Toggle navigation</span>\r\n            <span class=\"icon-bar\"></span>\r\n            <span class=\"icon-bar\"></span>\r\n            <span class=\"icon-bar\"></span>\r\n        </button>\r\n        <a class=\"navbar-brand\">Allied Waterproofing</a>\r\n    </div>\r\n\r\n    <!-- Collect the nav links, forms, and other content for toggling -->\r\n    <div id=\"navbar-ex1-collapse\" class=\"collapse navbar-collapse navbar-ex1-collapse\">\r\n        <ul class=\"nav navbar-nav\">\r\n            <li>\r\n                <a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" (click)=\"closeDropdown()\"\r\n                    [routerLink]=\"['/home']\">\r\n                    <span class=\"glyphicon glyphicon-home\" aria-hidden=\"true\"></span> Home</a>\r\n            </li>\r\n            <li>\r\n                <a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" (click)=\"closeDropdown()\"\r\n                    [routerLink]=\"['/customers']\">\r\n                    <span class=\"glyphicon glyphicon-user\" aria-hidden=\"true\"></span> Customers</a>\r\n            </li>\r\n            <li>\r\n                <a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" (click)=\"closeDropdown()\"\r\n                    [routerLink]=\"['/inquiries']\">\r\n                    <span class=\"glyphicon glyphicon-inbox\" aria-hidden=\"true\"></span> Inquiries</a>\r\n            </li>\r\n            <li>\r\n                <a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" (click)=\"closeDropdown()\"\r\n                    [routerLink]=\"['/bids']\">\r\n                    <span class=\"glyphicon glyphicon-file\" aria-hidden=\"true\"></span> Bids</a>\r\n            </li>\r\n            <li>\r\n                <a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" (click)=\"closeDropdown()\"\r\n                    [routerLink]=\"['/jobs']\">\r\n                    <span class=\"glyphicon glyphicon-briefcase\" aria-hidden=\"true\"></span> Jobs</a>\r\n            </li>\r\n        </ul>\r\n        <ul class=\"nav navbar-nav navbar-right\">\r\n            <li class=\"dropdown\">\r\n                <a *ngIf=\"authService.loggedIn()\" href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\">\r\n                    <span class=\"glyphicon glyphicon-collapse-down\"></span> Manage\r\n                </a>\r\n                <ul class=\"dropdown-menu\" role=\"menu\">\r\n                    <li>\r\n                        <a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" (click)=\"closeDropdown()\"\r\n                            [routerLink]=\"['/materials']\">\r\n                            <span class=\"glyphicon glyphicon-tint\" aria-hidden=\"true\"></span> Materials</a>\r\n                    </li>\r\n                    <li>\r\n                        <a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" (click)=\"closeDropdown()\"\r\n                            [routerLink]=\"['/equipment']\">\r\n                            <span class=\"glyphicon glyphicon-blackboard\" aria-hidden=\"true\"></span> Equipment</a>\r\n                    </li>\r\n                    <li>\r\n                        <a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" (click)=\"closeDropdown()\"\r\n                            [routerLink]=\"['/labor']\">\r\n                            <span class=\"glyphicon glyphicon-wrench\" aria-hidden=\"true\"></span> Labor</a>\r\n                    </li>\r\n                    <!-- <li class=\"divider\"></li>\r\n                    <li>\r\n                        <a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" [routerLink]=\"['/profile']\">\r\n                            <span class=\"glyphicon glyphicon-info-sign\" aria-hidden=\"true\"></span> Profile</a>\r\n                    </li> -->\r\n                </ul>\r\n            </li>\r\n            <li>\r\n                <a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" (click)=\"closeDropdown()\"\r\n                    [routerLink]=\"['/reports']\">\r\n                    <span class=\"glyphicon glyphicon-dashboard\" aria-hidden=\"true\"></span> Reports</a>\r\n            </li>\r\n            <!-- <li><a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" [routerLink]=\"['/materials']\"><span class=\"glyphicon glyphicon-tint\" aria-hidden=\"true\"></span> Materials</a></li>\r\n            <li><a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" [routerLink]=\"['/labor']\"><span class=\"glyphicon glyphicon-wrench\" aria-hidden=\"true\"></span> Labor</a></li> -->\r\n            <!-- <li><a *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" [routerLink]=\"['/register']\">Register User</a></li> -->\r\n            <li>\r\n                <a *ngIf=\"authService.loggedIn()\" data-toggle=\"modal\" href='#logout-modal'>\r\n                    <span class=\"glyphicon glyphicon-log-out\" aria-hidden=\"true\"></span> Logout</a>\r\n            </li>\r\n        </ul>\r\n    </div>\r\n    <!-- /.navbar-collapse -->\r\n</nav>\r\n\r\n\r\n<!--                Logout Popup                -->\r\n<div class=\"modal fade\" id=\"logout-modal\">\r\n    <div class=\"modal-dialog\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header\">\r\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\r\n                <h4 class=\"modal-title\">Warning</h4>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <p>Are you sure you want to logout?</p>\r\n            </div>\r\n            <div class=\"modal-footer\">\r\n                <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">No</button>\r\n                <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\" (click)=\"onLogout()\">Yes</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -4985,6 +4990,152 @@ var _a, _b;
 
 /***/ }),
 
+/***/ "../../../../../src/app/components/reports/reports.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/reports/reports.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"pull-left\">\n  <button class=\"btn btn-default\" [routerLink]=\"['/home']\">\n    <span class=\"glyphicon glyphicon-home\" aria-hidden=\"true\"></span> Go Home</button>\n</div>\n<div class=\"pull-right\">\n  <a target=\"_blank\" href=\"/api/help/reportsHelp.pdf\">\n    <button type=\"button\" class=\"btn btn-default\">Help\n      <span class=\"glyphicon glyphicon-question-sign\" aria-hidden=\"true\"></span>\n    </button>\n  </a>\n  <!-- <a target=\"_blank\" href=\"http://localhost:3000/api/help/reportsHelp.pdf\">\n        <button type=\"button\" class=\"btn btn-default\">Help\n          <span class=\"glyphicon glyphicon-question-sign\" aria-hidden=\"true\"></span>\n        </button>\n      </a> -->\n</div>\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\n  <h2 class=\"page-header\">Reports</h2>\n  <h4 style=\"font-weight:normal\">Select Date Range</h4>\n  <form class=\"form-inline\" (submit)=\"onSubmitDates()\">\n    <div class=\"form-group\">\n      <label>From: </label>\n      <my-date-picker [options]=\"myDatePickerOptions\" [(ngModel)]=\"date1\" name=\"date1\"></my-date-picker>\n    </div>\n    <div class=\"form-group\">\n      <label>To: </label>\n      <my-date-picker [options]=\"myDatePickerOptions\" [(ngModel)]=\"date2\" name=\"date2\"></my-date-picker>\n    </div>\n    <button [disabled]=\"date2 == null || date1 == null || date1.jsdate > date2.jsdate\" type=\"submit\" class=\"btn btn-primary\">\n      <span class=\"glyphicon glyphicon-dashboard\"></span> View</button>\n  </form>\n  <div *ngIf=\"jobs != null\">\n    <h3 class=\"page-header\" style=\"font-weight:normal\">Totals</h3>\n    <table class=\"table table-bordered\">\n      <thead>\n        <tr class=\"active\">\n          <th style=\"width:10px\"></th>\n          <th>Actual</th>\n          <th>Expected</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr>\n          <th class=\"active\" style=\"width:10px\">Revenue</th>\n          <td>{{totalActualRevenue | currency: 'USD':true}}</td>\n          <td>{{totalExpectedRevenue | currency: 'USD':true}}</td>\n        </tr>\n        <tr>\n          <th class=\"active\" style=\"width:10px\">Costs</th>\n          <td>{{totalActualCosts | currency: 'USD':true}}</td>\n          <td>{{totalExpectedCosts | currency: 'USD':true}}</td>\n        </tr>\n        <tr>\n          <th class=\"active\" style=\"width:10px\">Profit</th>\n          <th>{{totalActualRevenue - totalActualCosts | currency: 'USD':true}}</th>\n          <th>{{totalExpectedRevenue - totalExpectedCosts | currency: 'USD':true}}</th>\n        </tr>\n      </tbody>\n    </table>\n    <h3 class=\"page-header\" style=\"font-weight:normal\">Jobs</h3>\n    <h4 style=\"font-weight:normal\">Select Customer(s)</h4>\n    <div class=\"checkbox-inline\" *ngFor=\"let customer of customers\">\n      <label class=\"checkbox-inline\">\n        <input type=\"checkbox\" class=\"form-check-input\"> {{customer.customerName}}\n      </label>\n    </div>\n    <hr>\n    <table class=\"table table-bordered\">\n      <thead>\n        <tr class=\"active\">\n          <th>ID</th>\n          <th>Name</th>\n          <th>Customer</th>\n          <th>Revenue</th>\n          <th>Costs</th>\n          <th>Profit</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let job of jobs\">\n          <td *ngIf=\"selectedCustomerIDs.includes(job.customerID)\">{{job.jobID}}</td>\n          <td *ngIf=\"selectedCustomerIDs.includes(job.customerID)\">{{job.jobName}}</td>\n          <td *ngIf=\"selectedCustomerIDs.includes(job.customerID)\">{{job.customerName}}</td>\n          <td *ngIf=\"selectedCustomerIDs.includes(job.customerID)\">{{job.actualRevenue | currency: 'USD':true}}</td>\n          <td *ngIf=\"selectedCustomerIDs.includes(job.customerID)\">{{job.actualCosts | currency: 'USD':true}}</td>\n          <th *ngIf=\"selectedCustomerIDs.includes(job.customerID)\">{{job.actualRevenue - job.actualCosts | currency: 'USD':true}}</th>\n        </tr>\n      </tbody>\n    </table>\n  </div>\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/reports/reports.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReportsComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_job_service__ = __webpack_require__("../../../../../src/app/services/job.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_inquiry_service__ = __webpack_require__("../../../../../src/app/services/inquiry.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_customer_service__ = __webpack_require__("../../../../../src/app/services/customer.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_bid_service__ = __webpack_require__("../../../../../src/app/services/bid.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var ReportsComponent = (function () {
+    function ReportsComponent(jobService, bidService, inquiryService, customerService) {
+        this.jobService = jobService;
+        this.bidService = bidService;
+        this.inquiryService = inquiryService;
+        this.customerService = customerService;
+        this.jobs = null;
+        this.totalExpectedRevenue = 0;
+        this.totalActualRevenue = 0;
+        this.totalExpectedCosts = 0;
+        this.totalActualCosts = 0;
+        this.bids = null;
+        this.inquiries = null;
+        this.customers = [];
+        this.selectedCustomerIDs = [];
+        this.myDatePickerOptions = null;
+        this.date1 = null;
+        this.date2 = null;
+    }
+    ReportsComponent.prototype.ngOnInit = function () {
+        this.setupDatePickers();
+    };
+    ReportsComponent.prototype.onSubmitDates = function () {
+        var _this = this;
+        var dates = {
+            startDate: this.date1.date.year + "-" + this.date1.date.month + "-" + this.date1.date.day + " 00:00:00",
+            endDate: this.date2.date.year + "-" + this.date2.date.month + "-" + this.date2.date.day + " 23:59:59"
+        };
+        this.jobService.getJobsReport(dates).subscribe(function (jobs) {
+            _this.jobs = jobs;
+            _this.totalActualCosts = 0;
+            _this.totalActualRevenue = 0;
+            _this.totalExpectedCosts = 0;
+            _this.totalExpectedRevenue = 0;
+            _this.customers = [];
+            _this.selectedCustomerIDs = [];
+            _this.customerService.getAllCustomers().subscribe(function (customers) {
+                _this.jobs.forEach(function (job) {
+                    _this.totalActualCosts += job.actualCosts;
+                    _this.totalActualRevenue += job.actualRevenue;
+                    _this.totalExpectedCosts += job.expectedCosts;
+                    _this.totalExpectedRevenue += job.expectedRevenue;
+                    customers.customers.forEach(function (customer) {
+                        if (job.customerID == customer.customerID) {
+                            if (!_this.customers.includes(customer)) {
+                                _this.customers.push(customer);
+                                _this.selectedCustomerIDs.push(customer.customerID);
+                            }
+                        }
+                    });
+                });
+            });
+        });
+        this.bidService.getBidsByDates(dates).subscribe(function (bids) {
+            _this.bids = bids;
+            // console.log(this.bids);
+        });
+        this.inquiryService.getInquiriesByDate(dates).subscribe(function (inquiries) {
+            _this.inquiries = inquiries;
+            // console.log(this.inquiries);
+        });
+    };
+    ReportsComponent.prototype.setupDatePickers = function () {
+        this.myDatePickerOptions = {
+            dateFormat: 'mm-dd-yyyy',
+            editableDateField: false
+        };
+        var today = this.getToday();
+        this.date2 = {
+            date: {
+                year: today[2], month: today[0], day: today[1]
+            }
+        };
+    };
+    ReportsComponent.prototype.getToday = function () {
+        var today = new Date();
+        var dd = today.getDate().toString();
+        var mm = (today.getMonth() + 1).toString(); // January is 0
+        var yyyy = today.getFullYear();
+        return [mm, dd, yyyy];
+    };
+    return ReportsComponent;
+}());
+ReportsComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-reports',
+        template: __webpack_require__("../../../../../src/app/components/reports/reports.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/components/reports/reports.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_job_service__["a" /* JobService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_job_service__["a" /* JobService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__services_bid_service__["a" /* BidService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_bid_service__["a" /* BidService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_inquiry_service__["a" /* InquiryService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_inquiry_service__["a" /* InquiryService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__services_customer_service__["a" /* CustomerService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_customer_service__["a" /* CustomerService */]) === "function" && _d || Object])
+], ReportsComponent);
+
+var _a, _b, _c, _d;
+//# sourceMappingURL=reports.component.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/guards/auth.guard.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -5151,6 +5302,13 @@ var BidService = (function () {
         headers.append('Authorization', this.authService.authToken);
         headers.append('Content-Type', 'application/json');
         return this.http.get(this.localHttp + "/bids/all", { headers: headers }).map(function (response) { return response.json(); });
+    };
+    BidService.prototype.getBidsByDates = function (dates) {
+        this.authService.loadToken();
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        headers.append('Authorization', this.authService.authToken);
+        headers.append('Content-Type', 'application/json');
+        return this.http.post(this.localHttp + "/bids/by-date", JSON.stringify(dates), { headers: headers }).map(function (response) { return response.json(); });
     };
     BidService.prototype.getBidById = function (id) {
         this.authService.loadToken();
@@ -5562,6 +5720,13 @@ var InquiryService = (function () {
         headers.append('Content-Type', 'application/json');
         return this.http.get(this.localHttp + "/inquiries/all/customer/" + customerID, { headers: headers }).map(function (response) { return response.json(); });
     };
+    InquiryService.prototype.getInquiriesByDate = function (dates) {
+        this.authService.loadToken();
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        headers.append('Authorization', this.authService.authToken);
+        headers.append('Content-Type', 'application/json');
+        return this.http.post(this.localHttp + "/inquiries/by-date", JSON.stringify(dates), { headers: headers }).map(function (response) { return response.json(); });
+    };
     InquiryService.prototype.getAllInquiriesTest = function () {
         this.authService.loadToken();
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
@@ -5717,6 +5882,13 @@ var JobService = (function () {
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', this.authService.authToken);
         return this.http.post(this.localHttp + "/jobs/update-status", JSON.stringify(updatedJob), { headers: headers }).map(function (response) { return response.json(); });
+    };
+    JobService.prototype.getJobsReport = function (dates) {
+        this.authService.loadToken();
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        headers.append('Authorization', this.authService.authToken);
+        headers.append('Content-Type', 'application/json');
+        return this.http.post(this.localHttp + "/jobs/report", JSON.stringify(dates), { headers: headers }).map(function (response) { return response.json(); });
     };
     /********************************************************************* MATERIAL FUNCTIONS ***********************************************************************/
     JobService.prototype.getJobMaterialsById = function (jobId) {

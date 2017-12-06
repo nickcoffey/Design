@@ -61,6 +61,22 @@ router.get('/all/current/costs', passport.authenticate('jwt', { session: false }
     });
 });
 
+// Get jobs report
+router.post('/report', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    let dates = {
+        startDate: request.body.startDate,
+        endDate: request.body.endDate
+    };
+
+    job.getJobsReport(dates, (jobs) => {
+        if (!jobs) {
+            return err;
+        } else {
+            return response.json(jobs);
+        }
+    });
+});
+
 // Get job by id
 router.get('/:id', passport.authenticate('jwt', { session: false }), (request, response, next) => {
     const id = request.params.id;

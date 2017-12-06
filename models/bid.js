@@ -26,6 +26,17 @@ module.exports.getBidById = function (id, callback) {
     });
 }
 
+module.exports.getBidsByDate = function (dates, callback) {
+    const queryString = `SELECT bidID, bidStatus, createdDate, customerID, customerName FROM detailedBids WHERE createdDate BETWEEN '${dates.startDate}' AND '${dates.endDate}'`;
+    connection.query(queryString, (error, rows, fields) => {
+        if (!error) {
+            callback(rows);
+        } else {
+            return error;
+        }
+    });
+}
+
 module.exports.updateBid = function (updatedBid, callback) {
     const queryString = sqlString.format(`UPDATE Bid SET ? WHERE bidID = ?`, [updatedBid, updatedBid.bidID]);
     console.log(queryString);

@@ -58,6 +58,18 @@ module.exports.getCurrentJobCosts = function (callback) {
     });
 }
 
+module.exports.getJobsReport = function (dates, callback) {
+    const queryString = `SELECT * FROM JobsReport WHERE jobCreatedDate BETWEEN '${dates.startDate}' AND '${dates.endDate}'`;
+    console.log(queryString);
+    connection.query(queryString, (error, rows, fields) => {
+        if (!error) {
+            callback(rows);
+        } else {
+            return error;
+        }
+    });
+}
+
 module.exports.updateJob = function (updatedJob, callback) {
     const queryString = sqlString.format(`UPDATE Job SET ? WHERE jobID = ?`, [updatedJob, updatedJob.jobID]);
     //console.log(queryString);

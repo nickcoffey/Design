@@ -24,6 +24,17 @@ module.exports.getInquiriesByCustomer = function (customerID, callback) {
     });
 }
 
+module.exports.getInquiriesByDate = function (dates, callback) {
+    const queryString = `SELECT inquiryID, inquiryStatus, receivedDate, customerID, customerName FROM detailedInquiries WHERE receivedDate BETWEEN '${dates.startDate}' AND '${dates.endDate}'`;
+    connection.query(queryString, (err, rows, fields) => {
+        if (!err) {
+            callback(rows);
+        } else {
+            return err;
+        }
+    });
+}
+
 module.exports.getInquiryById = function (id, callback) {
     const queryString = `SELECT * FROM detailedInquiries WHERE inquiryID=${id}`;
     connection.query(queryString, (error, rows, fields) => {

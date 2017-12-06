@@ -49,6 +49,22 @@ router.get('/all/customer/:id', passport.authenticate('jwt', { session: false })
     });
 });
 
+// Get inquiries by date
+router.post('/by-date', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    let dates = {
+        startDate: request.body.startDate,
+        endDate: request.body.endDate
+    };
+
+    inquiry.getInquiriesByDate(dates, (inquiries) => {
+        if (!inquiries) {
+            return err;
+        } else {
+            return response.json(inquiries);
+        }
+    });
+});
+
 // Get inquiry by id
 router.get('/:id', passport.authenticate('jwt', { session: false }), (request, response, next) => {
     const id = request.params.id;

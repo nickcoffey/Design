@@ -149,6 +149,22 @@ router.get('/all', passport.authenticate('jwt', { session: false }), (request, r
     });
 });
 
+// Get bids by date
+router.post('/by-date', passport.authenticate('jwt', { session: false }), (request, response, next) => {
+    let dates = {
+        startDate: request.body.startDate,
+        endDate: request.body.endDate
+    };
+    
+    bid.getBidsByDate(dates, (bids) => {
+        if (!bids) {
+            return err;
+        } else {
+            return response.json(bids);
+        }
+    });
+});
+
 // Get bid by id
 router.get('/:id', passport.authenticate('jwt', { session: false }), (request, response, next) => {
     const id = request.params.id;

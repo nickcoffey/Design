@@ -1,0 +1,91 @@
+<div class="pull-left">
+  <button class="btn btn-default" [routerLink]="['/home']">
+    <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Go Home</button>
+</div>
+<div class="pull-right">
+  <a target="_blank" href="/api/help/reportsHelp.pdf">
+    <button type="button" class="btn btn-default">Help
+      <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+    </button>
+  </a>
+  <!-- <a target="_blank" href="http://localhost:3000/api/help/reportsHelp.pdf">
+        <button type="button" class="btn btn-default">Help
+          <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+        </button>
+      </a> -->
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <h2 class="page-header">Reports</h2>
+  <h4 style="font-weight:normal">Select Date Range</h4>
+  <form class="form-inline" (submit)="onSubmitDates()">
+    <div class="form-group">
+      <label>From: </label>
+      <my-date-picker [options]="myDatePickerOptions" [(ngModel)]="date1" name="date1"></my-date-picker>
+    </div>
+    <div class="form-group">
+      <label>To: </label>
+      <my-date-picker [options]="myDatePickerOptions" [(ngModel)]="date2" name="date2"></my-date-picker>
+    </div>
+    <button [disabled]="date2 == null || date1 == null || date1.jsdate > date2.jsdate" type="submit" class="btn btn-primary">
+      <span class="glyphicon glyphicon-dashboard"></span> View</button>
+  </form>
+  <div *ngIf="jobs != null">
+    <h3 class="page-header" style="font-weight:normal">Totals</h3>
+    <table class="table table-bordered">
+      <thead>
+        <tr class="active">
+          <th style="width:10px"></th>
+          <th>Actual</th>
+          <th>Expected</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th class="active" style="width:10px">Revenue</th>
+          <td>{{totalActualRevenue | currency: 'USD':true}}</td>
+          <td>{{totalExpectedRevenue | currency: 'USD':true}}</td>
+        </tr>
+        <tr>
+          <th class="active" style="width:10px">Costs</th>
+          <td>{{totalActualCosts | currency: 'USD':true}}</td>
+          <td>{{totalExpectedCosts | currency: 'USD':true}}</td>
+        </tr>
+        <tr>
+          <th class="active" style="width:10px">Profit</th>
+          <th>{{totalActualRevenue - totalActualCosts | currency: 'USD':true}}</th>
+          <th>{{totalExpectedRevenue - totalExpectedCosts | currency: 'USD':true}}</th>
+        </tr>
+      </tbody>
+    </table>
+    <h3 class="page-header" style="font-weight:normal">Jobs</h3>
+    <h4 style="font-weight:normal">Select Customer(s)</h4>
+    <div class="checkbox-inline" *ngFor="let customer of customers">
+      <label class="checkbox-inline">
+        <input type="checkbox" class="form-check-input"> {{customer.customerName}}
+      </label>
+    </div>
+    <hr>
+    <table class="table table-bordered">
+      <thead>
+        <tr class="active">
+          <th>ID</th>
+          <th>Name</th>
+          <th>Customer</th>
+          <th>Revenue</th>
+          <th>Costs</th>
+          <th>Profit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let job of jobs">
+          <td *ngIf="selectedCustomerIDs.includes(job.customerID)">{{job.jobID}}</td>
+          <td *ngIf="selectedCustomerIDs.includes(job.customerID)">{{job.jobName}}</td>
+          <td *ngIf="selectedCustomerIDs.includes(job.customerID)">{{job.customerName}}</td>
+          <td *ngIf="selectedCustomerIDs.includes(job.customerID)">{{job.actualRevenue | currency: 'USD':true}}</td>
+          <td *ngIf="selectedCustomerIDs.includes(job.customerID)">{{job.actualCosts | currency: 'USD':true}}</td>
+          <th *ngIf="selectedCustomerIDs.includes(job.customerID)">{{job.actualRevenue - job.actualCosts | currency: 'USD':true}}</th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

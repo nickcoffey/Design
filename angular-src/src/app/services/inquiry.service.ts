@@ -30,6 +30,14 @@ export class InquiryService {
     return this.http.get(`${this.localHttp}/inquiries/all/customer/${customerID}`, { headers: headers }).map(response => response.json());
   }
 
+  getInquiriesByDate(dates) {
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Authorization', this.authService.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(`${this.localHttp}/inquiries/by-date`, JSON.stringify(dates), { headers: headers }).map(response => response.json());
+  }
+
   getAllInquiriesTest() {
     this.authService.loadToken();
     let headers = new Headers();

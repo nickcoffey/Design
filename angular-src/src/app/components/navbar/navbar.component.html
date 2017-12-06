@@ -31,11 +31,31 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div id="navbar-ex1-collapse" class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav">
-            <li><a *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" (click)="closeDropdown()" [routerLink]="['/home']"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
-            <li><a *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" (click)="closeDropdown()" [routerLink]="['/customers']"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Customers</a></li>
-            <li><a *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" (click)="closeDropdown()" [routerLink]="['/inquiries']"><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> Inquiries</a></li>
-            <li><a *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" (click)="closeDropdown()" [routerLink]="['/bids']"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Bids</a></li>
-            <li><a *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" (click)="closeDropdown()" [routerLink]="['/jobs']"><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Jobs</a></li>
+            <li>
+                <a *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" (click)="closeDropdown()"
+                    [routerLink]="['/home']">
+                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a>
+            </li>
+            <li>
+                <a *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" (click)="closeDropdown()"
+                    [routerLink]="['/customers']">
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Customers</a>
+            </li>
+            <li>
+                <a *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" (click)="closeDropdown()"
+                    [routerLink]="['/inquiries']">
+                    <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> Inquiries</a>
+            </li>
+            <li>
+                <a *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" (click)="closeDropdown()"
+                    [routerLink]="['/bids']">
+                    <span class="glyphicon glyphicon-file" aria-hidden="true"></span> Bids</a>
+            </li>
+            <li>
+                <a *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" (click)="closeDropdown()"
+                    [routerLink]="['/jobs']">
+                    <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Jobs</a>
+            </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
@@ -44,15 +64,18 @@
                 </a>
                 <ul class="dropdown-menu" role="menu">
                     <li>
-                        <a *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" (click)="closeDropdown()" [routerLink]="['/materials']">
+                        <a *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" (click)="closeDropdown()"
+                            [routerLink]="['/materials']">
                             <span class="glyphicon glyphicon-tint" aria-hidden="true"></span> Materials</a>
                     </li>
                     <li>
-                        <a *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" (click)="closeDropdown()" [routerLink]="['/equipment']">
+                        <a *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" (click)="closeDropdown()"
+                            [routerLink]="['/equipment']">
                             <span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span> Equipment</a>
                     </li>
                     <li>
-                        <a *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" (click)="closeDropdown()" [routerLink]="['/labor']">
+                        <a *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" (click)="closeDropdown()"
+                            [routerLink]="['/labor']">
                             <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Labor</a>
                     </li>
                     <!-- <li class="divider"></li>
@@ -62,12 +85,21 @@
                     </li> -->
                 </ul>
             </li>
+            <li>
+                <a *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" (click)="closeDropdown()"
+                    [routerLink]="['/reports']">
+                    <span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> Reports</a>
+            </li>
             <!-- <li><a *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" [routerLink]="['/materials']"><span class="glyphicon glyphicon-tint" aria-hidden="true"></span> Materials</a></li>
             <li><a *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" [routerLink]="['/labor']"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Labor</a></li> -->
             <!-- <li><a *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" [routerLink]="['/register']">Register User</a></li> -->
-            <li><a *ngIf="authService.loggedIn()" data-toggle="modal" href='#logout-modal'><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout</a></li>
+            <li>
+                <a *ngIf="authService.loggedIn()" data-toggle="modal" href='#logout-modal'>
+                    <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout</a>
+            </li>
         </ul>
-    </div><!-- /.navbar-collapse -->
+    </div>
+    <!-- /.navbar-collapse -->
 </nav>
 
 

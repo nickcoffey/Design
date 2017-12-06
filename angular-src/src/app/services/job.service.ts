@@ -79,6 +79,14 @@ export class JobService {
     return this.http.post(`${this.localHttp}/jobs/update-status`, JSON.stringify(updatedJob), { headers: headers }).map(response => response.json());
   }
 
+  getJobsReport(dates) {
+    this.authService.loadToken();
+    let headers = new Headers();
+    headers.append('Authorization', this.authService.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(`${this.localHttp}/jobs/report`, JSON.stringify(dates), { headers: headers }).map(response => response.json());
+  }
+
   /********************************************************************* MATERIAL FUNCTIONS ***********************************************************************/
   getJobMaterialsById(jobId) {
     this.authService.loadToken();
