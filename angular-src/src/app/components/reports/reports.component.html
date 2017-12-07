@@ -29,8 +29,8 @@
     <button [disabled]="date2 == null || date1 == null || date1.jsdate > date2.jsdate" type="submit" class="btn btn-primary">
       <span class="glyphicon glyphicon-dashboard"></span> View</button>
   </form>
-  <div *ngIf="jobs != null">
-    <h3 class="page-header" style="font-weight:normal">Totals</h3>
+  <div *ngIf="jobs.length > 0">
+    <!-- <h3 class="page-header" style="font-weight:normal">Totals</h3>
     <table class="table table-bordered">
       <thead>
         <tr class="active">
@@ -56,36 +56,55 @@
           <th>{{totalExpectedRevenue - totalExpectedCosts | currency: 'USD':true}}</th>
         </tr>
       </tbody>
-    </table>
+    </table> -->
     <h3 class="page-header" style="font-weight:normal">Jobs</h3>
     <h4 style="font-weight:normal">Select Customer(s)</h4>
-    <div class="checkbox-inline" *ngFor="let customer of customers">
+    <div class="checkbox-inline" *ngFor="let customer of customers; let i = index;">
       <label class="checkbox-inline">
-        <input type="checkbox" class="form-check-input"> {{customer.customerName}}
+        <input type="checkbox" class="form-check-input" (change)="onFilterCustomer(customer)" checked> {{customer.customerName}}
       </label>
     </div>
     <hr>
-    <table class="table table-bordered">
+    <h5 style="font-weight:normal">Click To Open Job Page</h5>
+    <table class="table table-bordered table-hover">
       <thead>
         <tr class="active">
           <th>ID</th>
           <th>Name</th>
           <th>Customer</th>
-          <th>Revenue</th>
-          <th>Costs</th>
-          <th>Profit</th>
+          <th>Revenue Collected</th>
+          <th>Costs Accrued</th>
+          <th>Profit Generated</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let job of jobs">
-          <td *ngIf="selectedCustomerIDs.includes(job.customerID)">{{job.jobID}}</td>
-          <td *ngIf="selectedCustomerIDs.includes(job.customerID)">{{job.jobName}}</td>
-          <td *ngIf="selectedCustomerIDs.includes(job.customerID)">{{job.customerName}}</td>
-          <td *ngIf="selectedCustomerIDs.includes(job.customerID)">{{job.actualRevenue | currency: 'USD':true}}</td>
-          <td *ngIf="selectedCustomerIDs.includes(job.customerID)">{{job.actualCosts | currency: 'USD':true}}</td>
-          <th *ngIf="selectedCustomerIDs.includes(job.customerID)">{{job.actualRevenue - job.actualCosts | currency: 'USD':true}}</th>
+        <tr *ngFor="let job of jobs" [ngClass]="{'danger': job.actualRevenue - job.actualCosts < 0}" [routerLink]="['/jobs/'+job.jobID]">
+          <template [ngIf]="customerSelected(job)">
+            <td>{{job.jobID}}</td>
+            <td>{{job.jobName}}</td>
+            <td>{{job.customerName}}</td>
+            <td>{{job.actualRevenue | currency: 'USD':true}}</td>
+            <td>{{job.actualCosts | currency: 'USD':true}}</td>
+            <th>{{job.actualRevenue - job.actualCosts | currency: 'USD':true}}</th>
+          </template>
+          <!-- <td *ngIf="customerSelected(job)">{{job.jobID}}</td>
+          <td *ngIf="customerSelected(job)">{{job.jobName}}</td>
+          <td *ngIf="customerSelected(job)">{{job.customerName}}</td>
+          <td *ngIf="customerSelected(job)">{{job.actualRevenue | currency: 'USD':true}}</td>
+          <td *ngIf="customerSelected(job)">{{job.actualCosts | currency: 'USD':true}}</td>
+          <th *ngIf="customerSelected(job)">{{job.actualRevenue - job.actualCosts | currency: 'USD':true}}</th> -->
         </tr>
       </tbody>
+      <!-- <tfoot>
+        <tr class="active">
+          <th>Totals</th>
+          <th></th>
+          <th></th>
+          <th>{{totalActualRevenue | currency: 'USD':true}}</th>
+          <th>{{totalActualCosts | currency: 'USD':true}}</th>
+          <th>{{totalActualRevenue - totalActualCosts | currency: 'USD':true}}</th>
+        </tr>
+      </tfoot> -->
     </table>
   </div>
 </div>

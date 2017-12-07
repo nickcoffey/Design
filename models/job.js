@@ -59,11 +59,26 @@ module.exports.getCurrentJobCosts = function (callback) {
 }
 
 module.exports.getJobsReport = function (dates, callback) {
-    const queryString = `SELECT * FROM JobsReport WHERE jobCreatedDate BETWEEN '${dates.startDate}' AND '${dates.endDate}'`;
-    console.log(queryString);
-    connection.query(queryString, (error, rows, fields) => {
+    // const queryString = `SELECT * FROM JobsReport WHERE jobCreatedDate BETWEEN '${dates.startDate}' AND '${dates.endDate}'`;
+    const setStartQuery = `SET @startDate = '${dates.startDate}'`;
+    const setEndQuery = `SET @endDate = '${dates.endDate}'`;
+    const callReportQuery = `CALL ReportProcedure(@startDate, @endDate)`;
+    // console.log(queryString);
+    connection.query(setStartQuery, (error, rows, fields) => {
         if (!error) {
-            callback(rows);
+            connection.query(setEndQuery, (error, rows, fields) => {
+                if (!error) {
+                    connection.query(callReportQuery, (error, rows, fields) => {
+                        if (!error) {
+                            callback(rows);
+                        } else {
+                            return error;
+                        }
+                    });
+                } else {
+                    return error;
+                }
+            });
         } else {
             return error;
         }

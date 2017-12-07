@@ -295,7 +295,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/alert/alert.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div href=\"#warningAlert\" id=\"warningAlert\" class=\"alert alert-dismissible alert-warning\" hidden></div>\r\n<div href=\"#successAlert\" id=\"successAlert\" class=\"alert alert-dismissible alert-success\" hidden></div>"
+module.exports = "<div href=\"#warningAlert\" id=\"warningAlert\" class=\"alert alert-dismissible alert-warning\" hidden></div>\n<div href=\"#successAlert\" id=\"successAlert\" class=\"alert alert-dismissible alert-success\" hidden></div>"
 
 /***/ }),
 
@@ -4860,7 +4860,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/profile/profile.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"pull-left\">\n  <button class=\"btn btn-default\" [routerLink]=\"['/home']\">\n    <span class=\"glyphicon glyphicon-home\" aria-hidden=\"true\"></span> Go Home</button>\n</div>\n\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\n  <h2 class=\"page-header\">Profile</h2>\n</div>"
+module.exports = "<div class=\"pull-left\">\r\n  <button class=\"btn btn-default\" [routerLink]=\"['/home']\">\r\n    <span class=\"glyphicon glyphicon-home\" aria-hidden=\"true\"></span> Go Home</button>\r\n</div>\r\n\r\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <h2 class=\"page-header\">Profile</h2>\r\n</div>"
 
 /***/ }),
 
@@ -4921,7 +4921,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/register/register.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<button class=\"btn btn-default\" [routerLink]=\"['/home']\">Go Home</button>\r\n<h2 class=\"page-header\">Register A New User</h2>\r\n<form (submit)=\"onRegister()\">\r\n  <div class=\"form-group\">\r\n    <label>Name</label>\r\n    <input type=\"text\" [(ngModel)]=\"name\" name=\"name\" placeholder=\"Name\" class=\"form-control\" required>\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <label>Username</label>\r\n    <input type=\"text\" [(ngModel)]=\"username\" name=\"username\" placeholder=\"Username\" class=\"form-control\" required>\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <label>Password</label>\r\n    <input type=\"password\" [(ngModel)]=\"password\" name=\"password\" placeholder=\"Password\" class=\"form-control\" required>\r\n  </div>\r\n  <button type=\"submit\" class=\"btn btn-primary\">Register</button>\r\n  <button type=\"reset\" class=\"btn btn-danger\">Clear</button>\r\n</form>"
+module.exports = "<button class=\"btn btn-default\" [routerLink]=\"['/home']\">Go Home</button>\n<h2 class=\"page-header\">Register A New User</h2>\n<form (submit)=\"onRegister()\">\n  <div class=\"form-group\">\n    <label>Name</label>\n    <input type=\"text\" [(ngModel)]=\"name\" name=\"name\" placeholder=\"Name\" class=\"form-control\" required>\n  </div>\n  <div class=\"form-group\">\n    <label>Username</label>\n    <input type=\"text\" [(ngModel)]=\"username\" name=\"username\" placeholder=\"Username\" class=\"form-control\" required>\n  </div>\n  <div class=\"form-group\">\n    <label>Password</label>\n    <input type=\"password\" [(ngModel)]=\"password\" name=\"password\" placeholder=\"Password\" class=\"form-control\" required>\n  </div>\n  <button type=\"submit\" class=\"btn btn-primary\">Register</button>\n  <button type=\"reset\" class=\"btn btn-danger\">Clear</button>\n</form>"
 
 /***/ }),
 
@@ -5011,7 +5011,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/reports/reports.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"pull-left\">\n  <button class=\"btn btn-default\" [routerLink]=\"['/home']\">\n    <span class=\"glyphicon glyphicon-home\" aria-hidden=\"true\"></span> Go Home</button>\n</div>\n<div class=\"pull-right\">\n  <a target=\"_blank\" href=\"/api/help/reportsHelp.pdf\">\n    <button type=\"button\" class=\"btn btn-default\">Help\n      <span class=\"glyphicon glyphicon-question-sign\" aria-hidden=\"true\"></span>\n    </button>\n  </a>\n  <!-- <a target=\"_blank\" href=\"http://localhost:3000/api/help/reportsHelp.pdf\">\n        <button type=\"button\" class=\"btn btn-default\">Help\n          <span class=\"glyphicon glyphicon-question-sign\" aria-hidden=\"true\"></span>\n        </button>\n      </a> -->\n</div>\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\n  <h2 class=\"page-header\">Reports</h2>\n  <h4 style=\"font-weight:normal\">Select Date Range</h4>\n  <form class=\"form-inline\" (submit)=\"onSubmitDates()\">\n    <div class=\"form-group\">\n      <label>From: </label>\n      <my-date-picker [options]=\"myDatePickerOptions\" [(ngModel)]=\"date1\" name=\"date1\"></my-date-picker>\n    </div>\n    <div class=\"form-group\">\n      <label>To: </label>\n      <my-date-picker [options]=\"myDatePickerOptions\" [(ngModel)]=\"date2\" name=\"date2\"></my-date-picker>\n    </div>\n    <button [disabled]=\"date2 == null || date1 == null || date1.jsdate > date2.jsdate\" type=\"submit\" class=\"btn btn-primary\">\n      <span class=\"glyphicon glyphicon-dashboard\"></span> View</button>\n  </form>\n  <div *ngIf=\"jobs != null\">\n    <h3 class=\"page-header\" style=\"font-weight:normal\">Totals</h3>\n    <table class=\"table table-bordered\">\n      <thead>\n        <tr class=\"active\">\n          <th style=\"width:10px\"></th>\n          <th>Actual</th>\n          <th>Expected</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr>\n          <th class=\"active\" style=\"width:10px\">Revenue</th>\n          <td>{{totalActualRevenue | currency: 'USD':true}}</td>\n          <td>{{totalExpectedRevenue | currency: 'USD':true}}</td>\n        </tr>\n        <tr>\n          <th class=\"active\" style=\"width:10px\">Costs</th>\n          <td>{{totalActualCosts | currency: 'USD':true}}</td>\n          <td>{{totalExpectedCosts | currency: 'USD':true}}</td>\n        </tr>\n        <tr>\n          <th class=\"active\" style=\"width:10px\">Profit</th>\n          <th>{{totalActualRevenue - totalActualCosts | currency: 'USD':true}}</th>\n          <th>{{totalExpectedRevenue - totalExpectedCosts | currency: 'USD':true}}</th>\n        </tr>\n      </tbody>\n    </table>\n    <h3 class=\"page-header\" style=\"font-weight:normal\">Jobs</h3>\n    <h4 style=\"font-weight:normal\">Select Customer(s)</h4>\n    <div class=\"checkbox-inline\" *ngFor=\"let customer of customers\">\n      <label class=\"checkbox-inline\">\n        <input type=\"checkbox\" class=\"form-check-input\"> {{customer.customerName}}\n      </label>\n    </div>\n    <hr>\n    <table class=\"table table-bordered\">\n      <thead>\n        <tr class=\"active\">\n          <th>ID</th>\n          <th>Name</th>\n          <th>Customer</th>\n          <th>Revenue</th>\n          <th>Costs</th>\n          <th>Profit</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let job of jobs\">\n          <td *ngIf=\"selectedCustomerIDs.includes(job.customerID)\">{{job.jobID}}</td>\n          <td *ngIf=\"selectedCustomerIDs.includes(job.customerID)\">{{job.jobName}}</td>\n          <td *ngIf=\"selectedCustomerIDs.includes(job.customerID)\">{{job.customerName}}</td>\n          <td *ngIf=\"selectedCustomerIDs.includes(job.customerID)\">{{job.actualRevenue | currency: 'USD':true}}</td>\n          <td *ngIf=\"selectedCustomerIDs.includes(job.customerID)\">{{job.actualCosts | currency: 'USD':true}}</td>\n          <th *ngIf=\"selectedCustomerIDs.includes(job.customerID)\">{{job.actualRevenue - job.actualCosts | currency: 'USD':true}}</th>\n        </tr>\n      </tbody>\n    </table>\n  </div>\n</div>"
+module.exports = "<div class=\"pull-left\">\r\n  <button class=\"btn btn-default\" [routerLink]=\"['/home']\">\r\n    <span class=\"glyphicon glyphicon-home\" aria-hidden=\"true\"></span> Go Home</button>\r\n</div>\r\n<div class=\"pull-right\">\r\n  <a target=\"_blank\" href=\"/api/help/reportsHelp.pdf\">\r\n    <button type=\"button\" class=\"btn btn-default\">Help\r\n      <span class=\"glyphicon glyphicon-question-sign\" aria-hidden=\"true\"></span>\r\n    </button>\r\n  </a>\r\n  <!-- <a target=\"_blank\" href=\"http://localhost:3000/api/help/reportsHelp.pdf\">\r\n        <button type=\"button\" class=\"btn btn-default\">Help\r\n          <span class=\"glyphicon glyphicon-question-sign\" aria-hidden=\"true\"></span>\r\n        </button>\r\n      </a> -->\r\n</div>\r\n<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r\n  <h2 class=\"page-header\">Reports</h2>\r\n  <h4 style=\"font-weight:normal\">Select Date Range</h4>\r\n  <form class=\"form-inline\" (submit)=\"onSubmitDates()\">\r\n    <div class=\"form-group\">\r\n      <label>From: </label>\r\n      <my-date-picker [options]=\"myDatePickerOptions\" [(ngModel)]=\"date1\" name=\"date1\"></my-date-picker>\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label>To: </label>\r\n      <my-date-picker [options]=\"myDatePickerOptions\" [(ngModel)]=\"date2\" name=\"date2\"></my-date-picker>\r\n    </div>\r\n    <button [disabled]=\"date2 == null || date1 == null || date1.jsdate > date2.jsdate\" type=\"submit\" class=\"btn btn-primary\">\r\n      <span class=\"glyphicon glyphicon-dashboard\"></span> View</button>\r\n  </form>\r\n  <div *ngIf=\"jobs.length > 0\">\r\n    <!-- <h3 class=\"page-header\" style=\"font-weight:normal\">Totals</h3>\r\n    <table class=\"table table-bordered\">\r\n      <thead>\r\n        <tr class=\"active\">\r\n          <th style=\"width:10px\"></th>\r\n          <th>Actual</th>\r\n          <th>Expected</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr>\r\n          <th class=\"active\" style=\"width:10px\">Revenue</th>\r\n          <td>{{totalActualRevenue | currency: 'USD':true}}</td>\r\n          <td>{{totalExpectedRevenue | currency: 'USD':true}}</td>\r\n        </tr>\r\n        <tr>\r\n          <th class=\"active\" style=\"width:10px\">Costs</th>\r\n          <td>{{totalActualCosts | currency: 'USD':true}}</td>\r\n          <td>{{totalExpectedCosts | currency: 'USD':true}}</td>\r\n        </tr>\r\n        <tr>\r\n          <th class=\"active\" style=\"width:10px\">Profit</th>\r\n          <th>{{totalActualRevenue - totalActualCosts | currency: 'USD':true}}</th>\r\n          <th>{{totalExpectedRevenue - totalExpectedCosts | currency: 'USD':true}}</th>\r\n        </tr>\r\n      </tbody>\r\n    </table> -->\r\n    <h3 class=\"page-header\" style=\"font-weight:normal\">Jobs</h3>\r\n    <h4 style=\"font-weight:normal\">Select Customer(s)</h4>\r\n    <div class=\"checkbox-inline\" *ngFor=\"let customer of customers; let i = index;\">\r\n      <label class=\"checkbox-inline\">\r\n        <input type=\"checkbox\" class=\"form-check-input\" (change)=\"onFilterCustomer(customer)\" checked> {{customer.customerName}}\r\n      </label>\r\n    </div>\r\n    <hr>\r\n    <h5 style=\"font-weight:normal\">Click To Open Job Page</h5>\r\n    <table class=\"table table-bordered table-hover\">\r\n      <thead>\r\n        <tr class=\"active\">\r\n          <th>ID</th>\r\n          <th>Name</th>\r\n          <th>Customer</th>\r\n          <th>Revenue Collected</th>\r\n          <th>Costs Accrued</th>\r\n          <th>Profit Generated</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let job of jobs\" [ngClass]=\"{'danger': job.actualRevenue - job.actualCosts < 0}\" [routerLink]=\"['/jobs/'+job.jobID]\">\r\n          <template [ngIf]=\"customerSelected(job)\">\r\n            <td>{{job.jobID}}</td>\r\n            <td>{{job.jobName}}</td>\r\n            <td>{{job.customerName}}</td>\r\n            <td>{{job.actualRevenue | currency: 'USD':true}}</td>\r\n            <td>{{job.actualCosts | currency: 'USD':true}}</td>\r\n            <th>{{job.actualRevenue - job.actualCosts | currency: 'USD':true}}</th>\r\n          </template>\r\n          <!-- <td *ngIf=\"customerSelected(job)\">{{job.jobID}}</td>\r\n          <td *ngIf=\"customerSelected(job)\">{{job.jobName}}</td>\r\n          <td *ngIf=\"customerSelected(job)\">{{job.customerName}}</td>\r\n          <td *ngIf=\"customerSelected(job)\">{{job.actualRevenue | currency: 'USD':true}}</td>\r\n          <td *ngIf=\"customerSelected(job)\">{{job.actualCosts | currency: 'USD':true}}</td>\r\n          <th *ngIf=\"customerSelected(job)\">{{job.actualRevenue - job.actualCosts | currency: 'USD':true}}</th> -->\r\n        </tr>\r\n      </tbody>\r\n      <!-- <tfoot>\r\n        <tr class=\"active\">\r\n          <th>Totals</th>\r\n          <th></th>\r\n          <th></th>\r\n          <th>{{totalActualRevenue | currency: 'USD':true}}</th>\r\n          <th>{{totalActualCosts | currency: 'USD':true}}</th>\r\n          <th>{{totalActualRevenue - totalActualCosts | currency: 'USD':true}}</th>\r\n        </tr>\r\n      </tfoot> -->\r\n    </table>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -5045,7 +5045,7 @@ var ReportsComponent = (function () {
         this.bidService = bidService;
         this.inquiryService = inquiryService;
         this.customerService = customerService;
-        this.jobs = null;
+        this.jobs = [];
         this.totalExpectedRevenue = 0;
         this.totalActualRevenue = 0;
         this.totalExpectedCosts = 0;
@@ -5054,12 +5054,54 @@ var ReportsComponent = (function () {
         this.inquiries = null;
         this.customers = [];
         this.selectedCustomerIDs = [];
+        this.deselectedCustomers = [];
         this.myDatePickerOptions = null;
         this.date1 = null;
         this.date2 = null;
     }
     ReportsComponent.prototype.ngOnInit = function () {
         this.setupDatePickers();
+    };
+    ReportsComponent.prototype.onFilterCustomer = function (customer) {
+        var _this = this;
+        if (!this.selectedCustomerIDs.includes(customer.customerID)) {
+            this.selectedCustomerIDs.push(customer.customerID);
+            // this.jobs.forEach(job => {
+            //   if(this.selectedCustomerIDs.includes(job.customerID)) {
+            //     this.totalActualCosts += job.actualCosts;
+            //     this.totalActualRevenue += job.actualRevenue;
+            //   }
+            // });
+        }
+        else {
+            // this.jobs.forEach(job => {
+            //   if(this.selectedCustomerIDs.includes(job.customerID)) {
+            //     this.totalActualCosts -= job.actualCosts;
+            //     this.totalActualRevenue -= job.actualRevenue;
+            //   }
+            // });
+            this.selectedCustomerIDs.forEach(function (selectedCustomerID, i) {
+                if (selectedCustomerID == customer.customerID) {
+                    _this.selectedCustomerIDs.splice(i, 1);
+                }
+            });
+        }
+    };
+    ReportsComponent.prototype.customerSelected = function (job) {
+        if (this.selectedCustomerIDs.includes(job.customerID)) {
+            // this.totalActualCosts += job.actualCosts;
+            // this.totalActualRevenue += job.actualRevenue;
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+    ReportsComponent.prototype.addRevenue = function (revenue) {
+        this.totalActualRevenue += revenue;
+    };
+    ReportsComponent.prototype.addCosts = function (costs) {
+        this.totalActualCosts += costs;
     };
     ReportsComponent.prototype.onSubmitDates = function () {
         var _this = this;
@@ -5068,7 +5110,7 @@ var ReportsComponent = (function () {
             endDate: this.date2.date.year + "-" + this.date2.date.month + "-" + this.date2.date.day + " 23:59:59"
         };
         this.jobService.getJobsReport(dates).subscribe(function (jobs) {
-            _this.jobs = jobs;
+            _this.jobs = [];
             _this.totalActualCosts = 0;
             _this.totalActualRevenue = 0;
             _this.totalExpectedCosts = 0;
@@ -5076,19 +5118,22 @@ var ReportsComponent = (function () {
             _this.customers = [];
             _this.selectedCustomerIDs = [];
             _this.customerService.getAllCustomers().subscribe(function (customers) {
-                _this.jobs.forEach(function (job) {
-                    _this.totalActualCosts += job.actualCosts;
-                    _this.totalActualRevenue += job.actualRevenue;
-                    _this.totalExpectedCosts += job.expectedCosts;
-                    _this.totalExpectedRevenue += job.expectedRevenue;
-                    customers.customers.forEach(function (customer) {
-                        if (job.customerID == customer.customerID) {
-                            if (!_this.customers.includes(customer)) {
-                                _this.customers.push(customer);
-                                _this.selectedCustomerIDs.push(customer.customerID);
+                jobs.forEach(function (job, i) {
+                    if (job.actualRevenue != 0 || job.actualCosts != 0) {
+                        // this.totalActualCosts += job.actualCosts;
+                        // this.totalActualRevenue += job.actualRevenue;
+                        // this.totalExpectedCosts += job.expectedCosts;
+                        // this.totalExpectedRevenue += job.expectedRevenue;
+                        _this.jobs.push(job);
+                        customers.customers.forEach(function (customer) {
+                            if (job.customerID == customer.customerID) {
+                                if (!_this.customers.includes(customer)) {
+                                    _this.customers.push(customer);
+                                    _this.selectedCustomerIDs.push(customer.customerID);
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 });
             });
         });

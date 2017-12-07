@@ -68,11 +68,11 @@ router.post('/report', passport.authenticate('jwt', { session: false }), (reques
         endDate: request.body.endDate
     };
 
-    job.getJobsReport(dates, (jobs) => {
-        if (!jobs) {
+    job.getJobsReport(dates, (data) => {
+        if (!data) {
             return err;
         } else {
-            return response.json(jobs);
+            return response.json(data[0]);
         }
     });
 });

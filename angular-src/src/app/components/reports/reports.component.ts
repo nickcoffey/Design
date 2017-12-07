@@ -12,7 +12,7 @@ import { BidService } from '../../services/bid.service';
 })
 export class ReportsComponent implements OnInit {
 
-  jobs: any = null;
+  jobs: any = [];
   totalExpectedRevenue: number = 0;
   totalActualRevenue: number = 0;
   totalExpectedCosts: number = 0;
@@ -22,6 +22,7 @@ export class ReportsComponent implements OnInit {
   inquiries: any = null;
   customers: any = [];
   selectedCustomerIDs: number[] = [];
+  deselectedCustomers: any = [];
 
   myDatePickerOptions: IMyDpOptions = null;
   date1: any = null;
@@ -39,13 +40,55 @@ export class ReportsComponent implements OnInit {
     this.setupDatePickers();
   }
 
+  onFilterCustomer(customer) {
+    if (!this.selectedCustomerIDs.includes(customer.customerID)) {
+      this.selectedCustomerIDs.push(customer.customerID);
+      // this.jobs.forEach(job => {
+      //   if(this.selectedCustomerIDs.includes(job.customerID)) {
+      //     this.totalActualCosts += job.actualCosts;
+      //     this.totalActualRevenue += job.actualRevenue;
+      //   }
+      // });
+    } else {
+      // this.jobs.forEach(job => {
+      //   if(this.selectedCustomerIDs.includes(job.customerID)) {
+      //     this.totalActualCosts -= job.actualCosts;
+      //     this.totalActualRevenue -= job.actualRevenue;
+      //   }
+      // });
+      this.selectedCustomerIDs.forEach((selectedCustomerID, i) => {
+        if (selectedCustomerID == customer.customerID) {
+          this.selectedCustomerIDs.splice(i, 1);
+        }
+      });
+    }
+  }
+
+  customerSelected(job) {
+    if (this.selectedCustomerIDs.includes(job.customerID)) {
+      // this.totalActualCosts += job.actualCosts;
+      // this.totalActualRevenue += job.actualRevenue;
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  addRevenue(revenue) {
+    this.totalActualRevenue += revenue;
+  }
+
+  addCosts(costs) {
+    this.totalActualCosts += costs;
+  }
+
   onSubmitDates() {
     let dates = {
       startDate: `${this.date1.date.year}-${this.date1.date.month}-${this.date1.date.day} 00:00:00`,
       endDate: `${this.date2.date.year}-${this.date2.date.month}-${this.date2.date.day} 23:59:59`
     }
     this.jobService.getJobsReport(dates).subscribe((jobs) => {
-      this.jobs = jobs;
+      this.jobs = [];
       this.totalActualCosts = 0;
       this.totalActualRevenue = 0;
       this.totalExpectedCosts = 0;
@@ -53,19 +96,22 @@ export class ReportsComponent implements OnInit {
       this.customers = [];
       this.selectedCustomerIDs = [];
       this.customerService.getAllCustomers().subscribe((customers) => {
-        this.jobs.forEach(job => {
-          this.totalActualCosts += job.actualCosts;
-          this.totalActualRevenue += job.actualRevenue;
-          this.totalExpectedCosts += job.expectedCosts;
-          this.totalExpectedRevenue += job.expectedRevenue;
-          customers.customers.forEach(customer => {
-            if (job.customerID == customer.customerID) {
-              if (!this.customers.includes(customer)) {
-                this.customers.push(customer);
-                this.selectedCustomerIDs.push(customer.customerID);
+        jobs.forEach((job, i) => {
+          if (job.actualRevenue != 0 || job.actualCosts != 0) {
+            // this.totalActualCosts += job.actualCosts;
+            // this.totalActualRevenue += job.actualRevenue;
+            // this.totalExpectedCosts += job.expectedCosts;
+            // this.totalExpectedRevenue += job.expectedRevenue;
+            this.jobs.push(job);
+            customers.customers.forEach(customer => {
+              if (job.customerID == customer.customerID) {
+                if (!this.customers.includes(customer)) {
+                  this.customers.push(customer);
+                  this.selectedCustomerIDs.push(customer.customerID);
+                }
               }
-            }
-          });
+            });
+          }
         });
       });
     });
