@@ -32,8 +32,8 @@ const labors = require('./routes/labors');
 const equipments = require('./routes/equipments');
 
 // Port Number
-// const port = process.env.PORT || 8080;
-const port = 3000;
+const port = process.env.PORT || 8080;
+// const port = 3000;
 
 // Git Hook Auto-Deploy
 app.post('/api/deploy', (req, res) => {
