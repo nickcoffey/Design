@@ -254,9 +254,9 @@
                   <tr class="active">
                     <th>Material</th>
                     <th>Date</th>
-                    <th>Linear Feet</th>
+                    <th>Number Of Units</th>
                     <th class="hidden-xs hidden-sm">Price Per Unit</th>
-                    <th class="hidden-xs hidden-sm">Coverage In Linear Feet</th>
+                    <!-- <th class="hidden-xs hidden-sm">Coverage In Linear Feet</th> -->
                     <th>Total</th>
                   </tr>
                 </thead>
@@ -265,19 +265,19 @@
                     href='#update-material-modal'>
                     <td>{{jobMaterial.materialName}}</td>
                     <td>{{jobMaterial.materialDate | date: 'MM/dd/yyyy'}}</td>
-                    <td>{{jobMaterial.linearFeet}}</td>
+                    <td>{{jobMaterial.numberOfUnits}}</td>
                     <td class="hidden-xs hidden-sm">{{jobMaterial.pricePerUnit | currency: 'USD':true}}</td>
-                    <td class="hidden-xs hidden-sm">{{jobMaterial.linearFeetCoverage}} ft</td>
-                    <td>{{jobMaterial.pricePerUnit / jobMaterial.linearFeetCoverage * jobMaterial.linearFeet | currency: 'USD':true}}</td>
+                    <!-- <td class="hidden-xs hidden-sm">{{jobMaterial.linearFeetCoverage}} ft</td> -->
+                    <td>{{jobMaterial.pricePerUnit * jobMaterial.numberOfUnits | currency: 'USD':true}}</td>
                   </tr>
                 </tbody>
                 <tfoot>
                   <tr class="active">
                     <th>Grand Total</th>
                     <th></th>
-                    <th>{{totalLinearFeetTable}}</th>
+                    <th>{{totalUnitsTable}}</th>
                     <th class="hidden-xs hidden-sm"></th>
-                    <th class="hidden-xs hidden-sm"></th>
+                    <!-- <th class="hidden-xs hidden-sm"></th> -->
                     <th>{{totalMaterialPriceTable | currency: 'USD':true}}</th>
                   </tr>
                 </tfoot>
@@ -990,7 +990,7 @@
               <thead>
                 <tr>
                   <th>Select Material</th>
-                  <th>Enter Linear Feet</th>
+                  <th>Enter # Of Units</th>
                   <th>Add Material</th>
                 </tr>
               </thead>
@@ -1003,7 +1003,7 @@
                     </select>
                   </td>
                   <td>
-                    <input required mask="0000000" #feet2="ngModel" type="number" [(ngModel)]="linearFeet" name="linearFeet" placeholder="Linear Feet"
+                    <input required mask="0000000" #feet2="ngModel" type="number" [(ngModel)]="numberOfUnits" name="numberOfUnits" placeholder="Units"
                       class="form-control">
                   </td>
                   <td>
@@ -1016,7 +1016,7 @@
               <tfoot>
                 <tr *ngIf="feet2.invalid" style="color:#ff0000">
                   <td *ngIf="feet2.errors.required"></td>
-                  <td *ngIf="feet2.errors.required">*Linear feet are required</td>
+                  <td *ngIf="feet2.errors.required">*Number of units is required</td>
                   <td *ngIf="feet2.errors.required"></td>
                 </tr>
               </tfoot>
@@ -1032,7 +1032,7 @@
               <tbody>
                 <tr *ngFor="let selectedMaterial of selectedMaterials1; let i = index" (click)="onRemoveMaterial(selectedMaterial, i)">
                   <td>{{selectedMaterial.materialName}}</td>
-                  <td>{{selectedMaterial.linearFeet*selectedMaterial.pricePerUnit/selectedMaterial.linearFeetCoverage | currency:'USD':true}}</td>
+                  <td>{{selectedMaterial.numberOfUnits*selectedMaterial.pricePerUnit | currency:'USD':true}}</td>
                 </tr>
               </tbody>
               <tfoot>
@@ -1067,12 +1067,12 @@
       <div class="modal-body">
         <form #f7="ngForm" (submit)="onUpdateJobMaterial()">
           <div class="form-group">
-            <label>Linear Feet</label>
-            <input required mask="0000000" #feet="ngModel" type="number" [(ngModel)]="linearFeet" name="linearFeet" placeholder="Linear Feet"
+            <label>Units</label>
+            <input required mask="0000000" #feet="ngModel" type="number" [(ngModel)]="numberOfUnits" name="numberOfUnits" placeholder="Units"
               class="form-control">
             <div *ngIf="feet.invalid" style="color:#ff0000">
               <div *ngIf="feet.errors.required">
-                *Linear feet are required
+                *Number of units is required
               </div>
             </div>
           </div>
@@ -1086,7 +1086,7 @@
               </div>
             </div>
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label>Coverage In Linear Feet</label>
             <input required mask="0000000" #coverage="ngModel" type="number" [(ngModel)]="linearFeetCoverage" name="linearFeetCoverage"
               placeholder="Coverage In Linear Feet" class="form-control">
@@ -1095,7 +1095,7 @@
                 *Coverage in linear feet is required
               </div>
             </div>
-          </div>
+          </div> -->
           <button [disabled]="f7.invalid" type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Update</button>
           <button type="button" (click)="clearMaterialUpdate()" class="btn btn-warning">

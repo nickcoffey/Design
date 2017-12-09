@@ -146,7 +146,8 @@ module.exports.deleteJobMaterial = function (jobMaterial, callback) {
 }
 
 module.exports.getJobMaterialsById = function (id, callback) {
-    const queryString = `SELECT * FROM Material JOIN JobMaterial ON Material.materialID = JobMaterial.materialID WHERE jobID=${id}`;
+    // const queryString = `SELECT * FROM Material JOIN JobMaterial ON Material.materialID = JobMaterial.materialID WHERE jobID=${id}`;
+    const queryString = `SELECT * FROM JobMaterial WHERE jobID=${id}`;
     connection.query(queryString, (error, rows, fields) => {
         if (!error) {
             callback(rows);
@@ -157,7 +158,7 @@ module.exports.getJobMaterialsById = function (id, callback) {
 }
 
 module.exports.getCurrentJobMaterialsCost = function (id, callback) {
-    const queryString = `SELECT SUM(JobMaterial.pricePerUnit/JobMaterial.linearFeetCoverage*JobMaterial.linearFeet) AS jobMaterialCost FROM JobMaterial WHERE JobMaterial.jobID = ${id}`;
+    const queryString = `SELECT SUM(JobMaterial.pricePerUnit*JobMaterial.numberOfUnits) AS jobMaterialCost FROM JobMaterial WHERE JobMaterial.jobID = ${id}`;
     connection.query(queryString, (error, rows, fields) => {
         if (!error) {
             callback(rows);

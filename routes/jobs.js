@@ -247,7 +247,7 @@ router.post('/:id/new/job-material', passport.authenticate('jwt', { session: fal
         jobID: request.params.id,
         materialID: request.body.materialID,
         materialName: request.body.materialName,
-        linearFeet: request.body.linearFeet,
+        numberOfUnits: request.body.numberOfUnits,
         pricePerUnit: request.body.pricePerUnit,
         linearFeetCoverage: request.body.linearFeetCoverage
     };
@@ -272,12 +272,12 @@ router.post('/modify/job-material', passport.authenticate('jwt', { session: fals
     let updatedJobMaterial = {
         jobID: request.body.jobID,
         materialID: request.body.materialID,
-        linearFeet: request.body.linearFeet,
+        numberOfUnits: request.body.numberOfUnits,
         pricePerUnit: request.body.pricePerUnit,
         linearFeetCoverage: request.body.linearFeetCoverage
     };
-    if (updatedJobMaterial.linearFeet == null || updatedJobMaterial.linearFeet == undefined || updatedJobMaterial.linearFeet == "") {
-        delete updatedJobMaterial.linearFeet;
+    if (updatedJobMaterial.numberOfUnits == null || updatedJobMaterial.numberOfUnits == undefined || updatedJobMaterial.numberOfUnits == "") {
+        delete updatedJobMaterial.numberOfUnits;
     }
     if (updatedJobMaterial.pricePerUnit == null || updatedJobMaterial.pricePerUnit == undefined || updatedJobMaterial.pricePerUnit == "") {
         delete updatedJobMaterial.pricePerUnit;

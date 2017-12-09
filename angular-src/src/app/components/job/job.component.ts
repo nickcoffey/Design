@@ -41,12 +41,12 @@ export class JobComponent implements OnInit {
   materialName: string = '';
   materialID: number = null;
   materialIndex: number = null;
-  linearFeet: number = 0;
+  numberOfUnits: number = 0;
   pricePerUnit: number = 0;
   linearFeetCoverage: number = 0;
   totalMaterialPrice: number = 0;
   totalMaterialPriceTable: number = 0;
-  totalLinearFeetTable: number = 0;
+  totalUnitsTable: number = 0;
   /** JOB REVENUES **/
   revenueID: number = null;
   revenueIndex: number = null;
@@ -296,10 +296,10 @@ export class JobComponent implements OnInit {
     this.jobService.getJobMaterialsById(this.id).subscribe((jobMaterials) => {
       this.jobMaterials = jobMaterials;
       this.totalMaterialPriceTable = 0;
-      this.totalLinearFeetTable = 0;
+      this.totalUnitsTable = 0;
       for (let k = 0; k < this.jobMaterials.length; k++) {
-        this.totalMaterialPriceTable += ((this.jobMaterials[k].pricePerUnit / this.jobMaterials[k].linearFeetCoverage) * this.jobMaterials[k].linearFeet);
-        this.totalLinearFeetTable += this.jobMaterials[k].linearFeet;
+        this.totalMaterialPriceTable += (this.jobMaterials[k].pricePerUnit * this.jobMaterials[k].numberOfUnits);
+        this.totalUnitsTable += this.jobMaterials[k].numberOfUnits;
       }
 
       this.materialService.getAllMaterials().subscribe((materials) => {
@@ -330,14 +330,14 @@ export class JobComponent implements OnInit {
       this.materials.push(selectedMaterial);
     });
     this.selectedMaterials1 = [];
-    this.linearFeet = 0;
+    this.numberOfUnits = 0;
     this.pricePerUnit = 0;
     this.linearFeetCoverage = 0;
     this.totalMaterialPrice = 0;
   }
 
   clearMaterialUpdate() {
-    this.linearFeet = 0;
+    this.numberOfUnits = 0;
     this.pricePerUnit = 0;
     this.linearFeetCoverage = 0;
   }
@@ -375,17 +375,17 @@ export class JobComponent implements OnInit {
       materialName: this.materials[this.materialID].materialName,
       pricePerUnit: this.materials[this.materialID].pricePerUnit,
       linearFeetCoverage: this.materials[this.materialID].linearFeetCoverage,
-      linearFeet: this.linearFeet
+      numberOfUnits: this.numberOfUnits
     };
-    this.totalMaterialPrice += ((selectedMaterial.pricePerUnit / selectedMaterial.linearFeetCoverage) * this.linearFeet);
+    this.totalMaterialPrice += (selectedMaterial.pricePerUnit * this.numberOfUnits);
     this.selectedMaterials1.push(selectedMaterial);
     this.materials.splice(this.materialID, 1);
     this.material = null;
-    this.linearFeet = 0;
+    this.numberOfUnits = 0;
   }
 
   onRemoveMaterial(material, id) {
-    this.totalMaterialPrice -= ((material.pricePerUnit / material.linearFeetCoverage) * material.linearFeet);
+    this.totalMaterialPrice -= ((material.pricePerUnit / material.linearFeetCoverage) * material.numberOfUnits);
     this.selectedMaterials1.splice(id, 1);
     this.materials.push(material);
   }
@@ -393,7 +393,7 @@ export class JobComponent implements OnInit {
   onClickUpdateJobMaterial(materialID, materialIndex) {
     this.materialID = materialID;
     this.materialIndex = materialIndex;
-    this.linearFeet = this.jobMaterials[materialIndex].linearFeet;
+    this.numberOfUnits = this.jobMaterials[materialIndex].numberOfUnits;
     this.pricePerUnit = this.jobMaterials[materialIndex].pricePerUnit;
     this.linearFeetCoverage = this.jobMaterials[materialIndex].linearFeetCoverage;
     this.materialName = this.jobMaterials[materialIndex].materialName;
@@ -403,7 +403,7 @@ export class JobComponent implements OnInit {
     let updatedJobMaterial = {
       jobID: this.id,
       materialID: this.jobMaterials[this.materialIndex].materialID,
-      linearFeet: this.linearFeet,
+      numberOfUnits: this.numberOfUnits,
       pricePerUnit: this.pricePerUnit,
       linearFeetCoverage: this.linearFeetCoverage
     };
@@ -956,7 +956,7 @@ export class JobComponent implements OnInit {
 interface SelectedMaterial {
   materialID: number,
   materialName: String,
-  linearFeet: number,
+  numberOfUnits: number,
   pricePerUnit: number,
   linearFeetCoverage: number
 }

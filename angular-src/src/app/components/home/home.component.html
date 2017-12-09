@@ -20,22 +20,23 @@
         </h3>
       </div>
       <div [attr.id]="'accordion' + job.jobID" class="panel-body panel-collapse collapse" style="margin-top:0;">
-        <h4>Customer:</h4>
-        <h5 style="font-weight:normal">{{job.customerName}}</h5>
+        <h4>Customer: <span style="font-weight:normal">{{job.customerName}}</span></h4>
         <hr>
-        <h4>Budget:</h4>
+        <h4>Budgeted Costs: <span style="font-weight:normal">{{job.expectedCosts | currency:'USD':true}}</span></h4>
+        <h4>Actual Costs: <span style="font-weight:normal">{{job.actualCosts | currency:'USD':true}}</span></h4>
         <div class="progress progress-striped active">
           <div [attr.id]="'costProgress'+job.jobID" class="progress-bar progress-bar-info" role="progressbar" [attr.aria-valuenow]="job.actualCosts"
-            aria-valuemin="0" [attr.aria-valuemax]="job.expectedCosts" [ngStyle]="{'min-width': '2em', 'width': (job.actualCosts/job.expectedCosts)*100+ '%'}">
-            <!-- {{job.actualCosts/job.expectedCosts | percent:'1.0-0'}} -->
+            aria-valuemin="0" [attr.aria-valuemax]="job.expectedCosts" [ngStyle]="{'min-width': '0%', 'max-width': '100%', 'width': (job.actualCosts/job.expectedCosts)*100+ '%'}">
+            <span style="color:#000000">{{job.actualCosts/job.expectedCosts | percent:'1.0-0'}} spent</span>
           </div>
         </div>
         <hr>
-        <h4>Revenue Collected:</h4>
+        <h4>Expected Revenue: <span style="font-weight:normal">{{job.expectedRevenue | currency:'USD':true}}</span></h4>
+        <h4>Collected Revenue: <span style="font-weight:normal">{{job.actualRevenue | currency:'USD':true}}</span></h4>
         <div class="progress progress-striped active">
           <div id="revenueProgress" class="progress-bar progress-bar-info" role="progressbar" [attr.aria-valuenow]="job.actualRevenue"
-            aria-valuemin="0" [attr.aria-valuemax]="job.expectedRevenue" [ngStyle]="{'min-width': '2em', 'width': (job.actualRevenue/job.expectedRevenue)*100+ '%'}">
-            <!-- {{job.actualRevenue/job.expectedRevenue | percent:'1.0-0'}} -->
+            aria-valuemin="0" [attr.aria-valuemax]="job.expectedRevenue" [ngStyle]="{'min-width': '0%', 'max-width': '100%', 'width': (job.actualRevenue/job.expectedRevenue)*100+ '%'}">
+            <span style="color:#000000">{{job.actualRevenue/job.expectedRevenue | percent:'1.0-0'}} collected</span>
           </div>
         </div>
         <hr>

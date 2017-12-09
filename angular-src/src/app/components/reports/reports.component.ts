@@ -4,6 +4,7 @@ import { JobService } from '../../services/job.service';
 import { InquiryService } from '../../services/inquiry.service';
 import { CustomerService } from '../../services/customer.service';
 import { BidService } from '../../services/bid.service';
+import { Subject } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-reports',
@@ -28,6 +29,10 @@ export class ReportsComponent implements OnInit {
   date1: any = null;
   date2: any = null;
 
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
+  displayTable: Boolean = false;
+
   constructor(
     private jobService: JobService,
     private bidService: BidService,
@@ -38,6 +43,7 @@ export class ReportsComponent implements OnInit {
 
   ngOnInit() {
     this.setupDatePickers();
+    this.setupDataTable();
   }
 
   onFilterCustomer(customer) {
@@ -98,10 +104,10 @@ export class ReportsComponent implements OnInit {
       this.customerService.getAllCustomers().subscribe((customers) => {
         jobs.forEach((job, i) => {
           if (job.actualRevenue != 0 || job.actualCosts != 0) {
-            // this.totalActualCosts += job.actualCosts;
-            // this.totalActualRevenue += job.actualRevenue;
-            // this.totalExpectedCosts += job.expectedCosts;
-            // this.totalExpectedRevenue += job.expectedRevenue;
+            this.totalActualCosts += job.actualCosts;
+            this.totalActualRevenue += job.actualRevenue;
+            this.totalExpectedCosts += job.expectedCosts;
+            this.totalExpectedRevenue += job.expectedRevenue;
             this.jobs.push(job);
             customers.customers.forEach(customer => {
               if (job.customerID == customer.customerID) {
@@ -137,6 +143,15 @@ export class ReportsComponent implements OnInit {
         year: today[2], month: today[0], day: today[1]
       }
     }
+  }
+
+  setupDataTable() {
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      order: [0, 'desc']
+    };
+    this.dtTrigger.next();
+    this.displayTable = true;
   }
 
   getToday() {
