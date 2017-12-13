@@ -1237,7 +1237,7 @@
         <form #f="ngForm" (submit)="onUpdateChangeOrder()">
           <div class="form-group">
             <label>Amount</label>
-            <input required mask="0000000" #amount="ngModel" type="number" [(ngModel)]="changeAmount" name="changeAmount" placeholder="Amount"
+            <input required onKeyPress="if(this.value.length==7) return false;" #amount="ngModel" type="number" [(ngModel)]="changeAmount" name="changeAmount" placeholder="Amount"
               class="form-control">
             <div *ngIf="amount.invalid" style="color:#ff0000">
               <div *ngIf="amount.errors.required">
@@ -1290,7 +1290,7 @@
         <form #f2="ngForm" (submit)="onCreateChangeOrder()">
           <div class="form-group">
             <label>Amount</label>
-            <input required mask="0000000" #amount2="ngModel" type="number" [(ngModel)]="changeAmount" name="changeAmount" placeholder="Amount"
+            <input required onKeyPress="if(this.value.length==7) return false;" #amount2="ngModel" type="number" [(ngModel)]="changeAmount" name="changeAmount" placeholder="Amount"
               class="form-control">
             <div *ngIf="amount2.invalid" style="color:#ff0000">
               <div *ngIf="amount2.errors.required">
