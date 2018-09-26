@@ -5,7 +5,7 @@
 
 # STOP APP AND PULL IN CHANGES
 cd ../Design
-forever app.js stop
+forever stop app.js
 git pull
 
 # INSTALL ANY NEW DEPENDENCIES
