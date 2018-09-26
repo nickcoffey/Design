@@ -1,7 +1,7 @@
 module.exports.AWS = {
     host: 'alliedwaterproofing.cvsyojwbt8yt.us-east-2.rds.amazonaws.com',
     user: 'coffeynick',
-    password: 'Capp_1217',
+    password: '',
     port: '3306',
     database: 'designDB'
 }
@@ -9,7 +9,7 @@ module.exports.AWS = {
 module.exports.LOCAL = {
     host: 'localhost',
     user: 'root',
-    password: 'UMSL1217',
+    password: 'Password123',
     port: '3306',
     database: 'designDB'
 }

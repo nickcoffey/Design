@@ -40,7 +40,7 @@ app.post('/api/deploy', (req, res) => {
     var sys = require('sys');
     var exec = require('child_process').exec;
     var child;
-    child = exec('../../Scripts/deploy.sh', (err, stdout, stderr) =>{
+    child = exec('..Scripts/deploy.sh', (err, stdout, stderr) =>{
         sys.print(`stdout: ${stdout}`);
         sys.print(`stderr: ${stderr}`);
         if (err != null) {
